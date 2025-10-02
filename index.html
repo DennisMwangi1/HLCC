@@ -1,151 +1,314 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>TW Coming Soon | Free Tailwindcss theme by Fyrestrap</title>
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700&display=swap" rel="stylesheet"> 
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600;1,700;1,800&display=swap" rel="stylesheet"> 
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>HLCC | Coming Soon</title>
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/x-icon" href="assets/favicons/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/favicons/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/favicons/apple-touch-icon.png">
+  <!-- Optional Web Manifest -->
+  <link rel="manifest" href="assets/favicons/site.webmanifest">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600;1,700,1,800&display=swap"
+    rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Comforter+Brush&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
   <script src="https://cdn.tailwindcss.com?plugins=typography"></script>
-
   <script>
     tailwind.config = {
       theme: {
         extend: {
+          colors: {
+            hlcc: {
+              DEFAULT: '#05203E',
+              dark: '#0E233D',
+              gold: '#EAC253'
+            }
+          },
           fontFamily: {
-            'Montserrat': ['Montserrat'],
-            'Noto-Sans': ['"Noto Sans"'],
-            'Comforter-Brush': ['"Comforter Brush"']
+            'Montserrat': [ 'Montserrat', 'sans-serif' ],
+            'Noto-Sans': [ '"Noto Sans"', 'sans-serif' ],
+            'Comforter-Brush': [ '"Comforter Brush"', 'cursive' ]
           }
         }
       }
     }
   </script>
-  
+
+  <style>
+    ::placeholder {
+      opacity: 0.7;
+      color: #dbe7f0;
+    }
+  </style>
 </head>
 
-<body class="font-Noto-Sans">
 
-  
-  <!-- Header -->
-  <header class="w-full bg-[url('assets/img/leaves.jpg')] bg-cover bg-bottom">  
-    <div class="w-full min-h-screen md:w-1/2 bg-gradient-to-b from-gray-900/90 to-gray-900/95 p-10 flex">
-      <div class="w-full text-center my-auto">
-        <h1 class="font-bold text-5xl font-Comforter-Brush text-amber-500 mb-10 md:text-right">Launcher.</h1>
-        <h6 class="font-Montserrat font-bold uppercase text-4xl md:text-5xl lg:text-6xl mb-14 md:-mr-20 text-white md:text-right">Coming <span class="text-white/70 md:-mr-20">soon</span></h6>
+<body class="font-Noto-Sans bg- hlcc: #05203E">
 
-        
-        <!-- Count down -->
-        <div class="w-full text-left flex mb-10">
-          <ul class="w-full flex place-content-center md:place-content-end gap-5 mx-auto text-gray-50">        
-            <li>
-              <div class="font-bold text-white rounded-full border-dotted border-gray-700 border-4 flex items-center justify-center text-2xl lg:text-4xl h-16 lg:h-24 w-16 lg:w-24" id="cdD">00</div>
-              <p class="text-center text-xs mt-2">Days</p>
+  <!-- Page wrapper -->
+  <div class="min-h-screen bg-[url('assets/img/leaves.jpg')] bg-cover bg-center flex items-start justify-start">
+    <!-- Left panel (content) -->
+    <div
+      class="min-h-screen w-full lg:w-7/12 max-w-8xl bg-gradient-to-b from-[#05203E]/95 to-[#0E233D]/95  shadow-2xl overflow-hidden md:flex">
+
+      <!-- Left column (content) -->
+      <div class="w-full p-10 md:p-14 text-white">
+        <!-- Logo placeholder -->
+        <div class="mb-4">
+          <img src="/assets/img/HLCC-new.png" alt="HLCC logo" class="h-12">
+
+
+        </div>
+
+        <!-- Company name (for SEO / fallback) -->
+        <h1 class="font-Montserrat text-[#EAC253] text-4xl md:text-4xl font-bold mb-2">High-Impact Leadership &amp;
+          Culture Consulting LTD</h1>
+        <h2 class="font-Noto-Sans uppercase text-white/90 text-xl md:text-2xl font-bold mb-6">Coming <span
+            class="text-white/70">soon</span></h2>
+
+        <!-- Description -->
+        <p class="text-gray-200 mb-8 leading-relaxed">
+          Every business has a strategy. Few have a culture that makes it work. HLCC was born in 2016 with a simple
+          conviction: people are not just part of the plan — they are the plan. What began as Elite HR Solutions has
+          evolved into a culture-first partner for organizations that want more than policies and paperwork. We help
+          leaders shape environments where values are lived, talent feels at home, and performance follows naturally.
+          With global standards and African insight, we stand alongside ambitious organizations ready to turn strategy
+          into results.
+        </p>
+
+        <!-- Countdown -->
+        <div class="mb-8">
+          <ul class="flex justify-center gap-4 md:gap-20 items-center">
+            <li class="text-center">
+              <div id="cdD"
+                class="bg-[#0E233D]/30 border-4 border-dotted border-[#0E233D]/50 rounded-full w-16 h-16 md:w-20 md:h-20 flex items-center justify-center text-2xl md:text-4xl font-bold">
+                00</div>
+              <div class="text-md text-gray-300 mt-2">Days</div>
             </li>
-
-            <li>
-              <div class="font-bold text-white rounded-full border-dotted border-gray-700 border-4 flex items-center justify-center text-2xl lg:text-4xl h-16 lg:h-24 w-16 lg:w-24" id="cdH">00</div>
-              <p class="text-center text-xs mt-2">Hours</p>
+            <li class="text-center">
+              <div id="cdH"
+                class="bg-[#0E233D]/30 border-4 border-dotted border-[#0E233D]/50 rounded-full w-16 h-16 md:w-20 md:h-20 flex items-center justify-center text-2xl md:text-4xl font-bold">
+                00</div>
+              <div class="text-md text-gray-300 mt-2">Hours</div>
             </li>
-
-            <li>
-              <div class="font-bold text-white rounded-full border-dotted border-gray-700 border-4 flex items-center justify-center text-2xl lg:text-4xl h-16 lg:h-24 w-16 lg:w-24" id="cdM">00</div>
-              <p class="text-center text-xs mt-2">Minutes</p>
+            <li class="text-center">
+              <div id="cdM"
+                class="bg-[#0E233D]/30 border-4 border-dotted border-[#0E233D]/50 rounded-full w-16 h-16 md:w-20 md:h-20 flex items-center justify-center text-2xl md:text-4xl font-bold">
+                00</div>
+              <div class="text-md text-gray-300 mt-2">Minutes</div>
             </li>
-
-            <li>
-              <div class="font-bold text-white rounded-full border-dotted border-gray-700 border-4 flex items-center justify-center text-2xl lg:text-4xl h-16 lg:h-24 w-16 lg:w-24" id="cdS">00</div>
-              <p class="text-center text-xs mt-2">Seconds</p>
+            <li class="text-center">
+              <div id="cdS"
+                class="bg-[#0E233D]/30 border-4 border-dotted border-[#0E233D]/50 rounded-full w-16 h-16 md:w-20 md:h-20 flex items-center justify-center text-2xl md:text-4xl font-bold">
+                00</div>
+              <div class="text-md text-gray-300 mt-2">Seconds</div>
             </li>
-
           </ul>
         </div>
 
-        <!-- Content -->
-        <p class="text-base mb-10 text-gray-200 md:text-right">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta reprehenderit delectus quasi eligendi maiores consectetur repellat necessitatibus libero deleniti quaerat debitis, odit earum modi. Magni porro iste dolores. </p>
+        <!-- Notify block (centered block style) -->
+        <div class="max-full bg-[#05203E]/60 border border-[#0E233D]/40 rounded-lg p-6">
+          <h3 class="text-white text-lg font-semibold mb-3">Be notified when we launch</h3>
+          <p class="text-sm text-gray-300 mb-4">Enter your email below and we will notify you when HLCC goes live.</p>
 
-        <!-- Social media -->
-        <div class="w-full text-left flex">
-          <ul class="w-full flex place-content-center md:place-content-end gap-10 mx-auto text-gray-500">        
-            <li>
-              <a href="#" class="text-lg hover:text-amber-500">
-                <i class="fab fa-facebook-f"></i>
-              </a>
-            </li>
+          <!-- FORM -->
+          <form id="notifyForm" class="space-y-4" novalidate>
+            <div>
+              <label for="email" class="sr-only">Email</label>
+              <input id="email" name="email" type="email" required placeholder="you@company.com"
+                class="w-full px-4 py-3 rounded-md bg-white/6 text-white placeholder-gray-300 outline-none focus:ring-2 focus:ring-[#EAC253]/60" />
+            </div>
 
-            <li>
-              <a href="#" class="text-lg hover:text-amber-500">
-                <i class="fab fa-twitter"></i>
-              </a>
-            </li>
+            <div class="flex items-center gap-3">
+              <button id="submitBtn" type="submit"
+                class="flex-1 text-[#05203E] bg-[#EAC253] font-semibold px-4 py-2 rounded-md hover:opacity-95 disabled:opacity-60">
+                Notify Me
+              </button>
+              <div id="formSpinner" class="hidden" aria-hidden="true">
+                <svg class="w-6 h-6 animate-spin text-[#EAC253]" xmlns="http://www.w3.org/2000/svg" fill="none"
+                  viewBox="0 0 24 24">
+                  <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                  <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z"></path>
+                </svg>
+              </div>
+            </div>
 
-            <li>
-              <a href="#" class="text-lg hover:text-amber-500">
-                <i class="fab fa-youtube"></i>
-              </a>
-            </li>
+            <p id="formMessage" class="text-sm text-gray-300 mt-1"></p>
+          </form>
 
-            <li>
-              <a href="#" class="text-lg hover:text-amber-500">
-                <i class="fab fa-instagram"></i>
-              </a>
-            </li>
-
-          </ul>
+          <p class="text-xs text-gray-400 mt-4">We will never share your email. By subscribing you agree to receive
+            occasional updates from HLCC.</p>
         </div>
+
 
       </div>
-    </div>   
-  </header>  
+
+
+
+    </div>
+  </div>
+
+  <!-- Fontawesome -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/js/all.min.js" crossorigin="anonymous"
+    referrerpolicy="no-referrer"></script>
 
   <script>
-    // Change the value of countDownEndDate to the day you want to end the count down
-    var countDownEndDate = "August 5, 2024 09:00:00";
-    
-    var endDate = new Date(countDownEndDate).getTime();
-    
-    var x = setInterval(function() {
-    
-      var timeNow = new Date().getTime();
-    
-      var timeLeft = endDate - timeNow;
-    
-      var days    = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
-      var hours   = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      var minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
-      var seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+      /******************************************************
+       * COUNTDOWN: 7 days from when the page is opened
+       ******************************************************/
+      ( function ()
+      {
+        const endDate = Date.now() + 7 * 24 * 60 * 60 * 1000; // 7 days from now in ms
 
-      if(days < 10) {
-        days = "0" + days;
-      }
+        function pad ( n ) { return n < 10 ? '0' + n : '' + n; }
 
-      if(hours < 10) {
-        hours = "0" + hours;
-      }
+        function tick ()
+        {
+          const now = Date.now();
+          const timeLeft = endDate - now;
+          if ( timeLeft <= 0 )
+          {
+            document.getElementById( 'cdD' ).textContent = '00';
+            document.getElementById( 'cdH' ).textContent = '00';
+            document.getElementById( 'cdM' ).textContent = '00';
+            document.getElementById( 'cdS' ).textContent = '00';
+            clearInterval( interval );
+            return;
+          }
+          const days = Math.floor( timeLeft / ( 1000 * 60 * 60 * 24 ) );
+          const hours = Math.floor( ( timeLeft % ( 1000 * 60 * 60 * 24 ) ) / ( 1000 * 60 * 60 ) );
+          const minutes = Math.floor( ( timeLeft % ( 1000 * 60 * 60 ) ) / ( 1000 * 60 ) );
+          const seconds = Math.floor( ( timeLeft % ( 1000 * 60 ) ) / 1000 );
 
-      if(minutes < 10) {
-        minutes = "0" + minutes;
-      }
+          document.getElementById( 'cdD' ).textContent = pad( days );
+          document.getElementById( 'cdH' ).textContent = pad( hours );
+          document.getElementById( 'cdM' ).textContent = pad( minutes );
+          document.getElementById( 'cdS' ).textContent = pad( seconds );
+        }
 
-      if(seconds < 10) {
-        seconds = "0" + seconds;
-      }
-    
-      if (timeLeft > 0) {
-        document.getElementById("cdD").innerHTML = days;
-        document.getElementById("cdH").innerHTML = hours;
-        document.getElementById("cdM").innerHTML = minutes;
-        document.getElementById("cdS").innerHTML = seconds;
-      }
-    }, 1000);
+        tick();
+        const interval = setInterval( tick, 1000 );
+      } )();
+
+
+    /******************************************************
+     * FORM: Silent submit using Formspree (AJAX)
+     *
+     * Setup steps (quick):
+     * 1. Go to https://formspree.io and create a new form.
+     * 2. Note the Form ID (it looks like: "xqwykzvn" or "f/xxxxxx").
+     * 3. Replace the FORMSPREE_FORM_ID below with that ID.
+     * 4. Verify the confirmation email Formspree sends you.
+     *
+     * If you prefer another provider (Mailchimp, Brevo, Google Sheets),
+     * we can swap the endpoint later — this code is modular.
+     ******************************************************/
+    ( function ()
+    {
+      const FORMSPREE_FORM_ID = 'xvgwrwro';// <-- REPLACE with your Formspree form ID, e.g. 'f/xqwykzvn' or 'xqwykzvn'
+      // If you leave this blank, the form will not send to Formspree.
+      // Instead, the user will see an error asking the site owner to configure Formspree.
+
+      const form = document.getElementById( 'notifyForm' );
+      const emailInput = form.querySelector( '#email' );
+      const submitBtn = document.getElementById( 'submitBtn' );
+      const spinner = document.getElementById( 'formSpinner' );
+      const message = document.getElementById( 'formMessage' );
+
+      form.addEventListener( 'submit', async function ( ev )
+      {
+        ev.preventDefault();
+        message.textContent = '';
+        const email = emailInput.value.trim();
+
+        if ( !email )
+        {
+          message.textContent = 'Please enter a valid email address.';
+          return;
+        }
+
+        // Basic client-side email pattern (simple)
+        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if ( !emailPattern.test( email ) )
+        {
+          message.textContent = 'Please enter a valid email address.';
+          return;
+        }
+
+        if ( !FORMSPREE_FORM_ID )
+        {
+          message.textContent = 'Submission endpoint not configured. Please configure Formspree (see site admin).';
+          return;
+        }
+
+        // UI: disable while sending
+        submitBtn.disabled = true;
+        spinner.classList.remove( 'hidden' );
+
+        try
+        {
+          // Compose body for Formspree
+          // Formspree expects form fields as form data.
+          const url = FORMSPREE_FORM_ID.startsWith( 'http' ) ?
+            FORMSPREE_FORM_ID :
+            `https://formspree.io/${ FORMSPREE_FORM_ID }`;
+
+          const formData = new FormData();
+          formData.append( 'email', email );
+          // You can include extra hidden fields if you want, e.g. source, tags
+          formData.append( '_subject', 'HLCC Coming Soon - New Subscriber' );
+          formData.append( '_replyto', email );
+          formData.append( '_language', 'en' );
+
+          const res = await fetch( url, {
+            method: 'POST',
+            body: formData,
+            headers: {
+              // Formspree accepts normal form posts; do not set Content-Type here so the boundary is correct.
+              'Accept': 'application/json'
+            }
+          } );
+
+          const json = await res.json().catch( () => ( {} ) );
+
+          if ( res.ok )
+          {
+            // Formal & professional thank-you message
+            message.style.color = '#cbd5e1';
+            message.textContent = 'Thank you. We’ll notify you as soon as we launch.';
+            form.reset();
+          } else
+          {
+            // Non-2xx
+            console.error( 'Formspree error:', res.status, json );
+            message.style.color = '#fca5a5';
+            message.textContent = 'An error occurred while submitting. Please try again later.';
+          }
+        } catch ( err )
+        {
+          console.error( 'Submission failed', err );
+          message.style.color = '#fca5a5';
+          message.textContent = 'Submission failed. Please try again later.';
+        } finally
+        {
+          submitBtn.disabled = false;
+          spinner.classList.add( 'hidden' );
+        }
+      } );
+    } )();
   </script>
+
 </body>
+
 </html>
