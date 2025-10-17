@@ -1,16 +1,16 @@
-import { Header } from "../../HLCC-v2/src/components/Header";
-import { Footer } from "../../HLCC-v2/src/components/Footer";
+import { Header } from "@/components/Header";
+import { Footer } from "@/components/Footer";
 import { Routes, Route } from "react-router-dom";
-import Home from "../../HLCC-v2/src/pages/Home";
-import About from "../../HLCC-v2/src/pages/About";
-import ScrollToHash from "../../HLCC-v2/src/components/ScrollToHash";
-import ServicesOverview from "../../HLCC-v2/src/pages/services/Overview";
-import ServiceDetails from "../../HLCC-v2/src/pages/services/ServiceDetails";
-import RegisterCoach from "../../HLCC-v2/src/pages/register/Coach";
-import RegisterFacilitator from "../../HLCC-v2/src/pages/register/Facilitator";
-import Contact from "../../HLCC-v2/src/pages/Contact";
-import { BookingModal } from "../../HLCC-v2/src/components/booking/BookingModal";
-import { useBookingModal } from "../../HLCC-v2/src/hooks/useBookingModal";
+import Home from "@/pages/Home";
+import About from "@/pages/About";
+import ScrollToHash from "@/components/ScrollToHash";
+import ServicesOverview from "@/pages/services/Overview";
+import ServiceDetails from "@/pages/services/ServiceDetails";
+import RegisterCoach from "@/pages/register/Coach";
+import RegisterFacilitator from "@/pages/register/Facilitator";
+import Contact from "@/pages/Contact";
+import { BookingModal } from "@/components/booking/BookingModal";
+import { useBookingModal } from "@/hooks/useBookingModal";
 
 interface AppContentProps {
     onBookConsultation: () => void;
