@@ -145,8 +145,8 @@ export default function Contact() {
                 <div>
                   <h4 className="font-medium">Email Us</h4>
                   <p className="text-sm text-muted-foreground">
-                    info@hlcc.co.ke<br />
-                    support@hlcc.co.ke
+                    info@hlcc.africa<br />
+                    support@hlcc.africa
                   </p>
                 </div>
               </div>
@@ -158,21 +158,8 @@ export default function Contact() {
                 <div>
                   <h4 className="font-medium">Call Us</h4>
                   <p className="text-sm text-muted-foreground">
-                    +254 700 000 000<br />
-                    +254 700 000 001
-                  </p>
-                </div>
-              </div>
-
-              <div className="flex items-start gap-4">
-                <div className="bg-primary/10 p-2 rounded-full">
-                  <Clock className="h-5 w-5 text-primary" />
-                </div>
-                <div>
-                  <h4 className="font-medium">Working Hours</h4>
-                  <p className="text-sm text-muted-foreground">
-                    Monday - Friday: 8:00 AM - 5:00 PM<br />
-                    Saturday: 9:00 AM - 1:00 PM
+                      +254 115335322<br />
+                      +254 724 213506
                   </p>
                 </div>
               </div>

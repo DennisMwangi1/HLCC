@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { motion, useAnimation } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
+import {useNavigate} from "react-router-dom";
 
 interface HeroProps {
     onBookConsultation: () => void;
@@ -12,7 +13,7 @@ interface HeroProps {
 export function Hero({ onBookConsultation }: HeroProps) {
     const metrics = [
         {
-            target: 10000,
+            target: 400,
             label: "Leaders Developed",
             description: "Empowered through coaching and learning programs",
             suffix: "+",
@@ -34,6 +35,7 @@ export function Hero({ onBookConsultation }: HeroProps) {
     // Counter logic
     const [counts, setCounts] = useState(metrics.map(() => 0));
     const controls = useAnimation();
+    const navigate = useNavigate();
 
     useEffect(() => {
         controls.start((i) => ({
@@ -83,7 +85,7 @@ export function Hero({ onBookConsultation }: HeroProps) {
             <div className="container relative mx-auto px-4 md:px-6 py-20 md:py-32 grid md:grid-cols-2 gap-12 items-center">
                 {/* Left side */}
                 <div className="max-w-3xl">
-                    <h1 className="text-4xl md:text-5xl lg:text-6xl text-white mb-6 leading-tight">
+                    <h1 className="text-3xl md:text-4xl lg:text-5xl text-white mb-6 leading-tight">
                         Culture Runs the Show.
                         <span className="block mt-2 bg-gradient-to-r from-[var(--blue-bright)] to-[var(--gold-accent)] bg-clip-text text-transparent">
                             We Make Sure It Works for You.
@@ -109,54 +111,99 @@ export function Hero({ onBookConsultation }: HeroProps) {
                             size="lg"
                             variant="outline"
                             className="border-2 border-white/30 text-white hover:bg-black/10 hover:text-white bg-white/10 text-lg px-8 py-6"
+                            onClick={()=>navigate('/about')}
                         >
                             Learn More
                         </Button>
                     </div>
                 </div>
 
-                {/* Right side: metrics */}
-                <div className="relative flex flex-col justify-center space-y-10 border-l border-white/20 pl-8">
-                    {/* Accent background pulse */}
-                    <motion.div
-                        className="absolute inset-0 -z-10 bg-gradient-to-br from-[var(--blue-accent)]/10 to-[var(--gold-accent)]/10 rounded-3xl blur-2xl"
-                        animate={{ opacity: [0.4, 0.7, 0.4] }}
-                        transition={{ repeat: Infinity, duration: 6, ease: "easeInOut" }}
-                    />
-
-                    {metrics.map((metric, i) => (
+                {/* Right side: image + animated metrics */}
+                <div className="relative flex items-center justify-center border-l border-white/20 pl-8">
+                    <div className="relative">
+                        {/* Glow backdrop */}
                         <motion.div
-                            key={i}
-                            custom={i}
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={controls}
-                            className="relative"
-                        >
-                            <div className="text-5xl font-bold bg-gradient-to-r from-[var(--blue-bright)] to-[var(--gold-accent)] bg-clip-text text-transparent mb-1">
-                                {counts[i]}
-                                {metric.suffix}
-                            </div>
-                            <div className="text-lg text-white mb-1">{metric.label}</div>
-                            <p className="text-sm text-gray-400 max-w-xs leading-relaxed">
-                                {metric.description}
-                            </p>
-                        </motion.div>
-                    ))}
+                            className="absolute -inset-6 -z-10 rounded-[2rem] bg-gradient-to-br from-[var(--blue-accent)]/20 to-[var(--gold-accent)]/20 blur-3xl"
+                            animate={{ opacity: [0.4, 0.7, 0.4] }}
+                            transition={{ repeat: Infinity, duration: 6, ease: "easeInOut" }}
+                        />
 
-                    {/* Floating badge */}
-                    <motion.div
-                        initial={{ opacity: 0, y: 30 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 1.2 }}
-                        className="mt-8 p-4 bg-white/10 backdrop-blur-sm rounded-xl border border-white/20 shadow-lg"
-                    >
-                        <p className="text-gray-300 text-sm">
-                            <span className="text-white font-medium">
-                                “People First. Always.”
-                            </span>{" "}
-                            — Our core belief driving every partnership.
-                        </p>
-                    </motion.div>
+                        {/* Main image (larger) */}
+                        <motion.div
+                            initial={{ opacity: 0, scale: 0.95, y: 20 }}
+                            animate={{ opacity: 1, scale: 1, y: 0 }}
+                            transition={{ duration: 0.6, ease: "easeOut" }}
+                            className="relative overflow-hidden rounded-3xl ring-1 ring-white/20 shadow-2xl"
+                        >
+                            <motion.img
+                                src="/assets/img/hlcc-culture.png"
+                                alt="HLCC culture"
+                                className="block w-[360px] md:w-[460px] lg:w-[700px] max-w-[90vw] h-auto object-cover"
+                                animate={{ y: [0, -6, 0] }}
+                                transition={{ repeat: Infinity, duration: 6, ease: "easeInOut" }}
+                            />
+                        </motion.div>
+
+                        {/* Metric badge 1 */}
+                        <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: 0.4, duration: 0.5 }}
+                            className="absolute -top-6 -left-4 md:-left-10"
+                        >
+                            <motion.div
+                                animate={{ y: [0, -6, 0] }}
+                                transition={{ repeat: Infinity, duration: 4.5, ease: "easeInOut", delay: 0.4 }}
+                                className="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl px-4 py-3 shadow-lg"
+                            >
+                                <div className="text-2xl md:text-3xl font-bold bg-gradient-to-r from-[var(--blue-bright)] to-[var(--gold-accent)] bg-clip-text text-transparent">
+                                    {counts[0]}
+                                    {metrics[0].suffix}
+                                </div>
+                                <div className="text-xs md:text-sm text-gray-200">{metrics[0].label}</div>
+                            </motion.div>
+                        </motion.div>
+
+                        {/* Metric badge 2 */}
+                        <motion.div
+                            initial={{ opacity: 0, x: 20 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            transition={{ delay: 0.6, duration: 0.5 }}
+                            className="absolute top-1/2 -right-6 md:-right-10 -translate-y-1/2"
+                        >
+                            <motion.div
+                                animate={{ y: [0, -6, 0] }}
+                                transition={{ repeat: Infinity, duration: 5, ease: "easeInOut", delay: 0.6 }}
+                                className="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl px-4 py-3 shadow-lg"
+                            >
+                                <div className="text-2xl md:text-3xl font-bold bg-gradient-to-r from-[var(--blue-bright)] to-[var(--gold-accent)] bg-clip-text text-transparent">
+                                    {counts[1]}
+                                    {metrics[1].suffix}
+                                </div>
+                                <div className="text-xs md:text-sm text-gray-200">{metrics[1].label}</div>
+                            </motion.div>
+                        </motion.div>
+
+                        {/* Metric badge 3 */}
+                        <motion.div
+                            initial={{ opacity: 0, y: -20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: 0.8, duration: 0.5 }}
+                            className="absolute -bottom-8 left-1/2 -translate-x-1/2"
+                        >
+                            <motion.div
+                                animate={{ y: [0, -6, 0] }}
+                                transition={{ repeat: Infinity, duration: 4, ease: "easeInOut", delay: 0.8 }}
+                                className="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl px-4 py-3 shadow-lg"
+                            >
+                                <div className="text-2xl md:text-3xl font-bold bg-gradient-to-r from-[var(--blue-bright)] to-[var(--gold-accent)] bg-clip-text text-transparent">
+                                    {counts[2]}
+                                    {metrics[2].suffix}
+                                </div>
+                                <div className="text-xs md:text-sm text-gray-200">{metrics[2].label}</div>
+                            </motion.div>
+                        </motion.div>
+                    </div>
                 </div>
             </div>
         </section>

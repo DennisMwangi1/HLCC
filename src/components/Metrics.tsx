@@ -7,7 +7,7 @@ export function ImpactAtScale() {
                 "Across Africa and beyond — building cultures that align people, purpose, and performance.",
         },
         {
-            value: "10,000+",
+            value: "400+",
             label: "Leaders Developed",
             description:
                 "Equipped with emotional intelligence, agility, and purpose-driven leadership skills.",

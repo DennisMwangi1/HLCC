@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 import {
     Card,
     CardContent,
@@ -73,12 +74,14 @@ export function Insights() {
                             culture, and learning.
                         </p>
                     </div>
-                    <Button
-                        variant="outline"
-                        className="hidden md:flex border-2 border-gray-300 hover:border-[var(--blue-accent)] hover:text-[var(--blue-accent)]"
-                    >
-                        View All Articles
-                    </Button>
+                    <Link to="/insights">
+                        <Button
+                            variant="outline"
+                            className="hidden md:flex border-2 border-gray-300 hover:border-[var(--blue-accent)] hover:text-[var(--blue-accent)]"
+                        >
+                            View All Articles
+                        </Button>
+                    </Link>
                 </motion.div>
 
                 {/* Blog Cards */}
@@ -109,7 +112,7 @@ export function Insights() {
                                     </div>
                                 </div>
                                 <CardHeader>
-                                    <CardTitle className="text-xl group-hover:text-[var(--blue-accent)] transition-colors line-clamp-2">
+                                    <CardTitle className="text-xl group-hover:text-[var(--blue-accent)] transition-colors line-clamp-1">
                                         {post.title}
                                     </CardTitle>
                                 </CardHeader>
@@ -144,12 +147,14 @@ export function Insights() {
 
                 {/* Mobile Button */}
                 <div className="text-center mt-12 md:hidden">
-                    <Button
-                        variant="outline"
-                        className="border-2 border-gray-300 hover:border-[var(--blue-accent)] hover:text-[var(--blue-accent)]"
-                    >
-                        View All Articles
-                    </Button>
+                    <Link to="/insights">
+                        <Button
+                            variant="outline"
+                            className="border-2 border-gray-300 hover:border-[var(--blue-accent)] hover:text-[var(--blue-accent)]"
+                        >
+                            View All Articles
+                        </Button>
+                    </Link>
                 </div>
             </div>
         </section>

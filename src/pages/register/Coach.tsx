@@ -69,10 +69,7 @@ function Hero() {
 
 function WhyJoin() {
   const bullets = [
-    "Partner with a human-centered, globally minded firm shaping leadership and culture.",
-    "Access world-class tools, methodologies, and a community of expert practitioners.",
-    "Work with top organizations across Africa and beyond, delivering measurable impact.",
-    "Grow your craft through reflective practice, peer learning, and development pathways.",
+    "Collaborate with a human centered, globally minded firm shaping leadership and culture through evidence based coaching, shared learning, and meaningful impact",
   ];
 
   return (
@@ -82,16 +79,13 @@ function WhyJoin() {
           <h2 className="text-3xl md:text-4xl font-semibold text-[var(--navy-dark)] mb-6">Why Join HLCC</h2>
           <div className="space-y-4 text-gray-700 text-lg leading-relaxed">
             <p>
-              HLCC partners with organizations to align people, culture, and leadership. Our coaches help
-              leaders grow with courage and empathy while building cultures where belonging drives performance.
+                Partner with Purpose. Grow with HLCC.
+
+                Join a global network of coaches and facilitators dedicated to shaping cultures where people and performance flourish. At HLCC, we believe true transformation begins with people, courageous leaders, empathetic teams, and workplaces where belonging drives excellence.
+
+                Be part of a purpose led community that blends evidence based coaching with deep human insight, creating lasting change in how organizations lead, live, and grow.
             </p>
-            <p>
-              As part of the HLCC network, you will facilitate transformative experiences, deliver evidence-led
-              coaching, and contribute to strategic culture work across sectors and regions.
-            </p>
-            <p>
-              We offer a platform for meaningful impact, backed by global standards and deep regional insight.
-            </p>
+
           </div>
         </div>
 

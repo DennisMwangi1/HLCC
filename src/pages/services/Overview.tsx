@@ -9,7 +9,7 @@ import { Button } from "@/components/ui/button";
 
 export default function ServicesOverview() {
   return (
-    <main className="py-16">
+    <main className="pb-16">
       {/* Intro */}
       <section className="relative py-20 bg-gradient-to-b from-white via-slate-50 to-white overflow-hidden">
         <div className="absolute inset-0 bg-[url('/noise.svg')] opacity-5 pointer-events-none" />
@@ -23,7 +23,7 @@ export default function ServicesOverview() {
             </span>
           </h1>
           <p className="text-lg text-gray-700 max-w-3xl mx-auto">
-            HLCC bridges leadership, culture, and HR strategy — helping you design workplaces where people
+            HLCC bridges leadership, culture, and HR strategy helping you design workplaces where people
             feel seen, valued, and inspired to perform at their best.
           </p>
         </div>
@@ -46,9 +46,13 @@ export default function ServicesOverview() {
                   } hover:shadow-lg hover:border-[var(--gold-deep)] transition-all duration-300`}>
                   <div>
                     <CardHeader className="flex items-center gap-4 mb-4">
-                      <div className="p-[2px] rounded-2xl bg-gradient-to-br from-[var(--blue-accent)] to-[var(--gold-accent)]">
-                        <div className="w-14 h-14 rounded-2xl bg-white flex items-center justify-center">
-                          <s.icon className="w-7 h-7 text-[var(--navy-dark)]" aria-hidden="true" />
+                      <div className="p-[1px] rounded-2xl bg-gradient-to-br from-[var(--blue-accent)] to-[var(--gold-accent)]">
+                        <div className="w-20 h-20 rounded-2xl bg-white overflow-hidden flex items-center justify-center">
+                          <img
+                            src={s.heroImage ?? '/assets/img/wanjiru.jpg'}
+                            alt={`${s.title} image`}
+                            className="w-full h-full object-cover"
+                          />
                         </div>
                       </div>
                       <div>
@@ -57,7 +61,7 @@ export default function ServicesOverview() {
                       </div>
                     </CardHeader>
 
-                    <CardContent>
+                    <CardContent className="pb-0">
                       <CardDescription className="text-base text-gray-700 leading-relaxed mb-4">
                         {s.description}
                       </CardDescription>
@@ -68,7 +72,7 @@ export default function ServicesOverview() {
                             <AccordionTrigger className="text-[var(--navy-dark)] hover:underline text-sm">
                               View Focus Areas
                             </AccordionTrigger>
-                            <AccordionContent>
+                            <AccordionContent className="pb-0">
                               <ul className="space-y-2 pl-5 mt-3 text-gray-700 text-[15px] leading-relaxed">
                                 {s.focusAreas.map((item, idx) => (
                                   <li
@@ -86,14 +90,13 @@ export default function ServicesOverview() {
                     </CardContent>
                   </div>
 
-                  <div className="mt-2 flex items-center justify-between">
-                    <p className="italic text-gray-800 text-sm">✨ Outcome: {s.outcome}</p>
-                    <Link
-                      to={`/services/${s.slug}`}
-                      className="text-[var(--blue-accent)] hover:text-[var(--gold-accent)] font-medium"
-                    >
-                      → Learn More
-                    </Link>
+                  <div>
+                    <p className="italic text-gray-800 text-sm mb-4">Outcome: {s.outcome}</p>
+                    <div className="flex justify-center">
+                      <Button asChild size="sm" className="bg-gradient-to-r from-[var(--blue-accent)] to-[var(--gold-accent)] text-white hover:opacity-90">
+                        <Link to={`/services/${s.slug}`}>Learn More</Link>
+                      </Button>
+                    </div>
                   </div>
                 </Card>
               </motion.div>
@@ -111,7 +114,7 @@ export default function ServicesOverview() {
               <span className="block mt-1">Let’s make yours intentional.</span>
             </h2>
             <Button asChild size="lg" className="bg-gradient-to-r from-[var(--blue-accent)] to-[var(--gold-accent)] text-white hover:opacity-90">
-              <a href="#contact">Book a Consultation</a>
+              <a href="/contact">Book a Consultation</a>
             </Button>
           </div>
         </div>

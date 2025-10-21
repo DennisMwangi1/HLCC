@@ -9,6 +9,8 @@ import ServiceDetails from "@/pages/services/ServiceDetails";
 import RegisterCoach from "@/pages/register/Coach";
 import RegisterFacilitator from "@/pages/register/Facilitator";
 import Contact from "@/pages/Contact";
+import InsightsList from "@/pages/insights/InsightsList";
+import InsightDetail from "@/pages/insights/InsightDetail";
 import { BookingModal } from "@/components/booking/BookingModal";
 import { useBookingModal } from "@/hooks/useBookingModal";
 
@@ -27,6 +29,8 @@ function AppContent({ onBookConsultation, onBookDiscovery }: AppContentProps) {
                 <Route path="/about" element={<About />} />
                 <Route path="/services" element={<ServicesOverview />} />
                 <Route path="/services/:slug" element={<ServiceDetails />} />
+                <Route path="/insights" element={<InsightsList />} />
+                <Route path="/insights/:slug" element={<InsightDetail />} />
                 <Route path="/register/coach" element={<RegisterCoach />} />
                 <Route path="/register/facilitator" element={<RegisterFacilitator />} />
                 <Route path="/contact" element={<Contact />} />

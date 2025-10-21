@@ -10,18 +10,17 @@ export function WhoWeAre() {
 
                     <p className="text-gray-700 text-lg leading-relaxed mb-6">
                         Founded in 2016 as <strong>Elite HR Solutions Ltd</strong>, HLCC has evolved into
-                        <strong> Human-Centered Leadership & Culture Consulting Ltd</strong> — a firm dedicated to helping
-                        organizations across Africa and beyond align people, culture, and leadership.
+                        <strong> Human-Centered Leadership & Culture Consulting Ltd</strong> Helping organizations across Africa and beyond align people, culture, and leadership.
+
                     </p>
 
                     <p className="text-gray-700 text-lg leading-relaxed mb-6">
-                        We believe every strategy succeeds or fails because of culture. That’s why we help organizations design
-                        workplaces where people belong, values are lived daily, and performance grows naturally.
+                        We believe culture runs the show, and every strategy succeeds or fails because of it.
+                        That’s why we help leaders build workplaces where belonging fuels performance and values become lived behavior.
                     </p>
 
                     <p className="text-gray-700 text-lg leading-relaxed">
-                        Our approach combines global standards with deep African insight — bringing together evidence-based tools,
-                        human understanding, and bold ideas to shape resilient, high-performing cultures.
+                        With a blend of global expertise and deep African insight, we craft cultures that are resilient, high-performing, and unmistakably human.
                     </p>
 
                     <div className="mt-8">

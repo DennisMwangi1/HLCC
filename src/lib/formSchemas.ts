@@ -31,7 +31,7 @@ export const coachFormSchema: FormSchema = {
           name: "phone",
           label: "Phone",
           type: "tel",
-          placeholder: "+254 700 000 000",
+          placeholder: "+254 115335322",
         },
         {
           id: "linkedin",

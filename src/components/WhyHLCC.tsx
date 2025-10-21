@@ -5,11 +5,11 @@ import { ImageWithFallback } from "@/components/figma/ImageWithFallback";
 export function WhyHLCC() {
     const differentiators = [
         "Culture-first approach — aligning people and strategy for measurable growth.",
-        "Global-class expertise with deep African insight.",
-        "Personal, agile, and relationship-driven — not bureaucratic.",
-        "Evidence-based tools grounded in behavioral science and human insight.",
-        "End-to-end support: from diagnostics to leadership, coaching, and HR systems.",
-        "Transformation that’s lived, not just trained — sustained through rituals and values.",
+        "Global expertise with African insight , blending world class tools with deep local understanding.\n",
+        "Personal and agile , always relationship driven, never bureaucratic.",
+        "Evidence based practice , grounded in behavioral science and human insight.",
+        "End to end partnership , from diagnostics to leadership, coaching, and HR systems.",
+        "Transformation that lasts , sustained through values, rituals, and daily behaviors.",
     ];
 
     return (
@@ -30,20 +30,21 @@ export function WhyHLCC() {
                         </div>
 
                         <h2 className="text-3xl md:text-4xl font-semibold mb-6">
-                            Big Enough to Compete,
+                            Big Enough to Compete.
                             <span className="block mt-2 bg-gradient-to-r from-[var(--blue-bright)] to-[var(--gold-accent)] bg-clip-text text-transparent">
-                                Small Enough to Stay Personal.
+                                Personal Enough to Care.
                             </span>
                         </h2>
 
                         <p className="text-lg text-gray-300 mb-8">
                             HLCC helps organizations shape cultures where people thrive and
-                            strategy comes alive. We combine the scale and rigor of global firms
+                            strategy comes alive. We combine the scale and discipline of global firms
                             with the empathy, agility, and cultural intelligence that local
                             contexts demand.
                         </p>
 
-                        {/* Differentiators */}
+                        {/* What Sets Us Apart */}
+                        <h3 className="text-xl font-semibold mb-4">What Sets Us Apart</h3>
                         <div className="grid sm:grid-cols-1 gap-4 mb-10">
                             {differentiators.map((item, index) => (
                                 <div key={index} className="flex items-start gap-3">
@@ -68,9 +69,9 @@ export function WhyHLCC() {
                         <div className="absolute inset-0 bg-gradient-to-br from-[var(--gold-accent)] to-[var(--blue-accent)] rounded-2xl blur-2xl opacity-30" />
                         <div className="relative bg-white/10 backdrop-blur-sm rounded-2xl p-3 border border-white/20 max-w-md mx-auto">
                             <ImageWithFallback
-                                src="/assets/img/wanjiru.jpg"
+                                src="/assets/img/connections.png"
                                 alt="HLCC Culture Collaboration"
-                                className="w-full h-[600px] object-cover rounded-xl shadow-xl"
+                                className="w-full h-full object-center rounded-xl shadow-xl"
                             />
 
                             {/* Floating Info Cards */}

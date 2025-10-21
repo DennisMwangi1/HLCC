@@ -1,6 +1,3 @@
-import { Users, Target, BookOpen, Search, ClipboardCheck } from "lucide-react";
-import type { ComponentType, SVGProps } from "react";
-
 export type FAQItem = {
   question: string;
   answer: string;
@@ -21,7 +18,6 @@ export type Service = {
   focusAreas: string[];
   outcome: string;
   heroImage?: string;
-  icon: ComponentType<SVGProps<SVGSVGElement>>;
   methodology: string[];
   process: ProcessStep[];
   faq: FAQItem[];
@@ -30,7 +26,6 @@ export type Service = {
 export const services: Service[] = [
   {
     slug: "culture-shaping",
-    icon: Users,
     title: "Culture Shaping & Organizational Health",
     tagline: "Design the culture you want. Nurture the one you need.",
     description:
@@ -44,7 +39,7 @@ export const services: Service[] = [
     ],
     outcome: "A living culture where people feel connected, inspired, and accountable.",
     heroImage:
-      "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1200&q=80",
+      "/assets/img/culture-shaping.jpg",
     methodology: [
       "Diagnostic Assessment & Insights",
       "Co-creation & Leadership Alignment",
@@ -91,7 +86,6 @@ export const services: Service[] = [
   },
   {
     slug: "team-coaching",
-    icon: Target,
     title: "Team Coaching & Development",
     tagline: "From groups to great teams.",
     description:
@@ -104,7 +98,7 @@ export const services: Service[] = [
     ],
     outcome: "Teams that communicate openly, collaborate intentionally, and deliver consistently.",
     heroImage:
-      "https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&w=1200&q=80",
+      "/assets/img/coaching.jpg",
     methodology: [
       "Team Assessment & Diagnostics",
       "Trust & Psychological Safety Building",
@@ -151,7 +145,6 @@ export const services: Service[] = [
   },
   {
     slug: "leadership-training",
-    icon: BookOpen,
     title: "Leadership Training & Capacity Building",
     tagline: "Develop leaders who lead with heart and impact.",
     description:
@@ -165,7 +158,7 @@ export const services: Service[] = [
     ],
     outcome: "Confident, emotionally intelligent leaders who shape culture and deliver impact.",
     heroImage:
-      "https://images.unsplash.com/photo-1551836022-4c4c79ecde51?auto=format&fit=crop&w=1200&q=80",
+      "/assets/img/capacity-building.webp",
     methodology: [
       "Competency Assessment",
       "Personalized Development Planning",
@@ -209,9 +202,9 @@ export const services: Service[] = [
         answer: "We recommend 8-15 participants for optimal interaction and learning."
       }
     ]
-  },{
+  },
+  {
     slug: "executive-search",
-    icon: Search,
     title: "Executive & Talent Search",
     tagline: "Placing people who transform performance.",
     description:
@@ -224,7 +217,7 @@ export const services: Service[] = [
     ],
     outcome: "Strategic hires who elevate culture, capability, and performance.",
     heroImage:
-      "https://images.unsplash.com/photo-1523958203904-cdcb402031fd?auto=format&fit=crop&w=1200&q=80",
+      "/assets/img/talent-search.jpg",
     methodology: [
       "Needs Analysis & Role Definition",
       "Market Mapping & Research",
@@ -271,7 +264,6 @@ export const services: Service[] = [
   },
   {
     slug: "hr-advisory",
-    icon: ClipboardCheck,
     title: "HR Operations & Advisory",
     tagline: "Strong foundations. Sustainable growth.",
     description:
@@ -285,7 +277,7 @@ export const services: Service[] = [
     ],
     outcome: "A future-ready HR function that supports people, culture, and performance.",
     heroImage:
-      "https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&w=1200&q=80",
+      "/assets/img/hr-operations.png",
     methodology: [
       "Gap Analysis",
       "Best Practice Benchmarking",

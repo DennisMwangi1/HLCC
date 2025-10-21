@@ -13,16 +13,14 @@ export function Header() {
         "About",
         "Services",
         "Why HLCC",
-        "Case Studies",
-        "Insights",
+        "Blogs & Insights",
         "Contact",
     ];
     const { isOpen, type, openModal, closeModal } = useBookingModal();
 
     const sectionMap: Record<string, string> = {
         "Why HLCC": "why-hlcc",
-        "Case Studies": "case-studies",
-        "Insights": "insights",
+        "Blogs & Insights": "case-studies",
     };
 
     const toHref = (label: string) => {

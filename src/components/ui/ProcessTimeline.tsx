@@ -57,13 +57,19 @@ function ProcessStep({
         >
             {/* Step content */}
             <div
-                className={`w-full md:w-1/2 px-6 md:px-12 ${isEven ? "md:text-left" : "md:text-right"
+                className={`w-full md:w-1/2 px-6 md:px-12 ${isEven ? "md:text-left w-1/2 flex-col start-1 " : "md:text-right w-1/2 flex-col end-1"
                     }`}
             >
                 <h4 className="text-xl font-semibold text-[var(--navy-dark)] mb-2">
                     {title}
                 </h4>
-                <p className="text-gray-600 leading-relaxed">{description}</p>
+                <p
+                    className={`${
+                        isEven ? "w-1/2 pr-4 ml-0" : "w-1/2 pl-4 ml-auto"
+                    }`}
+                >
+                    {description}
+                </p>
             </div>
 
             {/* Circle marker */}

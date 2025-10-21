@@ -8,12 +8,15 @@ import {
     AccordionContent,
 } from "@/components/ui/accordion";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
-import { Users, Target, BookOpen, Search, ClipboardCheck } from "lucide-react";
+import { ImageWithFallback } from "@/components/figma/ImageWithFallback";
+import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
+import { ArrowRight } from "lucide-react";
 
 const offerings = [
     {
         id: "culture",
-        icon: Users,
+        image: "/assets/img/culture-shaping.jpg",
         title: "Culture Shaping & Organizational Health",
         tagline: "Design the culture you want. Nurture the one you need.",
         description:
@@ -30,7 +33,7 @@ const offerings = [
     },
     {
         id: "team",
-        icon: Target,
+        image: "/assets/img/coaching.jpg",
         title: "Team Coaching & Development",
         tagline: "From groups to great teams.",
         description:
@@ -46,7 +49,7 @@ const offerings = [
     },
     {
         id: "leadership",
-        icon: BookOpen,
+        image: "/assets/img/capacity-building.webp",
         title: "Leadership Training & Capacity Building",
         tagline: "Develop leaders who lead with heart and impact.",
         description:
@@ -60,40 +63,7 @@ const offerings = [
         ],
         outcome:
             "Confident, emotionally intelligent leaders who shape culture and deliver impact.",
-    },
-    {
-        id: "search",
-        icon: Search,
-        title: "Executive & Talent Search",
-        tagline: "Placing people who transform performance.",
-        description:
-            "We go beyond recruitment to match leaders who align with your organization’s purpose, values, and strategic direction.",
-        focusAreas: [
-            "Executive and senior leadership search",
-            "Targeted mid-level recruitment",
-            "Competency profiling and assessments",
-            "Candidate selection and onboarding support",
-        ],
-        outcome:
-            "Strategic hires who elevate culture, capability, and performance.",
-    },
-    {
-        id: "hr",
-        icon: ClipboardCheck,
-        title: "HR Operations & Advisory",
-        tagline: "Strong foundations. Sustainable growth.",
-        description:
-            "We strengthen your HR systems and structures to enable clarity, compliance, and human-centered growth.",
-        focusAreas: [
-            "HR audits and process optimization",
-            "Job evaluation and grading frameworks",
-            "Compensation and benefits benchmarking",
-            "Policy development and compliance alignment",
-            "HR capability development and advisory",
-        ],
-        outcome:
-            "A future-ready HR function that supports people, culture, and performance.",
-    },
+    }
 ];
 
 export function Offerings() {
@@ -124,7 +94,7 @@ export function Offerings() {
                 <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
                     {offerings.map(
                         (
-                            { id, icon: Icon, title, tagline, description, focusAreas, outcome },
+                            { id, image, title, tagline, description, focusAreas, outcome },
                             i
                         ) => (
                             <motion.div
@@ -148,10 +118,11 @@ export function Offerings() {
                                     <div>
                                         <CardHeader className="flex items-center gap-4 mb-4">
                                             <div className="p-[2px] rounded-2xl bg-gradient-to-br from-[var(--blue-accent)] to-[var(--gold-accent)]">
-                                                <div className="w-14 h-14 rounded-2xl bg-white flex items-center justify-center">
-                                                    <Icon
-                                                        className="w-7 h-7 text-[var(--navy-dark)]"
-                                                        aria-hidden="true"
+                                                <div className="w-14 h-14 rounded-2xl bg-white flex items-center justify-center overflow-hidden">
+                                                    <ImageWithFallback
+                                                        src={image}
+                                                        alt={title}
+                                                        className="w-full h-full object-cover"
                                                     />
                                                 </div>
                                             </div>
@@ -193,13 +164,33 @@ export function Offerings() {
                                     </div>
 
                                     <p className="italic text-gray-800 text-sm mt-2">
-                                        ✨ Outcome: {outcome}
+                                        Outcome: {outcome}
                                     </p>
                                 </Card>
                             </motion.div>
                         )
                     )}
                 </div>
+
+                {/* See All Offerings Button */}
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, ease: "easeOut", delay: 0.2 }}
+                    viewport={{ once: true }}
+                    className="flex justify-center mt-12"
+                >
+                    <Button
+                        asChild
+                        size="lg"
+                        className="bg-gradient-to-r from-[var(--navy-dark)] to-[var(--blue-accent)] hover:from-[var(--blue-accent)] hover:to-[var(--navy-dark)] text-white shadow-lg hover:shadow-xl transition-all duration-300 group"
+                    >
+                        <Link to="/services" className="flex items-center gap-2">
+                            See All Offerings
+                            <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                        </Link>
+                    </Button>
+                </motion.div>
             </div>
         </section>
     );

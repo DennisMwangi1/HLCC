@@ -8,14 +8,19 @@ interface FooterProps {
 
 export function Footer({ onBookConsultation }: FooterProps) {
     const footerLinks = {
-        "What We Do": [
-            "Leadership Development",
-            "Culture Transformation",
-            "Team Coaching",
-            "HR Advisory",
-        ],
+        "What We Do": ["Leadership Development", "Culture Transformation", "Team Coaching", "HR Advisory"],
         "Resources": ["Case Studies", "Insights", "Events & Webinars", "Publications"],
         "Company": ["About HLCC", "Our People", "Careers", "Contact"],
+    };
+
+    const getLinkPath = (category, link) => {
+        if (category === "What We Do") return "/services";
+        if (category === "Resources") return "/#insights";
+        if (category === "Company") {
+            if (link === "Contact") return "/contact";
+            return "/about";
+        }
+        return "#";
     };
 
     return (
@@ -74,7 +79,7 @@ export function Footer({ onBookConsultation }: FooterProps) {
                             </div>
                             <div className="flex items-center gap-3 text-gray-300">
                                 <Phone className="h-5 w-5 text-[var(--blue-accent)]" />
-                                <span>+254 700 000 000</span>
+                                <span>+254 115335322</span>
                             </div>
                             <div className="flex items-center gap-3 text-gray-300">
                                 <MapPin className="h-5 w-5 text-[var(--blue-accent)]" />
@@ -91,7 +96,7 @@ export function Footer({ onBookConsultation }: FooterProps) {
                                 {links.map((link) => (
                                     <li key={link}>
                                         <Link
-                                            to={link === 'Contact' ? '/contact' : '#'}
+                                            to={getLinkPath(category, link)}
                                             className="text-gray-300 hover:text-white transition-colors"
                                         >
                                             {link}
@@ -100,8 +105,7 @@ export function Footer({ onBookConsultation }: FooterProps) {
                                 ))}
                             </ul>
                         </div>
-                    ))}
-                </div>
+                    ))}                </div>
 
                 {/* Bottom Section */}
                 <div className="border-t border-white/10 mt-16 pt-8 flex flex-col md:flex-row justify-between items-center gap-6">

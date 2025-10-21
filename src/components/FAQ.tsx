@@ -119,7 +119,7 @@ export function FAQ() {
                             href="tel:+254-700-000-000"
                             className="text-[var(--blue-accent)] hover:text-[var(--gold-accent)] transition-colors"
                         >
-                            +254 700 000 000
+                            +254 115335322
                         </a>
                     </div>
                 </motion.div>

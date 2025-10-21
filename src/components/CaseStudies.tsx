@@ -1,5 +1,6 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import { ImageWithFallback } from "@/components/figma/ImageWithFallback";
 
@@ -72,7 +73,7 @@ export function CaseStudies() {
                             </div>
 
                             <CardHeader>
-                                <CardTitle className="text-xl group-hover:text-[var(--blue-accent)] transition-colors">
+                                <CardTitle className="text-xl group-hover:text-[var(--blue-accent)] transition-colors line-clamp-1">
                                     {study.title}
                                 </CardTitle>
                             </CardHeader>
@@ -81,26 +82,30 @@ export function CaseStudies() {
                                 <CardDescription className="text-base text-gray-600 mb-4">
                                     {study.description}
                                 </CardDescription>
-                                <Button
-                                    variant="ghost"
-                                    className="text-[var(--blue-accent)] hover:text-[var(--gold-accent)] p-0 h-auto"
-                                >
-                                    Read Full Story
-                                    <ArrowRight className="ml-2 h-4 w-4" />
-                                </Button>
+                                <Link to="/insights">
+                                    <Button
+                                        variant="ghost"
+                                        className="text-[var(--blue-accent)] hover:text-[var(--gold-accent)] p-0 h-auto"
+                                    >
+                                        Read Full Story
+                                        <ArrowRight className="ml-2 h-4 w-4" />
+                                    </Button>
+                                </Link>
                             </CardContent>
                         </Card>
                     ))}
                 </div>
 
                 <div className="text-center mt-12">
-                    <Button
-                        size="lg"
-                        variant="outline"
-                        className="border-2 border-gray-300 hover:border-[var(--blue-accent)] hover:text-[var(--blue-accent)]"
-                    >
-                        View All Success Stories
-                    </Button>
+                    <Link to="/insights">
+                        <Button
+                            size="lg"
+                            variant="outline"
+                            className="border-2 border-gray-300 hover:border-[var(--blue-accent)] hover:text-[var(--blue-accent)]"
+                        >
+                            View All Success Stories
+                        </Button>
+                    </Link>
                 </div>
             </div>
         </section>

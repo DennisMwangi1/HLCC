@@ -35,17 +35,17 @@ export function BookingModal({ isOpen, onOpenChange, type }: BookingModalProps) 
 
   return (
     <Dialog open={isOpen} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-[600px] max-h-[90vh] overflow-y-auto">
+      <DialogContent className="sm:max-w-1/2 max-h-[90vh] overflow-y-auto">
         <div className="relative">
-          <Button
-            variant="ghost"
-            size="icon"
-            className="absolute -right-2 -top-2 h-8 w-8 rounded-full"
-            onClick={handleClose}
-          >
-            <X className="h-4 w-4" />
-            <span className="sr-only">Close</span>
-          </Button>
+          {/*<Button*/}
+          {/*  variant="ghost"*/}
+          {/*  size="icon"*/}
+          {/*  className="absolute -right-2 -top-2 h-8 w-8 rounded-full"*/}
+          {/*  onClick={handleClose}*/}
+          {/*>*/}
+          {/*  <X className="h-4 w-4" />*/}
+          {/*  <span className="sr-only">Close</span>*/}
+          {/*</Button>*/}
 
           <DialogHeader className="mb-6">
             <DialogTitle className="text-2xl text-center">
