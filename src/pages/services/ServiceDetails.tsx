@@ -2,9 +2,9 @@
 
 import { useMemo, useState } from "react";
 import { useParams, Link } from "react-router-dom";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion,} from "framer-motion";
 import { serviceBySlug } from "../../content/services";
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { ImageWithFallback } from "@/components/figma/ImageWithFallback";
 import { CheckCircle, Quote, ChevronDown, Sparkles, Target, TrendingUp, Award } from "lucide-react";

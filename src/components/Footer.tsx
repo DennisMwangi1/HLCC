@@ -13,7 +13,7 @@ export function Footer({ onBookConsultation }: FooterProps) {
         "Company": ["About HLCC", "Our People", "Careers", "Contact"],
     };
 
-    const getLinkPath = (category, link) => {
+    const getLinkPath = (category: string, link : string) => {
         if (category === "What We Do") return "/services";
         if (category === "Resources") return "/#insights";
         if (category === "Company") {

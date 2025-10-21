@@ -1,8 +1,6 @@
 import { useState } from 'react';
-import { X } from 'lucide-react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { BookingForm } from './BookingForm';
-import { Button } from '@/components/ui/button';
 import type {BookingType} from "@/components/booking/types.ts";
 
 interface BookingModalProps {

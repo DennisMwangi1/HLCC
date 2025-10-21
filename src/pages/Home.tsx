@@ -5,7 +5,6 @@ import { Offerings } from "../components/Offerings";
 import { WhyHLCC } from "../components/WhyHLCC";
 import { ImpactAtScale } from "../components/Metrics";
 import { Testimonials } from "../components/Testimonials";
-import { CaseStudies } from "../components/CaseStudies";
 import { Insights } from "../components/Insights";
 import { FAQ } from "../components/FAQ";
 

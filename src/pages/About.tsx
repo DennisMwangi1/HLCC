@@ -3,9 +3,8 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { ImageWithFallback } from "@/components/figma/ImageWithFallback";
-import { Quote, Users, Sparkles, BarChart3, Linkedin } from "lucide-react";
+import { Quote, Users, Linkedin } from "lucide-react";
 import { ProcessTimeline } from "@/components/ui/ProcessTimeline";
 
 export default function About() {
