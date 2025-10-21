@@ -65,7 +65,7 @@ export function WhyHLCC() {
                     </div>
 
                     {/* Visual Side */}
-                    <div className="relative">
+                    <div className="hidden md:block relative">
                         <div className="absolute inset-0 bg-gradient-to-br from-[var(--gold-accent)] to-[var(--blue-accent)] rounded-2xl blur-2xl opacity-30" />
                         <div className="relative bg-white/10 backdrop-blur-sm rounded-2xl p-3 border border-white/20 max-w-md mx-auto">
                             <ImageWithFallback

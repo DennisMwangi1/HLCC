@@ -60,12 +60,12 @@ function ProcessStep({
                 className={`w-full md:w-1/2 px-6 md:px-12 ${isEven ? "md:text-left w-1/2 flex-col start-1 " : "md:text-right w-1/2 flex-col end-1"
                     }`}
             >
-                <h4 className="text-xl font-semibold text-[var(--navy-dark)] mb-2">
+                <h4 className={`text-xl font-semibold text-[var(--navy-dark)] mb-2 ${isEven ? "w-1/2 pr-4 ml-0" : "w-1/2 pl-10 ml-auto"}`}>
                     {title}
                 </h4>
                 <p
                     className={`${
-                        isEven ? "w-1/2 pr-4 ml-0" : "w-1/2 pl-4 ml-auto"
+                        isEven ? "w-1/2 pr-4 ml-0" : "w-1/2 pl-10 ml-auto"
                     }`}
                 >
                     {description}
@@ -73,7 +73,7 @@ function ProcessStep({
             </div>
 
             {/* Circle marker */}
-            <div className="absolute left-1/2 -translate-x-1/2 flex flex-col items-center">
+            <div className="absolute left-1/2 -translate-x-1/2 flex flex-col items-center px-10">
                 <motion.div
                     initial={{ scale: 0 }}
                     whileInView={{ scale: 1 }}

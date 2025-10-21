@@ -44,7 +44,7 @@ export function Testimonials() {
             <div className="absolute top-20 left-10 w-72 h-72 bg-[var(--blue-accent)]/10 rounded-full blur-3xl" />
             <div className="absolute bottom-20 right-10 w-72 h-72 bg-[var(--gold-accent)]/10 rounded-full blur-3xl" />
 
-            <div className="container relative mx-auto px-4 md:px-6">
+            <div className=" relative mx-auto px-4 md:px-6">
                 {/* Header */}
                 <div className="text-center mb-16">
                     <h2 className="text-3xl md:text-4xl text-white font-semibold mb-4">

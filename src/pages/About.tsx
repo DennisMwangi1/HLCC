@@ -151,7 +151,7 @@ function OurPhilosophy() {
               </CardContent>
             </Card>
           </motion.div>
-        ))}
+            ))}
       </div>
     </SectionContainer>
   );
@@ -164,21 +164,22 @@ function OurTeam() {
       name: "Wanjiru Mwangi",
       title: "Chief People and Culture Architect",
       linkedin: "https://www.linkedin.com/in/carolinewmwangi/",
+      image: "/assets/img/wanjiru.jpg",
     },
-      {
-          name: "Carolyne Mutheu",
-          title: "Chief of Staff",
-          linkedin: "https://www.linkedin.com/in/carolyne-mutheu-699342b0/",
-      }
+    {
+      name: "Carolyne Mutheu",
+      title: "Chief of Staff",
+      linkedin: "https://www.linkedin.com/in/carolyne-mutheu-699342b0/",
+      image: "/assets/img/carolyne.jpg",
+    }
     // Add more team members here
   ];
-
+  
   return (
     <SectionContainer className="py-24 bg-gradient-to-b from-white to-slate-50">
       {/* Advisory Board Section */}
       <div className="mb-20">
         <div className="text-center mb-10">
-          <h2 className="text-3xl md:text-4xl font-semibold text-[var(--navy-dark)] mb-4">Advisory Board</h2>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
             Strategic advisors guiding our vision and impact.
           </p>
@@ -206,40 +207,49 @@ function OurTeam() {
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 max-w-6xl mx-auto">
           {team.map((member, i) => (
-            <motion.div
-              key={member.name}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: i * 0.1 }}
-              viewport={{ once: true }}
-            >
-              <Card className="h-full hover:shadow-lg transition-shadow border-2 hover:border-[var(--gold-deep)]">
-                <CardContent className="p-6 flex flex-col items-center text-center space-y-4">
-                  <div className="w-16 h-16 rounded-full bg-gradient-to-br from-[var(--blue-accent)] to-[var(--gold-accent)] flex items-center justify-center">
-                    <span className="text-white text-xl font-semibold">
-                      {member.name.split(' ').map(n => n[0]).join('')}
-                    </span>
-                  </div>
-                  <div className="flex-1">
-                    <h3 className="text-lg font-semibold text-[var(--navy-dark)] mb-2">
-                      {member.name}
-                    </h3>
-                    <p className="text-sm text-gray-600 leading-relaxed">
-                      {member.title}
-                    </p>
-                  </div>
-                  <a
-                    href={member.linkedin}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-[#0A66C2] hover:bg-[#004182] transition-colors"
-                    aria-label={`${member.name}'s LinkedIn profile`}
-                  >
-                    <Linkedin className="w-5 h-5 text-white" />
-                  </a>
-                </CardContent>
-              </Card>
-            </motion.div>
+              <motion.div
+                  key={member.name}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: i * 0.1 }}
+                  viewport={{ once: true }}
+              >
+                  <Card className="h-full hover:shadow-lg transition-shadow border-2 hover:border-[var(--gold-deep)]">
+                      <CardContent className="p-6 flex flex-col items-center text-center space-y-4">
+                          {member.image ? (
+                              <img
+                                  src={member.image}
+                                  alt={member.name}
+                                  className="w-24 h-24 md:w-40 md:h-40 rounded-full object-cover border-1 border-[var(--gold-accent)] shadow-sm"
+                              />
+                          ) : (
+                              <div className="w-24 h-24 rounded-full bg-gradient-to-br from-[var(--blue-accent)] to-[var(--gold-accent)] flex items-center justify-center text-white text-2xl font-semibold">
+                                  {member.name.split(' ').map(n => n[0]).join('')}
+                              </div>
+                          )}
+
+                          <div className="flex-1">
+                              <h3 className="text-lg font-semibold text-[var(--navy-dark)] mb-2">
+                                  {member.name}
+                              </h3>
+                              <p className="text-sm text-gray-600 leading-relaxed">
+                                  {member.title}
+                              </p>
+                          </div>
+
+                          <a
+                              href={member.linkedin}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-[#0A66C2] hover:bg-[#004182] transition-colors"
+                              aria-label={`${member.name}'s LinkedIn profile`}
+                          >
+                              <Linkedin className="w-5 h-5 text-white" />
+                          </a>
+                      </CardContent>
+                  </Card>
+              </motion.div>
+
           ))}
         </div>
       </div>

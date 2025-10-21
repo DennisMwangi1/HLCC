@@ -119,7 +119,7 @@ export function Hero({ onBookConsultation }: HeroProps) {
                 </div>
 
                 {/* Right side: image + animated metrics */}
-                <div className="relative flex items-center justify-center border-l border-white/20 pl-8">
+                <div className="hidden relative md:flex items-center justify-center border-l border-white/20 pl-8">
                     <div className="relative">
                         {/* Glow backdrop */}
                         <motion.div

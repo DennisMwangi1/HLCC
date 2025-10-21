@@ -16,7 +16,7 @@ export function Header() {
         "Blogs & Insights",
         "Contact",
     ];
-    const { isOpen, type, openModal, closeModal } = useBookingModal();
+    const { isOpen, type, closeModal } = useBookingModal();
 
     const sectionMap: Record<string, string> = {
         "Why HLCC": "why-hlcc",
@@ -98,7 +98,7 @@ export function Header() {
                             side="right"
                             className="bg-[var(--navy-dark)] border-white/10 text-white w-80"
                         >
-                            <nav className="flex flex-col gap-4 mt-8">
+                            <nav className="flex flex-col gap-4 mt-8 text-center">
                                 {navLinks.map((link) => (
                                     <Link
                                         key={link}
@@ -110,32 +110,20 @@ export function Header() {
                                 ))}
 
                                 <div className="border-t border-white/10 pt-4 mt-4 flex flex-col gap-3">
+                                    <h1 className="text-lg font-semibold text-white">Register</h1>
                                     <Button
                                         asChild
                                         variant="outline"
-                                        className="border-white/20 text-white hover:bg-white/10 justify-start"
+                                        className="border-white/20 text-white bg-[var(--navy-dark)] hover:bg-white/10 justify-start"
                                     >
-                                        <Link to="/register/coach">Register as Coach</Link>
+                                        <Link to="/register/coach">As Coach</Link>
                                     </Button>
                                     <Button
                                         asChild
                                         variant="outline"
-                                        className="border-white/20 text-white hover:bg-white/10 justify-start"
+                                        className="border-white/20 bg-[var(--navy-dark)]  text-white hover:bg-white/10 justify-start"
                                     >
-                                        <Link to="/register/facilitator">Become a Facilitator</Link>
-                                    </Button>
-                                    <Button
-                                        variant="ghost"
-                                        className="text-white hover:bg-white/10 justify-start"
-                                    >
-                                        Learner Login
-                                    </Button>
-                                    <Button
-                                        size="lg"
-                                        className="bg-gradient-to-r from-[var(--blue-accent)] to-[var(--gold-accent)] text-white hover:opacity-90"
-                                        onClick={() => openModal("consultation")}
-                                    >
-                                        Book a Consultation
+                                        <Link to="/register/facilitator">As Facilitator</Link>
                                     </Button>
                                 </div>
                             </nav>
