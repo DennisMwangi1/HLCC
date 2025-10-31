@@ -1,29 +1,24 @@
 export function ImpactAtScale() {
     const metrics = [
         {
-            value: "50+",
+            value: "15+",
             label: "Organizations Transformed",
             description:
                 "Across Africa and beyond — building cultures that align people, purpose, and performance.",
         },
         {
-            value: "400+",
+            value: "100+",
             label: "Leaders Developed",
             description:
                 "Equipped with emotional intelligence, agility, and purpose-driven leadership skills.",
         },
         {
-            value: "30,000+",
+            value: "1000+",
             label: "Employees Engaged",
             description:
                 "Empowered through culture design, coaching, and HR transformation initiatives.",
         },
-        {
-            value: "97%",
-            label: "Client Retention",
-            description:
-                "Long-term partnerships built on trust, measurable impact, and shared growth.",
-        },
+
     ];
 
     return (
@@ -43,7 +38,7 @@ export function ImpactAtScale() {
                     </p>
                 </div>
 
-                <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
                     {metrics.map((metric, index) => (
                         <div
                             key={index}

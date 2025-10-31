@@ -65,13 +65,13 @@ export function WhyHLCC() {
                     </div>
 
                     {/* Visual Side */}
-                    <div className="hidden md:block relative">
+                    <div className="hidden lg:flex relative">
                         <div className="absolute inset-0 bg-gradient-to-br from-[var(--gold-accent)] to-[var(--blue-accent)] rounded-2xl blur-2xl opacity-30" />
                         <div className="relative bg-white/10 backdrop-blur-sm rounded-2xl p-3 border border-white/20 max-w-md mx-auto">
                             <ImageWithFallback
                                 src="/assets/img/connections.png"
                                 alt="HLCC Culture Collaboration"
-                                className="w-full h-full object-center rounded-xl shadow-xl"
+                                className="w-[1000px] h-[500px] object-center rounded-xl shadow-xl"
                             />
 
                             {/* Floating Info Cards */}

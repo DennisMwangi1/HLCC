@@ -57,6 +57,7 @@ export type FormSchema = {
     title?: string;
     description?: string;
     submitText?: string;
+    submitEndpoint?: string; // optional endpoint to POST submissions to (e.g., Formspree)
     fields: SectionSchema[];
 };
 
@@ -89,12 +90,38 @@ export function DynamicForm({
         }, {} as Record<string, any>);
 
     const formSchema = z.object(shape);
-    const { control, handleSubmit, watch } = useForm({
+    const { control, handleSubmit, watch, reset } = useForm({
         resolver: zodResolver(formSchema),
     });
 
     const values = watch();
-    const onSubmit = (data: any) => console.log("Form Data:", data);
+    const onSubmit = async (data: any) => {
+        if (!schema.submitEndpoint) {
+            console.log("Form Data:", data);
+            return;
+        }
+
+        try {
+            const response = await fetch(schema.submitEndpoint, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Accept": "application/json",
+                },
+                body: JSON.stringify(data),
+            });
+
+            if (!response.ok) {
+                throw new Error(`Submission failed with status ${response.status}`);
+            }
+
+            // basic UX: reset form on success
+            reset();
+            console.log("Form submitted successfully");
+        } catch (error) {
+            console.error("Error submitting form:", error);
+        }
+    };
 
     return (
         <form

@@ -33,7 +33,7 @@ function Hero() {
     <section className="relative py-24 md:py-32 text-white overflow-hidden">
       <div className="absolute inset-0">
         <ImageWithFallback
-          src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1600&q=80"
+          src="/assets/img/coach.avif"
           alt="Coaching and leadership in action"
           className="w-full h-full object-cover"
         />
@@ -79,11 +79,11 @@ function WhyJoin() {
           <h2 className="text-3xl md:text-4xl font-semibold text-[var(--navy-dark)] mb-6">Why Join HLCC</h2>
           <div className="space-y-4 text-gray-700 text-lg leading-relaxed">
             <p>
-                Partner with Purpose. Grow with HLCC.
+              Partner with Purpose. Grow with HLCC.
 
-                Join a global network of coaches and facilitators dedicated to shaping cultures where people and performance flourish. At HLCC, we believe true transformation begins with people, courageous leaders, empathetic teams, and workplaces where belonging drives excellence.
+              Join a global network of coaches and facilitators dedicated to shaping cultures where people and performance flourish. At HLCC, we believe true transformation begins with people, courageous leaders, empathetic teams, and workplaces where belonging drives excellence.
 
-                Be part of a purpose led community that blends evidence based coaching with deep human insight, creating lasting change in how organizations lead, live, and grow.
+              Be part of a purpose led community that blends evidence based coaching with deep human insight, creating lasting change in how organizations lead, live, and grow.
             </p>
 
           </div>

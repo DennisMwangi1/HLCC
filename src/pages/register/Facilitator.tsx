@@ -33,7 +33,7 @@ function Hero() {
     <section className="relative py-24 md:py-32 text-white overflow-hidden">
       <div className="absolute inset-0">
         <ImageWithFallback
-          src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1600&q=80"
+          src="/assets/img/facilitator.avif"
           alt="Facilitation in action"
           className="w-full h-full object-cover"
         />

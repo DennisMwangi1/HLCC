@@ -50,7 +50,7 @@ export const articles: Article[] = [
     title: "Energy Sector: Culture Transformation Across 5 Countries",
     category: "Case Study",
     image:
-      "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
+      "assets/img/whoweare.webp",
     tagline: "A regional transformation aligned purpose, values, and behaviors.",
     description:
       "Within 12 months, engagement scores rose by 42% and leadership alignment was restored.",

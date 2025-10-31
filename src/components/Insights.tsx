@@ -37,7 +37,7 @@ export function Insights() {
         },
         {
             image:
-                "https://images.unsplash.com/photo-1758691736722-cda1858056e0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
+                "/assets/img/whoweare.webp",
             title: "Proving the ROI of Leadership Development",
             excerpt:
                 "A clear framework for linking leadership growth to business performance — and communicating impact with confidence.",

@@ -47,7 +47,7 @@ export function WhoWeAre() {
                     <div
                         className="w-full h-80 rounded-2xl overflow-hidden shadow-lg"
                         style={{
-                            backgroundImage: `url('https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=900&q=80')`,
+                            backgroundImage: 'url("/assets/img/whoweare.webp")',
                             backgroundSize: "cover",
                             backgroundPosition: "center",
                         }}
