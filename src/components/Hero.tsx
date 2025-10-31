@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { motion, useAnimation } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
-import {useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 interface HeroProps {
     onBookConsultation: () => void;
@@ -13,23 +13,18 @@ interface HeroProps {
 export function Hero({ onBookConsultation }: HeroProps) {
     const metrics = [
         {
-            target: 400,
+            target: 100,
             label: "Leaders Developed",
             description: "Empowered through coaching and learning programs",
             suffix: "+",
         },
         {
-            target: 50,
+            target: 15,
             label: "Organizations Transformed",
             description: "Across Africa, the Middle East, and beyond",
             suffix: "+",
         },
-        {
-            target: 97,
-            label: "Client Retention",
-            description: "Sustained partnerships built on trust and measurable results",
-            suffix: "%",
-        },
+
     ];
 
     // Counter logic
@@ -111,7 +106,7 @@ export function Hero({ onBookConsultation }: HeroProps) {
                             size="lg"
                             variant="outline"
                             className="border-2 border-white/30 text-white hover:bg-black/10 hover:text-white bg-white/10 text-lg px-8 py-6"
-                            onClick={()=>navigate('/about')}
+                            onClick={() => navigate('/about')}
                         >
                             Learn More
                         </Button>
