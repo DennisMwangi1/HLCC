@@ -14,6 +14,10 @@ import {
   FormLabel,
   FormMessage,
 } from '@/components/ui/form';
+import { submitToMailchimp, parseName } from '@/lib/mailchimp';
+import { useState } from 'react';
+import { Loader2 } from 'lucide-react';
+import { toast } from 'sonner';
 
 const formSchema = z.object({
   name: z.string().min(2, { message: 'Name must be at least 2 characters.' }),
@@ -24,6 +28,7 @@ const formSchema = z.object({
 });
 
 export default function Contact() {
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -35,9 +40,38 @@ export default function Contact() {
     },
   });
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values);
-    // Handle form submission
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    setIsSubmitting(true);
+    try {
+      const { firstName, lastName } = parseName(values.name);
+      
+      // Submit to Mailchimp
+      const result = await submitToMailchimp(
+        {
+          email: values.email,
+          firstName,
+          lastName,
+          phone: values.phone || undefined,
+          mergeFields: {
+            SUBJECT: values.subject,
+            MESSAGE: values.message,
+          },
+        },
+        'contact'
+      );
+
+      if (result.success) {
+        toast.success('Message sent successfully! We\'ll get back to you soon.');
+        form.reset();
+      } else {
+        toast.error(result.error || 'Failed to send message. Please try again.');
+      }
+    } catch (error) {
+      console.error('Form submission error:', error);
+      toast.error('An error occurred. Please try again.');
+    } finally {
+      setIsSubmitting(false);
+    }
   }
 
   return (
@@ -111,8 +145,15 @@ export default function Contact() {
                   </FormItem>
                 )}
               />
-              <Button type="submit" className="w-full md:w-auto">
-                Send Message
+              <Button type="submit" className="w-full md:w-auto" disabled={isSubmitting}>
+                {isSubmitting ? (
+                  <>
+                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                    Sending...
+                  </>
+                ) : (
+                  'Send Message'
+                )}
               </Button>
             </form>
           </Form>

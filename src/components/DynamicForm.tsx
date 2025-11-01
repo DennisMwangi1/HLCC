@@ -21,6 +21,10 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Switch } from "@/components/ui/switch";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/utils"; // Tailwind class combiner
+import { submitToMailchimp, parseName } from "@/lib/mailchimp";
+import { useState } from "react";
+import { toast } from "sonner";
+import { Loader2 } from "lucide-react";
 
 export type FieldSchema = {
     id: string;
@@ -58,6 +62,8 @@ export type FormSchema = {
     description?: string;
     submitText?: string;
     submitEndpoint?: string; // optional endpoint to POST submissions to (e.g., Formspree)
+    useMailchimp?: boolean; // if true, submit to Mailchimp
+    mailchimpFormType?: 'coach' | 'facilitator'; // type of form for Mailchimp tags
     fields: SectionSchema[];
 };
 
@@ -77,9 +83,11 @@ export function DynamicForm({
     schema,
     className,
 }: {
-    schema: FormSchema;
-    className?: string;
+    readonly schema: FormSchema;
+    readonly className?: string;
 }) {
+    const [isSubmitting, setIsSubmitting] = useState(false);
+
     const shape = schema.fields
         .flatMap((s) => s.fields)
         .reduce((acc, f) => {
@@ -96,30 +104,80 @@ export function DynamicForm({
 
     const values = watch();
     const onSubmit = async (data: any) => {
-        if (!schema.submitEndpoint) {
-            console.log("Form Data:", data);
-            return;
-        }
+        setIsSubmitting(true);
 
         try {
-            const response = await fetch(schema.submitEndpoint, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    "Accept": "application/json",
-                },
-                body: JSON.stringify(data),
-            });
+            // If Mailchimp is enabled, submit to Mailchimp
+            if (schema.useMailchimp && schema.mailchimpFormType) {
+                // Extract email and name from form data
+                const email = data.email || data.Email || '';
+                const name = data.name || data.Name || '';
+                const { firstName, lastName } = parseName(name);
 
-            if (!response.ok) {
-                throw new Error(`Submission failed with status ${response.status}`);
+                // Build merge fields from all form data
+                const mergeFields: Record<string, string> = {};
+                for (const key of Object.keys(data)) {
+                    if (key.toLowerCase() !== 'email' && key.toLowerCase() !== 'name') {
+                        const value = data[key];
+                        if (value !== null && value !== undefined && value !== '') {
+                            mergeFields[key.toUpperCase()] = String(value);
+                        }
+                    }
+                }
+
+                const result = await submitToMailchimp(
+                    {
+                        email,
+                        firstName,
+                        lastName,
+                        phone: data.phone || data.Phone || undefined,
+                        company: data.company || data.Company || undefined,
+                        mergeFields,
+                        tags: [schema.mailchimpFormType, 'application'],
+                    },
+                    schema.mailchimpFormType
+                );
+
+                if (result.success) {
+                    toast.success('Application submitted successfully!');
+                    reset();
+                } else {
+                    toast.error(result.error || 'Failed to submit application. Please try again.');
+                    // Still log the form data even if Mailchimp fails
+                    console.log("Form Data (Mailchimp failed):", data);
+                }
+                setIsSubmitting(false);
+                return;
             }
 
-            // basic UX: reset form on success
-            reset();
-            console.log("Form submitted successfully");
+            // Legacy: Use submitEndpoint if provided
+            if (schema.submitEndpoint) {
+                const response = await fetch(schema.submitEndpoint, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Accept": "application/json",
+                    },
+                    body: JSON.stringify(data),
+                });
+
+                if (!response.ok) {
+                    throw new Error(`Submission failed with status ${response.status}`);
+                }
+
+                reset();
+                toast.success('Form submitted successfully!');
+                console.log("Form submitted successfully");
+            } else {
+                // Fallback: just log to console
+                console.log("Form Data:", data);
+                toast.info('Form data logged (no submission endpoint configured)');
+            }
         } catch (error) {
             console.error("Error submitting form:", error);
+            toast.error('An error occurred. Please try again.');
+        } finally {
+            setIsSubmitting(false);
         }
     };
 
@@ -256,10 +314,19 @@ export function DynamicForm({
 
             <div className="pt-4 flex justify-end">
                 <Button
+                    type="submit"
                     size="lg"
+                    disabled={isSubmitting}
                     className="bg-gradient-to-r from-[var(--blue-accent)] to-[var(--gold-accent)] text-white font-semibold shadow-sm hover:opacity-90 transition-all"
                 >
-                    {schema.submitText || "Submit"}
+                    {isSubmitting ? (
+                        <>
+                            <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                            Submitting...
+                        </>
+                    ) : (
+                        schema.submitText || "Submit"
+                    )}
                 </Button>
             </div>
         </form>

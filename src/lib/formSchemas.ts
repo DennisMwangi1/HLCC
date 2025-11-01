@@ -5,6 +5,8 @@ export const coachFormSchema: FormSchema = {
   submitText: "Submit Application",
   description:
     "By submitting, you agree to our processing of your information in line with our privacy policy.",
+  useMailchimp: true,
+  mailchimpFormType: 'coach',
   fields: [
     {
       group: "Personal Info",
@@ -105,6 +107,8 @@ export const facilitatorFormSchema: FormSchema = {
   submitText: "Submit Application",
   description:
     "By submitting, you agree to our processing of your information in line with our privacy policy.",
+  useMailchimp: true,
+  mailchimpFormType: 'facilitator',
   fields: [
     {
       group: "Personal Info",

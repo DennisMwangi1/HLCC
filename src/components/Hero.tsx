@@ -179,25 +179,6 @@ export function Hero({ onBookConsultation }: HeroProps) {
                             </motion.div>
                         </motion.div>
 
-                        {/* Metric badge 3 */}
-                        <motion.div
-                            initial={{ opacity: 0, y: -20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: 0.8, duration: 0.5 }}
-                            className="absolute -bottom-8 left-1/2 -translate-x-1/2"
-                        >
-                            <motion.div
-                                animate={{ y: [0, -6, 0] }}
-                                transition={{ repeat: Infinity, duration: 4, ease: "easeInOut", delay: 0.8 }}
-                                className="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl px-4 py-3 shadow-lg"
-                            >
-                                <div className="text-2xl md:text-3xl font-bold bg-gradient-to-r from-[var(--blue-bright)] to-[var(--gold-accent)] bg-clip-text text-transparent">
-                                    {counts[2]}
-                                    {metrics[2].suffix}
-                                </div>
-                                <div className="text-xs md:text-sm text-gray-200">{metrics[2].label}</div>
-                            </motion.div>
-                        </motion.div>
                     </div>
                 </div>
             </div>

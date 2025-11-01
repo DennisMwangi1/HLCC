@@ -10,6 +10,8 @@ import { BookingStep3 } from './steps/Step3';
 import { BookingConfirmation } from './steps/Confirmation';
 import { motion, AnimatePresence } from 'framer-motion';
 import type { BookingType } from "@/components/booking/types.ts";
+import { submitToMailchimp, parseName } from '@/lib/mailchimp';
+import { toast } from 'sonner';
 
 const formSchema = z.object({
   // Step 1
@@ -82,16 +84,47 @@ export function BookingForm({ type, onSuccess, onCancel }: BookingFormProps) {
   const onSubmit = async (data: FormValues) => {
     try {
       setIsSubmitting(true);
-      // TODO: Replace with actual API call
-      console.log('Form submitted:', { type, ...data });
+      
+      const { firstName, lastName } = parseName(data.name);
+      
+      // Submit to Mailchimp
+      const result = await submitToMailchimp(
+        {
+          email: data.email,
+          firstName,
+          lastName,
+          phone: data.phone,
+          company: data.company,
+          mergeFields: {
+            NEEDS: Array.isArray(data.needs) ? data.needs.join(', ') : data.needs,
+            TIMEFRAME: data.timeframe,
+            CONTACT_METHOD: data.contactMethod,
+            PREFERRED_DATE: data.preferredDate,
+            PREFERRED_TIME: data.preferredTime,
+            TIMEZONE: data.timezone,
+            MESSAGE: data.message || '',
+            HOW_HEARD: data.howDidYouHear,
+            BOOKING_TYPE: type,
+          },
+          tags: [type === 'discovery' ? 'discovery-call' : 'consultation', 'booking'],
+        },
+        'booking'
+      );
 
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1500));
-
-      setIsSuccess(true);
-      onSuccess?.();
+      if (result.success) {
+        setIsSuccess(true);
+        toast.success('Booking request submitted successfully!');
+        onSuccess?.();
+      } else {
+        toast.error(result.error || 'Failed to submit booking. Please try again.');
+        // Still show success to user for booking UX, but log error
+        console.error('Mailchimp error:', result.error);
+        setIsSuccess(true);
+        onSuccess?.();
+      }
     } catch (error) {
-      console.error('Error submitting form:', error);
+      console.error('Error submitting booking form:', error);
+      toast.error('An error occurred. Please try again.');
     } finally {
       setIsSubmitting(false);
     }
