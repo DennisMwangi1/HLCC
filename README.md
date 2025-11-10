@@ -34,6 +34,7 @@ To set your site's base URL:
    - Add `VITE_SITE_URL` with your production domain (e.g., `https://hlcc.africa`)
 
 2. **For local development**: Create a `.env.local` file (not committed to git) with:
+
    ```
    VITE_SITE_URL=https://hlcc.africa
    ```
@@ -43,6 +44,7 @@ The sitemap will be available at `/sitemap.xml` and `robots.txt` will reference 
 ### Manual Sitemap Generation
 
 You can manually generate the sitemap by running:
+
 ```bash
 npm run generate-sitemap
 ```
@@ -52,6 +54,7 @@ npm run generate-sitemap
 #### Page-Specific SEO
 
 Each page includes:
+
 - **Dynamic title tags** with page-specific content
 - **Meta descriptions** optimized for search engines
 - **Open Graph tags** for social media sharing
@@ -79,9 +82,16 @@ Each page includes:
 ### Customizing SEO
 
 To customize SEO for a specific page, edit `src/lib/seo.ts`:
+
 - Update `pageSEO` object for page-specific metadata
 - Modify `siteConfig` for site-wide settings
 - Update `defaultSEO` for fallback values
+
+### Favicon Configuration
+
+If Google Search is showing your favicon with a white circle background, see [FAVICON_GUIDE.md](./docs/FAVICON_GUIDE.md) for instructions on creating favicons without transparency.
+
+**Quick fix**: Ensure your favicon files (especially `android-chrome-192x192.png`) have a solid background color, not transparency. Google adds a white background to transparent favicons.
 
 ## Expanding the ESLint configuration
 
