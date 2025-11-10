@@ -7,8 +7,17 @@ import { Button } from "@/components/ui/button";
 import { Calendar, User, ArrowRight } from "lucide-react";
 import { ImageWithFallback } from "@/components/figma/ImageWithFallback";
 import { articles } from "@/content/insights";
+import { useSEO } from "@/hooks/useSEO";
+import { pageSEO } from "@/lib/seo";
+import { OrganizationSchema, BreadcrumbSchema } from "@/components/StructuredData";
 
 export default function InsightsList() {
+  useSEO(pageSEO.insights);
+
+  const breadcrumbs = [
+    { name: 'Home', url: '/' },
+    { name: 'Insights', url: '/insights' },
+  ];
   const sorted = [...articles].sort((a, b) => {
     const d1 = new Date(a.date).getTime();
     const d2 = new Date(b.date).getTime();
@@ -16,7 +25,10 @@ export default function InsightsList() {
   });
 
   return (
-    <section className="py-24 bg-gradient-to-b from-slate-50 to-white relative overflow-hidden">
+    <>
+      <OrganizationSchema />
+      <BreadcrumbSchema items={breadcrumbs} />
+      <section className="py-24 bg-gradient-to-b from-slate-50 to-white relative overflow-hidden">
       <div className="absolute inset-0 bg-[url('/noise.svg')] opacity-5 pointer-events-none" />
       <div className="absolute top-0 right-0 w-96 h-96 bg-[var(--gold-accent)]/10 rounded-full blur-3xl" />
       <div className="absolute bottom-0 left-0 w-96 h-96 bg-[var(--blue-accent)]/10 rounded-full blur-3xl" />
@@ -102,5 +114,6 @@ export default function InsightsList() {
         </div>
       </div>
     </section>
+    </>
   );
 }

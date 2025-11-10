@@ -6,17 +6,31 @@ import { ImageWithFallback } from "@/components/figma/ImageWithFallback";
 import { Check, ArrowRight, Star } from "lucide-react";
 import { DynamicForm } from "../../components/DynamicForm.tsx";
 import { facilitatorFormSchema } from "../../lib/formSchemas.ts";
+import { useSEO } from "@/hooks/useSEO";
+import { pageSEO } from "@/lib/seo";
+import { OrganizationSchema, BreadcrumbSchema } from "@/components/StructuredData";
 
 export default function RegisterFacilitator() {
+  useSEO(pageSEO.registerFacilitator);
+
+  const breadcrumbs = [
+    { name: 'Home', url: '/' },
+    { name: 'Register as Facilitator', url: '/register/facilitator' },
+  ];
+
   return (
-    <main>
-      <Hero />
-      <WhyJoin />
-      <Eligibility />
-      <ApplicationForm />
-      <Testimonials />
-      <BottomCTA />
-    </main>
+    <>
+      <OrganizationSchema />
+      <BreadcrumbSchema items={breadcrumbs} />
+      <main>
+        <Hero />
+        <WhyJoin />
+        <Eligibility />
+        <ApplicationForm />
+        <Testimonials />
+        <BottomCTA />
+      </main>
+    </>
   );
 }
 

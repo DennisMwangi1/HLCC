@@ -6,16 +6,30 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { ImageWithFallback } from "@/components/figma/ImageWithFallback";
 import { Quote, Users, Linkedin } from "lucide-react";
 import { ProcessTimeline } from "@/components/ui/ProcessTimeline";
+import { useSEO } from "@/hooks/useSEO";
+import { pageSEO } from "@/lib/seo";
+import { OrganizationSchema, BreadcrumbSchema } from "@/components/StructuredData";
 
 export default function About() {
+  useSEO(pageSEO.about);
+
+  const breadcrumbs = [
+    { name: 'Home', url: '/' },
+    { name: 'About', url: '/about' },
+  ];
+
   return (
-    <main>
-      <OurStory />
-      <OurPurpose />
-      <OurPhilosophy />
-      <OurTeam />
-      <OurImpact />
-    </main>
+    <>
+      <OrganizationSchema />
+      <BreadcrumbSchema items={breadcrumbs} />
+      <main>
+        <OurStory />
+        <OurPurpose />
+        <OurPhilosophy />
+        <OurTeam />
+        <OurImpact />
+      </main>
+    </>
   );
 }
 

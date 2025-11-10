@@ -7,10 +7,40 @@ import { Button } from "@/components/ui/button";
 import { Calendar, User, ArrowLeft, Award } from "lucide-react";
 import { ImageWithFallback } from "@/components/figma/ImageWithFallback";
 import { articles } from "@/content/insights";
+import { useSEO } from "@/hooks/useSEO";
+import { getAbsoluteUrl } from "@/lib/seo";
+import { OrganizationSchema, ArticleSchema, BreadcrumbSchema } from "@/components/StructuredData";
 
 export default function InsightDetail() {
   const { slug } = useParams();
   const article = articles.find((a) => a.slug === slug);
+
+  // SEO configuration for article
+  useSEO(
+    article
+      ? {
+          title: `${article.title} | HLCC Insights`,
+          description: article.description || article.tagline,
+          keywords: article.relatedTags,
+          image: article.image,
+          url: getAbsoluteUrl(`/insights/${article.slug}`),
+          type: 'article',
+          publishedTime: article.date,
+          modifiedTime: article.date,
+          author: article.author,
+          section: article.category,
+          tags: article.relatedTags,
+        }
+      : undefined
+  );
+
+  const breadcrumbs = article
+    ? [
+        { name: 'Home', url: '/' },
+        { name: 'Insights', url: '/insights' },
+        { name: article.title, url: `/insights/${article.slug}` },
+      ]
+    : [];
 
   if (!article) {
     return (
@@ -33,7 +63,11 @@ export default function InsightDetail() {
     .filter(Boolean);
 
   return (
-    <section className="py-24 bg-gradient-to-b from-slate-50 to-white relative overflow-hidden">
+    <>
+      <OrganizationSchema />
+      <ArticleSchema article={article} />
+      {breadcrumbs.length > 0 && <BreadcrumbSchema items={breadcrumbs} />}
+      <section className="py-24 bg-gradient-to-b from-slate-50 to-white relative overflow-hidden">
       <div className="absolute inset-0 bg-[url('/noise.svg')] opacity-5 pointer-events-none" />
       <div className="absolute top-0 right-0 w-96 h-96 bg-[var(--gold-accent)]/10 rounded-full blur-3xl" />
       <div className="absolute bottom-0 left-0 w-96 h-96 bg-[var(--blue-accent)]/10 rounded-full blur-3xl" />
@@ -190,6 +224,7 @@ export default function InsightDetail() {
         </div>
       </div>
     </section>
+    </>
   );
 }
 

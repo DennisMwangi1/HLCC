@@ -6,10 +6,23 @@ import { services } from "../../content/services";
 import { Card, CardHeader, CardTitle, CardContent, CardDescription } from "@/components/ui/card";
 import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
+import { useSEO } from "@/hooks/useSEO";
+import { pageSEO } from "@/lib/seo";
+import { OrganizationSchema, BreadcrumbSchema } from "@/components/StructuredData";
 
 export default function ServicesOverview() {
+  useSEO(pageSEO.services);
+
+  const breadcrumbs = [
+    { name: 'Home', url: '/' },
+    { name: 'Services', url: '/services' },
+  ];
+
   return (
-    <main className="pb-16">
+    <>
+      <OrganizationSchema />
+      <BreadcrumbSchema items={breadcrumbs} />
+      <main className="pb-16">
       {/* Intro */}
       <section className="relative py-20 bg-gradient-to-b from-white via-slate-50 to-white overflow-hidden">
         <div className="absolute inset-0 bg-[url('/noise.svg')] opacity-5 pointer-events-none" />
@@ -119,6 +132,7 @@ export default function ServicesOverview() {
           </div>
         </div>
       </section>
-    </main>
+      </main>
+    </>
   );
 }

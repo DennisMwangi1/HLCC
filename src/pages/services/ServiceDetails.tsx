@@ -9,6 +9,9 @@ import { Button } from "@/components/ui/button";
 import { ImageWithFallback } from "@/components/figma/ImageWithFallback";
 import { CheckCircle, Quote, ChevronDown, Sparkles, Target, TrendingUp, Award } from "lucide-react";
 import { ProcessTimeline } from "../../components/ui/ProcessTimeline";
+import { useSEO } from "@/hooks/useSEO";
+import { getAbsoluteUrl } from "@/lib/seo";
+import { OrganizationSchema, ServiceSchema, BreadcrumbSchema } from "@/components/StructuredData";
 
 interface FAQItemProps {
   question: string;
@@ -100,6 +103,28 @@ export default function ServiceDetails() {
   const { slug } = useParams<{ slug: string; }>();
   const service = useMemo(() => (slug ? serviceBySlug[slug] : undefined), [slug]);
 
+  // SEO configuration for service page
+  useSEO(
+    service
+      ? {
+          title: `${service.title} - ${service.tagline} | HLCC`,
+          description: service.description,
+          keywords: service.focusAreas,
+          image: service.heroImage || '/assets/img/capacity-building.webp',
+          url: getAbsoluteUrl(`/services/${service.slug}`),
+          type: 'website',
+        }
+      : undefined
+  );
+
+  const breadcrumbs = service
+    ? [
+        { name: 'Home', url: '/' },
+        { name: 'Services', url: '/services' },
+        { name: service.title, url: `/services/${service.slug}` },
+      ]
+    : [];
+
   if (!service) {
     return (
       <main className="py-24">
@@ -115,7 +140,11 @@ export default function ServiceDetails() {
   }
 
   return (
-    <main>
+    <>
+      <OrganizationSchema />
+      <ServiceSchema service={service} />
+      {breadcrumbs.length > 0 && <BreadcrumbSchema items={breadcrumbs} />}
+      <main>
       {/* ============================================================================ */}
       {/* HERO SECTION - Premium, immersive introduction with parallax effect */}
       {/* ============================================================================ */}
@@ -505,5 +534,6 @@ export default function ServiceDetails() {
       </section>
 
     </main>
+    </>
   );
 }

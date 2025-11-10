@@ -7,24 +7,33 @@ import { ImpactAtScale } from "../components/Metrics";
 import { Testimonials } from "../components/Testimonials";
 import { Insights } from "../components/Insights";
 import { FAQ } from "../components/FAQ";
+import { useSEO } from "@/hooks/useSEO";
+import { pageSEO } from "@/lib/seo";
+import { OrganizationSchema, WebSiteSchema } from "@/components/StructuredData";
 
 interface HomeProps {
   onBookConsultation: () => void;
 }
 
 export default function Home({ onBookConsultation }: HomeProps) {
+  useSEO(pageSEO.home);
+
   return (
-    <main>
-      <Hero onBookConsultation={onBookConsultation} />
-      <WhoWeAre />
-      <InsightToImpact />
-      <Offerings />
-      <WhyHLCC />
-      <ImpactAtScale />
-      <Testimonials />
-      {/*<CaseStudies />*/}
-      <Insights />
-      <FAQ />
-    </main>
+    <>
+      <OrganizationSchema />
+      <WebSiteSchema />
+      <main>
+        <Hero onBookConsultation={onBookConsultation} />
+        <WhoWeAre />
+        <InsightToImpact />
+        <Offerings />
+        <WhyHLCC />
+        <ImpactAtScale />
+        <Testimonials />
+        {/*<CaseStudies />*/}
+        <Insights />
+        <FAQ />
+      </main>
+    </>
   );
 }

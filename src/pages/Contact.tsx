@@ -18,6 +18,9 @@ import { submitToMailchimp, parseName } from '@/lib/mailchimp';
 import { useState } from 'react';
 import { Loader2 } from 'lucide-react';
 import { toast } from 'sonner';
+import { useSEO } from '@/hooks/useSEO';
+import { pageSEO } from '@/lib/seo';
+import { OrganizationSchema, BreadcrumbSchema } from '@/components/StructuredData';
 
 const formSchema = z.object({
   name: z.string().min(2, { message: 'Name must be at least 2 characters.' }),
@@ -28,6 +31,13 @@ const formSchema = z.object({
 });
 
 export default function Contact() {
+  useSEO(pageSEO.contact);
+
+  const breadcrumbs = [
+    { name: 'Home', url: '/' },
+    { name: 'Contact', url: '/contact' },
+  ];
+
   const [isSubmitting, setIsSubmitting] = useState(false);
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -75,7 +85,10 @@ export default function Contact() {
   }
 
   return (
-    <main className="container mx-auto px-4 py-12 md:py-16">
+    <>
+      <OrganizationSchema />
+      <BreadcrumbSchema items={breadcrumbs} />
+      <main className="container mx-auto px-4 py-12 md:py-16">
       <div className="text-center mb-12">
         <h1 className="text-4xl font-bold mb-4">Get In Touch</h1>
         <p className="text-muted-foreground max-w-2xl mx-auto">
@@ -255,5 +268,6 @@ export default function Contact() {
         </div>
       </div>
     </main>
+    </>
   );
 }
