@@ -17,7 +17,7 @@ export function StructuredData({ type, data }: StructuredDataProps) {
           name: siteConfig.fullName,
           alternateName: siteConfig.name,
           url: siteConfig.url,
-          logo: getAbsoluteUrl('/assets/img/HLCC-new.png'),
+          logo: getAbsoluteUrl('/assets/img/HLCC.png'),
           description: siteConfig.description,
           contactPoint: {
             '@type': 'ContactPoint',
@@ -117,7 +117,7 @@ export function StructuredData({ type, data }: StructuredDataProps) {
             name: siteConfig.fullName,
             logo: {
               '@type': 'ImageObject',
-              url: getAbsoluteUrl('/assets/img/HLCC-new.png'),
+              url: getAbsoluteUrl('/assets/img/HLCC.png'),
             },
           },
           mainEntityOfPage: {

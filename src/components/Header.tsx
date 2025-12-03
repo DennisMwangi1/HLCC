@@ -20,7 +20,6 @@ export function Header() {
 
     const sectionMap: Record<string, string> = {
         "Why HLCC": "why-hlcc",
-        "Blogs & Insights": "case-studies",
     };
 
     const toHref = (label: string) => {
@@ -28,6 +27,7 @@ export function Header() {
         if (label === "About") return "/about";
         if (label === "Contact") return "/contact";
         if (label === "Offerings" || label === "Services") return "/services";
+        if (label === "Blogs & Insights") return "/insights";
         const slug = sectionMap[label] ?? label.toLowerCase().replace(/\s+/g, "-");
         return `/#${slug}`;
     };
@@ -36,8 +36,11 @@ export function Header() {
         <header className="sticky top-0 z-50 w-full border-b border-white/10 bg-[var(--navy-dark)] backdrop-blur supports-[backdrop-filter]:bg-[var(--navy-dark)]/95">
             <div className="container mx-auto flex h-20 items-center justify-between px-4 md:px-6">
                 <div>
-                    <Link to="/">
-                        <img src="/assets/img/HLCC-new.png" alt="HLCC logo" className="h-14" />
+                    <Link to="/" className="flex flex-col items-start w-fit">
+                        <img src="/assets/img/HLCC.png" alt="HLCC logo" className="h-10" />
+                        <p className="text-[10px] uppercase tracking-widest bg-gradient-to-b from-white to-[var(--gold-accent)] bg-clip-text text-transparent font-bold mt-1 leading-tight max-w-[200px]">
+                            HUMAN-CENTERED LEADERSHIP & CULTURE CONSULTING LTD
+                        </p>
                     </Link>
                 </div>
 

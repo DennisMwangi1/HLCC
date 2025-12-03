@@ -10,71 +10,25 @@ export type Article = {
   date: string; // display-ready
   result?: string; // optional, for case studies
   relatedTags?: string[];
+  originalUrl?: string; // link to original article
+  secondaryImage?: string; // additional image for the article
 };
 
 export const articles: Article[] = [
   {
-    slug: "future-of-organizational-learning-2025",
-    title: "The Future of Organizational Learning: Trends Shaping 2025",
+    slug: "wanjiru-mwangi-top-25-changemakers-2025",
+    title: "Top 25 Changemakers in People and Culture Space 2025 - Wanjiru Mwangi",
     category: "Leadership",
-    image:
-      "https://images.unsplash.com/photo-1669607960578-f7d7fd363e5e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
-    tagline:
-      "From AI-augmented learning to culture-first development strategies.",
+    image: "/assets/img/Carol.png",
+    secondaryImage: "/assets/img/Carol-2.png",
+    tagline: "A heart-led leader shaping the future of people and culture across Africa.",
     description:
-      "Key trends leaders should watch as learning becomes more adaptive, social, and evidence-based.",
+      "Wanjiru Mwangi brings grounded confidence from a life lived in alignment, with purpose, people, principles, and God at the centre. A seasoned HR executive with over 20 years of experience across Africa.",
     content:
-      "Learning is shifting from one-off programs to continuous, in-the-flow experiences.\n\nAI will augment—not replace—human development by personalizing content and surfacing just-in-time nudges.\n\nOrganizations that connect learning to lived culture and leadership behaviors will see the most durable performance gains.",
-    author: "HLCC Research Team",
-    date: "Oct 1, 2025",
-    relatedTags: ["learning", "leadership", "evidence"],
-  },
-  {
-    slug: "building-a-coaching-culture-that-scales",
-    title: "Building a Coaching Culture that Scales",
-    category: "Transformation",
-    image:
-      "https://images.unsplash.com/photo-1758519290111-bfbd61b32d49?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
-    tagline:
-      "Embed coaching principles across teams to drive trust and accountability.",
-    description:
-      "A practical roadmap to spread coaching mindsets and behaviors across the organization.",
-    content:
-      "Scaling a coaching culture starts with leaders modeling curiosity and feedback.\n\nCreate simple rituals—check-ins, retros, and peer coaching—that make growth a shared habit.\n\nMeasure what matters: psychological safety, collaboration quality, and performance outcomes.",
-    author: "Wanjiru Mwangi",
-    date: "Sep 25, 2025",
-    relatedTags: ["coaching", "culture", "leadership"],
-  },
-  {
-    slug: "energy-sector-culture-transformation",
-    title: "Energy Sector: Culture Transformation Across 5 Countries",
-    category: "Case Study",
-    image:
-      "assets/img/whoweare.webp",
-    tagline: "A regional transformation aligned purpose, values, and behaviors.",
-    description:
-      "Within 12 months, engagement scores rose by 42% and leadership alignment was restored.",
-    content:
-      "HLCC partnered with a leading African energy company to redefine purpose, values, and behaviors.\n\nThrough leadership labs, manager toolkits, and culture rituals, teams reconnected to a shared way of working.\n\nThe transformation focused on lived behaviors: decision transparency, mutual accountability, and customer empathy.",
-    author: "HLCC Team",
-    date: "Aug 12, 2025",
-    result: "42% engagement lift",
-    relatedTags: ["culture", "energy", "transformation"],
-  },
-  {
-    slug: "financial-services-ei-leadership",
-    title: "Financial Services: Building Emotionally Intelligent Leaders",
-    category: "Case Study",
-    image:
-      "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
-    tagline: "Equipping 300 senior managers to lead with empathy and accountability.",
-    description:
-      "A blended learning and coaching journey improved collaboration and customer satisfaction.",
-    content:
-      "We designed a blended leadership program combining workshops, coaching circles, and on-the-job experiments.\n\nLeaders practiced emotional regulation, courageous conversations, and feedback skills.\n\nThe result was stronger cross-functional collaboration and measurable improvements in customer outcomes.",
-    author: "Carolyne Mutheu",
-    date: "Jul 2, 2025",
-    result: "300 leaders trained",
-    relatedTags: ["leadership", "emotional-intelligence", "coaching"],
+      "Wanjiru Mwangi has been recognized as one of the Top 25 Changemakers in People and Culture Space 2025 by The Knowledge Warehouse. A seasoned HR executive with over 20 years of experience across Africa, Wanjiru brings grounded confidence from a life lived in alignment with purpose, people, principles, and God at the centre.\n\nHer journey is a testament to intentional career pivoting and values-based leadership. Starting with a BSc in Information Technology, she discovered her true passion lay not in machines, but in people. This pivotal insight led her to pursue a Higher National Diploma in HR Management from IHRM, followed by an Executive MBA, and later the Senior Management Leadership Program (SMLP) at Strathmore Business School in partnership with IESE.\n\nWanjiru's leadership style is intentional and values-based. She describes herself as a \"heart-led leader,\" one who blends clarity with compassion. Her career has spanned impactful roles including Head of Regional People Partners – Africa at Bolt, Senior Director of People and Culture at Samasource, and HR Director for East Africa at Schneider Electric. Beyond the corporate world, she is a passionate advocate for education, equity, and empowerment, serving on school boards and as a board member at CIHEB – Kenya. At just 26, she founded what would later become The SHero Foundation, which today supports the education of nearly 20 high school students and provides daily meals to over 2,000 learners through a school porridge program.",
+    author: "The Knowledge Warehouse",
+    date: "November 4, 2025",
+    originalUrl: "https://theknowledgewarehouseke.com/top-25-changemakers-in-people-and-culture-space-2025-18/",
+    relatedTags: ["leadership", "recognition", "changemaker", "people-culture"],
   },
 ];

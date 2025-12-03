@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { ImageWithFallback } from "@/components/figma/ImageWithFallback";
-import { Check, ArrowRight, Star } from "lucide-react";
+import { Check, ArrowRight } from "lucide-react";
 import { DynamicForm } from "../../components/DynamicForm.tsx";
 import { coachFormSchema } from "../../lib/formSchemas.ts";
 import { useSEO } from "@/hooks/useSEO";
@@ -27,7 +27,6 @@ export default function RegisterCoach() {
         <WhyJoin />
         <Eligibility />
         <ApplicationForm />
-        <Testimonials />
         <BottomCTA />
       </main>
     </>
@@ -200,61 +199,6 @@ function ApplicationForm() {
         </div>
 
         <DynamicForm schema={coachFormSchema} />
-      </div>
-    </Section>
-  );
-}
-
-function Testimonials() {
-  const quotes = [
-    {
-      text:
-        "HLCC gave me the platform to scale my practice across industries while staying true to human-centered values.",
-      author: "Amina S.",
-      role: "Leadership Coach, Nairobi",
-    },
-    {
-      text:
-        "The rigor of the culture work and the depth of reflection elevate every engagement. The impact is tangible.",
-      author: "David K.",
-      role: "Executive Coach, Johannesburg",
-    },
-    {
-      text:
-        "Working with HLCC means meaningful problems, brave conversations, and real outcomes for leaders and teams.",
-      author: "Grace T.",
-      role: "Team Coach, Accra",
-    },
-  ];
-
-  return (
-    <Section className="py-20 bg-gradient-to-br from-[var(--navy-medium)] to-[var(--gold-muted)] relative overflow-hidden">
-      <div className="absolute top-20 left-10 w-72 h-72 bg-[var(--blue-accent)]/10 rounded-full blur-3xl" />
-      <div className="absolute bottom-20 right-10 w-72 h-72 bg-[var(--gold-accent)]/10 rounded-full blur-3xl" />
-
-      <div className="relative">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl text-white font-semibold">What Our Coaches Say</h2>
-        </div>
-
-        <div className="grid md:grid-cols-3 gap-6">
-          {quotes.map((q, i) => (
-            <Card key={i} className="bg-white/10 backdrop-blur-sm border-white/20 hover:bg-white/15 transition-all">
-              <CardContent className="p-6 text-gray-100">
-                <div className="flex gap-1 mb-4">
-                  {Array.from({ length: 5 }).map((_, idx) => (
-                    <Star key={idx} className="h-5 w-5 fill-[var(--gold-accent)] text-[var(--gold-accent)]" />
-                  ))}
-                </div>
-                <p className="mb-4 leading-relaxed">“{q.text}”</p>
-                <div className="text-sm text-gray-300">
-                  <div className="font-medium text-white">{q.author}</div>
-                  <div>{q.role}</div>
-                </div>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
       </div>
     </Section>
   );

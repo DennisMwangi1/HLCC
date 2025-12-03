@@ -10,42 +10,19 @@ import {
     CardTitle,
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Calendar, Clock, ArrowRight } from "lucide-react";
+import { Calendar, User, ArrowRight } from "lucide-react";
 import { ImageWithFallback } from "@/components/figma/ImageWithFallback";
+import { articles } from "@/content/insights";
 
 export function Insights() {
-    const posts = [
-        {
-            image:
-                "https://images.unsplash.com/photo-1669607960578-f7d7fd363e5e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
-            title: "The Future of Organizational Learning: Trends Shaping 2025",
-            excerpt:
-                "From AI-augmented learning to culture-first development strategies — discover what’s next for leaders and HR innovators.",
-            category: "Leadership & Learning",
-            date: "Oct 1, 2025",
-            readTime: "5 min read",
-        },
-        {
-            image:
-                "https://images.unsplash.com/photo-1758519290111-bfbd61b32d49?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
-            title: "Building a Coaching Culture that Scales",
-            excerpt:
-                "How to embed coaching principles across teams and sustain a culture of feedback, trust, and shared accountability.",
-            category: "Culture & Coaching",
-            date: "Sep 25, 2025",
-            readTime: "8 min read",
-        },
-        {
-            image:
-                "/assets/img/whoweare.webp",
-            title: "Proving the ROI of Leadership Development",
-            excerpt:
-                "A clear framework for linking leadership growth to business performance — and communicating impact with confidence.",
-            category: "Insights & Analytics",
-            date: "Sep 18, 2025",
-            readTime: "6 min read",
-        },
-    ];
+    // Get the latest 3 articles, sorted by date
+    const sortedArticles = [...articles]
+        .sort((a, b) => {
+            const d1 = new Date(a.date).getTime();
+            const d2 = new Date(b.date).getTime();
+            return d2 - d1;
+        })
+        .slice(0, 3);
 
     return (
         <section
@@ -85,65 +62,73 @@ export function Insights() {
                 </motion.div>
 
                 {/* Blog Cards */}
-                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    {posts.map((post, index) => (
-                        <motion.div
-                            key={index}
-                            initial={{ opacity: 0, y: 30 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            transition={{
-                                duration: 0.5,
-                                delay: index * 0.15,
-                                ease: "easeOut",
-                            }}
-                            viewport={{ once: true }}
-                        >
-                            <Card className="overflow-hidden group hover:shadow-xl transition-all duration-300 border-2 hover:border-[var(--blue-accent)] cursor-pointer">
-                                <div className="relative h-48 overflow-hidden">
-                                    <ImageWithFallback
-                                        src={post.image}
-                                        alt={post.title}
-                                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
-                                    />
-                                    <div className="absolute top-4 left-4">
-                                        <span className="px-3 py-1 bg-white/90 backdrop-blur-sm rounded-full text-xs text-gray-900">
-                                            {post.category}
-                                        </span>
-                                    </div>
-                                </div>
-                                <CardHeader>
-                                    <CardTitle className="text-xl group-hover:text-[var(--blue-accent)] transition-colors line-clamp-1">
-                                        {post.title}
-                                    </CardTitle>
-                                </CardHeader>
-                                <CardContent>
-                                    <CardDescription className="text-base text-gray-600 mb-4 line-clamp-2">
-                                        {post.excerpt}
-                                    </CardDescription>
-
-                                    <div className="flex items-center gap-4 text-sm text-gray-500 mb-4">
-                                        <div className="flex items-center gap-1">
-                                            <Calendar className="h-4 w-4" />
-                                            <span>{post.date}</span>
+                {sortedArticles.length > 0 ? (
+                    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        {sortedArticles.map((article, index) => (
+                            <motion.div
+                                key={article.slug}
+                                initial={{ opacity: 0, y: 30 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                transition={{
+                                    duration: 0.5,
+                                    delay: index * 0.15,
+                                    ease: "easeOut",
+                                }}
+                                viewport={{ once: true }}
+                            >
+                                <Link to={`/insights/${article.slug}`} className="block">
+                                    <Card className="overflow-hidden group hover:shadow-xl transition-all duration-300 border-2 hover:border-[var(--blue-accent)] cursor-pointer h-full">
+                                        <div className="relative h-48 overflow-hidden">
+                                            <ImageWithFallback
+                                                src={article.secondaryImage || article.image}
+                                                alt={article.title}
+                                                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                                            />
+                                            <div className="absolute top-4 left-4">
+                                                <span className="px-3 py-1 bg-white/90 backdrop-blur-sm rounded-full text-xs text-gray-900">
+                                                    {article.category}
+                                                </span>
+                                            </div>
                                         </div>
-                                        <div className="flex items-center gap-1">
-                                            <Clock className="h-4 w-4" />
-                                            <span>{post.readTime}</span>
-                                        </div>
-                                    </div>
+                                        <CardHeader>
+                                            <CardTitle className="text-xl group-hover:text-[var(--blue-accent)] transition-colors line-clamp-1">
+                                                {article.title}
+                                            </CardTitle>
+                                        </CardHeader>
+                                        <CardContent>
+                                            <CardDescription className="text-base text-gray-600 mb-4 line-clamp-2">
+                                                {article.tagline || article.description}
+                                            </CardDescription>
 
-                                    <Button
-                                        variant="ghost"
-                                        className="text-[var(--blue-accent)] hover:text-[var(--gold-accent)] p-0 h-auto"
-                                    >
-                                        Read More
-                                        <ArrowRight className="ml-2 h-4 w-4" />
-                                    </Button>
-                                </CardContent>
-                            </Card>
-                        </motion.div>
-                    ))}
-                </div>
+                                            <div className="flex items-center gap-4 text-sm text-gray-500 mb-4">
+                                                <div className="flex items-center gap-1">
+                                                    <User className="h-4 w-4" />
+                                                    <span>{article.author}</span>
+                                                </div>
+                                                <div className="flex items-center gap-1">
+                                                    <Calendar className="h-4 w-4" />
+                                                    <span>{article.date}</span>
+                                                </div>
+                                            </div>
+
+                                            <Button
+                                                variant="ghost"
+                                                className="text-[var(--blue-accent)] p-0 h-auto cursor-pointer group/btn"
+                                            >
+                                                Read More
+                                                <ArrowRight className="ml-2 h-4 w-4 transition-transform duration-300 group-hover/btn:translate-x-1" />
+                                            </Button>
+                                        </CardContent>
+                                    </Card>
+                                </Link>
+                            </motion.div>
+                        ))}
+                    </div>
+                ) : (
+                    <div className="text-center py-12">
+                        <p className="text-gray-600">No articles available at the moment.</p>
+                    </div>
+                )}
 
                 {/* Mobile Button */}
                 <div className="text-center mt-12 md:hidden">

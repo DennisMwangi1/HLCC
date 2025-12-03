@@ -29,7 +29,7 @@ export default function Home({ onBookConsultation }: HomeProps) {
         <Offerings />
         <WhyHLCC />
         <ImpactAtScale />
-        <Testimonials />
+        {/* <Testimonials /> */}
         {/*<CaseStudies />*/}
         <Insights />
         <FAQ />

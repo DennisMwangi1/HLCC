@@ -27,7 +27,6 @@ export default function RegisterFacilitator() {
         <WhyJoin />
         <Eligibility />
         <ApplicationForm />
-        <Testimonials />
         <BottomCTA />
       </main>
     </>
@@ -210,58 +209,6 @@ function ApplicationForm() {
         </div>
 
         <DynamicForm schema={facilitatorFormSchema} />
-      </div>
-    </Section>
-  );
-}
-
-function Testimonials() {
-  const testimonials = [
-    {
-      quote: "Facilitating with HLCC has been transformative for my practice. The level of trust and support is unmatched.",
-      author: "Amina K., Leadership Facilitator",
-      role: "Nairobi, Kenya"
-    },
-    {
-      quote: "The opportunity to work with diverse organizations across the continent has been incredibly rewarding.",
-      author: "David M., OD Consultant",
-      role: "Lagos, Nigeria"
-    },
-    {
-      quote: "HLCC's approach to facilitation training elevated my skills and expanded my professional network.",
-      author: "Thandiwe N., Learning & Development",
-      role: "Johannesburg, South Africa"
-    }
-  ];
-
-  return (
-    <Section className="py-20 bg-white">
-      <div className="text-center max-w-3xl mx-auto mb-12">
-        <h2 className="text-3xl md:text-4xl font-semibold text-[var(--navy-dark)] mb-4">
-          What Our Facilitators Say
-        </h2>
-        <p className="text-gray-600">
-          Hear from professionals who've grown their facilitation practice with HLCC.
-        </p>
-      </div>
-
-      <div className="grid md:grid-cols-3 gap-8">
-        {testimonials.map((testimonial, i) => (
-          <Card key={i} className="border hover:shadow-lg transition-shadow">
-            <CardContent className="pt-6">
-              <div className="flex gap-1 mb-4 text-[var(--gold-accent)]">
-                {[...Array(5)].map((_, i) => (
-                  <Star key={i} className="w-5 h-5 fill-current" />
-                ))}
-              </div>
-              <p className="text-gray-700 italic mb-6">"{testimonial.quote}"</p>
-              <div className="mt-auto">
-                <p className="font-medium text-[var(--navy-dark)]">{testimonial.author}</p>
-                <p className="text-sm text-gray-500">{testimonial.role}</p>
-              </div>
-            </CardContent>
-          </Card>
-        ))}
       </div>
     </Section>
   );

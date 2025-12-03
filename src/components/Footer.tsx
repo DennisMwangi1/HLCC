@@ -62,8 +62,11 @@ export function Footer({ onBookConsultation }: FooterProps) {
                 <div className="grid lg:grid-cols-5 gap-12">
                     {/* Company Info */}
                     <div className="lg:col-span-2">
-                        <div className="flex items-center gap-2 mb-6">
-                            <img src="/assets/img/HLCC-new.png" alt="HLCC logo" className="h-14" />
+                        <div className="flex flex-col gap-2 mb-6 w-fit">
+                            <img src="/assets/img/HLCC.png" alt="HLCC logo" className="h-10" />
+                            <p className="text-[10px] uppercase tracking-widest bg-gradient-to-b from-white to-[var(--gold-accent)] bg-clip-text text-transparent font-bold leading-tight max-w-[200px]">
+                                HUMAN-CENTERED LEADERSHIP & CULTURE CONSULTING LTD
+                            </p>
                         </div>
                         <p className="text-gray-300 mb-6 leading-relaxed">
                             HLCC partners with organizations to develop emotionally intelligent
