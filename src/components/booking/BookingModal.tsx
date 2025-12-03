@@ -33,25 +33,15 @@ export function BookingModal({ isOpen, onOpenChange, type }: BookingModalProps) 
 
   return (
     <Dialog open={isOpen} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-1/2 max-h-[90vh] overflow-y-auto">
-        <div className="relative">
-          {/*<Button*/}
-          {/*  variant="ghost"*/}
-          {/*  size="icon"*/}
-          {/*  className="absolute -right-2 -top-2 h-8 w-8 rounded-full"*/}
-          {/*  onClick={handleClose}*/}
-          {/*>*/}
-          {/*  <X className="h-4 w-4" />*/}
-          {/*  <span className="sr-only">Close</span>*/}
-          {/*</Button>*/}
-
-          <DialogHeader className="mb-6">
-            <DialogTitle className="text-2xl text-center">
+      <DialogContent className="sm:max-w-2xl lg:max-w-3xl max-h-[90vh] overflow-y-auto p-0">
+        <div className="relative bg-gradient-to-br from-white to-gray-50/50">
+          <DialogHeader className="px-6 pt-6 pb-4">
+            <DialogTitle className="text-2xl font-semibold text-center text-gray-900">
               {getTitle()}
             </DialogTitle>
           </DialogHeader>
 
-          <div className="px-1">
+          <div className="px-6 pb-6">
             <BookingForm
               type={type}
               onSuccess={handleSuccess}
