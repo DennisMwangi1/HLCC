@@ -13,7 +13,7 @@ export function Footer({ onBookConsultation }: FooterProps) {
         "Company": ["About HLCC", "Our People", "Careers", "Contact"],
     };
 
-    const getLinkPath = (category: string, link : string) => {
+    const getLinkPath = (category: string, link: string) => {
         if (category === "What We Do") return "/services";
         if (category === "Resources") return "/#insights";
         if (category === "Company") {
@@ -86,7 +86,7 @@ export function Footer({ onBookConsultation }: FooterProps) {
                             </div>
                             <div className="flex items-center gap-3 text-gray-300">
                                 <MapPin className="h-5 w-5 text-[var(--blue-accent)]" />
-                                <span>Nairobi, Kenya • Johannesburg, SA • Dubai, UAE</span>
+                                <span>Nairobi, Kenya • Johannesburg, SA • Kigali, Rwanda • Dar es Salaam, Tanzania</span>
                             </div>
                         </div>
                     </div>

@@ -4,7 +4,8 @@ import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { ImageWithFallback } from "@/components/figma/ImageWithFallback";
-import { Quote, Users, Linkedin } from "lucide-react";
+import { Quote, Users, Linkedin, ChevronDown } from "lucide-react";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { ProcessTimeline } from "@/components/ui/ProcessTimeline";
 import { useSEO } from "@/hooks/useSEO";
 import { pageSEO } from "@/lib/seo";
@@ -171,8 +172,119 @@ function OurPhilosophy() {
   );
 }
 
+// Advisor Card Component
+function AdvisorCard({ advisor, index }: { advisor: { name: string; title: string; bioShort: string; bio: string; image: string | null; }; index: number; }) {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const hasFullBio = advisor.bio !== advisor.bioShort && advisor.bio !== "Details coming soon.";
+
+  return (
+    <>
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, delay: index * 0.1 }}
+        viewport={{ once: true }}
+      >
+        <Card className="h-full hover:shadow-lg transition-shadow border-2 hover:border-[var(--gold-deep)]">
+          <CardContent className="p-6 flex flex-col items-center text-center space-y-4">
+            {advisor.image ? (
+              <img
+                src={advisor.image}
+                alt={advisor.name}
+                className="w-24 h-24 md:w-40 md:h-40 rounded-full object-cover border-1 border-[var(--gold-accent)] shadow-sm"
+              />
+            ) : (
+              <div className="w-24 h-24 md:w-40 md:h-40 rounded-full bg-gradient-to-br from-[var(--blue-accent)] to-[var(--gold-accent)] flex items-center justify-center text-white text-2xl font-semibold">
+                {advisor.name.split(' ').map(n => n[0]).join('')}
+              </div>
+            )}
+
+            <div className="flex-1 w-full">
+              <h3 className="text-lg font-semibold text-[var(--navy-dark)] mb-2">
+                {advisor.name}
+              </h3>
+              <p className="text-sm text-gray-600 mb-3">
+                {advisor.title}
+              </p>
+              <div className="text-sm text-gray-700 leading-relaxed text-left">
+                <p className="mb-2">{advisor.bioShort}</p>
+                {hasFullBio && (
+                  <button
+                    onClick={() => setIsModalOpen(true)}
+                    className="mt-2 text-[var(--gold-accent)] hover:text-[var(--gold-deep)] font-medium text-sm flex items-center gap-1 mx-auto transition-colors"
+                  >
+                    <span>Read more</span>
+                    <ChevronDown className="w-4 h-4" />
+                  </button>
+                )}
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+      </motion.div>
+
+      <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
+        <DialogContent className="sm:max-w-2xl max-h-[90vh] overflow-y-auto">
+          <DialogHeader>
+            <div className="flex items-center gap-4 mb-4">
+              {advisor.image ? (
+                <img
+                  src={advisor.image}
+                  alt={advisor.name}
+                  className="w-20 h-20 rounded-full object-cover border-2 border-[var(--gold-accent)] shadow-sm"
+                />
+              ) : (
+                <div className="w-20 h-20 rounded-full bg-gradient-to-br from-[var(--blue-accent)] to-[var(--gold-accent)] flex items-center justify-center text-white text-xl font-semibold">
+                  {advisor.name.split(' ').map(n => n[0]).join('')}
+                </div>
+              )}
+              <div>
+                <DialogTitle className="text-2xl text-[var(--navy-dark)]">
+                  {advisor.name}
+                </DialogTitle>
+                <DialogDescription className="text-base text-gray-600 mt-1">
+                  {advisor.title}
+                </DialogDescription>
+              </div>
+            </div>
+          </DialogHeader>
+          <div className="mt-4">
+            <p className="text-gray-700 leading-relaxed whitespace-pre-line">
+              {advisor.bio}
+            </p>
+          </div>
+        </DialogContent>
+      </Dialog>
+    </>
+  );
+}
+
 // 4) Our Team
 function OurTeam() {
+  const advisors = [
+    {
+      name: "Kenzie Karuoro",
+      title: "Strategic Advisor",
+      bioShort: "Visionary HR Leader and Global Executive Leadership Coach with over 20 years of distinguished experience driving strategic human resources and organizational transformation across complex, multinational environments.",
+      bio: "Kezie Karuoro Kihara is a visionary HR Leader and Global Executive Leadership Coach with over 20 years of distinguished experience driving strategic human resources and organizational transformation across complex, multinational environments. As HR Director – Africa for PVH Corp. and a non-executive Director at Power Financial Wellness, she is renowned for her expertise in Transitional Coaching anchored in Emotional Intelligence, enabling leaders and organizations to navigate change with resilience and agility.\n\nRecognized by Business Monthly as one of the Top 25 Change Makers in People and Culture for 2025, Kezie is a dynamic architect of inclusive workplace cultures, an ardent champion of diversity, equity, and inclusion, and a passionate advocate for holistic wellness, emphasizing fitness and well-being as critical drivers of sustainable performance. Her leadership philosophy integrates strategic HR management with transformative coaching to empower executives and teams, fostering environments where innovation, engagement, and authentic leadership flourish.\n\nBeyond her corporate impact, Kezie invests deeply in community development, supporting educational empowerment through active engagement with her alma mater, Ngandu Girls High School, and advancing youth sports as the Junior Convenor for Junior Golf.\n\nA dedicated mother and wife, she balances familial commitments with a relentless drive to inspire and elevate those around her, embodying leadership excellence both professionally and personally.",
+      image: "/assets/img/Kenzie-K.jpg",
+    },
+    {
+      name: "Major Boke Kitangita",
+      title: "Strategic Advisor",
+      bioShort: "Co-founder & CEO of Jeff Hamilton; an integrated outsourcing company focusing on Staff Outsourcing, Security Services and Talent Acquisition with presence in Kenya, Uganda, Rwanda, and Tanzania.",
+      bio: "Major Boke is a father, a husband and a co-founder & CEO of Jeff Hamilton; an integrated outsourcing company focusing on Staff Outsourcing, Security Services and Talent Acquisition with presence in Kenya, Uganda, Rwanda, and Tanzania. Major believes 'in fair treatment of minimum wage workers; that Africa will rise; and that fatherhood is NOT celebrated enough\"\n\nMajor serves as Chair of the advisory board of MMW Advocates LLP, Chair of the Board of Directors of Sifox - a Technology and innovation company for telecom; and a Director of Halisi Family Hospital. Major Boke is the Foundation Director at the Rotary Club of Stoni Athi, Past President at the Rotary Club of Syokimau and a Past Assistant Governor with Rotary district 9212.\n\nMajor was awarded Presidential Commission in 1999 by the then President Daniel Arap Moi; and is a multiple Paul Harris Fellow with Rotary International for his generous giving to needy causes.\n\nMajor is the holder of an MBA in Strategic Management from the University of Nairobi; and is an Alumni of the Owner Management Program from Strathmore University. Major Boke enjoys great food especially kuku kienyeji served with Plantain, G-Nut Sauce and a glass of maziwa lala. He loves fitness training & has climbed Mt. Kilimanjaro, Long'onot among others.",
+      image: "/assets/img/Major-B.jpg",
+    },
+    {
+      name: "Jenn Kenyoe",
+      title: "Strategic Advisor",
+      bioShort: "Details coming soon.",
+      bio: "Details coming soon.",
+      image: null,
+    },
+  ];
+
   const team = [
     {
       name: "Wanjiru Mwangi",
@@ -194,19 +306,15 @@ function OurTeam() {
       {/* Advisory Board Section */}
       <div className="mb-20">
         <div className="text-center mb-10">
+          <h2 className="text-3xl md:text-4xl font-semibold text-[var(--navy-dark)] mb-4">Strategic Advisors</h2>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
             Strategic advisors guiding our vision and impact.
           </p>
         </div>
-        <div className="max-w-3xl mx-auto">
-          <Card className="border-2 border-dashed border-gray-300 bg-slate-50/50">
-            <CardContent className="p-8 text-center">
-              <Users className="w-12 h-12 mx-auto mb-4 text-gray-400" />
-              <p className="text-gray-600 text-lg">
-                Our distinguished advisory board members will be announced soon.
-              </p>
-            </CardContent>
-          </Card>
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 max-w-6xl mx-auto">
+          {advisors.map((advisor, i) => (
+            <AdvisorCard key={advisor.name} advisor={advisor} index={i} />
+          ))}
         </div>
       </div>
 
