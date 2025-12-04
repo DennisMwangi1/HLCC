@@ -37,8 +37,8 @@ export function Header() {
             <div className="container mx-auto flex h-20 items-center justify-between px-4 md:px-6">
                 <div>
                     <Link to="/" className="flex flex-col items-start w-fit">
-                        <img src="/assets/img/HLCC.png" alt="HLCC logo" className="h-10" />
-                        <p className="text-[10px] uppercase tracking-widest bg-gradient-to-b from-white to-[var(--gold-accent)] bg-clip-text text-transparent font-bold mt-1 leading-tight max-w-[200px]">
+                        <img src="/assets/img/HLCC.png" alt="HLCC logo" className="h-8 md:h-10 w-auto sm:w-fit " />
+                        <p className="hidden md:flex items-center text-[10px] uppercase tracking-widest bg-gradient-to-b from-white to-[var(--gold-accent)] bg-clip-text text-transparent font-bold mt-1 leading-tight max-w-[200px]">
                             HUMAN-CENTERED LEADERSHIP & CULTURE CONSULTING LTD
                         </p>
                     </Link>
