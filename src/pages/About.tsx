@@ -263,11 +263,11 @@ function AdvisorCard({ advisor, index }: { advisor: { name: string; title: strin
 function OurTeam() {
   const advisors = [
     {
-      name: "Kenzie Karuoro",
+      name: "Kezie Karuoro",
       title: "Strategic Advisor",
       bioShort: "Visionary HR Leader and Global Executive Leadership Coach with over 20 years of distinguished experience driving strategic human resources and organizational transformation across complex, multinational environments.",
       bio: "Kezie Karuoro Kihara is a visionary HR Leader and Global Executive Leadership Coach with over 20 years of distinguished experience driving strategic human resources and organizational transformation across complex, multinational environments. As HR Director – Africa for PVH Corp. and a non-executive Director at Power Financial Wellness, she is renowned for her expertise in Transitional Coaching anchored in Emotional Intelligence, enabling leaders and organizations to navigate change with resilience and agility.\n\nRecognized by Business Monthly as one of the Top 25 Change Makers in People and Culture for 2025, Kezie is a dynamic architect of inclusive workplace cultures, an ardent champion of diversity, equity, and inclusion, and a passionate advocate for holistic wellness, emphasizing fitness and well-being as critical drivers of sustainable performance. Her leadership philosophy integrates strategic HR management with transformative coaching to empower executives and teams, fostering environments where innovation, engagement, and authentic leadership flourish.\n\nBeyond her corporate impact, Kezie invests deeply in community development, supporting educational empowerment through active engagement with her alma mater, Ngandu Girls High School, and advancing youth sports as the Junior Convenor for Junior Golf.\n\nA dedicated mother and wife, she balances familial commitments with a relentless drive to inspire and elevate those around her, embodying leadership excellence both professionally and personally.",
-      image: "/assets/img/Kenzie-K.jpg",
+      image: "/assets/img/Kezie-K.jpg",
     },
     {
       name: "Major Boke Kitangita",
