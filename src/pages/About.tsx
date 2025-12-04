@@ -275,14 +275,7 @@ function OurTeam() {
       bioShort: "Co-founder & CEO of Jeff Hamilton; an integrated outsourcing company focusing on Staff Outsourcing, Security Services and Talent Acquisition with presence in Kenya, Uganda, Rwanda, and Tanzania.",
       bio: "Major Boke is a father, a husband and a co-founder & CEO of Jeff Hamilton; an integrated outsourcing company focusing on Staff Outsourcing, Security Services and Talent Acquisition with presence in Kenya, Uganda, Rwanda, and Tanzania. Major believes 'in fair treatment of minimum wage workers; that Africa will rise; and that fatherhood is NOT celebrated enough\"\n\nMajor serves as Chair of the advisory board of MMW Advocates LLP, Chair of the Board of Directors of Sifox - a Technology and innovation company for telecom; and a Director of Halisi Family Hospital. Major Boke is the Foundation Director at the Rotary Club of Stoni Athi, Past President at the Rotary Club of Syokimau and a Past Assistant Governor with Rotary district 9212.\n\nMajor was awarded Presidential Commission in 1999 by the then President Daniel Arap Moi; and is a multiple Paul Harris Fellow with Rotary International for his generous giving to needy causes.\n\nMajor is the holder of an MBA in Strategic Management from the University of Nairobi; and is an Alumni of the Owner Management Program from Strathmore University. Major Boke enjoys great food especially kuku kienyeji served with Plantain, G-Nut Sauce and a glass of maziwa lala. He loves fitness training & has climbed Mt. Kilimanjaro, Long'onot among others.",
       image: "/assets/img/Major-B.jpg",
-    },
-    {
-      name: "Jenn Kenyoe",
-      title: "Strategic Advisor",
-      bioShort: "Details coming soon.",
-      bio: "Details coming soon.",
-      image: null,
-    },
+    }
   ];
 
   const team = [
