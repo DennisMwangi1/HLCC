@@ -23,6 +23,7 @@ const formSchema = z.object({
   // Step 2
   needs: z.array(z.string()).min(1, 'Please select at least one area of interest'),
   timeframe: z.string().min(1, 'Please select when you would like to start'),
+  //@ts-ignore
   contactMethod: z.enum(['email', 'phone', 'video'], {
     errorMap: () => ({ message: 'Please select your preferred contact method' }),
   }),
@@ -96,9 +97,9 @@ export function BookingForm({ type, onSuccess, onCancel }: BookingFormProps) {
   const onSubmit = async (data: FormValues) => {
     try {
       setIsSubmitting(true);
-      
+
       const { firstName, lastName } = parseName(data.name);
-      
+
       // Submit to Mailchimp
       const result = await submitToMailchimp(
         {
@@ -162,28 +163,26 @@ export function BookingForm({ type, onSuccess, onCancel }: BookingFormProps) {
             <motion.div
               className="h-full bg-primary"
               initial={{ width: 0 }}
-              animate={{ 
-                width: currentStep === 1 ? '0%' : currentStep === 2 ? '50%' : '100%' 
+              animate={{
+                width: currentStep === 1 ? '0%' : currentStep === 2 ? '50%' : '100%'
               }}
               transition={{ duration: 0.3, ease: 'easeInOut' }}
             />
           </div>
 
-          {steps.map((step, index) => {
+          {steps.map((step) => {
             const isCompleted = currentStep > step.id;
             const isActive = currentStep === step.id;
-            const isUpcoming = currentStep < step.id;
 
             return (
               <div key={step.id} className="flex flex-col items-center flex-1 relative z-10">
                 <motion.div
-                  className={`w-10 h-10 rounded-full flex items-center justify-center mb-3 transition-all duration-300 ${
-                    isCompleted
+                  className={`w-10 h-10 rounded-full flex items-center justify-center mb-3 transition-all duration-300 ${isCompleted
                       ? 'bg-primary text-white shadow-md'
                       : isActive
                         ? 'bg-primary text-white shadow-lg scale-110'
                         : 'bg-gray-200 text-gray-500'
-                  }`}
+                    }`}
                   initial={false}
                   animate={{
                     scale: isActive ? 1.1 : 1,
@@ -197,11 +196,10 @@ export function BookingForm({ type, onSuccess, onCancel }: BookingFormProps) {
                   )}
                 </motion.div>
                 <span
-                  className={`text-xs font-medium text-center transition-colors duration-200 ${
-                    isCompleted || isActive
+                  className={`text-xs font-medium text-center transition-colors duration-200 ${isCompleted || isActive
                       ? 'text-gray-900'
                       : 'text-gray-500'
-                  }`}
+                    }`}
                 >
                   {step.title}
                 </span>
@@ -254,8 +252,8 @@ export function BookingForm({ type, onSuccess, onCancel }: BookingFormProps) {
                   Continue
                 </Button>
               ) : (
-                <Button 
-                  type="submit" 
+                <Button
+                  type="submit"
                   disabled={isSubmitting}
                   className="min-w-[220px] h-11 font-semibold text-base shadow-md hover:shadow-lg transition-all disabled:opacity-70 disabled:cursor-not-allowed"
                 >

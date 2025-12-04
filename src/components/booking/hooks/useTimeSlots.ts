@@ -1,10 +1,10 @@
-import { useState, useEffect, useMemo } from 'react';
-import { format, isSameDay, setHours, setMinutes, startOfDay } from 'date-fns';
+import { useState, useEffect, useMemo } from "react";
+import { format, isSameDay, setHours, setMinutes } from "date-fns";
 
 export interface TimeSlot {
   time: Date;
   formatted: string;
-  period: 'morning' | 'afternoon' | 'evening';
+  period: "morning" | "afternoon" | "evening";
 }
 
 export interface GroupedTimeSlots {
@@ -27,27 +27,30 @@ const generateTimeSlots = (date: Date): TimeSlot[] => {
     for (let minute of [0, 30]) {
       // Skip past times for today
       if (isSameDay(now, date)) {
-        if (hour < currentHour || (hour === currentHour && minute < currentMinute)) {
+        if (
+          hour < currentHour ||
+          (hour === currentHour && minute < currentMinute)
+        ) {
           continue;
         }
       }
 
       const time = setMinutes(setHours(date, hour), minute);
       const hour24 = time.getHours();
-      
+
       // Determine period
-      let period: 'morning' | 'afternoon' | 'evening';
+      let period: "morning" | "afternoon" | "evening";
       if (hour24 < 12) {
-        period = 'morning';
+        period = "morning";
       } else if (hour24 < 15) {
-        period = 'afternoon';
+        period = "afternoon";
       } else {
-        period = 'evening';
+        period = "evening";
       }
 
       slots.push({
         time,
-        formatted: format(time, 'h:mm a'),
+        formatted: format(time, "h:mm a"),
         period,
       });
     }
@@ -79,9 +82,9 @@ export function useTimeSlots(selectedDate: Date | undefined) {
 
   const groupedSlots = useMemo<GroupedTimeSlots>(() => {
     return {
-      morning: slots.filter(s => s.period === 'morning'),
-      afternoon: slots.filter(s => s.period === 'afternoon'),
-      evening: slots.filter(s => s.period === 'evening'),
+      morning: slots.filter((s) => s.period === "morning"),
+      afternoon: slots.filter((s) => s.period === "afternoon"),
+      evening: slots.filter((s) => s.period === "evening"),
     };
   }, [slots]);
 
@@ -94,4 +97,3 @@ export function useTimeSlots(selectedDate: Date | undefined) {
     hasSlots,
   };
 }
-

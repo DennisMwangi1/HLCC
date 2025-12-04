@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { services } from "../../content/services";
 import { Card, CardHeader, CardTitle, CardContent, CardDescription } from "@/components/ui/card";
 import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/ui/accordion";
@@ -25,56 +25,56 @@ export default function ServicesOverview() {
       <OrganizationSchema />
       <BreadcrumbSchema items={breadcrumbs} />
       <main className="pb-16">
-      {/* Intro */}
-      <section className="relative py-20 bg-gradient-to-b from-white via-slate-50 to-white overflow-hidden">
-        <div className="absolute inset-0 bg-[url('/noise.svg')] opacity-5 pointer-events-none" />
-        <div className="absolute top-0 right-0 w-96 h-96 bg-[var(--gold-accent)]/10 rounded-full blur-3xl" />
-        <div className="absolute bottom-0 left-0 w-96 h-96 bg-[var(--blue-accent)]/10 rounded-full blur-3xl" />
-        <div className="container relative mx-auto px-4 md:px-6 text-center">
-          <h1 className="text-3xl md:text-5xl font-semibold text-[var(--navy-dark)] mb-4">
-            Unlocking Human Potential.
-            <span className="block mt-2 bg-gradient-to-r from-[var(--blue-bright)] to-[var(--gold-accent)] bg-clip-text text-transparent">
-              Building Cultures that Thrive.
-            </span>
-          </h1>
-          <p className="text-lg text-gray-700 max-w-3xl mx-auto">
-            HLCC bridges leadership, culture, and HR strategy helping you design workplaces where people
-            feel seen, valued, and inspired to perform at their best.
-          </p>
-        </div>
-      </section>
-
-      {/* Services grid */}
-      <section className="py-10">
-        <div className="container mx-auto px-4 md:px-6">
-          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-            {services.map((s, i) => (
-              <ServiceCard key={s.slug} service={s} index={i} />
-            ))}
+        {/* Intro */}
+        <section className="relative py-20 bg-gradient-to-b from-white via-slate-50 to-white overflow-hidden">
+          <div className="absolute inset-0 bg-[url('/noise.svg')] opacity-5 pointer-events-none" />
+          <div className="absolute top-0 right-0 w-96 h-96 bg-[var(--gold-accent)]/10 rounded-full blur-3xl" />
+          <div className="absolute bottom-0 left-0 w-96 h-96 bg-[var(--blue-accent)]/10 rounded-full blur-3xl" />
+          <div className="container relative mx-auto px-4 md:px-6 text-center">
+            <h1 className="text-3xl md:text-5xl font-semibold text-[var(--navy-dark)] mb-4">
+              Unlocking Human Potential.
+              <span className="block mt-2 bg-gradient-to-r from-[var(--blue-bright)] to-[var(--gold-accent)] bg-clip-text text-transparent">
+                Building Cultures that Thrive.
+              </span>
+            </h1>
+            <p className="text-lg text-gray-700 max-w-3xl mx-auto">
+              HLCC bridges leadership, culture, and HR strategy helping you design workplaces where people
+              feel seen, valued, and inspired to perform at their best.
+            </p>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* Closing CTA */}
-      <section className="py-16">
-        <div className="container mx-auto px-4 md:px-6">
-          <div className="rounded-2xl p-8 md:p-12 bg-gradient-to-r from-[var(--navy-dark)] to-[var(--navy-medium)] text-white text-center">
-            <h2 className="text-2xl md:text-3xl font-semibold mb-4">
-              Workplaces do not transform by accident.
-              <span className="block mt-1">Let’s make yours intentional.</span>
-            </h2>
-            <Button asChild size="lg" className="bg-gradient-to-r from-[var(--blue-accent)] to-[var(--gold-accent)] text-white hover:opacity-90">
-              <a href="/contact">Book a Consultation</a>
-            </Button>
+        {/* Services grid */}
+        <section className="py-10">
+          <div className="container mx-auto px-4 md:px-6">
+            <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+              {services.map((s, i) => (
+                <ServiceCard key={s.slug} service={s} index={i} />
+              ))}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+
+        {/* Closing CTA */}
+        <section className="py-16">
+          <div className="container mx-auto px-4 md:px-6">
+            <div className="rounded-2xl p-8 md:p-12 bg-gradient-to-r from-[var(--navy-dark)] to-[var(--navy-medium)] text-white text-center">
+              <h2 className="text-2xl md:text-3xl font-semibold mb-4">
+                Workplaces do not transform by accident.
+                <span className="block mt-1">Let’s make yours intentional.</span>
+              </h2>
+              <Button asChild size="lg" className="bg-gradient-to-r from-[var(--blue-accent)] to-[var(--gold-accent)] text-white hover:opacity-90">
+                <a href="/contact">Book a Consultation</a>
+              </Button>
+            </div>
+          </div>
+        </section>
       </main>
     </>
   );
 }
 
-function ServiceCard({ service: s, index: i }: { service: typeof services[0]; index: number }) {
+function ServiceCard({ service: s, index: i }: { service: typeof services[0]; index: number; }) {
   const navigate = useNavigate();
   const [accordionValue, setAccordionValue] = useState<string>("");
 
@@ -96,9 +96,8 @@ function ServiceCard({ service: s, index: i }: { service: typeof services[0]; in
     >
       <Card
         onClick={handleCardClick}
-        className={`flex flex-col justify-between p-6 rounded-2xl border border-slate-200 bg-gradient-to-br ${
-          i % 2 === 0 ? "from-white to-slate-50" : "from-slate-50 to-white"
-        } hover:shadow-lg hover:border-[var(--gold-deep)] transition-all duration-300 cursor-pointer group`}
+        className={`flex flex-col justify-between p-6 rounded-2xl border border-slate-200 bg-gradient-to-br ${i % 2 === 0 ? "from-white to-slate-50" : "from-slate-50 to-white"
+          } hover:shadow-lg hover:border-[var(--gold-deep)] transition-all duration-300 cursor-pointer group`}
       >
         <div>
           <CardHeader className="flex items-center gap-4 mb-4">

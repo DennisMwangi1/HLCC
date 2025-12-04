@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { ImageWithFallback } from "@/components/figma/ImageWithFallback";
-import { Quote, Users, Linkedin, ChevronDown } from "lucide-react";
+import { Quote, Linkedin, ChevronDown } from "lucide-react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { ProcessTimeline } from "@/components/ui/ProcessTimeline";
 import { useSEO } from "@/hooks/useSEO";

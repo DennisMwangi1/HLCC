@@ -6,7 +6,7 @@ import { Calendar } from '@/components/ui/calendar';
 import { format, startOfDay, isBefore, isWeekend, addDays } from 'date-fns';
 import { cn } from '@/utils';
 import { motion } from 'framer-motion';
-import { CalendarIcon, Clock, Loader2, AlertCircle, CheckCircle2, Globe } from 'lucide-react';
+import { CalendarIcon, Clock, AlertCircle, CheckCircle2, Globe } from 'lucide-react';
 import { useTimeSlots } from '../hooks/useTimeSlots';
 import { TimeSlotGroup } from '../components/TimeSlotGroup';
 
@@ -20,11 +20,11 @@ const isDateAvailable = (date: Date): boolean => {
 // Get first available date (today if weekday, otherwise next weekday)
 const getFirstAvailableDate = (): Date => {
   const today = startOfDay(new Date());
-  
+
   if (!isWeekend(today)) {
     return today;
   }
-  
+
   // Find next weekday
   let daysToAdd = 1;
   while (daysToAdd <= 7) {
@@ -34,7 +34,7 @@ const getFirstAvailableDate = (): Date => {
     }
     daysToAdd++;
   }
-  
+
   return today; // Fallback
 };
 
@@ -44,7 +44,7 @@ export function BookingStep3() {
   const selectedTime = watch('preferredTime');
   const selectedTimezone = watch('timezone');
 
-  const { groupedSlots, isLoading, hasSlots } = useTimeSlots(selectedDate);
+  const { groupedSlots, isLoading } = useTimeSlots(selectedDate);
 
   // Auto-select first available date on mount and set default timezone
   useEffect(() => {
@@ -53,7 +53,7 @@ export function BookingStep3() {
       setSelectedDate(firstDate);
       setValue('preferredDate', format(firstDate, 'yyyy-MM-dd'), { shouldValidate: false });
     }
-    
+
     // Set default timezone if not set
     const currentTimezone = watch('timezone');
     if (!currentTimezone) {
@@ -204,7 +204,7 @@ export function BookingStep3() {
               <Clock className="h-5 w-5 text-gray-600" />
               <h4 className="text-base font-semibold text-gray-900">Select a Time</h4>
             </div>
-            
+
             {!selectedDate ? (
               <div className="p-8 bg-gray-50 rounded-lg border-2 border-dashed border-gray-200 text-center" role="status" aria-live="polite">
                 <Clock className="h-8 w-8 text-gray-400 mx-auto mb-2" aria-hidden="true" />
@@ -305,7 +305,7 @@ export function BookingStep3() {
                     <option value="other">Other</option>
                   </select>
                 </FormControl>
-                <FormMessage 
+                <FormMessage
                   id="howDidYouHear-error"
                   className="text-red-600 text-sm mt-1.5 flex items-center gap-1.5"
                   role="alert"
@@ -323,8 +323,8 @@ export function BookingStep3() {
             render={({ field, fieldState }) => (
               <FormItem className={cn(
                 "flex flex-row items-start space-x-3 space-y-0 rounded-lg p-4 border-2 transition-colors",
-                fieldState.error 
-                  ? "border-red-300 bg-red-50/50" 
+                fieldState.error
+                  ? "border-red-300 bg-red-50/50"
                   : "border-gray-200 hover:border-gray-300"
               )}>
                 <FormControl>

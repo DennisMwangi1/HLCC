@@ -1,7 +1,7 @@
 import { format } from 'date-fns';
 import { cn } from '@/utils';
 import { Clock } from 'lucide-react';
-import type { GroupedTimeSlots, TimeSlot } from '../hooks/useTimeSlots';
+import type { GroupedTimeSlots } from '../hooks/useTimeSlots';
 
 interface TimeSlotGroupProps {
   groupedSlots: GroupedTimeSlots;
@@ -31,7 +31,7 @@ export function TimeSlotGroup({ groupedSlots, selectedTime, onTimeSelect, select
         <Clock className="h-8 w-8 text-gray-400 mx-auto mb-3" />
         <p className="text-sm font-medium text-gray-900 mb-1">No available time slots</p>
         <p className="text-xs text-gray-600">
-          {selectedDate 
+          {selectedDate
             ? `No available times for ${format(selectedDate, 'MMMM d, yyyy')}. Please select another date.`
             : 'Please select a date first.'}
         </p>

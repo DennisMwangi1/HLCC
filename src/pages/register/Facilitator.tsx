@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { ImageWithFallback } from "@/components/figma/ImageWithFallback";
-import { Check, ArrowRight, Star } from "lucide-react";
+import { Check, ArrowRight } from "lucide-react";
 import { DynamicForm } from "../../components/DynamicForm.tsx";
 import { facilitatorFormSchema } from "../../lib/formSchemas.ts";
 import { useSEO } from "@/hooks/useSEO";

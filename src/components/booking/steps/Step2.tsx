@@ -4,8 +4,7 @@ import { Checkbox } from '@/components/ui/checkbox';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Label } from '@/components/ui/label';
 import { motion } from 'framer-motion';
-import { Mail, Phone, Video, AlertCircle } from 'lucide-react';
-import { cn } from '@/utils';
+import { Mail, Phone, Video } from 'lucide-react';
 
 const NEEDS = [
   {
@@ -73,7 +72,7 @@ export function BookingStep2({ bookingType }: BookingStep2Props) {
             name="needs"
             render={({ field }) => {
               const currentValue = Array.isArray(field.value) ? field.value : [];
-              
+
               return (
                 <FormItem>
                   <FormLabel className="text-base font-medium text-gray-900 mb-2">
@@ -86,23 +85,22 @@ export function BookingStep2({ bookingType }: BookingStep2Props) {
                     {NEEDS.map((item) => {
                       const isChecked = currentValue.includes(item.id);
                       const checkboxId = `needs-${item.id}`;
-                      
+
                       const handleChange = (checked: boolean) => {
                         const newValue = checked
                           ? [...currentValue, item.id]
                           : currentValue.filter((value: string) => value !== item.id);
                         field.onChange(newValue);
                       };
-                      
+
                       return (
                         <label
                           key={item.id}
                           htmlFor={checkboxId}
-                          className={`flex flex-row items-start space-x-3 space-y-0 rounded-lg border-2 p-4 transition-all cursor-pointer ${
-                            isChecked
+                          className={`flex flex-row items-start space-x-3 space-y-0 rounded-lg border-2 p-4 transition-all cursor-pointer ${isChecked
                               ? 'border-primary bg-primary/5 shadow-sm'
                               : 'border-gray-200 hover:border-gray-300 hover:bg-gray-50'
-                          }`}
+                            }`}
                         >
                           <FormControl>
                             <Checkbox
@@ -113,10 +111,9 @@ export function BookingStep2({ bookingType }: BookingStep2Props) {
                             />
                           </FormControl>
                           <div className="space-y-1 leading-none flex-1 pointer-events-none">
-                            <FormLabel 
-                              className={`font-medium ${
-                                isChecked ? 'text-gray-900' : 'text-gray-700'
-                              }`}
+                            <FormLabel
+                              className={`font-medium ${isChecked ? 'text-gray-900' : 'text-gray-700'
+                                }`}
                             >
                               {item.label}
                             </FormLabel>
@@ -162,22 +159,21 @@ export function BookingStep2({ bookingType }: BookingStep2Props) {
                   className="flex flex-col space-y-3"
                 >
                   {TIMEFRAMES.map((timeframe) => (
-                    <div 
-                      key={timeframe.value} 
-                      className={`flex items-center space-x-3 p-3 rounded-lg border-2 transition-all cursor-pointer ${
-                        field.value === timeframe.value
+                    <div
+                      key={timeframe.value}
+                      className={`flex items-center space-x-3 p-3 rounded-lg border-2 transition-all cursor-pointer ${field.value === timeframe.value
                           ? 'border-primary bg-primary/5'
                           : 'border-gray-200 hover:border-gray-300 hover:bg-gray-50'
-                      }`}
+                        }`}
                       onClick={() => field.onChange(timeframe.value)}
                     >
-                      <RadioGroupItem 
-                        value={timeframe.value} 
+                      <RadioGroupItem
+                        value={timeframe.value}
                         id={timeframe.value}
                         className="cursor-pointer"
                       />
-                      <Label 
-                        htmlFor={timeframe.value} 
+                      <Label
+                        htmlFor={timeframe.value}
                         className="font-normal cursor-pointer flex-1"
                       >
                         {timeframe.label}
@@ -221,36 +217,32 @@ export function BookingStep2({ bookingType }: BookingStep2Props) {
                   return (
                     <div
                       key={method.id}
-                      className={`relative rounded-lg border p-5 cursor-pointer transition-all ${
-                        field.value === method.id
+                      className={`relative rounded-lg border p-5 cursor-pointer transition-all ${field.value === method.id
                           ? 'border-primary bg-primary/5 shadow-md'
                           : 'border-gray-200 hover:border-gray-300 hover:shadow-sm'
-                      }`}
+                        }`}
                       onClick={() => field.onChange(method.id)}
                     >
                       <div className="mb-3">
-                        <IconComponent 
-                          className={`h-6 w-6 ${
-                            field.value === method.id 
-                              ? 'text-primary' 
+                        <IconComponent
+                          className={`h-6 w-6 ${field.value === method.id
+                              ? 'text-primary'
                               : 'text-gray-500'
-                          }`} 
+                            }`}
                         />
                       </div>
-                      <div className={`font-medium text-sm ${
-                        field.value === method.id 
-                          ? 'text-gray-900' 
+                      <div className={`font-medium text-sm ${field.value === method.id
+                          ? 'text-gray-900'
                           : 'text-gray-700'
-                      }`}>
+                        }`}>
                         {method.label}
                       </div>
                       <div className="absolute top-3 right-3">
                         <div
-                          className={`w-5 h-5 rounded-full border-2 flex items-center justify-center transition-all ${
-                            field.value === method.id
+                          className={`w-5 h-5 rounded-full border-2 flex items-center justify-center transition-all ${field.value === method.id
                               ? 'bg-primary border-primary'
                               : 'border-gray-300 bg-white'
-                          }`}
+                            }`}
                         >
                           {field.value === method.id && (
                             <div className="w-2.5 h-2.5 rounded-full bg-white"></div>
