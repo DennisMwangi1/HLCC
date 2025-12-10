@@ -192,6 +192,7 @@ function AdvisorCard({ advisor, index }: { advisor: { name: string; title: strin
                 src={advisor.image}
                 alt={advisor.name}
                 className="w-24 h-24 md:w-40 md:h-40 rounded-full object-cover border-1 border-[var(--gold-accent)] shadow-sm"
+                style={{ objectPosition: 'center 30%' }}
               />
             ) : (
               <div className="w-24 h-24 md:w-40 md:h-40 rounded-full bg-gradient-to-br from-[var(--blue-accent)] to-[var(--gold-accent)] flex items-center justify-center text-white text-2xl font-semibold">
@@ -232,6 +233,7 @@ function AdvisorCard({ advisor, index }: { advisor: { name: string; title: strin
                   src={advisor.image}
                   alt={advisor.name}
                   className="w-20 h-20 rounded-full object-cover border-2 border-[var(--gold-accent)] shadow-sm"
+                  style={{ objectPosition: 'center 30%' }}
                 />
               ) : (
                 <div className="w-20 h-20 rounded-full bg-gradient-to-br from-[var(--blue-accent)] to-[var(--gold-accent)] flex items-center justify-center text-white text-xl font-semibold">
@@ -275,6 +277,13 @@ function OurTeam() {
       bioShort: "Co-founder & CEO of Jeff Hamilton; an integrated outsourcing company focusing on Staff Outsourcing, Security Services and Talent Acquisition with presence in Kenya, Uganda, Rwanda, and Tanzania.",
       bio: "Major Boke is a father, a husband and a co-founder & CEO of Jeff Hamilton; an integrated outsourcing company focusing on Staff Outsourcing, Security Services and Talent Acquisition with presence in Kenya, Uganda, Rwanda, and Tanzania. Major believes 'in fair treatment of minimum wage workers; that Africa will rise; and that fatherhood is NOT celebrated enough\"\n\nMajor serves as Chair of the advisory board of MMW Advocates LLP, Chair of the Board of Directors of Sifox - a Technology and innovation company for telecom; and a Director of Halisi Family Hospital. Major Boke is the Foundation Director at the Rotary Club of Stoni Athi, Past President at the Rotary Club of Syokimau and a Past Assistant Governor with Rotary district 9212.\n\nMajor was awarded Presidential Commission in 1999 by the then President Daniel Arap Moi; and is a multiple Paul Harris Fellow with Rotary International for his generous giving to needy causes.\n\nMajor is the holder of an MBA in Strategic Management from the University of Nairobi; and is an Alumni of the Owner Management Program from Strathmore University. Major Boke enjoys great food especially kuku kienyeji served with Plantain, G-Nut Sauce and a glass of maziwa lala. He loves fitness training & has climbed Mt. Kilimanjaro, Long'onot among others.",
       image: "/assets/img/Major-B.jpg",
+    },
+    {
+      name: "Joshua Siwa",
+      title: "Strategic Advisor",
+      bioShort: "Strategic business leader and seasoned CFO with 18+ years of experience transforming finance into a strategic driver of growth across multinational corporations and the global development sector.",
+      bio: "Joshua is a strategic business leader and seasoned CFO with 18+ years of experience transforming finance into a strategic driver of growth across multinational corporations (FMCG, chemicals, cement) and the global development sector.\n\nHe brings deep expertise in financial governance, capital allocation and fundraising, M&A execution, operational restructuring, multi-country financial oversight, and building high-performing finance teams.\n\nJoshua currently serves as the Director of Finance and Planning at PATH International, where he leads enterprise-wide financial strategy, planning, and operational performance. He previously served as Chief Financial Officer at Africa Improved Foods, overseeing operations in Rwanda and Ethiopia and driving large-scale financial transformation, expansion planning, Mergers and Acquisitions, Investor Relations and enterprise risk management.\n\nHe holds an MBA from the University of Nairobi, a Bachelor's degree from Moi University, and is a Fellow of the Association of Chartered Certified Accountants (FCCA).",
+      image: "/assets/img/Josh.jpg",
     }
   ];
 
@@ -290,6 +299,18 @@ function OurTeam() {
       title: "Chief of Staff",
       linkedin: "https://www.linkedin.com/in/carolyne-mutheu-699342b0/",
       image: "/assets/img/carolyne.jpg",
+    },
+    {
+      name: "Leah Heho",
+      title: "Senior Associate, People and Culture",
+      linkedin: "#",
+      image: "/assets/img/Leah.jpg",
+    },
+    {
+      name: "Stella Kamau",
+      title: "Executive Assistant",
+      linkedin: "#",
+      image: "/assets/img/Stella.jpg",
     }
     // Add more team members here
   ];
@@ -336,6 +357,7 @@ function OurTeam() {
                       src={member.image}
                       alt={member.name}
                       className="w-24 h-24 md:w-40 md:h-40 rounded-full object-cover border-1 border-[var(--gold-accent)] shadow-sm"
+                      style={{ objectPosition: 'center 30%' }}
                     />
                   ) : (
                     <div className="w-24 h-24 rounded-full bg-gradient-to-br from-[var(--blue-accent)] to-[var(--gold-accent)] flex items-center justify-center text-white text-2xl font-semibold">
