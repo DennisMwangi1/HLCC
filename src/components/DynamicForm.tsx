@@ -21,7 +21,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Switch } from "@/components/ui/switch";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/utils"; // Tailwind class combiner
-import { submitToMailchimp, parseName } from "@/lib/mailchimp";
+import { sendEmail } from "@/lib/email";
 import { useState } from "react";
 import { toast } from "sonner";
 import { Loader2 } from "lucide-react";
@@ -107,71 +107,23 @@ export function DynamicForm({
         setIsSubmitting(true);
 
         try {
-            // If Mailchimp is enabled, submit to Mailchimp
-            if (schema.useMailchimp && schema.mailchimpFormType) {
-                // Extract email and name from form data
-                const email = data.email || data.Email || '';
-                const name = data.name || data.Name || '';
-                const { firstName, lastName } = parseName(name);
+            // Send email via Resend
+            const result = await sendEmail({
+                to: (schema.mailchimpFormType === 'coach' || schema.mailchimpFormType === 'facilitator')
+                    ? 'applications@hlcc.africa'
+                    : 'info@hlcc.africa',
+                subject: `New Application: ${schema.mailchimpFormType || 'Dynamic Form'}`,
+                data: data,
+                formName: `Application Form (${schema.mailchimpFormType || 'General'})`,
+                userEmail: data.email || data.Email || '',
+                userName: data.name || data.Name || '',
+            });
 
-                // Build merge fields from all form data
-                const mergeFields: Record<string, string> = {};
-                for (const key of Object.keys(data)) {
-                    if (key.toLowerCase() !== 'email' && key.toLowerCase() !== 'name') {
-                        const value = data[key];
-                        if (value !== null && value !== undefined && value !== '') {
-                            mergeFields[key.toUpperCase()] = String(value);
-                        }
-                    }
-                }
-
-                const result = await submitToMailchimp(
-                    {
-                        email,
-                        firstName,
-                        lastName,
-                        phone: data.phone || data.Phone || undefined,
-                        company: data.company || data.Company || undefined,
-                        mergeFields,
-                        tags: [schema.mailchimpFormType, 'application'],
-                    },
-                    schema.mailchimpFormType
-                );
-
-                if (result.success) {
-                    toast.success('Application submitted successfully!');
-                    reset();
-                } else {
-                    toast.error(result.error || 'Failed to submit application. Please try again.');
-                    // Still log the form data even if Mailchimp fails
-                    console.log("Form Data (Mailchimp failed):", data);
-                }
-                setIsSubmitting(false);
-                return;
-            }
-
-            // Legacy: Use submitEndpoint if provided
-            if (schema.submitEndpoint) {
-                const response = await fetch(schema.submitEndpoint, {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                        "Accept": "application/json",
-                    },
-                    body: JSON.stringify(data),
-                });
-
-                if (!response.ok) {
-                    throw new Error(`Submission failed with status ${response.status}`);
-                }
-
+            if (result.success) {
+                toast.success('Application submitted successfully!');
                 reset();
-                toast.success('Form submitted successfully!');
-                console.log("Form submitted successfully");
             } else {
-                // Fallback: just log to console
-                console.log("Form Data:", data);
-                toast.info('Form data logged (no submission endpoint configured)');
+                toast.error(result.error || 'Failed to submit application. Please try again.');
             }
         } catch (error) {
             console.error("Error submitting form:", error);

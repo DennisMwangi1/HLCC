@@ -1,5 +1,6 @@
 {
   "rewrites": [
+<<<<<<< Updated upstream
     { "source": "/(.*)", "destination": "/index.html" }
   ],
   "cleanUrls": true,
@@ -21,3 +22,11 @@
     }
   ]
 }
+=======
+    {
+      "source": "/((?!api/).*)",
+      "destination": "/"
+    }
+  ]
+}
+>>>>>>> Stashed changes

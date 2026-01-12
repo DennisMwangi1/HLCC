@@ -263,7 +263,25 @@ function AdvisorCard({ advisor, index }: { advisor: { name: string; title: strin
 function OurTeam() {
   const advisors = [
     {
+<<<<<<< Updated upstream
       name: "Kenzie Karuoro",
+=======
+      name: "Carol Koech",
+      title: "Strategic Advisor",
+      bioShort: "Carol Koech is the Vice President for Africa at the Global Energy Alliance for People and Planet (GEAPP). With over 15 years of leadership in energy, infrastructure, and consumer sectors.",
+      bio: "Carol Koech is the Vice President for Africa at the Global Energy Alliance for People and Planet, where she leads the Africa region on strategy, partnerships, and operations across the continent. She is responsible for driving the Alliance's mission to accelerate the Just Energy Transition, expanding access to clean and affordable energy, and catalyze economic opportunities for millions of people across Africa.\n\nCarol brings over two decades of leadership experience in the energy, infrastructure, and consumer sectors. Prior to joining the Alliance in August 2025, she served as Strategy Director for Sustainability, Thought Leadership & International Operations at Schneider Electric, where she helped shape the company's global sustainability agenda and advanced programs that expanded energy access to tens of millions of people worldwide.\n\nPrior to that, Carol was the Country President for Schneider Electric East Africa, becoming the first Kenyan woman to lead a multinational energy company in the region. In that role, she oversaw strategic growth across multiple business lines, strengthened country partnerships, and scaled access-to-energy programs. Before Schneider Electric, she held senior roles at General Electric (GE), where she led regional sales and commercial expansion across Sub-Saharan Africa, and earlier spent five years with Unilever, where she built foundational expertise in operations and commercial functions.\n\nCarol is also a passionate advocate for women in STEM and inclusive growth. She actively mentors young professionals through initiatives such as the Young African Leaders Initiative (YALI) and Go Green City, and champions the empowerment of women and youth in Africa's energy transition. She has also previously served in the Schneider Electric's Inclusion & Care Advisory Board and the French Chamber of Commerce-Kenya.",
+      image: "/assets/img/Koech.jpeg",
+    },
+    {
+      name: "Jennifer Kinyoe",
+      title: "Strategic Advisor",
+      bioShort: "Jennifer Kinyoe is the Managing Director of Loxea Kenya, leading innovative mobility solutions across Africa. With over 25 years of multi-sector leadership in leasing and healthcare.",
+      bio: "Ms. Jennifer Kinyoe is the Managing Director of Loxea Kenya, where she leads a team of leasing professionals driving innovative mobility solutions. Loxea operates across 23 African countries with a fleet of over 6,000 vehicles. Since joining Loxea in April 2023, Jennifer has been a passionate champion of sustainability, spearheading the company's efforts to promote electric vehicle adoption and green mobility solutions in Kenya and the broader East African region.\n\nWith over 25 years of multi-sector leadership experience, Jennifer has held key executive roles, including CEO of Zohari Leasing Ltd, CEO of Rivieres Finance Limited, and General Manager for GE Healthcare East Africa. She began her career at Deloitte East Africa and later Ernst & Young London, building a strong financial and audit foundation supported by her CPA qualification.\n\nMs. Kinyoe holds an MBA in Strategic Management, a Bachelor's degree in Economics and Sociology from the University of Nairobi, and an Executive Diploma in Marketing. Her leadership is marked by a commitment to sustainability, innovation, and empowering businesses and individuals through flexible, cost-effective leasing models aligned with environmental and economic goals.",
+      image: "/assets/img/Jennifer.jpeg",
+    },
+    {
+      name: "Kezie Karuoro",
+>>>>>>> Stashed changes
       title: "Strategic Advisor",
       bioShort: "Visionary HR Leader and Global Executive Leadership Coach with over 20 years of distinguished experience driving strategic human resources and organizational transformation across complex, multinational environments.",
       bio: "Kezie Karuoro Kihara is a visionary HR Leader and Global Executive Leadership Coach with over 20 years of distinguished experience driving strategic human resources and organizational transformation across complex, multinational environments. As HR Director – Africa for PVH Corp. and a non-executive Director at Power Financial Wellness, she is renowned for her expertise in Transitional Coaching anchored in Emotional Intelligence, enabling leaders and organizations to navigate change with resilience and agility.\n\nRecognized by Business Monthly as one of the Top 25 Change Makers in People and Culture for 2025, Kezie is a dynamic architect of inclusive workplace cultures, an ardent champion of diversity, equity, and inclusion, and a passionate advocate for holistic wellness, emphasizing fitness and well-being as critical drivers of sustainable performance. Her leadership philosophy integrates strategic HR management with transformative coaching to empower executives and teams, fostering environments where innovation, engagement, and authentic leadership flourish.\n\nBeyond her corporate impact, Kezie invests deeply in community development, supporting educational empowerment through active engagement with her alma mater, Ngandu Girls High School, and advancing youth sports as the Junior Convenor for Junior Golf.\n\nA dedicated mother and wife, she balances familial commitments with a relentless drive to inspire and elevate those around her, embodying leadership excellence both professionally and personally.",
@@ -272,17 +290,24 @@ function OurTeam() {
     {
       name: "Major Boke Kitangita",
       title: "Strategic Advisor",
-      bioShort: "Co-founder & CEO of Jeff Hamilton; an integrated outsourcing company focusing on Staff Outsourcing, Security Services and Talent Acquisition with presence in Kenya, Uganda, Rwanda, and Tanzania.",
+      bioShort: "Co-founder & CEO of Jeff Hamilton; an integrated outsourcing company focusing on Staff Outsourcing, Security Services and Talent Acquisition.",
       bio: "Major Boke is a father, a husband and a co-founder & CEO of Jeff Hamilton; an integrated outsourcing company focusing on Staff Outsourcing, Security Services and Talent Acquisition with presence in Kenya, Uganda, Rwanda, and Tanzania. Major believes 'in fair treatment of minimum wage workers; that Africa will rise; and that fatherhood is NOT celebrated enough\"\n\nMajor serves as Chair of the advisory board of MMW Advocates LLP, Chair of the Board of Directors of Sifox - a Technology and innovation company for telecom; and a Director of Halisi Family Hospital. Major Boke is the Foundation Director at the Rotary Club of Stoni Athi, Past President at the Rotary Club of Syokimau and a Past Assistant Governor with Rotary district 9212.\n\nMajor was awarded Presidential Commission in 1999 by the then President Daniel Arap Moi; and is a multiple Paul Harris Fellow with Rotary International for his generous giving to needy causes.\n\nMajor is the holder of an MBA in Strategic Management from the University of Nairobi; and is an Alumni of the Owner Management Program from Strathmore University. Major Boke enjoys great food especially kuku kienyeji served with Plantain, G-Nut Sauce and a glass of maziwa lala. He loves fitness training & has climbed Mt. Kilimanjaro, Long'onot among others.",
       image: "/assets/img/Major-B.jpg",
     },
     {
       name: "Jenn Kenyoe",
       title: "Strategic Advisor",
+<<<<<<< Updated upstream
       bioShort: "Details coming soon.",
       bio: "Details coming soon.",
       image: null,
     },
+=======
+      bioShort: "Strategic business leader and seasoned CFO with 18+ years of experience transforming finance into a strategic driver of growth.",
+      bio: "Joshua is a strategic business leader and seasoned CFO with 18+ years of experience transforming finance into a strategic driver of growth across multinational corporations (FMCG, chemicals, cement) and the global development sector.\n\nHe brings deep expertise in financial governance, capital allocation and fundraising, M&A execution, operational restructuring, multi-country financial oversight, and building high-performing finance teams.\n\nJoshua currently serves as the Director of Finance and Planning at PATH International, where he leads enterprise-wide financial strategy, planning, and operational performance. He previously served as Chief Financial Officer at Africa Improved Foods, overseeing operations in Rwanda and Ethiopia and driving large-scale financial transformation, expansion planning, Mergers and Acquisitions, Investor Relations and enterprise risk management.\n\nHe holds an MBA from the University of Nairobi, a Bachelor's degree from Moi University, and is a Fellow of the Association of Chartered Certified Accountants (FCCA).",
+      image: "/assets/img/Josh.jpg",
+    }
+>>>>>>> Stashed changes
   ];
 
   const team = [
@@ -306,9 +331,9 @@ function OurTeam() {
       {/* Advisory Board Section */}
       <div className="mb-20">
         <div className="text-center mb-10">
-          <h2 className="text-3xl md:text-4xl font-semibold text-[var(--navy-dark)] mb-4">Strategic Advisors</h2>
+          <h2 className="text-3xl md:text-4xl font-semibold text-[var(--navy-dark)] mb-4">Board of Strategic Advisors</h2>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Strategic advisors guiding our vision and impact.
+            Our Board of Directors and strategic advisors guiding our vision and impact.
           </p>
         </div>
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 max-w-6xl mx-auto">
