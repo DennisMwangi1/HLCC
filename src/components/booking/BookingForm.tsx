@@ -10,7 +10,7 @@ import { BookingStep3 } from './steps/Step3';
 import { BookingConfirmation } from './steps/Confirmation';
 import { motion, AnimatePresence } from 'framer-motion';
 import type { BookingType } from "@/components/booking/types.ts";
-import { submitToMailchimp, parseName } from '@/lib/mailchimp';
+import { sendEmail } from '@/lib/email';
 import { toast } from 'sonner';
 
 const formSchema = z.object({
@@ -98,31 +98,18 @@ export function BookingForm({ type, onSuccess, onCancel }: BookingFormProps) {
     try {
       setIsSubmitting(true);
 
-      const { firstName, lastName } = parseName(data.name);
-
-      // Submit to Mailchimp
-      const result = await submitToMailchimp(
-        {
-          email: data.email,
-          firstName,
-          lastName,
-          phone: data.phone,
-          company: data.company,
-          mergeFields: {
-            NEEDS: Array.isArray(data.needs) ? data.needs.join(', ') : data.needs,
-            TIMEFRAME: data.timeframe,
-            CONTACT_METHOD: data.contactMethod,
-            PREFERRED_DATE: data.preferredDate,
-            PREFERRED_TIME: data.preferredTime,
-            TIMEZONE: data.timezone,
-            MESSAGE: data.message || '',
-            HOW_HEARD: data.howDidYouHear,
-            BOOKING_TYPE: type,
-          },
-          tags: [type === 'discovery' ? 'discovery-call' : 'consultation', 'booking'],
+      // Send email via Resend
+      const result = await sendEmail({
+        to: 'info@hlcc.africa',
+        subject: `New Booking: ${type === 'discovery' ? 'Discovery Call' : 'Consultation'}`,
+        data: {
+          ...data,
+          bookingType: type,
         },
-        'booking'
-      );
+        formName: `Booking Form (${type === 'discovery' ? 'Discovery Call' : 'Consultation'})`,
+        userEmail: data.email,
+        userName: data.name,
+      });
 
       if (result.success) {
         setIsSuccess(true);
@@ -130,10 +117,6 @@ export function BookingForm({ type, onSuccess, onCancel }: BookingFormProps) {
         onSuccess?.();
       } else {
         toast.error(result.error || 'Failed to submit booking. Please try again.');
-        // Still show success to user for booking UX, but log error
-        console.error('Mailchimp error:', result.error);
-        setIsSuccess(true);
-        onSuccess?.();
       }
     } catch (error) {
       console.error('Error submitting booking form:', error);
@@ -178,10 +161,10 @@ export function BookingForm({ type, onSuccess, onCancel }: BookingFormProps) {
               <div key={step.id} className="flex flex-col items-center flex-1 relative z-10">
                 <motion.div
                   className={`w-10 h-10 rounded-full flex items-center justify-center mb-3 transition-all duration-300 ${isCompleted
-                      ? 'bg-primary text-white shadow-md'
-                      : isActive
-                        ? 'bg-primary text-white shadow-lg scale-110'
-                        : 'bg-gray-200 text-gray-500'
+                    ? 'bg-primary text-white shadow-md'
+                    : isActive
+                      ? 'bg-primary text-white shadow-lg scale-110'
+                      : 'bg-gray-200 text-gray-500'
                     }`}
                   initial={false}
                   animate={{
@@ -197,8 +180,8 @@ export function BookingForm({ type, onSuccess, onCancel }: BookingFormProps) {
                 </motion.div>
                 <span
                   className={`text-xs font-medium text-center transition-colors duration-200 ${isCompleted || isActive
-                      ? 'text-gray-900'
-                      : 'text-gray-500'
+                    ? 'text-gray-900'
+                    : 'text-gray-500'
                     }`}
                 >
                   {step.title}
