@@ -263,9 +263,6 @@ function AdvisorCard({ advisor, index }: { advisor: { name: string; title: strin
 function OurTeam() {
   const advisors = [
     {
-<<<<<<< Updated upstream
-      name: "Kenzie Karuoro",
-=======
       name: "Carol Koech",
       title: "Strategic Advisor",
       bioShort: "Carol Koech is the Vice President for Africa at the Global Energy Alliance for People and Planet (GEAPP). With over 15 years of leadership in energy, infrastructure, and consumer sectors.",
@@ -281,7 +278,6 @@ function OurTeam() {
     },
     {
       name: "Kezie Karuoro",
->>>>>>> Stashed changes
       title: "Strategic Advisor",
       bioShort: "Visionary HR Leader and Global Executive Leadership Coach with over 20 years of distinguished experience driving strategic human resources and organizational transformation across complex, multinational environments.",
       bio: "Kezie Karuoro Kihara is a visionary HR Leader and Global Executive Leadership Coach with over 20 years of distinguished experience driving strategic human resources and organizational transformation across complex, multinational environments. As HR Director – Africa for PVH Corp. and a non-executive Director at Power Financial Wellness, she is renowned for her expertise in Transitional Coaching anchored in Emotional Intelligence, enabling leaders and organizations to navigate change with resilience and agility.\n\nRecognized by Business Monthly as one of the Top 25 Change Makers in People and Culture for 2025, Kezie is a dynamic architect of inclusive workplace cultures, an ardent champion of diversity, equity, and inclusion, and a passionate advocate for holistic wellness, emphasizing fitness and well-being as critical drivers of sustainable performance. Her leadership philosophy integrates strategic HR management with transformative coaching to empower executives and teams, fostering environments where innovation, engagement, and authentic leadership flourish.\n\nBeyond her corporate impact, Kezie invests deeply in community development, supporting educational empowerment through active engagement with her alma mater, Ngandu Girls High School, and advancing youth sports as the Junior Convenor for Junior Golf.\n\nA dedicated mother and wife, she balances familial commitments with a relentless drive to inspire and elevate those around her, embodying leadership excellence both professionally and personally.",
@@ -297,17 +293,10 @@ function OurTeam() {
     {
       name: "Jenn Kenyoe",
       title: "Strategic Advisor",
-<<<<<<< Updated upstream
-      bioShort: "Details coming soon.",
-      bio: "Details coming soon.",
-      image: null,
-    },
-=======
       bioShort: "Strategic business leader and seasoned CFO with 18+ years of experience transforming finance into a strategic driver of growth.",
       bio: "Joshua is a strategic business leader and seasoned CFO with 18+ years of experience transforming finance into a strategic driver of growth across multinational corporations (FMCG, chemicals, cement) and the global development sector.\n\nHe brings deep expertise in financial governance, capital allocation and fundraising, M&A execution, operational restructuring, multi-country financial oversight, and building high-performing finance teams.\n\nJoshua currently serves as the Director of Finance and Planning at PATH International, where he leads enterprise-wide financial strategy, planning, and operational performance. He previously served as Chief Financial Officer at Africa Improved Foods, overseeing operations in Rwanda and Ethiopia and driving large-scale financial transformation, expansion planning, Mergers and Acquisitions, Investor Relations and enterprise risk management.\n\nHe holds an MBA from the University of Nairobi, a Bachelor's degree from Moi University, and is a Fellow of the Association of Chartered Certified Accountants (FCCA).",
       image: "/assets/img/Josh.jpg",
     }
->>>>>>> Stashed changes
   ];
 
   const team = [
