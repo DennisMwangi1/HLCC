@@ -15,7 +15,6 @@ export default function InsightDetail() {
   const { slug } = useParams();
   const article = articles.find((a) => a.slug === slug);
 
-  // SEO configuration for article
   useSEO(
     article
       ? {
@@ -44,21 +43,22 @@ export default function InsightDetail() {
 
   if (!article) {
     return (
-      <section className="py-24">
+      <main className="py-24 bg-white text-black">
         <div className="container mx-auto px-4 md:px-6 text-center">
-          <h1 className="text-2xl md:text-3xl font-semibold text-[var(--navy-dark)] mb-6">Article not found</h1>
-          <Link to="/insights">
-            <Button variant="outline" className="border-2">Back to Insights</Button>
-          </Link>
+          <p className="text-[#D4AF37] uppercase tracking-widest text-xs mb-8">Error 404</p>
+          <h1 className="text-4xl font-heading font-light mb-12 italic">Insight Not Found</h1>
+          <Button asChild className="bg-black text-white hover:bg-gray-800 rounded-none px-12 py-7 uppercase tracking-widest text-xs">
+            <Link to="/insights">Return to Insights</Link>
+          </Button>
         </div>
-      </section>
+      </main>
     );
   }
 
   const related = getRelatedArticles(article.slug, article.relatedTags);
 
   const paragraphs = article.content
-    .split(/\n\s*\n/) // split by blank lines
+    .split(/\n\s*\n/)
     .map((p) => p.trim())
     .filter(Boolean);
 
@@ -67,218 +67,172 @@ export default function InsightDetail() {
       <OrganizationSchema />
       <ArticleSchema article={article} />
       {breadcrumbs.length > 0 && <BreadcrumbSchema items={breadcrumbs} />}
-      <section className="py-24 bg-gradient-to-b from-slate-50 to-white relative overflow-hidden">
-        <div className="absolute inset-0 bg-[url('/noise.svg')] opacity-5 pointer-events-none" />
-        <div className="absolute top-0 right-0 w-96 h-96 bg-[var(--gold-accent)]/10 rounded-full blur-3xl" />
-        <div className="absolute bottom-0 left-0 w-96 h-96 bg-[var(--blue-accent)]/10 rounded-full blur-3xl" />
 
-        <div className="container relative mx-auto px-4 md:px-6">
-          {/* Back */}
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.4 }}
-            className="mb-6"
-          >
-            <Link to="/insights">
-              <Button variant="ghost" className="text-[var(--blue-accent)] gap-2 px-0">
-                <ArrowLeft className="w-4 h-4" /> Back to Insights
-              </Button>
-            </Link>
-          </motion.div>
+      <main className="bg-white">
+        {/* Article Hero */}
+        <section className="relative pt-40 pb-24 bg-black overflow-hidden">
+          <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/dark-matter.png')] opacity-[0.1] pointer-events-none" />
+          <div className="container relative z-10">
+            <div className="max-w-4xl">
+              <motion.div
+                initial={{ opacity: 0, tracking: '0.4em' }}
+                animate={{ opacity: 1, tracking: '0.2em' }}
+                className="text-[#D4AF37] uppercase text-[10px] font-bold mb-8 flex items-center gap-4"
+              >
+                <span className="px-3 py-1 border border-[#D4AF37]/30 text-[#D4AF37]">
+                  {article.category}
+                </span>
+                <span>{article.date}</span>
+              </motion.div>
 
-          {/* Header */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            viewport={{ once: true }}
-            className="mb-8"
-          >
-            <div className="mb-3">
-              <span className="px-3 py-1 bg-white shadow-sm border rounded-full text-xs text-gray-700">
-                {article.category}
-              </span>
-            </div>
-            <h1 className="text-3xl md:text-4xl font-semibold text-[var(--navy-dark)] mb-4">
-              {article.title}
-            </h1>
-            <div className="flex flex-wrap items-center gap-4 text-sm text-gray-600">
-              <div className="inline-flex items-center gap-1">
-                <User className="h-4 w-4" /> {article.author}
-              </div>
-              <div className="inline-flex items-center gap-1">
-                <Calendar className="h-4 w-4" /> {article.date}
-              </div>
-            </div>
-          </motion.div>
+              <motion.h1
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8 }}
+                className="text-4xl md:text-6xl font-heading font-light text-white mb-12 leading-tight"
+              >
+                {article.title}
+              </motion.h1>
 
-          {/* Image and Content Side by Side */}
-          <div className="grid md:grid-cols-2 gap-8 items-start">
-            {/* Left Column: Image and Key Takeaways */}
-            <div className="space-y-6">
-              {/* Featured image */}
-              {article.secondaryImage && (
-                <motion.div
-                  initial={{ opacity: 0, scale: 0.98 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.5 }}
-                  viewport={{ once: true }}
-                  className="overflow-hidden rounded-2xl border"
-                >
-                  <ImageWithFallback
-                    src={article.secondaryImage}
-                    alt={article.title}
-                    className="w-full h-auto object-contain"
-                  />
-                </motion.div>
-              )}
-              {!article.secondaryImage && (
-                <motion.div
-                  initial={{ opacity: 0, scale: 0.98 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.5 }}
-                  viewport={{ once: true }}
-                  className="overflow-hidden rounded-2xl border"
-                >
-                  <ImageWithFallback
-                    src={article.image}
-                    alt={article.title}
-                    className="w-full h-auto object-contain"
-                  />
-                </motion.div>
-              )}
-
-              {/* Key Takeaways under image */}
-              {article.relatedTags && article.relatedTags.length > 0 && (
-                <motion.div
-                  initial={{ opacity: 0, y: 10 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.4 }}
-                >
-                  <Card className="border-2">
-                    <CardHeader className="pb-2">
-                      <CardTitle className="text-[var(--navy-dark)]">Key Takeaways</CardTitle>
-                      <CardDescription>
-                        Themes and takeaways from this article.
-                      </CardDescription>
-                    </CardHeader>
-                    <CardContent>
-                      <ul className="list-disc pl-5 space-y-2 text-gray-700">
-                        {article.relatedTags.map((tag) => (
-                          <li key={tag}>{tag}</li>
-                        ))}
-                      </ul>
-                    </CardContent>
-                  </Card>
-                </motion.div>
-              )}
-            </div>
-
-            {/* Right Column: Article Content and Read Full Article */}
-            <div className="space-y-6">
-              {paragraphs.map((p, idx) => (
-                <motion.p
-                  key={idx}
-                  initial={{ opacity: 0, y: 10 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.4, delay: idx * 0.03 }}
-                  className="text-lg leading-relaxed text-gray-700"
-                >
-                  {p}
-                </motion.p>
-              ))}
-
-              {article.result && (
-                <motion.div
-                  initial={{ opacity: 0, y: 10 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.4 }}
-                >
-                  <Card className="bg-gradient-to-br from-white to-slate-50 border-2">
-                    <CardHeader className="pb-3">
-                      <div className="inline-flex items-center gap-2 text-[var(--navy-dark)]">
-                        <Award className="w-5 h-5 text-[var(--gold-accent)]" />
-                        <CardTitle>Results</CardTitle>
-                      </div>
-                      <CardDescription>
-                        Outcomes achieved through the engagement.
-                      </CardDescription>
-                    </CardHeader>
-                    <CardContent>
-                      <p className="text-gray-700 text-base">{article.result}</p>
-                    </CardContent>
-                  </Card>
-                </motion.div>
-              )}
-
-              {article.originalUrl && (
-                <motion.div
-                  initial={{ opacity: 0, y: 10 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.4 }}
-                >
-                  <Card className="bg-gradient-to-br from-[var(--navy-dark)] to-[var(--navy-medium)] border-2 border-[var(--gold-accent)]/20">
-                    <CardContent className="p-6">
-                      <div className="flex flex-col items-start gap-4">
-                        <div className="w-full">
-                          <h3 className="text-xl font-semibold text-white mb-2">Read the Full Article</h3>
-                          <p className="text-gray-300 text-sm">
-                            This is a summary of the original article. Visit The Knowledge Warehouse to read the complete story about Wanjiru Mwangi's recognition as one of the Top 25 Changemakers in People and Culture Space 2025.
-                          </p>
-                        </div>
-                        <a
-                          href={article.originalUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="inline-flex items-center gap-2 px-6 py-3 bg-[var(--gold-accent)] text-[var(--navy-dark)] font-semibold rounded-lg hover:bg-[var(--gold-accent)]/90 transition-colors shadow-lg hover:shadow-xl w-full justify-center"
-                        >
-                          Read Full Article
-                          <ExternalLink className="w-4 h-4" />
-                        </a>
-                      </div>
-                    </CardContent>
-                  </Card>
-                </motion.div>
-              )}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+                className="flex items-center gap-6"
+              >
+                <div className="w-12 h-12 bg-[#D4AF37]/20 flex items-center justify-center rounded-full">
+                  <User className="w-4 h-4 text-[#D4AF37]" strokeWidth={1.5} />
+                </div>
+                <div>
+                  <p className="text-white/40 text-[10px] uppercase tracking-widest font-bold">Written By</p>
+                  <p className="text-white font-heading italic">{article.author}</p>
+                </div>
+              </motion.div>
             </div>
           </div>
+        </section>
 
-          {/* Related at bottom */}
-          {related.length > 0 && (
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5 }}
-              className="mt-12"
-            >
-              <h2 className="text-2xl font-semibold text-[var(--navy-dark)] mb-6">Related Articles</h2>
-              <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {/* Article Body */}
+        <section className="py-24">
+          <div className="container mx-auto px-4 md:px-6">
+            <div className="grid lg:grid-cols-12 gap-24 items-start">
+
+              {/* Main Content */}
+              <div className="lg:col-span-8 space-y-12">
+                {article.secondaryImage || article.image ? (
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.98 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 1 }}
+                    viewport={{ once: true }}
+                    className="aspect-video bg-[#fafafa] overflow-hidden border border-black/5 mb-16"
+                  >
+                    <ImageWithFallback
+                      src={article.secondaryImage || article.image}
+                      alt={article.title}
+                      className="w-full h-full object-cover grayscale"
+                    />
+                  </motion.div>
+                ) : null}
+
+                <div className="prose prose-lg max-w-none">
+                  {paragraphs.map((p, idx) => (
+                    <motion.p
+                      key={idx}
+                      initial={{ opacity: 0, y: 10 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.6, delay: idx * 0.05 }}
+                      className="text-xl leading-relaxed text-black/70 font-light mb-10 first-letter:text-5xl first-letter:font-heading first-letter:mr-3 first-letter:float-left first-letter:text-black"
+                    >
+                      {p}
+                    </motion.p>
+                  ))}
+                </div>
+
+                {article.result && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    className="p-12 bg-[#fafafa] border-l-2 border-[#D4AF37] italic"
+                  >
+                    <div className="flex items-center gap-4 mb-6">
+                      <Award className="w-6 h-6 text-[#D4AF37]" strokeWidth={1} />
+                      <h3 className="text-xs uppercase tracking-[0.3em] font-bold text-black">Observation & Impact</h3>
+                    </div>
+                    <p className="text-2xl font-heading font-light text-black leading-relaxed">
+                      "{article.result}"
+                    </p>
+                  </motion.div>
+                )}
+              </div>
+
+              {/* Sidebar */}
+              <aside className="lg:col-span-4 space-y-24">
+                {article.relatedTags && article.relatedTags.length > 0 && (
+                  <div>
+                    <h3 className="text-xs uppercase tracking-[0.3em] font-bold text-black mb-8">Executive Summary</h3>
+                    <ul className="space-y-6">
+                      {article.relatedTags.map((tag, i) => (
+                        <li key={tag} className="flex items-start gap-4">
+                          <span className="text-[#D4AF37] font-heading italic text-xl">{String(i + 1).padStart(2, '0')}</span>
+                          <span className="text-black/50 font-light text-sm pt-1 leading-relaxed">{tag}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+
+                {article.originalUrl && (
+                  <div className="p-10 bg-black text-white">
+                    <h3 className="text-xs uppercase tracking-[0.3em] font-bold text-white/40 mb-6">Full Publication</h3>
+                    <p className="text-lg font-heading italic mb-8">Read the complete story in our digital warehouse.</p>
+                    <Button asChild className="w-full bg-[#D4AF37] text-black hover:bg-[#F3E5AB] rounded-none py-7 text-[10px] uppercase font-bold tracking-widest">
+                      <a href={article.originalUrl} target="_blank" rel="noopener noreferrer">
+                        Open Article
+                      </a>
+                    </Button>
+                  </div>
+                )}
+
+                <div className="pt-12 border-t border-black/5">
+                  <h3 className="text-xs uppercase tracking-[0.3em] font-bold text-black mb-8">Engage HLCC</h3>
+                  <p className="text-black/50 font-light text-sm mb-8">Interested in implementing these insights within your institution?</p>
+                  <Link to="/contact" className="text-[10px] uppercase font-bold tracking-widest text-[#D4AF37] hover:tracking-[0.2em] transition-all">
+                    Request a consultation &rarr;
+                  </Link>
+                </div>
+              </aside>
+            </div>
+          </div>
+        </section>
+
+        {/* Related Articles */}
+        {related.length > 0 && (
+          <section className="py-24 bg-[#fafafa]">
+            <div className="container mx-auto px-4 md:px-6">
+              <div className="flex items-end justify-between mb-16 border-b border-black/5 pb-8">
+                <h2 className="text-3xl font-heading font-light text-black italic">Parallel Studies</h2>
+                <Link to="/insights" className="text-[10px] uppercase font-bold tracking-widest text-black/40 hover:text-black transition-colors">View All &rarr;</Link>
+              </div>
+              <div className="grid md:grid-cols-3 gap-12">
                 {related.map((r) => (
-                  <Link key={r.slug} to={`/insights/${r.slug}`} className="group">
-                    <Card className="h-full border-2 hover:border-[var(--blue-accent)] transition">
-                      <div className="h-32 overflow-hidden">
-                        <ImageWithFallback src={r.image} alt={r.title} className="w-full h-full object-cover" />
-                      </div>
-                      <CardContent className="p-4">
-                        <div className="text-xs text-gray-500 mb-1">{r.category}</div>
-                        <div className="text-sm font-medium text-[var(--navy-dark)] group-hover:text-[var(--blue-accent)] line-clamp-2">
-                          {r.title}
-                        </div>
-                      </CardContent>
-                    </Card>
+                  <Link key={r.slug} to={`/insights/${r.slug}`} className="group block">
+                    <div className="aspect-[16/9] overflow-hidden bg-white mb-6 border border-black/5">
+                      <ImageWithFallback src={r.image} alt={r.title} className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700" />
+                    </div>
+                    <p className="text-[9px] uppercase tracking-widest font-bold text-[#D4AF37] mb-2">{r.category}</p>
+                    <h3 className="text-xl font-heading font-light text-black group-hover:text-[#D4AF37] transition-colors leading-snug line-clamp-2">
+                      {r.title}
+                    </h3>
                   </Link>
                 ))}
               </div>
-            </motion.div>
-          )}
-        </div>
-      </section>
+            </div>
+          </section>
+        )}
+      </main>
     </>
   );
 }
@@ -298,7 +252,6 @@ function getRelatedArticles(currentSlug: string, tags?: string[]) {
   const top = scored.filter(Boolean);
   if (top.length >= 3) return top.slice(0, 3);
 
-  // fallback fill
   const extras = pool.filter((p) => !top.includes(p)).slice(0, 3 - top.length);
   return [...top, ...extras];
 }

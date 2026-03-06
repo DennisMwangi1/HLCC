@@ -27,120 +27,90 @@ export function Insights() {
     return (
         <section
             id="insights"
-            className="py-24 bg-gradient-to-b from-slate-50 to-white relative overflow-hidden"
+            className="py-32 bg-[#fafafa] relative overflow-hidden"
         >
-            <div className="absolute inset-0 bg-[url('/noise.svg')] opacity-5 pointer-events-none" />
-            <div className="absolute top-0 right-0 w-96 h-96 bg-[var(--gold-accent)]/10 rounded-full blur-3xl" />
-            <div className="absolute bottom-0 left-0 w-96 h-96 bg-[var(--blue-accent)]/10 rounded-full blur-3xl" />
-
             <div className="container relative mx-auto px-4 md:px-6">
                 {/* Header */}
                 <motion.div
                     initial={{ opacity: 0, y: 30 }}
                     whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6, ease: "easeOut" }}
+                    transition={{ duration: 0.8, ease: "easeOut" }}
                     viewport={{ once: true }}
-                    className="flex justify-between items-end mb-16"
+                    className="flex flex-col md:flex-row justify-between items-start md:items-end mb-24 gap-8"
                 >
-                    <div>
-                        <h2 className="text-3xl md:text-4xl text-[var(--navy-dark)] mb-4 font-semibold">
-                            Insights & Perspectives
+                    <div className="max-w-2xl">
+                        <p className="text-[#D4AF37] uppercase tracking-[0.3em] text-[10px] font-semibold mb-6">
+                            Thought Leadership
+                        </p>
+                        <h2 className="text-4xl md:text-5xl text-black font-heading font-light mb-6">
+                            Insights & <span className="italic">Perspectives</span>
                         </h2>
-                        <p className="text-lg text-gray-600 max-w-2xl">
-                            Ideas, reflections, and research shaping the future of leadership,
-                            culture, and learning.
+                        <p className="text-xl text-black/50 font-light leading-relaxed">
+                            Research and reflections on the evolving landscape of global leadership and institutional culture.
                         </p>
                     </div>
-                    <Link to="/insights">
-                        <Button
-                            variant="outline"
-                            className="hidden md:flex border-2 border-gray-300 hover:border-[var(--blue-accent)] hover:text-[var(--blue-accent)]"
-                        >
-                            View All Articles
-                        </Button>
+                    <Link to="/insights" className="group flex items-center gap-3 text-black font-semibold text-xs uppercase tracking-widest border-b border-black/10 pb-2 hover:border-[#D4AF37] transition-all duration-300">
+                        Explore All Insights
+                        <ArrowRight className="w-4 h-4 transform group-hover:translate-x-1 transition-transform" strokeWidth={1.5} />
                     </Link>
                 </motion.div>
 
                 {/* Blog Cards */}
                 {sortedArticles.length > 0 ? (
-                    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div className="grid md:grid-cols-3 gap-12">
                         {sortedArticles.map((article, index) => (
                             <motion.div
                                 key={article.slug}
                                 initial={{ opacity: 0, y: 30 }}
                                 whileInView={{ opacity: 1, y: 0 }}
                                 transition={{
-                                    duration: 0.5,
-                                    delay: index * 0.15,
+                                    duration: 0.8,
+                                    delay: index * 0.1,
                                     ease: "easeOut",
                                 }}
                                 viewport={{ once: true }}
                             >
-                                <Link to={`/insights/${article.slug}`} className="block">
-                                    <Card className="overflow-hidden group hover:shadow-xl transition-all duration-300 border-2 hover:border-[var(--blue-accent)] cursor-pointer h-full">
-                                        <div className="relative h-48 overflow-hidden">
-                                            <ImageWithFallback
-                                                src={article.secondaryImage || article.image}
-                                                alt={article.title}
-                                                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
-                                            />
-                                            <div className="absolute top-4 left-4">
-                                                <span className="px-3 py-1 bg-white/90 backdrop-blur-sm rounded-full text-xs text-gray-900">
-                                                    {article.category}
-                                                </span>
-                                            </div>
+                                <Link to={`/insights/${article.slug}`} className="group block">
+                                    <div className="relative aspect-[16/10] overflow-hidden mb-8">
+                                        <ImageWithFallback
+                                            src={article.secondaryImage || article.image}
+                                            alt={article.title}
+                                            className="w-full h-full object-cover grayscale-[0.5] group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700"
+                                        />
+                                        <div className="absolute top-4 left-4">
+                                            <span className="px-3 py-1 bg-white/90 backdrop-blur-md text-[10px] uppercase tracking-widest font-semibold text-black">
+                                                {article.category}
+                                            </span>
                                         </div>
-                                        <CardHeader>
-                                            <CardTitle className="text-xl group-hover:text-[var(--blue-accent)] transition-colors line-clamp-1">
-                                                {article.title}
-                                            </CardTitle>
-                                        </CardHeader>
-                                        <CardContent>
-                                            <CardDescription className="text-base text-gray-600 mb-4 line-clamp-2">
-                                                {article.tagline || article.description}
-                                            </CardDescription>
+                                    </div>
 
-                                            <div className="flex items-center gap-4 text-sm text-gray-500 mb-4">
-                                                <div className="flex items-center gap-1">
-                                                    <User className="h-4 w-4" />
-                                                    <span>{article.author}</span>
-                                                </div>
-                                                <div className="flex items-center gap-1">
-                                                    <Calendar className="h-4 w-4" />
-                                                    <span>{article.date}</span>
-                                                </div>
-                                            </div>
+                                    <h3 className="text-2xl font-heading mb-4 text-black group-hover:text-[#D4AF37] transition-colors duration-500 leading-snug">
+                                        {article.title}
+                                    </h3>
 
-                                            <Button
-                                                variant="ghost"
-                                                className="text-[var(--blue-accent)] p-0 h-auto cursor-pointer group/btn"
-                                            >
-                                                Read More
-                                                <ArrowRight className="ml-2 h-4 w-4 transition-transform duration-300 group-hover/btn:translate-x-1" />
-                                            </Button>
-                                        </CardContent>
-                                    </Card>
+                                    <p className="text-black/50 font-light text-sm line-clamp-2 leading-relaxed mb-6">
+                                        {article.tagline || article.description}
+                                    </p>
+
+                                    <div className="flex items-center gap-6 text-[10px] uppercase tracking-widest text-black/30 font-semibold">
+                                        <span className="flex items-center gap-2">
+                                            <Calendar className="h-3 w-3" />
+                                            {article.date}
+                                        </span>
+                                        <span className="flex items-center gap-2">
+                                            <User className="h-3 w-3" />
+                                            {article.author}
+                                        </span>
+                                    </div>
                                 </Link>
                             </motion.div>
                         ))}
                     </div>
                 ) : (
-                    <div className="text-center py-12">
-                        <p className="text-gray-600">No articles available at the moment.</p>
+                    <div className="text-center py-24 border border-dashed border-black/10">
+                        <p className="text-black/40 font-light italic">No current entries available.</p>
                     </div>
                 )}
-
-                {/* Mobile Button */}
-                <div className="text-center mt-12 md:hidden">
-                    <Link to="/insights">
-                        <Button
-                            variant="outline"
-                            className="border-2 border-gray-300 hover:border-[var(--blue-accent)] hover:text-[var(--blue-accent)]"
-                        >
-                            View All Articles
-                        </Button>
-                    </Link>
-                </div>
             </div>
         </section>
     );

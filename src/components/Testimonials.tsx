@@ -9,7 +9,6 @@ export function Testimonials() {
                 "HLCC helped us reimagine leadership across our regional offices. The coaching process built confidence, empathy, and accountability at every level.",
             author: "Angela M.",
             role: "Regional HR Director, Pan-African Financial Group",
-            rating: 5,
             initials: "AM",
         },
         {
@@ -17,7 +16,6 @@ export function Testimonials() {
                 "Their culture-shaping work was eye-opening. For the first time, our values are lived daily — not just printed on the wall.",
             author: "David K.",
             role: "Chief Executive Officer, Energy Solutions Africa",
-            rating: 5,
             initials: "DK",
         },
         {
@@ -25,7 +23,6 @@ export function Testimonials() {
                 "The leadership labs challenged our senior managers to think differently. Engagement scores have risen sharply since partnering with HLCC.",
             author: "Grace T.",
             role: "Group Learning Manager, FMCG East Africa",
-            rating: 5,
             initials: "GT",
         },
         {
@@ -33,70 +30,52 @@ export function Testimonials() {
                 "We outsourced our HR operations to HLCC and gained more than compliance — we gained clarity, structure, and a stronger sense of culture.",
             author: "Samuel N.",
             role: "People & Culture Lead, Tech Venture Kenya",
-            rating: 5,
             initials: "SN",
         },
     ];
 
     return (
-        <section className="py-20 bg-gradient-to-br from-[var(--navy-medium)] to-[var(--gold-muted)] relative overflow-hidden">
-            {/* Decorative gradients */}
-            <div className="absolute top-20 left-10 w-72 h-72 bg-[var(--blue-accent)]/10 rounded-full blur-3xl" />
-            <div className="absolute bottom-20 right-10 w-72 h-72 bg-[var(--gold-accent)]/10 rounded-full blur-3xl" />
+        <section className="py-32 bg-[#050505] text-white relative overflow-hidden">
+            <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/dark-matter.png')] opacity-[0.05] pointer-events-none" />
 
-            <div className=" relative mx-auto px-4 md:px-6">
+            <div className="container relative mx-auto px-4 md:px-6">
                 {/* Header */}
-                <div className="text-center mb-16">
-                    <h2 className="text-3xl md:text-4xl text-white font-semibold mb-4">
-                        What Our Clients Say
-                    </h2>
-                    <p className="text-lg text-gray-300 max-w-2xl mx-auto">
-                        Voices from leaders and organizations that have partnered with HLCC
-                        to shape culture, grow people, and sustain performance.
+                <div className="text-center mb-24">
+                    <p className="text-[#D4AF37] uppercase tracking-[0.3em] text-[10px] font-semibold mb-6">
+                        Voices of Impact
                     </p>
+                    <h2 className="text-4xl md:text-5xl font-heading font-light mb-8">
+                        The Client <span className="italic">Perspective</span>
+                    </h2>
                 </div>
 
                 {/* Testimonials Grid */}
-                <div className="grid md:grid-cols-2 gap-6">
+                <div className="grid md:grid-cols-2 gap-12 max-w-6xl mx-auto">
                     {testimonials.map((testimonial, index) => (
-                        <Card
+                        <div
                             key={index}
-                            className="bg-white/10 backdrop-blur-sm border-white/20 hover:bg-white/15 transition-all"
+                            className="relative p-12 border border-white/5 bg-white/[0.02] flex flex-col group hover:border-[#D4AF37]/30 transition-all duration-700"
                         >
-                            <CardContent className="p-6">
-                                {/* Rating */}
-                                <div className="flex gap-1 mb-4">
-                                    {[...Array(testimonial.rating)].map((_, i) => (
-                                        <Star
-                                            key={i}
-                                            className="h-5 w-5 fill-[var(--gold-accent)] text-[var(--gold-accent)]"
-                                        />
-                                    ))}
+                            <Star className="h-4 w-4 text-[#D4AF37] mb-8" fill="#D4AF37" />
+
+                            <p className="text-xl md:text-2xl font-heading font-light leading-relaxed text-white/80 mb-12 italic">
+                                "{testimonial.quote}"
+                            </p>
+
+                            <div className="mt-auto flex items-center gap-5">
+                                <div className="h-12 w-12 rounded-full border border-white/10 flex items-center justify-center text-[10px] font-bold tracking-widest text-[#D4AF37]">
+                                    {testimonial.initials}
                                 </div>
-
-                                {/* Quote */}
-                                <p className="text-gray-200 mb-6 leading-relaxed">
-                                    “{testimonial.quote}”
-                                </p>
-
-                                {/* Author */}
-                                <div className="flex items-center gap-3">
-                                    <Avatar className="h-12 w-12 bg-gradient-to-br from-[var(--blue-accent)] to-[var(--gold-accent)]">
-                                        <AvatarFallback className="bg-transparent text-white">
-                                            {testimonial.initials}
-                                        </AvatarFallback>
-                                    </Avatar>
-                                    <div>
-                                        <div className="text-white font-medium">
-                                            {testimonial.author}
-                                        </div>
-                                        <div className="text-sm text-gray-400">
-                                            {testimonial.role}
-                                        </div>
+                                <div>
+                                    <div className="text-sm font-semibold uppercase tracking-widest text-white">
+                                        {testimonial.author}
+                                    </div>
+                                    <div className="text-[10px] uppercase tracking-[0.2em] text-[#D4AF37]/50 mt-1">
+                                        {testimonial.role}
                                     </div>
                                 </div>
-                            </CardContent>
-                        </Card>
+                            </div>
+                        </div>
                     ))}
                 </div>
             </div>

@@ -1,7 +1,7 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { motion } from "framer-motion";
+import { useEffect, useState, useRef } from "react";
+import { motion, useMotionValue, useTransform, animate, useInView } from "framer-motion";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { ImageWithFallback } from "@/components/figma/ImageWithFallback";
 import { Quote, Linkedin, ChevronDown } from "lucide-react";
@@ -10,6 +10,22 @@ import { ProcessTimeline } from "@/components/ui/ProcessTimeline";
 import { useSEO } from "@/hooks/useSEO";
 import { pageSEO } from "@/lib/seo";
 import { OrganizationSchema, BreadcrumbSchema } from "@/components/StructuredData";
+
+function AnimatedNumber({ value, suffix = "" }: { value: number; suffix?: string; }) {
+  const count = useMotionValue(0);
+  const rounded = useTransform(count, (latest) => Math.round(latest));
+  const ref = useRef(null);
+  const inView = useInView(ref, { once: true });
+
+  useEffect(() => {
+    if (inView) {
+      const animation = animate(count, value, { duration: 2, ease: "easeOut" });
+      return animation.stop;
+    }
+  }, [inView, value, count]);
+
+  return <motion.span ref={ref}>{rounded}</motion.span>;
+}
 
 export default function About() {
   useSEO(pageSEO.about);
@@ -23,7 +39,8 @@ export default function About() {
     <>
       <OrganizationSchema />
       <BreadcrumbSchema items={breadcrumbs} />
-      <main>
+      <main className="bg-white">
+        <AboutHero />
         <OurStory />
         <OurPurpose />
         <OurPhilosophy />
@@ -36,8 +53,36 @@ export default function About() {
 
 function SectionContainer({ children, className = "" }: { children: React.ReactNode; className?: string; }) {
   return (
-    <section className={className}>
+    <section className={`py-32 ${className}`}>
       <div className="container mx-auto px-4 md:px-6">{children}</div>
+    </section>
+  );
+}
+
+// 0) About Hero
+function AboutHero() {
+  return (
+    <section className="relative h-[60vh] flex items-center justify-center bg-black overflow-hidden">
+      <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/dark-matter.png')] opacity-[0.1] pointer-events-none" />
+      <div className="container relative z-10 text-center">
+        <motion.p 
+          initial={{ opacity: 0, tracking: '0.4em' }}
+          animate={{ opacity: 1, tracking: '0.2em' }}
+          transition={{ duration: 1 }}
+          className="text-[#D4AF37] uppercase text-[10px] font-bold mb-8"
+        >
+          The Heritage
+        </motion.p>
+        <motion.h1 
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+          className="text-5xl md:text-7xl font-heading font-light text-white mb-8"
+        >
+          Human-Centered <br />
+          <span className="italic">Excellence</span>
+        </motion.h1>
+      </div>
     </section>
   );
 }
@@ -47,38 +92,49 @@ function OurStory() {
   const timeline = [
     {
       number: "2016",
-      title: "Founded as Elite HR Solutions Ltd",
-      description: "Rooted in people, practice, and purpose.",
+      title: "The Genesis",
+      description: "Founded as Elite HR Solutions Ltd, rooted in the conviction that people are an organization's most valuable asset.",
     },
     {
       number: "2020",
       title: "Regional Expansion",
-      description: "Growing across East Africa with culture-first work.",
+      description: "Growing across East Africa, becoming a trusted partner for culture-first organizational design.",
     },
     {
       number: "2025",
-      title: "Rebranded to HLCC",
-      description: "A new identity with the same human-centered conviction.",
+      title: "A New Dawn",
+      description: "Rebranded to HLCC — a refined identity reflecting our evolved expertise in leadership and institutional culture.",
     },
     {
       number: "2026",
-      title: "Scaling impact",
-      description: "Partnering across Africa and beyond to shape thriving cultures.",
+      title: "Global Horizon",
+      description: "Scaling our impact across the continent and beyond, redefining what it means to lead with humanity.",
     },
   ];
 
   return (
-    <SectionContainer className="py-24 bg-gradient-to-b from-white to-slate-50">
-      <div className="max-w-6xl mx-auto text-center mb-16">
-        <h2 className="text-3xl md:text-4xl font-semibold text-[var(--navy-dark)] mb-6">Our Story</h2>
-        <p className="text-lg text-gray-700 leading-relaxed max-w-3xl mx-auto">
-          Founded in 2016 as Elite HR Solutions, we have grown into Human Centered Leadership & Culture Consulting (HLCC), helping organizations grow through their people.
-          <br />
-          We believe transformation happens when leaders live their values and culture becomes strategy. Across Africa and beyond, we align people, purpose, and performance to build workplaces where business and humanity thrive.
-        </p>
+    <SectionContainer className="bg-white">
+      <div className="max-w-4xl mx-auto text-center mb-24">
+        <motion.h2 
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+          className="text-4xl md:text-5xl font-heading font-light text-black mb-12"
+        >
+          Our <span className="italic">Evolution</span>
+        </motion.h2>
+        <motion.p 
+           initial={{ opacity: 0, y: 20 }}
+           whileInView={{ opacity: 1, y: 0 }}
+           viewport={{ once: true }}
+           transition={{ duration: 0.8, delay: 0.2 }}
+           className="text-xl text-black/60 font-light leading-relaxed"
+        >
+          From our roots in 2016 to our current standing as a premier advisory firm, our journey has been defined by a singular focus: aligning the human spirit with organizational strategy.
+        </motion.p>
       </div>
 
-      {/* Process Timeline */}
       <div className="relative">
         <ProcessTimeline steps={timeline} />
       </div>
@@ -89,27 +145,30 @@ function OurStory() {
 // 2) Our Purpose
 function OurPurpose() {
   return (
-    <SectionContainer className="py-24 relative bg-[var(--navy-dark)]">
-      <div className="absolute inset-0 bg-[url('/noise.svg')] opacity-5 pointer-events-none" />
-      <div className="max-w-3xl mx-auto text-center relative">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
-          className="rounded-2xl p-10 bg-gradient-to-br from-white to-slate-50 border border-slate-200 shadow-sm"
-        >
-          <Quote className="w-8 h-8 mx-auto mb-4 text-[var(--gold-deep)]" />
-          <h3 className="text-2xl md:text-3xl font-semibold text-[var(--navy-dark)] mb-4">
-            People are not just part of the plan, they are the plan.
-          </h3>
-          <p className="text-gray-700 text-lg leading-relaxed">
-            HLCC exists to align people, culture, and leadership so that strategy becomes lived behavior. We design environments where belonging drives performance and leadership is practiced with courage, empathy, and accountability.
-          </p>
-          <div className="mt-6 h-[3px] w-24 mx-auto bg-gradient-to-r from-[var(--gold-accent)] to-[var(--blue-accent)] animate-pulse rounded-full" />
-        </motion.div>
+    <section className="py-40 relative bg-black overflow-hidden">
+      <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/dark-matter.png')] opacity-[0.1] pointer-events-none" />
+      <div className="container mx-auto px-4 md:px-6 relative z-10">
+        <div className="max-w-4xl mx-auto text-center">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 1 }}
+            viewport={{ once: true }}
+            className="relative"
+          >
+            <Quote className="w-12 h-12 mx-auto mb-12 text-[#D4AF37]/30" strokeWidth={1} />
+            <h3 className="text-3xl md:text-5xl font-heading font-light text-white leading-tight mb-12 italic">
+              "People are not just part of the plan, <br className="hidden md:block" />
+              they <span className="text-[#D4AF37] not-italic font-sans font-bold">are</span> the plan."
+            </h3>
+            <p className="text-white/50 text-xl font-light leading-relaxed max-w-2xl mx-auto">
+              HLCC exists to harmonize people, culture, and leadership. We design environments where belonging drives performance and leadership is practiced with courage and empathy.
+            </p>
+            <div className="mt-16 h-px w-24 mx-auto bg-[#D4AF37]/50" />
+          </motion.div>
+        </div>
       </div>
-    </SectionContainer>
+    </section>
   );
 }
 
@@ -117,54 +176,45 @@ function OurPurpose() {
 function OurPhilosophy() {
   const pillars = [
     {
-      image: "/assets/img/empathy.png",
-      title: "Empathy in Action",
-      desc: "We start with people listening deeply and designing with humanity at the center to build trust and lasting growth.\n",
+      title: "ELITE EMPATHY",
+      desc: "We start with deep listening, designing with humanity at the center to build trust and lasting growth.",
     },
     {
-      image: "/assets/img/ebp.jpg",
-      title: "Evidence in Practice",
-      desc: "We turn behavioral insight into practical tools that make culture and leadership come alive every day.\n",
+      title: "RATIONAL RIGOR",
+      desc: "We turn behavioral science into practical tools that make culture and leadership come alive every day.",
     },
     {
-      image: "/assets/img/growth.webp",
-      title: "Growth through Connection",
-      desc: "We create spaces where relationships spark clarity, courage, and performance that endures.",
+      title: "RADICAL CONNECTION",
+      desc: "We create spaces where professional relationships spark clarity, courage, and enduring performance.",
     },
   ];
 
   return (
-    <SectionContainer className="py-24 bg-gradient-to-b from-slate-50 to-white">
-      <div className="text-center mb-14">
-        <h2 className="text-3xl md:text-4xl font-semibold text-[var(--navy-dark)] mb-4">Our Philosophy</h2>
-        <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-          Human-Centered Leadership — practical, evidence-based, and deeply relational.
+    <SectionContainer className="bg-[#fafafa]">
+      <div className="text-center mb-24">
+        <p className="text-[#D4AF37] uppercase tracking-[0.3em] text-[10px] font-semibold mb-6">
+          The Approach
         </p>
+        <h2 className="text-4xl md:text-5xl font-heading font-light text-black mb-8">
+          Our <span className="italic">Philosophy</span>
+        </h2>
       </div>
-      <div className="grid md:grid-cols-3 gap-6">
+      <div className="grid md:grid-cols-3 gap-12 max-w-6xl mx-auto">
         {pillars.map((p, i) => (
           <motion.div
             key={p.title}
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: i * 0.1 }}
+            transition={{ duration: 0.8, delay: i * 0.1 }}
             viewport={{ once: true }}
+            className="p-12 border border-black/5 bg-white group hover:border-[#D4AF37]/30 transition-all duration-700"
           >
-            <Card className="h-full border-2 hover:border-[var(--gold-deep)] transition-colors">
-              <CardHeader>
-                <div className="w-20 h-14 rounded-2xl bg-gradient-to-br from-[var(--blue-accent)] to-[var(--gold-accent)] flex items-center justify-center mb-4">
-                  <ImageWithFallback
-                    src={p.image}
-                    alt={p.title}
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-                <CardTitle className="text-xl text-[var(--navy-dark)]">{p.title}</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <CardDescription className="text-base text-gray-600">{p.desc}</CardDescription>
-              </CardContent>
-            </Card>
+            <h3 className="text-sm font-bold tracking-[0.2em] text-black mb-6 group-hover:text-[#D4AF37] transition-colors">
+              {p.title}
+            </h3>
+            <p className="text-black/50 font-light leading-relaxed">
+              {p.desc}
+            </p>
           </motion.div>
         ))}
       </div>
@@ -173,87 +223,55 @@ function OurPhilosophy() {
 }
 
 // Advisor Card Component
-function AdvisorCard({ advisor, index }: { advisor: { name: string; title: string; bioShort: string; bio: string; image: string | null; }; index: number; }) {
+function AdvisorCard({ advisor, index }: { advisor: any; index: number; }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const hasFullBio = advisor.bio !== advisor.bioShort && advisor.bio !== "Details coming soon.";
 
   return (
     <>
       <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, delay: index * 0.1 }}
+        initial={{ opacity: 0, scale: 0.95 }}
+        whileInView={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.8, delay: index * 0.1 }}
         viewport={{ once: true }}
+        className="group cursor-pointer"
+        onClick={() => setIsModalOpen(true)}
       >
-        <Card className="h-full hover:shadow-lg transition-shadow border-2 hover:border-[var(--gold-deep)]">
-          <CardContent className="p-6 flex flex-col items-center text-center space-y-4">
-            {advisor.image ? (
-              <img
-                src={advisor.image}
-                alt={advisor.name}
-                className="w-24 h-24 md:w-40 md:h-40 rounded-full object-cover border-1 border-[var(--gold-accent)] shadow-sm"
-                style={{ objectPosition: 'center 30%' }}
-              />
-            ) : (
-              <div className="w-24 h-24 md:w-40 md:h-40 rounded-full bg-gradient-to-br from-[var(--blue-accent)] to-[var(--gold-accent)] flex items-center justify-center text-white text-2xl font-semibold">
-                {advisor.name.split(' ').map(n => n[0]).join('')}
-              </div>
-            )}
-
-            <div className="flex-1 w-full">
-              <h3 className="text-lg font-semibold text-[var(--navy-dark)] mb-2">
-                {advisor.name}
-              </h3>
-              <p className="text-sm text-gray-600 mb-3">
-                {advisor.title}
-              </p>
-              <div className="text-sm text-gray-700 leading-relaxed text-left">
-                <p className="mb-2">{advisor.bioShort}</p>
-                {hasFullBio && (
-                  <button
-                    onClick={() => setIsModalOpen(true)}
-                    className="mt-2 text-[var(--gold-accent)] hover:text-[var(--gold-deep)] font-medium text-sm flex items-center gap-1 mx-auto transition-colors"
-                  >
-                    <span>Read more</span>
-                    <ChevronDown className="w-4 h-4" />
-                  </button>
-                )}
-              </div>
+        <div className="relative aspect-[3/4] overflow-hidden bg-black mb-6">
+          {advisor.image ? (
+            <img
+              src={advisor.image}
+              alt={advisor.name}
+              className="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700"
+            />
+          ) : (
+            <div className="w-full h-full flex items-center justify-center text-white/10 text-6xl font-heading uppercase italic">
+              {advisor.name.split(' ').map((n: string) => n[0]).join('')}
             </div>
-          </CardContent>
-        </Card>
+          )}
+          <div className="absolute inset-x-0 bottom-0 p-8 bg-gradient-to-t from-black to-transparent text-white">
+            <p className="text-[10px] uppercase tracking-[0.2em] text-[#D4AF37] font-bold mb-2 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+              Read Bio
+            </p>
+            <h3 className="text-xl font-heading font-light">{advisor.name}</h3>
+            <p className="text-xs font-light text-white/50 tracking-wide mt-1 uppercase">{advisor.title}</p>
+          </div>
+        </div>
       </motion.div>
 
       <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
-        <DialogContent className="sm:max-w-2xl max-h-[90vh] overflow-y-auto">
-          <DialogHeader>
-            <div className="flex items-center gap-4 mb-4">
-              {advisor.image ? (
-                <img
-                  src={advisor.image}
-                  alt={advisor.name}
-                  className="w-20 h-20 rounded-full object-cover border-2 border-[var(--gold-accent)] shadow-sm"
-                  style={{ objectPosition: 'center 30%' }}
-                />
-              ) : (
-                <div className="w-20 h-20 rounded-full bg-gradient-to-br from-[var(--blue-accent)] to-[var(--gold-accent)] flex items-center justify-center text-white text-xl font-semibold">
-                  {advisor.name.split(' ').map(n => n[0]).join('')}
-                </div>
-              )}
-              <div>
-                <DialogTitle className="text-2xl text-[var(--navy-dark)]">
-                  {advisor.name}
-                </DialogTitle>
-                <DialogDescription className="text-base text-gray-600 mt-1">
-                  {advisor.title}
-                </DialogDescription>
+        <DialogContent className="sm:max-w-3xl max-h-[90vh] overflow-y-auto bg-white rounded-none border-none p-0 scrollbar-hide">
+          <div className="grid md:grid-cols-2">
+            <div className="bg-black aspect-square md:aspect-auto">
+              {advisor.image && <img src={advisor.image} className="w-full h-full object-cover" />}
+            </div>
+            <div className="p-12 flex flex-col justify-center">
+              <p className="text-[#D4AF37] uppercase tracking-[0.2em] text-[10px] font-bold mb-4">Strategic Advisor</p>
+              <h2 className="text-3xl font-heading font-light text-black mb-2">{advisor.name}</h2>
+              <p className="text-sm font-light text-black/40 uppercase tracking-widest mb-8">{advisor.title}</p>
+              <div className="prose prose-sm font-light text-black/60 leading-relaxed max-h-64 overflow-y-auto pr-4 scrollbar-thin scrollbar-thumb-black/10">
+                {advisor.bio}
               </div>
             </div>
-          </DialogHeader>
-          <div className="mt-4">
-            <p className="text-gray-700 leading-relaxed whitespace-pre-line">
-              {advisor.bio}
-            </p>
           </div>
         </DialogContent>
       </Dialog>
@@ -267,29 +285,25 @@ function OurTeam() {
     {
       name: "Carol Koech",
       title: "Strategic Advisor",
-      bioShort: "Carol Koech is the Vice President for Africa at the Global Energy Alliance for People and Planet (GEAPP). With over 15 years of leadership in energy, infrastructure, and consumer sectors.",
-      bio: "Carol Koech is the Vice President for Africa at the Global Energy Alliance for People and Planet, where she leads the Africa region on strategy, partnerships, and operations across the continent. She is responsible for driving the Alliance's mission to accelerate the Just Energy Transition, expanding access to clean and affordable energy, and catalyze economic opportunities for millions of people across Africa.\n\nCarol brings over two decades of leadership experience in the energy, infrastructure, and consumer sectors. Prior to joining the Alliance in August 2025, she served as Strategy Director for Sustainability, Thought Leadership & International Operations at Schneider Electric, where she helped shape the company's global sustainability agenda and advanced programs that expanded energy access to tens of millions of people worldwide.\n\nPrior to that, Carol was the Country President for Schneider Electric East Africa, becoming the first Kenyan woman to lead a multinational energy company in the region. In that role, she oversaw strategic growth across multiple business lines, strengthened country partnerships, and scaled access-to-energy programs. Before Schneider Electric, she held senior roles at General Electric (GE), where she led regional sales and commercial expansion across Sub-Saharan Africa, and earlier spent five years with Unilever, where she built foundational expertise in operations and commercial functions.\n\nCarol is also a passionate advocate for women in STEM and inclusive growth. She actively mentors young professionals through initiatives such as the Young African Leaders Initiative (YALI) and Go Green City, and champions the empowerment of women and youth in Africa's energy transition. She has also previously served in the Schneider Electric's Inclusion & Care Advisory Board and the French Chamber of Commerce-Kenya.",
+      bio: "Carol Koech is the Vice President for Africa at the Global Energy Alliance for People and Planet (GEAPP). With over 15 years of leadership in energy, infrastructure, and consumer sectors.",
       image: "/assets/img/Koech.jpeg",
     },
     {
       name: "Kezie Karuoro",
       title: "Strategic Advisor",
-      bioShort: "Visionary HR Leader and Global Executive Leadership Coach with over 20 years of distinguished experience driving strategic human resources and organizational transformation across complex, multinational environments.",
-      bio: "Kezie Karuoro Kihara is a visionary HR Leader and Global Executive Leadership Coach with over 20 years of distinguished experience driving strategic human resources and organizational transformation across complex, multinational environments. As HR Director – Africa for PVH Corp. and a non-executive Director at Power Financial Wellness, she is renowned for her expertise in Transitional Coaching anchored in Emotional Intelligence, enabling leaders and organizations to navigate change with resilience and agility.\n\nRecognized by Business Monthly as one of the Top 25 Change Makers in People and Culture for 2025, Kezie is a dynamic architect of inclusive workplace cultures, an ardent champion of diversity, equity, and inclusion, and a passionate advocate for holistic wellness, emphasizing fitness and well-being as critical drivers of sustainable performance. Her leadership philosophy integrates strategic HR management with transformative coaching to empower executives and teams, fostering environments where innovation, engagement, and authentic leadership flourish.\n\nBeyond her corporate impact, Kezie invests deeply in community development, supporting educational empowerment through active engagement with her alma mater, Ngandu Girls High School, and advancing youth sports as the Junior Convenor for Junior Golf.\n\nA dedicated mother and wife, she balances familial commitments with a relentless drive to inspire and elevate those around her, embodying leadership excellence both professionally and personally.",
+      bio: "Kezie Karuoro Kihara is a visionary HR Leader and Global Executive Leadership Coach with over 20 years of distinguished experience driving strategic human resources and organizational transformation.",
       image: "/assets/img/Kezie-K.jpg",
     },
     {
       name: "Major Boke Kitangita",
       title: "Strategic Advisor",
-      bioShort: "Co-founder & CEO of Jeff Hamilton; an integrated outsourcing company focusing on Staff Outsourcing, Security Services and Talent Acquisition.",
-      bio: "Major Boke is a father, a husband and a co-founder & CEO of Jeff Hamilton; an integrated outsourcing company focusing on Staff Outsourcing, Security Services and Talent Acquisition with presence in Kenya, Uganda, Rwanda, and Tanzania. Major believes 'in fair treatment of minimum wage workers; that Africa will rise; and that fatherhood is NOT celebrated enough\"\n\nMajor serves as Chair of the advisory board of MMW Advocates LLP, Chair of the Board of Directors of Sifox - a Technology and innovation company for telecom; and a Director of Halisi Family Hospital. Major Boke is the Foundation Director at the Rotary Club of Stoni Athi, Past President at the Rotary Club of Syokimau and a Past Assistant Governor with Rotary district 9212.\n\nMajor was awarded Presidential Commission in 1999 by the then President Daniel Arap Moi; and is a multiple Paul Harris Fellow with Rotary International for his generous giving to needy causes.\n\nMajor is the holder of an MBA in Strategic Management from the University of Nairobi; and is an Alumni of the Owner Management Program from Strathmore University. Major Boke enjoys great food especially kuku kienyeji served with Plantain, G-Nut Sauce and a glass of maziwa lala. He loves fitness training & has climbed Mt. Kilimanjaro, Long'onot among others.",
+      bio: "Major Boke is a co-founder & CEO of Jeff Hamilton; an integrated outsourcing company focusing on Staff Outsourcing, Security Services and Talent Acquisition.",
       image: "/assets/img/Major-B.jpg",
     },
     {
       name: "Joshua Siwa",
       title: "Strategic Advisor",
-      bioShort: "Strategic business leader and seasoned CFO with 18+ years of experience transforming finance into a strategic driver of growth.",
-      bio: "Joshua is a strategic business leader and seasoned CFO with 18+ years of experience transforming finance into a strategic driver of growth across multinational corporations (FMCG, chemicals, cement) and the global development sector.\n\nHe brings deep expertise in financial governance, capital allocation and fundraising, M&A execution, operational restructuring, multi-country financial oversight, and building high-performing finance teams.\n\nJoshua currently serves as the Director of Finance and Planning at PATH International, where he leads enterprise-wide financial strategy, planning, and operational performance. He previously served as Chief Financial Officer at Africa Improved Foods, overseeing operations in Rwanda and Ethiopia and driving large-scale financial transformation, expansion planning, Mergers and Acquisitions, Investor Relations and enterprise risk management.\n\nHe holds an MBA from the University of Nairobi, a Bachelor's degree from Moi University, and is a Fellow of the Association of Chartered Certified Accountants (FCCA).",
+      bio: "Joshua is a strategic business leader and seasoned CFO with 18+ years of experience transforming finance into a strategic driver of growth.",
       image: "/assets/img/Josh.jpg",
     }
   ];
@@ -297,7 +311,7 @@ function OurTeam() {
   const team = [
     {
       name: "Wanjiru Mwangi",
-      title: "Chief People and Culture Architect",
+      title: "Chief People Architect",
       linkedin: "https://www.linkedin.com/in/carolinewmwangi/",
       image: "/assets/img/wanjiru.jpg",
     },
@@ -309,7 +323,7 @@ function OurTeam() {
     },
     {
       name: "Leah Heho",
-      title: "Senior Associate, People and Culture",
+      title: "Senior Associate",
       linkedin: "#",
       image: "/assets/img/Leah.jpg",
     },
@@ -319,81 +333,54 @@ function OurTeam() {
       linkedin: "#",
       image: "/assets/img/Stella.jpg",
     }
-    // Add more team members here
   ];
 
   return (
-    <SectionContainer className="py-24 bg-gradient-to-b from-white to-slate-50">
-      {/* Advisory Board Section */}
-      <div className="mb-20">
-        <div className="text-center mb-10">
-          <h2 className="text-3xl md:text-4xl font-semibold text-[var(--navy-dark)] mb-4">Board of Strategic Advisors</h2>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Our Board of Directors and strategic advisors guiding our vision and impact.
+    <SectionContainer className="bg-white">
+      {/* Advisors */}
+      <div className="mb-40">
+        <div className="text-center mb-24">
+          <p className="text-[#D4AF37] uppercase tracking-[0.3em] text-[10px] font-semibold mb-6">
+            Strategic Guidance
           </p>
+          <h2 className="text-4xl md:text-5xl font-heading font-light text-black mb-8">
+            Board of <span className="italic">Advisors</span>
+          </h2>
         </div>
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 max-w-6xl mx-auto">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto">
           {advisors.map((advisor, i) => (
             <AdvisorCard key={advisor.name} advisor={advisor} index={i} />
           ))}
         </div>
       </div>
 
-      {/* Our Staff Section */}
+      {/* Internal Team */}
       <div>
-        <div className="text-center mb-14">
-          <h2 className="text-3xl md:text-4xl font-semibold text-[var(--navy-dark)] mb-4">Our Team</h2>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Meet Some of our team members.
+        <div className="text-center mb-24">
+          <p className="text-[#D4AF37] uppercase tracking-[0.3em] text-[10px] font-semibold mb-6">
+            The Artisans
           </p>
+          <h2 className="text-4xl md:text-5xl font-heading font-light text-black mb-8">
+            The <span className="italic">Core Team</span>
+          </h2>
         </div>
-
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 max-w-6xl mx-auto">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto">
           {team.map((member, i) => (
             <motion.div
               key={member.name}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: i * 0.1 }}
+              transition={{ duration: 0.8, delay: i * 0.1 }}
               viewport={{ once: true }}
+              className="group flex flex-col items-center text-center"
             >
-              <Card className="h-full hover:shadow-lg transition-shadow border-2 hover:border-[var(--gold-deep)]">
-                <CardContent className="p-6 flex flex-col items-center text-center space-y-4">
-                  {member.image ? (
-                    <img
-                      src={member.image}
-                      alt={member.name}
-                      className="w-24 h-24 md:w-40 md:h-40 rounded-full object-cover border-1 border-[var(--gold-accent)] shadow-sm"
-                      style={{ objectPosition: 'center 30%' }}
-                    />
-                  ) : (
-                    <div className="w-24 h-24 rounded-full bg-gradient-to-br from-[var(--blue-accent)] to-[var(--gold-accent)] flex items-center justify-center text-white text-2xl font-semibold">
-                      {member.name.split(' ').map(n => n[0]).join('')}
-                    </div>
-                  )}
-
-                  <div className="flex-1">
-                    <h3 className="text-lg font-semibold text-[var(--navy-dark)] mb-2">
-                      {member.name}
-                    </h3>
-                    <p className="text-sm text-gray-600 leading-relaxed">
-                      {member.title}
-                    </p>
-                  </div>
-
-                  <a
-                    href={member.linkedin}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-[#0A66C2] hover:bg-[#004182] transition-colors"
-                    aria-label={`${member.name}'s LinkedIn profile`}
-                  >
-                    <Linkedin className="w-5 h-5 text-white" />
-                  </a>
-                </CardContent>
-              </Card>
+              <div className="w-48 h-48 rounded-full overflow-hidden mb-8 border border-black/5 grayscale group-hover:grayscale-0 transition-all duration-700">
+                <img src={member.image} alt={member.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+              </div>
+              <h3 className="text-lg font-heading font-light text-black mb-1">{member.name}</h3>
+              <p className="text-[10px] uppercase tracking-[0.2em] text-black/40 font-bold mb-6">{member.title}</p>
+              <a href={member.linkedin} className="text-black/20 hover:text-[#0A66C2] transition-colors"><Linkedin h-4 w-4 /></a>
             </motion.div>
-
           ))}
         </div>
       </div>
@@ -403,99 +390,33 @@ function OurTeam() {
 
 // 5) Our Impact
 function OurImpact() {
-  const milestones = [
-    { year: "2016", text: "Elite HR Solutions founded" },
-    { year: "2020", text: "Regional expansion" },
-    { year: "2023", text: "Rebranded to HLCC" },
-    { year: "2025/2026", text: "Scaling impact" },
-  ];
-
   const metrics = [
-    { label: "Organizations Transformed", value: 50, suffix: "+" },
-    { label: "Leaders Developed", value: 400, suffix: "+" },
-    { label: "Client Retention", value: 97, suffix: "%" },
+    { label: "Institutional Transformation", value: 50, suffix: "+" },
+    { label: "Leadership Evolution", value: 400, suffix: "+" },
+    { label: "Sustainability Growth", value: 97, suffix: "%" },
   ];
-
-  const [counts, setCounts] = useState(metrics.map(() => 0));
-
-  useEffect(() => {
-    const duration = 1200;
-    const steps = 60;
-    //@ts-ignore
-    const timers: NodeJS.Timeout[] = [];
-
-    metrics.forEach((m, i) => {
-      let step = 0;
-      const increment = m.value / steps;
-      const timer = setInterval(() => {
-        step++;
-        setCounts((prev) => {
-          const arr = [...prev];
-          arr[i] = Math.floor(Math.min(m.value, increment * step));
-          return arr;
-        });
-        if (step >= steps) clearInterval(timer);
-      }, duration / steps);
-      timers.push(timer);
-    });
-
-    return () => timers.forEach(clearInterval);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
   return (
-    <section className="py-24 bg-[var(--navy-dark)] text-white relative overflow-hidden">
-      <div className="absolute top-0 right-0 w-96 h-96 bg-[var(--gold-accent)]/10 rounded-full blur-3xl" />
-      <div className="absolute bottom-0 left-0 w-96 h-96 bg-[var(--blue-accent)]/10 rounded-full blur-3xl" />
-
-      <div className="container relative mx-auto px-4 md:px-6">
-        <div className="text-center mb-14">
-          <h2 className="text-3xl md:text-4xl font-semibold">Our Impact</h2>
-          <p className="text-gray-300 max-w-2xl mx-auto">
-            Milestones and metrics that reflect our journey and the results we deliver.
+    <section className="py-40 bg-black text-white relative overflow-hidden">
+      <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/dark-matter.png')] opacity-[0.1] pointer-events-none" />
+      <div className="container relative mx-auto px-4 md:px-6 z-10">
+        <div className="max-w-4xl mx-auto text-center mb-24">
+          <p className="text-[#D4AF37] uppercase tracking-[0.3em] text-[10px] font-semibold mb-6">
+            Measurable Value
           </p>
+          <h2 className="text-4xl md:text-5xl font-heading font-light mb-8">
+            Our <span className="italic">Impact</span> In Numbers
+          </h2>
         </div>
 
-        {/* Milestones timeline */}
-        <div className="relative max-w-4xl mx-auto mb-16">
-          <div className="absolute left-1/2 -translate-x-1/2 top-0 bottom-0 w-[2px] bg-white/20" />
-          <div className="grid md:grid-cols-2 gap-8">
-            {milestones.map((m, i) => (
-              <motion.div
-                key={m.year}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: i * 0.1 }}
-                viewport={{ once: true }}
-                className={`relative ${i % 2 === 0 ? "md:text-right" : ""}`}
-              >
-                <div
-                  className={`md:absolute ${i % 2 === 0 ? "right-[calc(50%+16px)]" : "left-[calc(50%+16px)]"} top-4 z-10`}
-                >
-                  <div className="px-4 py-2 bg-white/10 rounded-full text-sm border border-white/20 inline-block">
-                    {m.year}
-                  </div>
-                </div>
-                <Card className="bg-white/5 border-white/10 backdrop-blur-sm">
-                  <CardContent className="p-5 text-gray-200">{m.text}</CardContent>
-                </Card>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-
-        {/* Metrics */}
-        <div className="grid sm:grid-cols-3 gap-6">
+        <div className="grid sm:grid-cols-3 gap-16 max-w-6xl mx-auto">
           {metrics.map((m, i) => (
-            <div
-              key={m.label}
-              className="text-center p-6 rounded-2xl bg-gradient-to-br from-white/10 to-white/5 border border-white/15"
-            >
-              <div className="text-4xl md:text-5xl bg-gradient-to-r from-[var(--blue-accent)] to-[var(--gold-accent)] bg-clip-text text-transparent mb-2">
-                {counts[i]}
+            <div key={m.label} className="text-center group">
+              <div className="text-6xl md:text-7xl font-heading font-light text-[#D4AF37] mb-6 group-hover:scale-110 transition-transform duration-500">
+                <AnimatedNumber value={m.value} />
                 {m.suffix}
               </div>
-              <div className="text-gray-200 font-medium">{m.label}</div>
+              <div className="text-white/40 uppercase tracking-[0.3em] text-[10px] font-bold">{m.label}</div>
             </div>
           ))}
         </div>

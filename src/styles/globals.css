@@ -1,10 +1,13 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap');
+
 @custom-variant dark (&:is(.dark *));
+
 html {
-    scroll-behavior: smooth;
+  scroll-behavior: smooth;
 }
 
 :root {
-    scroll-behavior: smooth;
+  scroll-behavior: smooth;
   --font-size: 16px;
   --background: #ffffff;
   --foreground: oklch(0.145 0 0);
@@ -44,29 +47,23 @@ html {
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
 
-  /* Corporate L&D Theme Colors */
-  --navy-dark: #0A0E27;
-  --navy-medium: #1A1F3A;
-  --purple-deep: #B8860B;
-  --blue-accent: #3B82F6;
-  --magenta-accent: #C5A100;
-  --blue-bright: #60A5FA;
-  --purple-bright: #FFD700;
-  --navy-dark: #0A0E27;
-  /* --navy-medium: #1A1F3A;
-    --blue-accent: #3B82F6;
-    --blue-bright: #60A5FA; */
+  /* Corporate L&D Theme Colors (Luxury Refactor) */
+  --navy-dark: #0a0a0a;
+  --navy-medium: #1a1a1a;
+  --purple-deep: #1f1f1f;
+  --blue-accent: #2c3e50;
+  --magenta-accent: #D4AF37;
+  --blue-bright: #34495e;
+  --purple-bright: #D4AF37;
 
-  /* Replacing purple and magenta with golds */
-  --gold-accent: #C5A100;
-  /* rich, warm gold for accents */
+  --font-heading: 'Playfair Display', serif;
+  --font-body: 'Inter', sans-serif;
+
+  /* Luxury Gold Accents */
+  --gold-accent: #D4AF37;
   --gold-metallic: #B8860B;
-  /* metallic gold for highlights or text */
-
-  /* Optional — softer complementary golds */
-  --gold-light: #FFD700;
-  /* bright gold (highlight) */
-  --gold-muted: #B8860B;
+  --gold-light: #F3E5AB;
+  --gold-muted: #AA8C2C;
 }
 
 .dark {
@@ -154,6 +151,16 @@ html {
 
   body {
     @apply bg-background text-foreground;
+    font-family: var(--font-body);
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-heading);
   }
 }
 

@@ -70,31 +70,24 @@ export function Offerings() {
     return (
         <section
             id="offerings"
-            className="relative py-24 bg-gradient-to-b from-white via-slate-50 to-white scroll-mt-24"
+            className="relative py-32 bg-white scroll-mt-24"
         >
-            <div className="absolute inset-0 bg-[url('/noise.svg')] opacity-5 pointer-events-none" />
-
             <div className="container mx-auto px-4 md:px-6 relative z-10">
                 {/* Section Header */}
-                <div className="text-center mb-16">
-                    <h2 className="text-3xl md:text-4xl font-semibold tracking-tight text-[var(--navy-dark)] mb-4">
-                        What We Do
+                <div className="text-center mb-24">
+                    <h2 className="text-4xl md:text-5xl font-heading font-light text-black mb-6">
+                        What We <span className="italic">Deliver</span>
                     </h2>
-                    <p className="text-lg text-gray-700 max-w-3xl mx-auto">
+                    <p className="text-xl text-black/50 max-w-2xl mx-auto font-light leading-relaxed">
                         Unlocking Human Potential. Building Cultures that Thrive.
-                    </p>
-                    <p className="text-base text-gray-600 max-w-2xl mx-auto mt-4">
-                        HLCC bridges leadership, culture, and HR strategy — helping you
-                        build workplaces where people feel seen, valued, and inspired to
-                        perform at their best.
                     </p>
                 </div>
 
                 {/* Offering Cards */}
-                <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+                <div className="grid gap-12 md:grid-cols-3">
                     {offerings.map(
                         (
-                            { id, image, title, tagline, description, focusAreas, outcome },
+                            { id, title, tagline, description, outcome },
                             i
                         ) => (
                             <motion.div
@@ -102,71 +95,41 @@ export function Offerings() {
                                 initial={{ opacity: 0, y: 20 }}
                                 whileInView={{ opacity: 1, y: 0 }}
                                 transition={{
-                                    duration: 0.5,
+                                    duration: 0.8,
                                     ease: "easeOut",
-                                    delay: i * 0.05,
+                                    delay: i * 0.1,
                                 }}
                                 viewport={{ once: true }}
-                                className="h-full"
+                                className="group h-full flex flex-col"
                             >
-                                <Card
-                                    className={`flex flex-col justify-between h-full p-6 rounded-2xl border border-slate-200 bg-gradient-to-br ${i % 2 === 0
-                                            ? "from-white to-slate-50"
-                                            : "from-slate-50 to-white"
-                                        } hover:shadow-lg hover:border-[var(--gold-deep)] transition-all duration-300`}
-                                >
-                                    <div>
-                                        <CardHeader className="flex items-center gap-4 mb-4">
-                                            <div className="p-[2px] rounded-2xl bg-gradient-to-br from-[var(--blue-accent)] to-[var(--gold-accent)]">
-                                                <div className="w-14 h-14 rounded-2xl bg-white flex items-center justify-center overflow-hidden">
-                                                    <ImageWithFallback
-                                                        src={image}
-                                                        alt={title}
-                                                        className="w-full h-full object-cover"
-                                                    />
-                                                </div>
-                                            </div>
-                                            <div>
-                                                <CardTitle className="text-xl font-semibold text-[var(--navy-dark)]">
-                                                    {title}
-                                                </CardTitle>
-                                                <p className="text-[var(--gold-deep)] italic text-sm mt-1">
-                                                    {tagline}
-                                                </p>
-                                            </div>
-                                        </CardHeader>
-
-                                        <CardContent>
-                                            <p className="text-gray-700 leading-relaxed mb-4">
-                                                {description}
-                                            </p>
-
-                                            <Accordion type="single" collapsible className="w-full">
-                                                <AccordionItem value={`${id}-focus`}>
-                                                    <AccordionTrigger className="text-[var(--navy-dark)] hover:underline text-sm">
-                                                        View Focus Areas
-                                                    </AccordionTrigger>
-                                                    <AccordionContent>
-                                                        <ul className="space-y-2 pl-5 mt-3 text-gray-700 text-[15px] leading-relaxed">
-                                                            {focusAreas.map((item, index) => (
-                                                                <li
-                                                                    key={index}
-                                                                    className="relative before:content-['•'] before:absolute before:-left-4 before:text-[var(--gold-deep)]"
-                                                                >
-                                                                    {item}
-                                                                </li>
-                                                            ))}
-                                                        </ul>
-                                                    </AccordionContent>
-                                                </AccordionItem>
-                                            </Accordion>
-                                        </CardContent>
+                                <div className="border-t border-black/5 pt-12 flex flex-col h-full hover:border-[#D4AF37] transition-colors duration-500">
+                                    <div className="mb-8">
+                                        <p className="text-[#D4AF37] uppercase tracking-[0.2em] text-[10px] font-semibold mb-3">
+                                            Focus Area 0{i + 1}
+                                        </p>
+                                        <h3 className="text-2xl font-heading mb-4 text-black group-hover:text-[#D4AF37] transition-colors duration-500">
+                                            {title}
+                                        </h3>
+                                        <p className="text-[#D4AF37]/70 italic text-sm font-light mb-6">
+                                            "{tagline}"
+                                        </p>
                                     </div>
 
-                                    <p className="italic text-gray-800 text-sm mt-2">
-                                        Outcome: {outcome}
-                                    </p>
-                                </Card>
+                                    <div className="flex-grow">
+                                        <p className="text-black/60 font-light leading-relaxed text-base mb-8">
+                                            {description}
+                                        </p>
+                                    </div>
+
+                                    <div className="mt-auto">
+                                        <div className="pt-6 border-t border-black/5">
+                                            <p className="text-[10px] uppercase tracking-widest text-black/30 mb-2">Measurable Outcome</p>
+                                            <p className="text-black/80 text-sm font-medium italic">
+                                                {outcome}
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
                             </motion.div>
                         )
                     )}
@@ -174,22 +137,19 @@ export function Offerings() {
 
                 {/* See All Offerings Button */}
                 <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5, ease: "easeOut", delay: 0.2 }}
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 1 }}
+                    transition={{ duration: 1, delay: 0.5 }}
                     viewport={{ once: true }}
-                    className="flex justify-center mt-12"
+                    className="flex justify-center mt-20"
                 >
-                    <Button
-                        asChild
-                        size="lg"
-                        className="bg-gradient-to-r from-[var(--navy-dark)] to-[var(--blue-accent)] hover:from-[var(--blue-accent)] hover:to-[var(--navy-dark)] text-white shadow-lg hover:shadow-xl transition-all duration-300 group"
+                    <Link
+                        to="/services"
+                        className="group flex items-center gap-4 text-black font-semibold text-xs uppercase tracking-[0.3em] hover:text-[#D4AF37] transition-colors duration-300"
                     >
-                        <Link to="/services" className="flex items-center gap-2">
-                            See All Offerings
-                            <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                        </Link>
-                    </Button>
+                        Explore All Solutions
+                        <ArrowRight className="w-4 h-4 transform group-hover:translate-x-2 transition-transform duration-300" strokeWidth={1.5} />
+                    </Link>
                 </motion.div>
             </div>
         </section>

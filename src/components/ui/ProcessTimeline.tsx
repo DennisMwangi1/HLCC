@@ -19,17 +19,17 @@ export function ProcessTimeline({
     const containerRef = useRef<HTMLDivElement>(null);
 
     return (
-        <div ref={containerRef} className="relative mx-auto max-w-5xl py-10">
-            {/* Animated vertical line */}
+        <div ref={containerRef} className="relative mx-auto max-w-5xl py-20">
+            {/* Elegant vertical line */}
             <motion.div
                 initial={{ height: 0 }}
                 whileInView={{ height: "100%" }}
-                transition={{ duration: 1.2, ease: "easeOut" }}
+                transition={{ duration: 1.5, ease: "easeInOut" }}
                 viewport={{ once: true }}
-                className="absolute left-1/2 top-0 w-1 -translate-x-1/2 bg-gradient-to-b from-[var(--blue-accent)] to-[var(--gold-accent)] rounded-full"
+                className="absolute left-1/2 top-0 w-[1px] -translate-x-1/2 bg-black/10"
             />
 
-            <div className="space-y-24">
+            <div className="space-y-32">
                 {steps.map((step, index) => (
                     <ProcessStep key={index} {...step} index={index} />
                 ))}
@@ -48,41 +48,34 @@ function ProcessStep({
 
     return (
         <motion.div
-            initial={{ opacity: 0, y: 40 }}
+            initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: index * 0.1 }}
+            transition={{ duration: 0.8, delay: index * 0.1 }}
             viewport={{ once: true }}
-            className={`relative flex flex-col md:flex-row items-center ${isEven ? "md:flex-row-reverse" : ""
-                }`}
+            className={`relative flex flex-col md:flex-row items-center ${isEven ? "md:flex-row-reverse" : ""}`}
         >
             {/* Step content */}
-            <div
-                className={`w-full md:w-1/2 px-6 md:px-12 ${isEven ? "md:text-left w-1/2 flex-col start-1 " : "md:text-right w-1/2 flex-col end-1"
-                    }`}
-            >
-                <h4 className={`text-xl font-semibold text-[var(--navy-dark)] mb-2 ${isEven ? "w-1/2 pr-4 ml-0" : "w-1/2 pl-10 ml-auto"}`}>
+            <div className={`w-full md:w-1/2 px-8 md:px-16 ${isEven ? "md:text-left" : "md:text-right"}`}>
+                <h4 className="text-2xl font-heading mb-4 text-black italic">
                     {title}
                 </h4>
-                <p
-                    className={`${
-                        isEven ? "w-1/2 pr-4 ml-0" : "w-1/2 pl-10 ml-auto"
-                    }`}
-                >
+                <p className="text-black/60 font-light leading-relaxed">
                     {description}
                 </p>
             </div>
 
-            {/* Circle marker */}
-            <div className="absolute left-1/2 -translate-x-1/2 flex flex-col items-center px-10">
+            {/* Elegant Circle Marker */}
+            <div className="absolute left-1/2 -translate-x-1/2 flex items-center justify-center">
                 <motion.div
                     initial={{ scale: 0 }}
                     whileInView={{ scale: 1 }}
-                    transition={{ duration: 0.3, delay: index * 0.1 }}
+                    transition={{ duration: 0.5, delay: index * 0.15 }}
                     viewport={{ once: true }}
-                    className="flex items-center justify-center w-12 h-12 rounded-full bg-gradient-to-r from-[var(--blue-accent)] to-[var(--gold-accent)] text-white font-semibold shadow-md"
-                >
+                    className="flex items-center justify-center w-4 h-4 rounded-full bg-[#D4AF37] shadow-[0_0_15px_rgba(212,175,55,0.3)] z-10"
+                />
+                <div className="absolute top-8 text-[#D4AF37] font-heading text-sm tracking-widest opacity-50">
                     {number}
-                </motion.div>
+                </div>
             </div>
         </motion.div>
     );

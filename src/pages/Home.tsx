@@ -5,6 +5,7 @@ import { Offerings } from "../components/Offerings";
 import { WhyHLCC } from "../components/WhyHLCC";
 import { ImpactAtScale } from "../components/Metrics";
 import { Insights } from "../components/Insights";
+import { Testimonials } from "../components/Testimonials";
 import { FAQ } from "../components/FAQ";
 import { useSEO } from "@/hooks/useSEO";
 import { pageSEO } from "@/lib/seo";
@@ -25,11 +26,10 @@ export default function Home({ onBookConsultation }: HomeProps) {
         <Hero onBookConsultation={onBookConsultation} />
         <WhoWeAre />
         <InsightToImpact />
-        <Offerings />
         <WhyHLCC />
+        <Offerings />
         <ImpactAtScale />
-        {/* <Testimonials /> */}
-        {/*<CaseStudies />*/}
+        <Testimonials />
         <Insights />
         <FAQ />
       </main>

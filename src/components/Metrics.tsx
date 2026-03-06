@@ -2,55 +2,52 @@ export function ImpactAtScale() {
     const metrics = [
         {
             value: "15+",
-            label: "Organizations Transformed",
+            label: "Organizations",
             description:
-                "Across Africa and beyond — building cultures that align people, purpose, and performance.",
+                "Across Africa and the Middle East—building cultures that align people with performance.",
         },
         {
             value: "100+",
-            label: "Leaders Developed",
+            label: "Leaders",
             description:
-                "Equipped with emotional intelligence, agility, and purpose-driven leadership skills.",
+                "Equipped with emotional intelligence, agility, and purpose-driven leadership.",
         },
         {
             value: "1000+",
-            label: "Employees Engaged",
+            label: "Employees",
             description:
-                "Empowered through culture design, coaching, and HR transformation initiatives.",
+                "Impacted through intentional culture design and transformative HR initiatives.",
         },
-
     ];
 
     return (
-        <section className="py-20 bg-white relative overflow-hidden">
-            <div className="absolute top-0 right-0 w-96 h-96 bg-[var(--gold-accent)]/10 rounded-full blur-3xl" />
-            <div className="absolute bottom-0 left-0 w-96 h-96 bg-[var(--blue-accent)]/10 rounded-full blur-3xl" />
-
+        <section className="py-32 bg-white relative overflow-hidden">
             <div className="container relative mx-auto px-4 md:px-6">
-                <div className="text-center mb-16">
-                    <h2 className="text-3xl md:text-4xl text-[var(--navy-dark)] font-semibold mb-4">
-                        Impact at Scale
+                <div className="text-center mb-24">
+                    <p className="text-[#D4AF37] uppercase tracking-[0.3em] text-[10px] font-semibold mb-6">
+                        Our Track Record
+                    </p>
+                    <h2 className="text-4xl md:text-5xl text-black font-heading font-light mb-8">
+                        Impact at <span className="italic">Scale</span>
                     </h2>
-                    <p className="text-lg text-gray-700 max-w-2xl mx-auto">
-                        Every engagement with HLCC drives tangible, people-centered
-                        transformation — cultures strengthened, leaders elevated, and
-                        organizations redefined.
+                    <p className="text-xl text-black/50 max-w-2xl mx-auto font-light leading-relaxed">
+                        Every HLCC engagement drives tangible, human-centered transformation across the continent.
                     </p>
                 </div>
 
-                <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div className="grid md:grid-cols-3 gap-16 max-w-5xl mx-auto">
                     {metrics.map((metric, index) => (
                         <div
                             key={index}
-                            className="text-center p-6 rounded-2xl bg-gradient-to-br from-white to-slate-50 border border-gray-200 hover:border-[var(--gold-deep)] transition-all hover:shadow-lg group"
+                            className="text-center group"
                         >
-                            <div className="text-4xl md:text-5xl bg-gradient-to-r from-[var(--blue-accent)] to-[var(--gold-accent)] bg-clip-text text-transparent mb-3 group-hover:scale-110 transition-transform inline-block">
+                            <div className="text-5xl md:text-6xl font-heading text-black mb-6 group-hover:text-[#D4AF37] transition-colors duration-500">
                                 {metric.value}
                             </div>
-                            <div className="text-lg text-[var(--navy-dark)] mb-2 font-medium">
+                            <div className="text-sm uppercase tracking-widest text-[#D4AF37] mb-4 font-semibold">
                                 {metric.label}
                             </div>
-                            <p className="text-sm text-gray-600 leading-relaxed">
+                            <p className="text-black/50 text-sm font-light leading-relaxed">
                                 {metric.description}
                             </p>
                         </div>

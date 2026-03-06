@@ -1,58 +1,60 @@
 export function WhoWeAre() {
     return (
-        <section className="py-20 bg-white border-b">
-            <div className="container mx-auto px-4 md:px-6 grid md:grid-cols-2 gap-12 items-center">
+        <section className="py-32 bg-white">
+            <div className="container mx-auto px-4 md:px-6 grid md:grid-cols-2 gap-20 items-center">
                 {/* Text Content */}
-                <div>
-                    <h2 className="text-3xl md:text-4xl font-semibold text-[var(--navy-dark)] mb-6">
-                        Who We Are
+                <div className="max-w-xl">
+                    <h2 className="text-4xl md:text-5xl font-heading text-black mb-10 leading-tight">
+                        Our Essence
                     </h2>
 
-                    <p className="text-gray-700 text-lg leading-relaxed mb-6">
-                        Founded in 2016 as <strong>Elite HR Solutions Ltd</strong>, HLCC has evolved into
-                        <strong> Human-Centered Leadership & Culture Consulting Ltd</strong> Helping organizations across Africa and beyond align people, culture, and leadership.
+                    <div className="space-y-6 text-black/70 text-lg font-light leading-relaxed">
+                        <p>
+                            Founded in 2016 as <span className="font-medium text-black">Elite HR Solutions Ltd</span>, HLCC has evolved into
+                            <span className="font-medium text-black italic"> Human-Centered Leadership & Culture Consulting Ltd</span>.
+                            We specialize in helping organizations across Africa and the Middle East align their people with their purpose.
+                        </p>
 
-                    </p>
+                        <p>
+                            We believe culture runs the show. Every strategy succeeds or fails because of the human element behind it.
+                            We help leaders build workplaces where belonging isn't just a word, but a driver of performance.
+                        </p>
 
-                    <p className="text-gray-700 text-lg leading-relaxed mb-6">
-                        We believe culture runs the show, and every strategy succeeds or fails because of it.
-                        That’s why we help leaders build workplaces where belonging fuels performance and values become lived behavior.
-                    </p>
+                        <p>
+                            With a blend of global expertise and deep local insight, we craft organizational cultures that are resilient, high-performing, and unmistakably human.
+                        </p>
+                    </div>
 
-                    <p className="text-gray-700 text-lg leading-relaxed">
-                        With a blend of global expertise and deep African insight, we craft cultures that are resilient, high-performing, and unmistakably human.
-                    </p>
-
-                    <div className="mt-8">
+                    <div className="mt-12">
                         <a
                             href="/about"
-                            className="inline-flex items-center text-[var(--navy-dark)] hover:text-[var(--gold-deep)] font-medium text-lg"
+                            className="group inline-flex items-center text-black font-semibold text-sm uppercase tracking-widest border-b border-black/10 pb-2 hover:border-[#D4AF37] transition-all duration-300"
                         >
-                            Learn more about HLCC
+                            The Journey Behind HLCC
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
-                                className="ml-2 h-5 w-5"
+                                className="ml-2 h-4 w-4 transform group-hover:translate-x-1 transition-transform"
                                 fill="none"
                                 viewBox="0 0 24 24"
                                 stroke="currentColor"
                             >
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                             </svg>
                         </a>
                     </div>
                 </div>
 
                 {/* Visual Side */}
-                <div className="relative">
+                <div className="relative group">
+                    <div className="absolute -inset-4 bg-[#D4AF37]/5 rounded-none scale-95 group-hover:scale-100 transition-transform duration-700 -z-10" />
                     <div
-                        className="w-full h-80 rounded-2xl overflow-hidden shadow-lg"
+                        className="w-full h-[500px] rounded-none overflow-hidden grayscale-[0.3] group-hover:grayscale-0 transition-all duration-700"
                         style={{
                             backgroundImage: 'url("/assets/img/whoweare.webp")',
                             backgroundSize: "cover",
                             backgroundPosition: "center",
                         }}
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[var(--gold-accent)]/10 to-transparent rounded-2xl" />
                 </div>
             </div>
         </section>

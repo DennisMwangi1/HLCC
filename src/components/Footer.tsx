@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { Mail, Phone, MapPin, Linkedin, Twitter, Youtube } from "lucide-react";
+import { Mail, MapPin, Linkedin, Twitter, Youtube } from "lucide-react";
 import { Link } from "react-router-dom";
 
 interface FooterProps {
@@ -8,15 +8,15 @@ interface FooterProps {
 
 export function Footer({ onBookConsultation }: FooterProps) {
     const footerLinks = {
-        "What We Do": ["Leadership Development", "Culture Transformation", "Team Coaching", "HR Advisory"],
-        "Resources": ["Case Studies", "Insights", "Events & Webinars", "Publications"],
-        "Company": ["About HLCC", "Our People", "Careers", "Contact"],
+        "Capabilities": ["Leadership Development", "Culture Transformation", "Team Coaching", "HR Advisory"],
+        "Insights": ["Case Studies", "Articles", "White Papers", "Events"],
+        "Institute": ["About HLCC", "Our Legacy", "Careers", "Contact"],
     };
 
     const getLinkPath = (category: string, link: string) => {
-        if (category === "What We Do") return "/services";
-        if (category === "Resources") return "/#insights";
-        if (category === "Company") {
+        if (category === "Capabilities") return "/services";
+        if (category === "Insights") return "/insights";
+        if (category === "Institute") {
             if (link === "Contact") return "/contact";
             return "/about";
         }
@@ -24,33 +24,29 @@ export function Footer({ onBookConsultation }: FooterProps) {
     };
 
     return (
-        <footer className="bg-[var(--navy-dark)] text-white">
+        <footer className="bg-black text-white">
             {/* CTA Section */}
-            <div className="border-b border-white/10">
-                <div className="container mx-auto px-4 md:px-6 py-16">
+            <div className="border-t border-white/5 py-12">
+                <div className="container mx-auto px-4 md:px-6">
                     <div className="max-w-4xl mx-auto text-center">
-                        <h2 className="text-3xl md:text-4xl mb-4 font-semibold">
-                            Ready to Elevate Your Leadership and Culture?
-                        </h2>
-                        <p className="text-lg text-gray-300 mb-8 max-w-2xl mx-auto">
-                            Partner with HLCC to design and deliver transformative experiences
-                            that move your people—and your business—forward.
+                        <p className="text-[#D4AF37] uppercase tracking-[0.4em] text-[9px] font-bold mb-4">
+                            Inquiry
                         </p>
-                        <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                        <h2 className="text-2xl md:text-4xl mb-8 font-heading font-light leading-tight italic">
+                            Elevate Your Leadership & Culture
+                        </h2>
+                        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
                             <Button
-                                className="bg-gradient-to-r from-[var(--blue-accent)] to-[var(--gold-accent)] text-white hover:opacity-90"
+                                className="bg-[#D4AF37] text-black hover:bg-[#F3E5AB] transition-all duration-500 rounded-none px-6 py-4 text-[10px] uppercase tracking-widest font-bold h-auto"
                                 onClick={() => onBookConsultation()}
                             >
-                                Schedule a Discovery Call
+                                Schedule Discovery
                             </Button>
-                            <Link to="/contact">
-                                <Button
-                                    size="lg"
-                                    variant="outline"
-                                    className="border-white/30 text-white hover:bg-black/10 hover:text-white bg-white/10 w-full sm:w-auto"
-                                >
-                                    Contact Us
-                                </Button>
+                            <Link
+                                to="/contact"
+                                className="text-white/40 hover:text-[#D4AF37] font-bold text-[10px] uppercase tracking-[0.2em] border-b border-white/10 pb-1 transition-all duration-300"
+                            >
+                                Contact Team
                             </Link>
                         </div>
                     </div>
@@ -58,49 +54,43 @@ export function Footer({ onBookConsultation }: FooterProps) {
             </div>
 
             {/* Main Footer */}
-            <div className="container mx-auto px-4 md:px-6 py-16">
-                <div className="grid lg:grid-cols-5 gap-12">
-                    {/* Company Info */}
-                    <div className="lg:col-span-2">
-                        <div className="flex flex-col gap-2 mb-6 w-fit">
-                            <img src="/assets/img/HLCC.png" alt="HLCC logo" className="h-10" />
-                            <p className="text-[10px] uppercase tracking-widest bg-gradient-to-b from-white to-[var(--gold-accent)] bg-clip-text text-transparent font-bold leading-tight max-w-[200px]">
+            <div className="container mx-auto px-4 md:px-6 py-10 border-t border-white/5">
+                <div className="grid lg:grid-cols-6 gap-8">
+                    {/* Brand Meta */}
+                    <div className="lg:col-span-3">
+                        <div className="flex flex-col gap-2 mb-6">
+                            <img src="/assets/img/HLCC.png" alt="HLCC logo" className="h-5 w-fit grayscale brightness-200" />
+                            <p className="text-[7px] uppercase tracking-[0.4em] text-white/40 font-bold leading-relaxed max-w-sm">
                                 HUMAN-CENTERED LEADERSHIP & CULTURE CONSULTING LTD
                             </p>
                         </div>
-                        <p className="text-gray-300 mb-6 leading-relaxed">
-                            HLCC partners with organizations to develop emotionally intelligent
-                            leaders, cohesive teams, and thriving cultures that drive
-                            sustainable success.
+                        <p className="text-white/40 text-[13px] font-light leading-relaxed max-w-sm mb-8">
+                            A premier advisory firm dedicated to institutional transformation across the African continent.
                         </p>
 
-                        {/* Contact Info */}
+                        {/* Direct Contact */}
                         <div className="space-y-3">
-                            <div className="flex items-center gap-3 text-gray-300">
-                                <Mail className="h-5 w-5 text-[var(--blue-accent)]" />
-                                <span>info@hlcc.africa</span>
+                            <div className="flex items-center gap-3 text-white/30 hover:text-[#D4AF37] transition-colors duration-300">
+                                <Mail className="h-3.5 w-3.5" strokeWidth={1.5} />
+                                <span className="text-[11px] font-light tracking-wide">info@hlcc.africa</span>
                             </div>
-                            <div className="flex items-center gap-3 text-gray-300">
-                                <Phone className="h-5 w-5 text-[var(--blue-accent)]" />
-                                <span>+254 115335322</span>
-                            </div>
-                            <div className="flex items-center gap-3 text-gray-300">
-                                <MapPin className="h-5 w-5 text-[var(--blue-accent)]" />
-                                <span>Nairobi, Kenya • Johannesburg, SA • Kigali, Rwanda • Dar es Salaam, Tanzania</span>
+                            <div className="flex items-center gap-3 text-white/30">
+                                <MapPin className="h-3.5 w-3.5" strokeWidth={1.5} />
+                                <span className="text-[9px] font-light tracking-wide">Regional Hubs: Nairobi • Johannesburg • Kigali • Dar es Salaam</span>
                             </div>
                         </div>
                     </div>
 
                     {/* Footer Links */}
                     {Object.entries(footerLinks).map(([category, links]) => (
-                        <div key={category}>
-                            <h3 className="text-white mb-4 font-medium">{category}</h3>
-                            <ul className="space-y-3">
+                        <div key={category} className="lg:col-span-1">
+                            <h3 className="text-[9px] uppercase tracking-[0.3em] text-[#D4AF37] font-bold mb-4">{category}</h3>
+                            <ul className="space-y-2.5">
                                 {links.map((link) => (
                                     <li key={link}>
                                         <Link
                                             to={getLinkPath(category, link)}
-                                            className="text-gray-300 hover:text-white transition-colors"
+                                            className="text-white/30 hover:text-white text-[11px] font-light transition-colors duration-300"
                                         >
                                             {link}
                                         </Link>
@@ -108,41 +98,34 @@ export function Footer({ onBookConsultation }: FooterProps) {
                                 ))}
                             </ul>
                         </div>
-                    ))}                </div>
+                    ))}
+                </div>
 
-                {/* Bottom Section */}
-                <div className="border-t border-white/10 mt-16 pt-8 flex flex-col md:flex-row justify-between items-center gap-6">
-                    <div className="text-gray-300 text-sm text-center md:text-left">
-                        © {new Date().getFullYear()} HLCC. All rights reserved. |
-                        <a href="#" className="hover:text-white ml-1">
-                            Privacy Policy
-                        </a>{" "}
-                        |{" "}
-                        <a href="#" className="hover:text-white">
-                            Terms of Use
-                        </a>
+                {/* Bottom Bar */}
+                <div className="border-t border-white/5 mt-10 pt-8 flex flex-col md:flex-row justify-between items-center gap-6">
+                    <div className="text-white/20 text-[8px] uppercase tracking-[0.2em] font-medium order-2 md:order-1">
+                        © {new Date().getFullYear()} HLCC.
+                        <span className="mx-2 text-white/5">|</span>
+                        <a href="#" className="hover:text-white transition-colors">Privacy</a>
+                        <span className="mx-2 text-white/5">|</span>
+                        <a href="#" className="hover:text-white transition-colors">Terms</a>
                     </div>
 
-                    {/* Social Links */}
-                    <div className="flex gap-4">
-                        <a
-                            href="#"
-                            className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-gray-300 hover:text-white hover:bg-[var(--blue-accent)] transition-all"
-                        >
-                            <Linkedin className="h-5 w-5" />
-                        </a>
-                        <a
-                            href="#"
-                            className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-gray-300 hover:text-white hover:bg-[var(--blue-accent)] transition-all"
-                        >
-                            <Twitter className="h-5 w-5" />
-                        </a>
-                        <a
-                            href="#"
-                            className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-gray-300 hover:text-white hover:bg-[var(--blue-accent)] transition-all"
-                        >
-                            <Youtube className="h-5 w-5" />
-                        </a>
+                    {/* Social Hub */}
+                    <div className="flex gap-4 order-1 md:order-2">
+                        {[
+                            { Icon: Linkedin, href: "#" },
+                            { Icon: Twitter, href: "#" },
+                            { Icon: Youtube, href: "#" }
+                        ].map(({ Icon, href }, i) => (
+                            <a
+                                key={i}
+                                href={href}
+                                className="text-white/10 hover:text-[#D4AF37] transition-all duration-300 transform hover:-translate-y-1"
+                            >
+                                <Icon className="h-3.5 w-3.5" strokeWidth={1.5} />
+                            </a>
+                        ))}
                     </div>
                 </div>
             </div>
