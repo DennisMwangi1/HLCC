@@ -59,8 +59,8 @@ export function Footer({ onBookConsultation }: FooterProps) {
                     {/* Brand Meta */}
                     <div className="lg:col-span-3">
                         <div className="flex flex-col gap-2 mb-6">
-                            <img src="/assets/img/HLCC.png" alt="HLCC logo" className="h-5 w-fit grayscale brightness-200" />
-                            <p className="text-[7px] uppercase tracking-[0.4em] text-white/40 font-bold leading-relaxed max-w-sm">
+                            <img src="/assets/img/HLCC.png" alt="HLCC logo" className="h-5 w-fit" />
+                            <p className="text-[7px] uppercase tracking-[0.4em] text-[#D4AF37]/50 font-bold leading-relaxed max-w-sm">
                                 HUMAN-CENTERED LEADERSHIP & CULTURE CONSULTING LTD
                             </p>
                         </div>

@@ -48,9 +48,9 @@ export function WhoWeAre() {
                 <div className="relative group">
                     <div className="absolute -inset-4 bg-[#D4AF37]/5 rounded-none scale-95 group-hover:scale-100 transition-transform duration-700 -z-10" />
                     <div
-                        className="w-full h-[500px] rounded-none overflow-hidden grayscale-[0.3] group-hover:grayscale-0 transition-all duration-700"
+                        className="w-full h-[600px] rounded-none overflow-hidden transition-all duration-700"
                         style={{
-                            backgroundImage: 'url("/assets/img/whoweare.webp")',
+                            backgroundImage: 'url("/assets/img/our_essence_new.png")',
                             backgroundSize: "cover",
                             backgroundPosition: "center",
                         }}

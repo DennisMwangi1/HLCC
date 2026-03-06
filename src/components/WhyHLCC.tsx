@@ -1,6 +1,5 @@
 import { Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { ImageWithFallback } from "@/components/figma/ImageWithFallback";
 
 export function WhyHLCC() {
     const differentiators = [
@@ -63,13 +62,13 @@ export function WhyHLCC() {
                     {/* Visual Side */}
                     <div className="relative">
                         <div className="absolute -inset-10 bg-[#D4AF37]/5 rounded-full blur-3xl opacity-50" />
-                        <div className="relative aspect-square overflow-hidden grayscale-[0.5] hover:grayscale-0 transition-all duration-1000">
+                        <div className="relative aspect-square overflow-hidden hover:scale-105 transition-all duration-1000 group">
                             <img
-                                src="/assets/img/connections.png"
+                                src="/assets/img/compete_and_care_new.png"
                                 alt="HLCC Culture Collaboration"
                                 className="w-full h-full object-cover"
                             />
-                            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
+                            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-80" />
 
                             {/* Sophisticated Overlay Info */}
                             <div className="absolute bottom-10 left-10 space-y-4">
