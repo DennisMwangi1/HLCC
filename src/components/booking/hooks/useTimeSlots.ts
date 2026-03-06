@@ -24,7 +24,7 @@ const generateTimeSlots = (date: Date): TimeSlot[] => {
   const currentMinute = now.getMinutes();
 
   for (let hour = startHour; hour < endHour; hour++) {
-    for (let minute of [0, 30]) {
+    for (const minute of [0, 30]) {
       // Skip past times for today
       if (isSameDay(now, date)) {
         if (

@@ -1,12 +1,6 @@
 import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import {
-    Card,
-    CardHeader,
-    CardTitle,
-    CardContent,
-} from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
@@ -45,7 +39,7 @@ export type FieldSchema = {
     options?: string[];
     required?: boolean;
     rows?: number;
-    condition?: (values: any) => boolean;
+    condition?: (values: Record<string, unknown>) => boolean;
     className?: string; // allow custom field-level styling
     description?: string;
 };
@@ -67,7 +61,7 @@ export type FormSchema = {
     fields: SectionSchema[];
 };
 
-const componentRegistry: Record<string, any> = {
+const componentRegistry: Record<string, React.ElementType> = {
     text: Input,
     email: Input,
     tel: Input,
@@ -95,7 +89,7 @@ export function DynamicForm({
                 ? z.string().min(1, `${f.label} is required`)
                 : z.string().optional();
             return acc;
-        }, {} as Record<string, any>);
+        }, {} as Record<string, z.ZodTypeAny>);
 
     const formSchema = z.object(shape);
     const { control, handleSubmit, watch, reset, formState: { errors } } = useForm({
@@ -103,7 +97,7 @@ export function DynamicForm({
     });
 
     const values = watch();
-    const onSubmit = async (data: any) => {
+    const onSubmit = async (data: Record<string, unknown>) => {
         setIsSubmitting(true);
         try {
             const result = await sendEmail({
@@ -200,7 +194,7 @@ export function DynamicForm({
                                                         <div className="flex items-center space-x-3 py-2">
                                                             <Checkbox
                                                                 id={f.id}
-                                                                checked={field.value as any}
+                                                                checked={field.value as boolean}
                                                                 onCheckedChange={field.onChange}
                                                                 className="border-black/20 data-[state=checked]:bg-[#D4AF37] data-[state=checked]:border-[#D4AF37] rounded-none"
                                                             />

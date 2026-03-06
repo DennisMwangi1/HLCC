@@ -1,11 +1,8 @@
 "use client";
 
-import { useState } from "react";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { services } from "../../content/services";
-import { Card, CardHeader, CardTitle, CardContent, CardDescription } from "@/components/ui/card";
-import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import { useSEO } from "@/hooks/useSEO";

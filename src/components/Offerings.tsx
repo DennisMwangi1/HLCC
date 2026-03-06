@@ -1,15 +1,6 @@
 "use client";
 
 import { motion } from "framer-motion";
-import {
-    Accordion,
-    AccordionItem,
-    AccordionTrigger,
-    AccordionContent,
-} from "@/components/ui/accordion";
-import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
-import { ImageWithFallback } from "@/components/figma/ImageWithFallback";
-import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 

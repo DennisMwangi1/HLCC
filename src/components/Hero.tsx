@@ -3,30 +3,29 @@
 import { useEffect, useState } from "react";
 import { motion, useAnimation } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { ArrowRight } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
 interface HeroProps {
     onBookConsultation: () => void;
 }
 
+const metrics = [
+    {
+        target: 100,
+        label: "Leaders Developed",
+        description: "Empowered through coaching and learning programs",
+        suffix: "+",
+    },
+    {
+        target: 15,
+        label: "Organizations Transformed",
+        description: "Across Africa, the Middle East, and beyond",
+        suffix: "+",
+    },
+
+];
+
 export function Hero({ onBookConsultation }: HeroProps) {
-    const metrics = [
-        {
-            target: 100,
-            label: "Leaders Developed",
-            description: "Empowered through coaching and learning programs",
-            suffix: "+",
-        },
-        {
-            target: 15,
-            label: "Organizations Transformed",
-            description: "Across Africa, the Middle East, and beyond",
-            suffix: "+",
-        },
-
-    ];
-
     // Counter logic
     const [counts, setCounts] = useState(metrics.map(() => 0));
     const controls = useAnimation();

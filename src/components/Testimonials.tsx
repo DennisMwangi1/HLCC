@@ -1,6 +1,4 @@
-import { Card, CardContent } from "@/components/ui/card";
 import { Star } from "lucide-react";
-import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 
 export function Testimonials() {
     const testimonials = [

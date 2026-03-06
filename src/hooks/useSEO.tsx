@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useMemo } from 'react';
 import { useLocation } from 'react-router-dom';
 import type { SEOData } from '@/lib/seo';
 import { defaultSEO, getFullTitle, getAbsoluteUrl, siteConfig } from '@/lib/seo';
@@ -6,13 +6,13 @@ import { defaultSEO, getFullTitle, getAbsoluteUrl, siteConfig } from '@/lib/seo'
 export function useSEO(seoData?: Partial<SEOData>) {
   const location = useLocation();
   const currentUrl = getAbsoluteUrl(location.pathname);
-  
-  const seo: SEOData = {
+
+  const seo: SEOData = useMemo(() => ({
     ...defaultSEO,
     ...seoData,
     url: seoData?.url || currentUrl,
     image: seoData?.image ? getAbsoluteUrl(seoData.image) : getAbsoluteUrl(defaultSEO.image || ''),
-  };
+  }), [seoData, currentUrl]);
 
   useEffect(() => {
     // Update document title

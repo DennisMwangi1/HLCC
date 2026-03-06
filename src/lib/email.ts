@@ -6,7 +6,7 @@
 export interface EmailOptions {
   to: 'info@hlcc.africa' | 'support@hlcc.africa' | 'applications@hlcc.africa';
   subject: string;
-  data: Record<string, any>;
+  data: Record<string, unknown>;
   formName: string;
   userEmail?: string;
   userName?: string;
@@ -177,7 +177,7 @@ export async function sendEmail(options: EmailOptions) {
       try {
         const errorData = await response.json();
         errorMessage = errorData.error || errorData.message || errorMessage;
-      } catch (e) {
+      } catch {
         // If not JSON, try reading as text
         const textError = await response.text().catch(() => '');
         errorMessage = textError || `Service error: ${response.status}`;

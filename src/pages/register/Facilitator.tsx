@@ -27,7 +27,7 @@ export default function RegisterFacilitator() {
         <WhyJoin />
         <Eligibility />
         <ApplicationForm />
-        {/* <BottomCTA /> */}
+        <BottomCTA />
       </main>
     </>
   );

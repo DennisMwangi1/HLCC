@@ -27,7 +27,7 @@ export default function RegisterCoach() {
         <WhyJoin />
         <Eligibility />
         <ApplicationForm />
-        {/* <BottomCTA /> */}
+        <BottomCTA />
       </main>
     </>
   );
@@ -228,7 +228,7 @@ function ApplicationForm() {
         </div>
 
         <div className="max-w-5xl mx-auto">
-          <DynamicForm schema={coachFormSchema} />
+          <DynamicForm schema={coachFormSchema as any} />
         </div>
       </div>
     </Section>

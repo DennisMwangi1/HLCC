@@ -2,16 +2,14 @@
 
 import { useEffect, useState, useRef } from "react";
 import { motion, useMotionValue, useTransform, animate, useInView } from "framer-motion";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { ImageWithFallback } from "@/components/figma/ImageWithFallback";
-import { Quote, Linkedin, ChevronDown } from "lucide-react";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
+import { Quote, Linkedin } from "lucide-react";
+import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { ProcessTimeline } from "@/components/ui/ProcessTimeline";
 import { useSEO } from "@/hooks/useSEO";
 import { pageSEO } from "@/lib/seo";
 import { OrganizationSchema, BreadcrumbSchema } from "@/components/StructuredData";
 
-function AnimatedNumber({ value, suffix = "" }: { value: number; suffix?: string; }) {
+function AnimatedNumber({ value }: { value: number; suffix?: string; }) {
   const count = useMotionValue(0);
   const rounded = useTransform(count, (latest) => Math.round(latest));
   const ref = useRef(null);
@@ -222,8 +220,15 @@ function OurPhilosophy() {
   );
 }
 
+interface Advisor {
+  name: string;
+  title: string;
+  bio: string;
+  image?: string;
+}
+
 // Advisor Card Component
-function AdvisorCard({ advisor, index }: { advisor: any; index: number; }) {
+function AdvisorCard({ advisor, index }: { advisor: Advisor; index: number; }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
@@ -410,7 +415,7 @@ function OurImpact() {
         </div>
 
         <div className="grid sm:grid-cols-3 gap-16 max-w-6xl mx-auto">
-          {metrics.map((m, i) => (
+          {metrics.map((m) => (
             <div key={m.label} className="text-center group">
               <div className="text-6xl md:text-7xl font-heading font-light text-[#D4AF37] mb-6 group-hover:scale-110 transition-transform duration-500">
                 <AnimatedNumber value={m.value} />

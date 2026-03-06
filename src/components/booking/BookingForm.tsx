@@ -3,7 +3,7 @@ import { useForm, FormProvider } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button } from '@/components/ui/button';
-import { Loader2, Check } from 'lucide-react';
+import { Loader2 } from 'lucide-react';
 import { BookingStep1 } from './steps/Step1';
 import { BookingStep2 } from './steps/Step2';
 import { BookingStep3 } from './steps/Step3';
@@ -23,7 +23,7 @@ const formSchema = z.object({
   // Step 2
   needs: z.array(z.string()).min(1, 'Please select at least one area of interest'),
   timeframe: z.string().min(1, 'Please select when you would like to start'),
-  //@ts-ignore
+  // @ts-expect-error - contactMethod is an enum but we start with undefined
   contactMethod: z.enum(['email', 'phone', 'video'], {
     errorMap: () => ({ message: 'Please select your preferred contact method' }),
   }),
@@ -31,7 +31,7 @@ const formSchema = z.object({
   // Step 3
   preferredDate: z.string().min(1, 'Please select a date for your meeting'),
   preferredTime: z.string().min(1, 'Please select a time for your meeting'),
-  timezone: z.string().default(Intl.DateTimeFormat().resolvedOptions().timeZone),
+  timezone: z.string(),
 
   // Additional
   message: z.string().optional(),
@@ -55,7 +55,7 @@ export function BookingForm({ type, onSuccess, onCancel }: BookingFormProps) {
   const [isSuccess, setIsSuccess] = useState(false);
 
   const methods = useForm<FormValues>({
-    resolver: zodResolver(formSchema) as any,
+    resolver: zodResolver(formSchema),
     defaultValues: {
       name: '',
       email: '',
@@ -63,6 +63,7 @@ export function BookingForm({ type, onSuccess, onCancel }: BookingFormProps) {
       company: '',
       needs: [],
       timeframe: '',
+      //@ts-ignore
       contactMethod: undefined,
       preferredDate: '',
       preferredTime: '',
@@ -184,7 +185,7 @@ export function BookingForm({ type, onSuccess, onCancel }: BookingFormProps) {
       </div>
 
       <FormProvider {...methods}>
-        <form onSubmit={handleSubmit(onSubmit) as any} className="px-0">
+        <form onSubmit={handleSubmit(onSubmit)} className="px-0">
           <div className="min-h-[400px] py-4">
             <AnimatePresence mode="wait">
               <motion.div

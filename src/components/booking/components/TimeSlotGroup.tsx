@@ -1,6 +1,5 @@
 import { format } from 'date-fns';
 import { cn } from '@/utils';
-import { Clock } from 'lucide-react';
 import type { GroupedTimeSlots } from '../hooks/useTimeSlots';
 
 interface TimeSlotGroupProps {

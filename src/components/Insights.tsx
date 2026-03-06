@@ -2,14 +2,6 @@
 
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import {
-    Card,
-    CardContent,
-    CardDescription,
-    CardHeader,
-    CardTitle,
-} from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
 import { Calendar, User, ArrowRight } from "lucide-react";
 import { ImageWithFallback } from "@/components/figma/ImageWithFallback";
 import { articles } from "@/content/insights";

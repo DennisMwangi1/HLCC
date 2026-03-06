@@ -2,9 +2,7 @@
 
 import { Link, useParams } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Calendar, User, ArrowLeft, Award, ExternalLink } from "lucide-react";
+import {  User, Award } from "lucide-react";
 import { ImageWithFallback } from "@/components/figma/ImageWithFallback";
 import { articles } from "@/content/insights";
 import { useSEO } from "@/hooks/useSEO";

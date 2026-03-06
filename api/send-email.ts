@@ -1,6 +1,16 @@
 import { Resend } from 'resend';
 
-export default async function handler(req: any, res: any) {
+interface VercelRequest {
+    method: string;
+    body: any;
+}
+
+interface VercelResponse {
+    status: (code: number) => VercelResponse;
+    json: (data: any) => VercelResponse;
+}
+
+export default async function handler(req: VercelRequest, res: VercelResponse) {
     const resend = new Resend(process.env.RESEND_API_KEY);
     console.log('API Request received:', req.method);
 
@@ -51,9 +61,10 @@ export default async function handler(req: any, res: any) {
         }
 
         return res.status(200).json({ success: true, id: teamResponse.data?.id });
-    } catch (err: any) {
+    } catch (err: unknown) {
         console.error('Server error caught in handler:', err);
-        return res.status(500).json({ error: err.message || 'Internal server error' });
+        const errorMessage = err instanceof Error ? err.message : 'Internal server error';
+        return res.status(500).json({ error: errorMessage });
     }
 }
 

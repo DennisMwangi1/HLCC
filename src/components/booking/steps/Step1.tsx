@@ -2,7 +2,6 @@ import { useFormContext } from 'react-hook-form';
 import { FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { motion } from 'framer-motion';
-import { User, Mail, Phone, Building2, AlertCircle } from 'lucide-react';
 import { cn } from '@/utils';
 
 export function BookingStep1() {

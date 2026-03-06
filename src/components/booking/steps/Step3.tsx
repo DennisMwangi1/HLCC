@@ -1,12 +1,11 @@
 import { useState, useEffect, useMemo } from 'react';
 import { useFormContext } from 'react-hook-form';
-import { FormControl, FormField, FormItem, FormLabel, FormMessage, FormDescription } from '@/components/ui/form';
+import { FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Calendar } from '@/components/ui/calendar';
 import { format, startOfDay, isBefore, isWeekend, addDays } from 'date-fns';
 import { cn } from '@/utils';
 import { motion } from 'framer-motion';
-import { CalendarIcon, Clock, AlertCircle, CheckCircle2, Globe } from 'lucide-react';
 import { useTimeSlots } from '../hooks/useTimeSlots';
 import { TimeSlotGroup } from '../components/TimeSlotGroup';
 
@@ -42,7 +41,6 @@ export function BookingStep3() {
   const { control, watch, setValue } = useFormContext();
   const [selectedDate, setSelectedDate] = useState<Date | undefined>(undefined);
   const selectedTime = watch('preferredTime');
-  const selectedTimezone = watch('timezone');
 
   const { groupedSlots, isLoading } = useTimeSlots(selectedDate);
 
