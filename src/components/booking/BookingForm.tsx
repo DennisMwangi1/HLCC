@@ -137,19 +137,19 @@ export function BookingForm({ type, onSuccess, onCancel }: BookingFormProps) {
   }
 
   return (
-    <div className="w-full max-w-3xl mx-auto bg-white rounded-lg">
+    <div className="w-full max-w-4xl mx-auto bg-white">
       {/* Progress Bar */}
-      <div className="px-6 pt-8 pb-6 border-b border-gray-100">
-        <div className="relative flex items-center justify-between">
+      <div className="px-0 pt-4 pb-12">
+        <div className="relative flex items-center justify-between max-w-2xl mx-auto">
           {/* Connecting Lines */}
-          <div className="absolute top-5 left-0 right-0 h-0.5 bg-gray-200 -z-0">
+          <div className="absolute top-1/2 left-0 right-0 h-px bg-black/5 -translate-y-1/2">
             <motion.div
-              className="h-full bg-primary"
+              className="h-full bg-[#D4AF37]"
               initial={{ width: 0 }}
               animate={{
                 width: currentStep === 1 ? '0%' : currentStep === 2 ? '50%' : '100%'
               }}
-              transition={{ duration: 0.3, ease: 'easeInOut' }}
+              transition={{ duration: 0.5, ease: 'linear' }}
             />
           </div>
 
@@ -160,28 +160,19 @@ export function BookingForm({ type, onSuccess, onCancel }: BookingFormProps) {
             return (
               <div key={step.id} className="flex flex-col items-center flex-1 relative z-10">
                 <motion.div
-                  className={`w-10 h-10 rounded-full flex items-center justify-center mb-3 transition-all duration-300 ${isCompleted
-                    ? 'bg-primary text-white shadow-md'
-                    : isActive
-                      ? 'bg-primary text-white shadow-lg scale-110'
-                      : 'bg-gray-200 text-gray-500'
+                  className={`w-3 h-3 rounded-full border transition-all duration-500 ${isCompleted || isActive
+                    ? 'bg-[#D4AF37] border-[#D4AF37]'
+                    : 'bg-white border-black/10'
                     }`}
                   initial={false}
                   animate={{
-                    scale: isActive ? 1.1 : 1,
+                    scale: isActive ? 1.5 : 1,
                   }}
-                  transition={{ duration: 0.2 }}
-                >
-                  {isCompleted ? (
-                    <Check className="w-5 h-5" />
-                  ) : (
-                    <span className="text-sm font-semibold">{step.id}</span>
-                  )}
-                </motion.div>
+                />
                 <span
-                  className={`text-xs font-medium text-center transition-colors duration-200 ${isCompleted || isActive
-                    ? 'text-gray-900'
-                    : 'text-gray-500'
+                  className={`text-[9px] uppercase tracking-[0.2em] font-bold mt-4 transition-colors duration-300 ${isCompleted || isActive
+                    ? 'text-black'
+                    : 'text-black/30'
                     }`}
                 >
                   {step.title}
@@ -193,15 +184,15 @@ export function BookingForm({ type, onSuccess, onCancel }: BookingFormProps) {
       </div>
 
       <FormProvider {...methods}>
-        <form onSubmit={handleSubmit(onSubmit) as any} className="px-6 pb-6">
-          <div className="min-h-[400px] py-6">
+        <form onSubmit={handleSubmit(onSubmit) as any} className="px-0">
+          <div className="min-h-[400px] py-4">
             <AnimatePresence mode="wait">
               <motion.div
                 key={currentStep}
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -20 }}
-                transition={{ duration: 0.3, ease: 'easeInOut' }}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.4 }}
               >
                 {currentStep === 1 && <BookingStep1 />}
                 {currentStep === 2 && <BookingStep2 bookingType={type} />}
@@ -210,27 +201,27 @@ export function BookingForm({ type, onSuccess, onCancel }: BookingFormProps) {
             </AnimatePresence>
           </div>
 
-          <div className="mt-8 pt-6 border-t border-gray-200 flex justify-between items-center gap-4">
+          <div className="mt-16 pt-8 border-t border-black/5 flex justify-between items-center gap-6">
             <div>
               {currentStep > 1 && (
                 <Button
                   type="button"
-                  variant="outline"
+                  variant="ghost"
                   onClick={prevStep}
                   disabled={isSubmitting}
-                  className="min-w-[110px] h-11 font-medium border-2 hover:bg-gray-50 transition-all"
+                  className="px-0 text-[10px] uppercase tracking-[0.2em] font-bold text-black/40 hover:text-black hover:bg-transparent transition-all"
                 >
-                  Back
+                  &larr; Back
                 </Button>
               )}
             </div>
-            <div className="flex gap-3">
+            <div className="flex gap-4">
               {currentStep < 3 ? (
                 <Button
                   type="button"
                   onClick={nextStep}
                   disabled={isSubmitting}
-                  className="min-w-[140px] h-11 font-semibold text-base shadow-md hover:shadow-lg transition-all"
+                  className="bg-black text-white hover:bg-[#D4AF37] transition-all duration-500 rounded-none px-12 py-7 text-[10px] uppercase tracking-widest font-bold h-auto"
                 >
                   Continue
                 </Button>
@@ -238,15 +229,15 @@ export function BookingForm({ type, onSuccess, onCancel }: BookingFormProps) {
                 <Button
                   type="submit"
                   disabled={isSubmitting}
-                  className="min-w-[220px] h-11 font-semibold text-base shadow-md hover:shadow-lg transition-all disabled:opacity-70 disabled:cursor-not-allowed"
+                  className="bg-black text-white hover:bg-[#D4AF37] transition-all duration-500 rounded-none px-16 py-7 text-[10px] uppercase tracking-widest font-bold h-auto disabled:opacity-50"
                 >
                   {isSubmitting ? (
                     <>
-                      <Loader2 className="mr-2 h-5 w-5 animate-spin" />
-                      <span>Submitting...</span>
+                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                      <span>Confirming...</span>
                     </>
                   ) : (
-                    `Book ${type === 'discovery' ? 'Discovery Call' : 'Consultation'}`
+                    `Request ${type === 'discovery' ? 'Discovery Call' : 'Consultation'}`
                   )}
                 </Button>
               )}

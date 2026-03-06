@@ -57,16 +57,16 @@ export function BookingStep2({ bookingType }: BookingStep2Props) {
   return (
     <div className="space-y-8">
       <motion.div
-        initial={{ opacity: 0, y: 20 }}
+        initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.1 }}
       >
-        <div className="mb-8">
-          <h3 className="text-2xl font-semibold text-gray-900 mb-2">How can we help you?</h3>
-          <p className="text-sm text-gray-600">Tell us about your needs and preferences so we can tailor our approach.</p>
+        <div className="mb-12">
+          <h3 className="text-xl font-heading font-light text-black italic mb-2 text-center">Inquiry Scope</h3>
+          <p className="text-[10px] text-black/40 uppercase tracking-[0.2em] font-medium text-center">Tailoring our expertise to your specific needs.</p>
         </div>
 
-        <div className="space-y-6">
+        <div className="space-y-10">
           <FormField
             control={control}
             name="needs"
@@ -74,14 +74,11 @@ export function BookingStep2({ bookingType }: BookingStep2Props) {
               const currentValue = Array.isArray(field.value) ? field.value : [];
 
               return (
-                <FormItem>
-                  <FormLabel className="text-base font-medium text-gray-900 mb-2">
-                    What are you looking to achieve? *
+                <FormItem className="space-y-6">
+                  <FormLabel className="text-[10px] uppercase tracking-[0.3em] font-bold text-black/40 mb-6 block text-center">
+                    Areas of Interest
                   </FormLabel>
-                  <FormDescription className="mb-4 text-sm text-gray-600">
-                    Select all that apply
-                  </FormDescription>
-                  <div className="grid gap-4 md:grid-cols-2">
+                  <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
                     {NEEDS.map((item) => {
                       const isChecked = currentValue.includes(item.id);
                       const checkboxId = `needs-${item.id}`;
@@ -97,35 +94,34 @@ export function BookingStep2({ bookingType }: BookingStep2Props) {
                         <label
                           key={item.id}
                           htmlFor={checkboxId}
-                          className={`flex flex-row items-start space-x-3 space-y-0 rounded-lg border-2 p-4 transition-all cursor-pointer ${isChecked
-                              ? 'border-primary bg-primary/5 shadow-sm'
-                              : 'border-gray-200 hover:border-gray-300 hover:bg-gray-50'
+                          className={`flex flex-col h-full items-start space-y-4 rounded-none border p-6 transition-all duration-500 cursor-pointer ${isChecked
+                            ? 'border-[#D4AF37] bg-white shadow-xl'
+                            : 'border-black/5 hover:border-black/20 hover:bg-black/[0.02]'
                             }`}
                         >
-                          <FormControl>
-                            <Checkbox
-                              id={checkboxId}
-                              checked={!!isChecked}
-                              onCheckedChange={handleChange}
-                              className="mt-0.5"
-                            />
-                          </FormControl>
-                          <div className="space-y-1 leading-none flex-1 pointer-events-none">
+                          <div className="flex justify-between items-center w-full">
+                            <FormControl>
+                              <Checkbox
+                                id={checkboxId}
+                                checked={!!isChecked}
+                                onCheckedChange={handleChange}
+                                className={`rounded-none border-black/10 data-[state=checked]:bg-[#D4AF37] data-[state=checked]:border-[#D4AF37]`}
+                              />
+                            </FormControl>
+                          </div>
+                          <div className="space-y-1 flex-1">
                             <FormLabel
-                              className={`font-medium ${isChecked ? 'text-gray-900' : 'text-gray-700'
+                              className={`text-[11px] font-bold uppercase tracking-widest ${isChecked ? 'text-black' : 'text-black/60'
                                 }`}
                             >
                               {item.label}
                             </FormLabel>
-                            <FormDescription className="text-xs text-gray-600">
-                              {item.description}
-                            </FormDescription>
                           </div>
                         </label>
                       );
                     })}
                   </div>
-                  <FormMessage className="text-red-600 text-sm mt-2 flex items-center gap-1.5" />
+                  <FormMessage className="text-red-500 text-[9px] uppercase tracking-widest mt-2" />
                 </FormItem>
               );
             }}
@@ -134,47 +130,42 @@ export function BookingStep2({ bookingType }: BookingStep2Props) {
       </motion.div>
 
       <motion.div
-        initial={{ opacity: 0, y: 20 }}
+        initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.2 }}
-        className="pt-6 border-t border-gray-200"
+        className="pt-12 border-t border-black/5"
       >
         <FormField
           control={control}
           name="timeframe"
           render={({ field }) => (
-            <FormItem className="space-y-4">
-              <div>
-                <FormLabel className="text-base font-medium text-gray-900 mb-2">
-                  When are you looking to start? *
-                </FormLabel>
-                <FormDescription className="text-sm text-gray-600">
-                  Help us understand your timeline
-                </FormDescription>
-              </div>
+            <FormItem className="space-y-6">
+              <FormLabel className="text-[10px] uppercase tracking-[0.3em] font-bold text-black/40 block text-center">
+                Implementation Timeline
+              </FormLabel>
               <FormControl>
                 <RadioGroup
                   onValueChange={field.onChange}
                   value={field.value || ''}
-                  className="flex flex-col space-y-3"
+                  className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4"
                 >
                   {TIMEFRAMES.map((timeframe) => (
                     <div
                       key={timeframe.value}
-                      className={`flex items-center space-x-3 p-3 rounded-lg border-2 transition-all cursor-pointer ${field.value === timeframe.value
-                          ? 'border-primary bg-primary/5'
-                          : 'border-gray-200 hover:border-gray-300 hover:bg-gray-50'
+                      className={`flex flex-col items-center justify-center p-4 h-24 rounded-none border transition-all duration-500 cursor-pointer text-center ${field.value === timeframe.value
+                        ? 'border-[#D4AF37] bg-white shadow-lg'
+                        : 'border-black/5 hover:border-black/20 hover:bg-black/[0.02]'
                         }`}
                       onClick={() => field.onChange(timeframe.value)}
                     >
                       <RadioGroupItem
                         value={timeframe.value}
                         id={timeframe.value}
-                        className="cursor-pointer"
+                        className="sr-only"
                       />
                       <Label
                         htmlFor={timeframe.value}
-                        className="font-normal cursor-pointer flex-1"
+                        className={`text-[10px] uppercase tracking-widest font-bold cursor-pointer ${field.value === timeframe.value ? 'text-black' : 'text-black/40'}`}
                       >
                         {timeframe.label}
                       </Label>
@@ -182,78 +173,61 @@ export function BookingStep2({ bookingType }: BookingStep2Props) {
                   ))}
                 </RadioGroup>
               </FormControl>
-              <FormMessage className="text-red-600 text-sm mt-2 flex items-center gap-1.5" />
+              <FormMessage className="text-red-500 text-[9px] uppercase tracking-widest mt-2" />
             </FormItem>
           )}
         />
       </motion.div>
 
       <motion.div
-        initial={{ opacity: 0, y: 20 }}
+        initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.3 }}
-        className="pt-6 border-t border-gray-200"
+        className="pt-12 border-t border-black/5"
       >
         <FormField
           control={control}
           name="contactMethod"
           render={({ field }) => (
             <FormItem>
-              <div className="mb-4">
-                <FormLabel className="text-base font-medium text-gray-900 mb-2">
-                  Preferred contact method *
-                </FormLabel>
-                <FormDescription className="text-sm text-gray-600">
-                  How would you prefer us to reach out to you?
-                </FormDescription>
-              </div>
-              <div className="grid gap-4 md:grid-cols-3">
+              <FormLabel className="text-[10px] uppercase tracking-[0.3em] font-bold text-black/40 block text-center mb-8">
+                Consultation Protocol
+              </FormLabel>
+              <div className="grid gap-6 md:grid-cols-3">
                 {[
-                  { id: 'email', label: 'Email', icon: Mail },
-                  { id: 'phone', label: 'Phone Call', icon: Phone },
-                  { id: 'video', label: 'Video Call', icon: Video },
+                  { id: 'email', label: 'Electronic Correspondence', icon: Mail },
+                  { id: 'phone', label: 'Audio Consultation', icon: Phone },
+                  { id: 'video', label: 'Virtual Executive Meeting', icon: Video },
                 ].map((method) => {
                   const IconComponent = method.icon;
                   return (
                     <div
                       key={method.id}
-                      className={`relative rounded-lg border p-5 cursor-pointer transition-all ${field.value === method.id
-                          ? 'border-primary bg-primary/5 shadow-md'
-                          : 'border-gray-200 hover:border-gray-300 hover:shadow-sm'
+                      className={`relative flex flex-col items-center justify-center rounded-none border p-8 cursor-pointer transition-all duration-500 ${field.value === method.id
+                        ? 'border-[#D4AF37] bg-white shadow-xl translate-y-[-4px]'
+                        : 'border-black/5 hover:border-black/20 hover:bg-black/[0.1]'
                         }`}
                       onClick={() => field.onChange(method.id)}
                     >
-                      <div className="mb-3">
+                      <div className="mb-4">
                         <IconComponent
-                          className={`h-6 w-6 ${field.value === method.id
-                              ? 'text-primary'
-                              : 'text-gray-500'
+                          className={`h-5 w-5 ${field.value === method.id
+                            ? 'text-[#D4AF37]'
+                            : 'text-black/20'
                             }`}
                         />
                       </div>
-                      <div className={`font-medium text-sm ${field.value === method.id
-                          ? 'text-gray-900'
-                          : 'text-gray-700'
+                      <div className={`text-[9px] uppercase tracking-[0.2em] font-bold text-center ${field.value === method.id
+                        ? 'text-black'
+                        : 'text-black/40'
                         }`}>
                         {method.label}
-                      </div>
-                      <div className="absolute top-3 right-3">
-                        <div
-                          className={`w-5 h-5 rounded-full border-2 flex items-center justify-center transition-all ${field.value === method.id
-                              ? 'bg-primary border-primary'
-                              : 'border-gray-300 bg-white'
-                            }`}
-                        >
-                          {field.value === method.id && (
-                            <div className="w-2.5 h-2.5 rounded-full bg-white"></div>
-                          )}
-                        </div>
                       </div>
                     </div>
                   );
                 })}
               </div>
-              <FormMessage className="text-red-600 text-sm mt-2 flex items-center gap-1.5" />
+              <FormMessage className="text-red-500 text-[9px] uppercase tracking-widest mt-2" />
             </FormItem>
           )}
         />

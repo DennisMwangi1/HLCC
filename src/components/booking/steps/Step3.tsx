@@ -92,139 +92,109 @@ export function BookingStep3() {
   return (
     <div className="space-y-8">
       <motion.div
-        initial={{ opacity: 0, y: 20 }}
+        initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.3 }}
       >
         {/* Header */}
-        <div className="mb-8">
-          <h3 className="text-2xl font-semibold text-gray-900 mb-2">
-            Schedule Your {watch('contactMethod') === 'video' ? 'Video' : ''} Meeting
+        <div className="mb-12">
+          <h3 className="text-xl font-heading font-light text-black italic mb-2 text-center">
+            Scheduling Coordination
           </h3>
-          <p className="text-sm text-gray-600">
-            Choose a date and time that works best for you. All times are shown in your selected timezone.
+          <p className="text-[10px] text-black/40 uppercase tracking-[0.2em] font-medium text-center">
+            Securing your session in our global advisory calendar.
           </p>
         </div>
 
         {/* Selected Summary Card */}
         {hasSelection && (
           <motion.div
-            initial={{ opacity: 0, y: -10 }}
+            initial={{ opacity: 0, y: -5 }}
             animate={{ opacity: 1, y: 0 }}
-            className="mb-6 p-4 bg-primary/5 border-2 border-primary/20 rounded-xl"
+            className="mb-8 p-6 bg-white border border-[#D4AF37]/30 text-center shadow-sm"
             role="status"
-            aria-live="polite"
-            aria-label="Selected meeting time"
           >
-            <div className="flex items-start gap-3">
-              <CheckCircle2 className="h-5 w-5 text-primary mt-0.5 flex-shrink-0" aria-hidden="true" />
-              <div className="flex-1">
-                <p className="text-sm font-semibold text-gray-900 mb-1">Selected Meeting Time</p>
-                <p className="text-base text-primary font-medium">
-                  {format(selectedDate!, 'EEEE, MMMM d, yyyy')} at {format(new Date(`2000-01-01T${selectedTime}`), 'h:mm a')}
-                </p>
-                {selectedTimezone && (
-                  <p className="text-xs text-gray-600 mt-1">
-                    Timezone: {timezoneOptions.find(tz => tz.value === selectedTimezone)?.label || selectedTimezone}
-                  </p>
-                )}
-              </div>
-            </div>
+            <p className="text-[10px] uppercase tracking-[0.3em] font-bold text-[#D4AF37] mb-2">Confirmed Slot</p>
+            <p className="text-xl font-heading font-light text-black italic">
+              {format(selectedDate!, 'EEEE, MMMM d, yyyy')} <span className="opacity-30 mx-2 text-lg">|</span> {format(new Date(`2000-01-01T${selectedTime}`), 'h:mm a')}
+            </p>
           </motion.div>
         )}
 
         {/* Main Content: Date and Time Selection */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-12">
           {/* Date Selection */}
-          <div className="space-y-4">
-            <div className="flex items-center gap-2">
-              <CalendarIcon className="h-5 w-5 text-gray-600" />
-              <h4 className="text-base font-semibold text-gray-900">Select a Date</h4>
+          <div className="space-y-6">
+            <div className="flex flex-col items-center gap-2 mb-4">
+              <h4 className="text-[10px] uppercase tracking-[0.3em] font-bold text-black/40">1. Select Calendar Date</h4>
             </div>
-            <div className="flex justify-center lg:justify-start">
-              <div className="border-2 border-gray-200 rounded-xl p-4 bg-white shadow-sm" role="region" aria-label="Date picker calendar">
+            <div className="flex justify-center">
+              <div className="border border-black/5 rounded-none p-6 bg-white shadow-sm" role="region">
                 <Calendar
                   mode="single"
                   selected={selectedDate}
                   onSelect={handleDateSelect}
                   disabled={(date) => !isDateAvailable(date)}
                   initialFocus
-                  className="rounded-lg"
-                  aria-label="Select a date for your meeting"
+                  className="rounded-none font-sans"
                   classNames={{
                     months: "flex flex-col sm:flex-row gap-4",
                     month: "space-y-4",
-                    caption: "flex justify-center pt-1 relative items-center mb-4",
-                    caption_label: "text-lg font-semibold text-gray-900",
+                    caption: "flex justify-center pt-1 relative items-center mb-6",
+                    caption_label: "text-xs uppercase tracking-widest font-bold text-black",
                     nav: "space-x-1 flex items-center",
                     nav_button: cn(
-                      "h-9 w-9 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 hover:border-gray-400 transition-colors",
+                      "h-8 w-8 bg-white border border-black/5 rounded-none hover:bg-black/5 transition-colors",
                       "flex items-center justify-center"
                     ),
                     nav_button_previous: "absolute left-1",
                     nav_button_next: "absolute right-1",
                     table: "w-full border-collapse space-y-1",
-                    head_row: "flex mb-2",
-                    head_cell: "text-gray-600 font-semibold text-xs w-10 h-10 flex items-center justify-center",
+                    head_row: "flex mb-4",
+                    head_cell: "text-black/30 font-bold text-[9px] w-9 h-9 uppercase tracking-tighter flex items-center justify-center",
                     row: "flex w-full mt-1",
-                    cell: "h-10 w-10 text-center text-sm p-0 relative [&:has([aria-selected])]:bg-primary/10 rounded-lg",
+                    cell: "h-9 w-9 text-center text-xs p-0 relative [&:has([aria-selected])]:bg-transparent",
                     day: cn(
-                      "h-10 w-10 p-0 font-medium rounded-lg transition-all",
-                      "hover:bg-gray-100 hover:text-gray-900",
-                      "focus:bg-gray-100 focus:text-gray-900",
+                      "h-9 w-9 p-0 font-medium rounded-none transition-all",
+                      "hover:bg-black/5 hover:text-black",
+                      "focus:bg-black/5 focus:text-black",
                       "aria-selected:opacity-100"
                     ),
-                    day_selected: "bg-primary text-white hover:bg-primary hover:text-white focus:bg-primary focus:text-white font-semibold shadow-md",
-                    day_today: "bg-gray-100 text-gray-900 font-semibold border-2 border-primary/30",
-                    day_outside: "text-gray-400 opacity-50",
-                    day_disabled: "text-gray-300 opacity-40 cursor-not-allowed hover:bg-transparent hover:text-gray-300",
-                    day_range_middle: "aria-selected:bg-primary/10 aria-selected:text-gray-900",
-                    day_hidden: "invisible",
+                    day_selected: "bg-[#D4AF37] text-white hover:bg-[#D4AF37] hover:text-white focus:bg-[#D4AF37] focus:text-white font-bold shadow-lg scale-110 z-10",
+                    day_today: "border border-[#D4AF37]/30 text-black",
+                    day_outside: "text-black/10 opacity-50",
+                    day_disabled: "text-black/5 opacity-20 cursor-not-allowed hover:bg-transparent",
                   }}
                 />
               </div>
             </div>
-            {selectedDate && (
-              <motion.div
-                initial={{ opacity: 0, scale: 0.95 }}
-                animate={{ opacity: 1, scale: 1 }}
-                className="p-3 bg-gray-50 rounded-lg border border-gray-200"
-              >
-                <p className="text-sm text-gray-600 text-center">
-                  <span className="font-medium text-gray-900">Selected: </span>
-                  <span className="font-semibold text-primary">{format(selectedDate, 'EEEE, MMMM d, yyyy')}</span>
-                </p>
-              </motion.div>
-            )}
           </div>
 
           {/* Time Selection */}
-          <div className="space-y-4">
-            <div className="flex items-center gap-2">
-              <Clock className="h-5 w-5 text-gray-600" />
-              <h4 className="text-base font-semibold text-gray-900">Select a Time</h4>
+          <div className="space-y-6">
+            <div className="flex flex-col items-center gap-2 mb-4">
+              <h4 className="text-[10px] uppercase tracking-[0.3em] font-bold text-black/40">2. Select Session Time</h4>
             </div>
 
             {!selectedDate ? (
-              <div className="p-8 bg-gray-50 rounded-lg border-2 border-dashed border-gray-200 text-center" role="status" aria-live="polite">
-                <Clock className="h-8 w-8 text-gray-400 mx-auto mb-2" aria-hidden="true" />
-                <p className="text-sm text-gray-600">Please select a date first</p>
+              <div className="h-[340px] flex flex-col items-center justify-center p-8 border border-dashed border-black/5 text-center">
+                <p className="text-[10px] uppercase tracking-widest text-black/20 font-bold">Waiting for date selection</p>
               </div>
             ) : isLoading ? (
               <div className="space-y-4">
                 {[1, 2, 3].map((i) => (
                   <div key={i} className="space-y-2">
-                    <div className="h-4 bg-gray-200 rounded w-24 animate-pulse" />
+                    <div className="h-2 bg-black/[0.02] rounded w-24 animate-pulse" />
                     <div className="grid grid-cols-4 gap-2">
                       {[1, 2, 3, 4].map((j) => (
-                        <div key={j} className="h-10 bg-gray-200 rounded animate-pulse" />
+                        <div key={j} className="h-8 bg-black/[0.02] rounded animate-pulse" />
                       ))}
                     </div>
                   </div>
                 ))}
               </div>
             ) : (
-              <div className="bg-white border border-gray-200 rounded-lg p-4" role="region" aria-label="Time slot selection">
+              <div className="bg-transparent" role="region">
                 <TimeSlotGroup
                   groupedSlots={groupedSlots}
                   selectedTime={selectedTime || ''}
@@ -237,27 +207,20 @@ export function BookingStep3() {
         </div>
 
         {/* Additional Form Fields */}
-        <div className="space-y-6 pt-6 border-t border-gray-200">
+        <div className="space-y-12 pt-12 border-t border-black/5 max-w-2xl mx-auto">
           {/* Timezone Selection */}
           <FormField
             control={control}
             name="timezone"
             render={({ field }) => (
-              <FormItem>
-                <div className="flex items-center gap-2 mb-2">
-                  <Globe className="h-4 w-4 text-gray-600" />
-                  <FormLabel className="text-sm font-medium text-gray-900">Time Zone</FormLabel>
-                </div>
-                <FormDescription className="mb-3 text-xs text-gray-600">
-                  Select your timezone to ensure accurate scheduling
-                </FormDescription>
+              <FormItem className="space-y-4">
+                <FormLabel className="text-[10px] uppercase tracking-[0.3em] font-bold text-black/40 block text-center">Meeting Timezone</FormLabel>
                 <FormControl>
                   <select
                     {...field}
                     value={field.value || Intl.DateTimeFormat().resolvedOptions().timeZone}
                     onChange={field.onChange}
-                    aria-label="Select timezone"
-                    className="flex h-11 w-full rounded-md border border-gray-300 bg-background px-4 py-2 text-sm ring-offset-background placeholder:text-gray-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:border-primary disabled:cursor-not-allowed disabled:opacity-50"
+                    className="flex h-12 w-full border-0 border-b border-black/10 rounded-none bg-transparent px-0 text-black text-center text-sm font-medium focus-visible:ring-0 focus-visible:border-[#D4AF37] transition-all duration-300"
                   >
                     {timezoneOptions.map((option) => (
                       <option key={option.value} value={option.value}>
@@ -266,7 +229,7 @@ export function BookingStep3() {
                     ))}
                   </select>
                 </FormControl>
-                <FormMessage className="text-red-600 text-sm mt-1.5 flex items-center gap-1.5" />
+                <FormMessage className="text-red-500 text-[9px] uppercase tracking-widest mt-1 text-center" />
               </FormItem>
             )}
           />
@@ -276,42 +239,30 @@ export function BookingStep3() {
             control={control}
             name="howDidYouHear"
             render={({ field, fieldState }) => (
-              <FormItem>
-                <FormLabel className="text-sm font-medium text-gray-900 mb-2">
-                  How did you hear about us? *
+              <FormItem className="space-y-4">
+                <FormLabel className="text-[10px] uppercase tracking-[0.3em] font-bold text-black/40 block text-center">
+                  Source of Discovery
                 </FormLabel>
-                <FormDescription className="mb-3 text-xs text-gray-600">
-                  Help us understand how you discovered our services
-                </FormDescription>
                 <FormControl>
                   <select
                     {...field}
                     value={field.value || ''}
                     onChange={field.onChange}
-                    aria-label="How did you hear about us"
-                    aria-invalid={fieldState.error ? 'true' : 'false'}
-                    aria-describedby={fieldState.error ? 'howDidYouHear-error' : undefined}
                     className={cn(
-                      "flex h-11 w-full rounded-md border bg-background px-4 py-2 text-sm ring-offset-background placeholder:text-gray-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:border-primary disabled:cursor-not-allowed disabled:opacity-50",
-                      fieldState.error ? "border-red-300 focus-visible:ring-red-500" : "border-gray-300"
+                      "flex h-12 w-full border-0 border-b border-black/10 rounded-none bg-transparent px-0 text-black text-center text-sm font-medium focus-visible:ring-0 focus-visible:border-[#D4AF37] transition-all duration-300",
+                      fieldState.error && "border-red-500"
                     )}
                   >
-                    <option value="">Select an option</option>
-                    <option value="search">Search Engine (Google, Bing, etc.)</option>
-                    <option value="social">Social Media (LinkedIn, Twitter, etc.)</option>
-                    <option value="referral">Referral</option>
-                    <option value="event">Event or Conference</option>
-                    <option value="article">Article or Blog Post</option>
-                    <option value="other">Other</option>
+                    <option value="">Select Protocol</option>
+                    <option value="search">Search Engine Coordination</option>
+                    <option value="social">Professional Network / LinkedIn</option>
+                    <option value="referral">Referral Partnership</option>
+                    <option value="event">Industry Conference / Event</option>
+                    <option value="article">Thought Leadership Publication</option>
+                    <option value="other">Institutional Requirement</option>
                   </select>
                 </FormControl>
-                <FormMessage
-                  id="howDidYouHear-error"
-                  className="text-red-600 text-sm mt-1.5 flex items-center gap-1.5"
-                  role="alert"
-                >
-                  {fieldState.error && <AlertCircle className="h-3.5 w-3.5" aria-hidden="true" />}
-                </FormMessage>
+                <FormMessage className="text-red-500 text-[9px] uppercase tracking-widest mt-1 text-center" />
               </FormItem>
             )}
           />
@@ -322,35 +273,27 @@ export function BookingStep3() {
             name="agreeToTerms"
             render={({ field, fieldState }) => (
               <FormItem className={cn(
-                "flex flex-row items-start space-x-3 space-y-0 rounded-lg p-4 border-2 transition-colors",
+                "flex flex-row items-center justify-center space-x-4 space-y-0 p-8 border border-black/5 transition-all duration-500",
                 fieldState.error
-                  ? "border-red-300 bg-red-50/50"
-                  : "border-gray-200 hover:border-gray-300"
+                  ? "border-red-500 bg-red-50/10"
+                  : ""
               )}>
                 <FormControl>
                   <Checkbox
                     checked={field.value || false}
                     onCheckedChange={field.onChange}
-                    className="mt-0.5"
-                    aria-label="Agree to privacy policy"
-                    aria-invalid={fieldState.error ? 'true' : 'false'}
+                    className="rounded-none border-black/10 data-[state=checked]:bg-[#D4AF37] data-[state=checked]:border-[#D4AF37]"
                   />
                 </FormControl>
-                <div className="space-y-1 leading-none flex-1">
-                  <FormLabel className="text-sm font-medium text-gray-900 cursor-pointer">
-                    I agree to the processing of my personal data in accordance with the{' '}
-                    <a href="/privacy" className="text-primary underline hover:text-primary/80">
+                <div className="space-y-1">
+                  <FormLabel className="text-[9px] uppercase tracking-[0.2em] font-medium text-black/60 cursor-pointer">
+                    I acknowledge the processing of personal data per the{' '}
+                    <a href="/privacy" className="text-[#D4AF37] underline">
                       Privacy Policy
-                    </a>{' '}
-                    *
+                    </a>
                   </FormLabel>
-                  <FormDescription className="text-xs text-gray-600">
-                    We'll use this information to contact you about your inquiry.
-                  </FormDescription>
                   {fieldState.error && (
-                    <FormMessage className="text-red-600 text-sm mt-1.5 flex items-center gap-1.5">
-                      <AlertCircle className="h-3.5 w-3.5" />
-                    </FormMessage>
+                    <FormMessage className="text-red-500 text-[9px] uppercase tracking-widest mt-1 block" />
                   )}
                 </div>
               </FormItem>

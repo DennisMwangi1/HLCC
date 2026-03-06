@@ -27,37 +27,33 @@ export function TimeSlotGroup({ groupedSlots, selectedTime, onTimeSelect, select
 
   if (!hasAnySlots) {
     return (
-      <div className="text-center py-12 bg-gray-50 rounded-lg border-2 border-dashed border-gray-200">
-        <Clock className="h-8 w-8 text-gray-400 mx-auto mb-3" />
-        <p className="text-sm font-medium text-gray-900 mb-1">No available time slots</p>
-        <p className="text-xs text-gray-600">
+      <div className="text-center py-24 border border-dashed border-black/5 bg-white">
+        <p className="text-[10px] uppercase tracking-[0.2em] font-bold text-[#D4AF37] mb-4">Availability Status</p>
+        <p className="text-xl font-heading font-light text-black italic">
           {selectedDate
-            ? `No available times for ${format(selectedDate, 'MMMM d, yyyy')}. Please select another date.`
-            : 'Please select a date first.'}
+            ? `No sessions found for ${format(selectedDate, 'MMM d, yyyy')}`
+            : 'Pending Calendar Selection'}
         </p>
       </div>
     );
   }
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-8">
       {periods.map(({ key, slots }) => {
         if (slots.length === 0) return null;
 
         const periodInfo = periodLabels[key];
 
         return (
-          <div key={key} className="space-y-3">
-            <div className="flex items-center justify-between">
-              <div>
-                <h5 className="text-sm font-semibold text-gray-900">{periodInfo.label}</h5>
-                <p className="text-xs text-gray-500">{periodInfo.timeRange}</p>
-              </div>
-              <span className="text-xs text-gray-400 bg-gray-100 px-2 py-1 rounded font-medium">
-                {slots.length} {slots.length === 1 ? 'slot' : 'slots'}
+          <div key={key} className="space-y-4">
+            <div className="flex items-center justify-between border-b border-black/5 pb-2">
+              <h5 className="text-[10px] uppercase tracking-[0.2em] font-bold text-black/60">{periodInfo.label}</h5>
+              <span className="text-[8px] uppercase tracking-widest text-black/20 font-bold">
+                {periodInfo.timeRange}
               </span>
             </div>
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2">
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
               {slots.map((slot) => {
                 const timeString = format(slot.time, 'HH:mm');
                 const isSelected = selectedTime === timeString;
@@ -68,15 +64,14 @@ export function TimeSlotGroup({ groupedSlots, selectedTime, onTimeSelect, select
                     type="button"
                     onClick={() => onTimeSelect(slot.time)}
                     className={cn(
-                      'py-2.5 px-3 rounded-lg border-2 text-sm font-medium transition-all duration-200',
-                      'hover:shadow-sm focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2',
-                      'disabled:opacity-50 disabled:cursor-not-allowed',
+                      'py-3 px-4 rounded-none border text-[10px] uppercase tracking-widest font-bold transition-all duration-500',
+                      'focus:outline-none',
+                      'disabled:opacity-30 disabled:cursor-not-allowed',
                       isSelected
-                        ? 'bg-primary text-white border-primary shadow-md scale-[1.02] ring-2 ring-primary/20'
-                        : 'border-gray-200 hover:border-gray-300 hover:bg-gray-50 bg-white active:scale-95'
+                        ? 'bg-[#D4AF37] text-white border-[#D4AF37] shadow-xl translate-y-[-2px]'
+                        : 'border-black/5 hover:border-black/20 hover:bg-black/[0.02] bg-white text-black/60'
                     )}
                     aria-pressed={isSelected}
-                    aria-label={`Select time ${slot.formatted}`}
                   >
                     {slot.formatted}
                   </button>
