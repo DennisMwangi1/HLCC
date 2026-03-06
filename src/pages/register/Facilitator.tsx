@@ -27,7 +27,6 @@ export default function RegisterFacilitator() {
         <WhyJoin />
         <Eligibility />
         <ApplicationForm />
-        <BottomCTA />
       </main>
     </>
   );
@@ -239,23 +238,3 @@ function ApplicationForm() {
   );
 }
 
-function BottomCTA() {
-  return (
-    <section className="relative py-32 bg-[#050505] text-white">
-      <div className="container relative mx-auto px-4 md:px-6 text-center">
-        <p className="text-[#D4AF37] uppercase tracking-[0.4em] text-[9px] font-bold mb-8">The Association</p>
-        <h2 className="text-4xl md:text-6xl font-heading font-light mb-12 italic">
-          Guide the conversation.
-        </h2>
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-12">
-          <Button asChild className="bg-[#D4AF37] text-black hover:bg-[#F3E5AB] transition-all duration-500 rounded-none px-12 py-8 text-xs uppercase tracking-widest font-bold w-full sm:w-auto">
-            <a href="#apply">Apply to Network</a>
-          </Button>
-          <Link to="/contact" className="text-xs uppercase font-bold tracking-widest text-white/40 hover:text-[#D4AF37] transition-colors border-b border-white/10 hover:border-[#D4AF37] pb-1">
-            Inquire Privately
-          </Link>
-        </div>
-      </div>
-    </section>
-  );
-}
