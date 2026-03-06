@@ -47,8 +47,9 @@ export function Header() {
                 <div>
                     <Link to="/" className="flex flex-col items-start w-fit group">
                         <img src="/assets/img/HLCC.png" alt="HLCC logo" className="h-7 md:h-8 w-auto sm:w-fit transition-all duration-500 group-hover:scale-105" />
-                        <p className={`hidden md:flex items-center text-[8px] uppercase tracking-[0.2em] font-medium mt-1 leading-tight max-w-[180px] font-sans transition-all duration-500 ${isScrolled ? "text-[#D4AF37]/40" : "text-[#D4AF37]/70"}`}>
-                            HUMAN-CENTERED LEADERSHIP & CULTURE CONSULTING LTD
+                        <p className={`hidden md:flex flex-col items-start text-[8px] uppercase tracking-[0.2em] font-medium font-sans border-0 transition-all duration-500 ${isScrolled ? "opacity-0 max-h-0 mt-0 overflow-hidden" : "opacity-100 max-h-16 mt-1 text-white"}`}>
+                            <span>Human-Centered Leadership &</span>
+                            <span>Culture Consulting Ltd</span>
                         </p>
                     </Link>
                 </div>
