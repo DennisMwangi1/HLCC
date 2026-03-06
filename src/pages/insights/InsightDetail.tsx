@@ -75,8 +75,8 @@ export default function InsightDetail() {
           <div className="container relative z-10">
             <div className="max-w-4xl">
               <motion.div
-                initial={{ opacity: 0, tracking: '0.4em' }}
-                animate={{ opacity: 1, tracking: '0.2em' }}
+                initial={{ opacity: 0, letterSpacing: '0.4em' }}
+                animate={{ opacity: 1, letterSpacing: '0.2em' }}
                 className="text-[#D4AF37] uppercase text-[10px] font-bold mb-8 flex items-center gap-4"
               >
                 <span className="px-3 py-1 border border-[#D4AF37]/30 text-[#D4AF37]">

@@ -98,20 +98,16 @@ export function DynamicForm({
         }, {} as Record<string, any>);
 
     const formSchema = z.object(shape);
-    const { control, handleSubmit, watch, reset } = useForm({
+    const { control, handleSubmit, watch, reset, formState: { errors } } = useForm({
         resolver: zodResolver(formSchema),
     });
 
     const values = watch();
     const onSubmit = async (data: any) => {
         setIsSubmitting(true);
-
         try {
-            // Send email via Resend
             const result = await sendEmail({
-                to: (schema.mailchimpFormType === 'coach' || schema.mailchimpFormType === 'facilitator')
-                    ? 'applications@hlcc.africa'
-                    : 'info@hlcc.africa',
+                to: 'applications@hlcc.africa',
                 subject: `New Application: ${schema.mailchimpFormType || 'Dynamic Form'}`,
                 data: data,
                 formName: `Application Form (${schema.mailchimpFormType || 'General'})`,
@@ -120,14 +116,14 @@ export function DynamicForm({
             });
 
             if (result.success) {
-                toast.success('Application submitted successfully!');
+                toast.success('Your application has been received with thanks.');
                 reset();
             } else {
-                toast.error(result.error || 'Failed to submit application. Please try again.');
+                toast.error(result.error || 'Submission failed. Please try again.');
             }
         } catch (error) {
             console.error("Error submitting form:", error);
-            toast.error('An error occurred. Please try again.');
+            toast.error('An unexpected error occurred.');
         } finally {
             setIsSubmitting(false);
         }
@@ -136,148 +132,119 @@ export function DynamicForm({
     return (
         <form
             onSubmit={handleSubmit(onSubmit)}
-            className={cn(
-                "max-w-5xl mx-auto space-y-10 bg-white rounded-2xl shadow-sm p-8 border border-gray-100",
-                className
-            )}
+            className={cn("max-w-4xl mx-auto space-y-20 bg-transparent", className)}
         >
-            {schema.title && (
-                <h2 className="text-3xl font-semibold text-gray-900 mb-2">
-                    {schema.title}
-                </h2>
-            )}
-            {schema.description && (
-                <p className="text-gray-600 text-base mb-6">{schema.description}</p>
-            )}
-
-            <div className="space-y-10">
+            <div className="space-y-24">
                 {schema.fields.map((section) => (
-                    <Card
-                        key={section.group}
-                        className={cn(
-                            "shadow-none border border-gray-100 bg-gray-50/30 rounded-xl",
-                            section.className
-                        )}
-                    >
-                        <CardHeader>
-                            <CardTitle className="text-xl text-gray-800 font-semibold">
+                    <div key={section.group} className={cn("space-y-12", section.className)}>
+                        <div className="border-b border-black/5 pb-6">
+                            <h3 className="text-2xl font-heading font-light text-black italic">
                                 {section.group}
-                            </CardTitle>
-                        </CardHeader>
-                        <CardContent>
-                            <div
-                                className={cn(
-                                    "grid gap-6",
-                                    section.layout || "md:grid-cols-2"
-                                )}
-                            >
-                                {section.fields.map((f) => {
-                                    const Comp = componentRegistry[f.type];
-                                    if (!Comp) return null;
-                                    if (f.condition && !f.condition(values)) return null;
+                            </h3>
+                        </div>
 
-                                    return (
-                                        <div
-                                            key={f.id}
-                                            className={cn("flex flex-col gap-2", f.className)}
+                        <div className={cn("grid gap-x-12 gap-y-10", section.layout || "md:grid-cols-2")}>
+                            {section.fields.map((f) => {
+                                const Comp = componentRegistry[f.type];
+                                if (!Comp) return null;
+                                if (f.condition && !f.condition(values)) return null;
+
+                                return (
+                                    <div key={f.id} className={cn("flex flex-col gap-4", f.className)}>
+                                        <Label
+                                            htmlFor={f.id}
+                                            className="text-[10px] uppercase tracking-[0.3em] font-bold text-black/40"
                                         >
-                                            <Label
-                                                htmlFor={f.id}
-                                                className="font-medium text-gray-700"
-                                            >
-                                                {f.label}
-                                                {f.required && (
-                                                    <span className="text-red-500 ml-1">*</span>
-                                                )}
-                                            </Label>
+                                            {f.label}
+                                            {f.required && <span className="text-[#D4AF37] ml-1">*</span>}
+                                        </Label>
 
-                                            <Controller
-                                                name={f.name}
-                                                control={control}
-                                                render={({ field }) => {
-                                                    if (f.type === "select" && f.options)
-                                                        return (
-                                                            <Select
-                                                                onValueChange={field.onChange}
-                                                                value={field.value as string}
-                                                            >
-                                                                <SelectTrigger className="bg-white border-gray-200 focus:ring-[var(--blue-accent)]">
-                                                                    <SelectValue placeholder={f.placeholder} />
-                                                                </SelectTrigger>
-                                                                <SelectContent>
-                                                                    {f.options.map((opt) => (
-                                                                        <SelectItem key={opt} value={opt}>
-                                                                            {opt}
-                                                                        </SelectItem>
-                                                                    ))}
-                                                                </SelectContent>
-                                                            </Select>
-                                                        );
+                                        <Controller
+                                            name={f.name}
+                                            control={control}
+                                            render={({ field }) => {
+                                                const baseInputStyles = "border-0 border-b border-black/10 rounded-none bg-transparent px-0 py-4 focus-visible:ring-0 focus-visible:border-[#D4AF37] transition-all placeholder:text-black/10 text-lg font-light shadow-none";
 
-                                                    if (f.type === "checkbox")
-                                                        return (
-                                                            <Checkbox
-                                                                checked={field.value as any}
-                                                                onCheckedChange={field.onChange}
-                                                            />
-                                                        );
-
-                                                    if (f.type === "switch")
-                                                        return (
-                                                            <Switch
-                                                                checked={field.value as any}
-                                                                onCheckedChange={field.onChange}
-                                                            />
-                                                        );
-
-                                                    if (f.type === "textarea")
-                                                        return (
-                                                            //@ts-ignore
-                                                            <Textarea
-                                                                id={f.id}
-                                                                {...field}
-                                                                placeholder={f.placeholder as string}
-                                                                rows={f.rows || 4 as number}
-                                                                required={f.required as boolean}
-                                                                className="resize-none bg-white border-gray-200 focus:ring-[var(--blue-accent)]"
-                                                            />
-                                                        );
-
+                                                if (f.type === "select" && f.options)
                                                     return (
-                                                        <Comp
+                                                        <Select
+                                                            onValueChange={field.onChange}
+                                                            value={field.value as string}
+                                                        >
+                                                            <SelectTrigger className={baseInputStyles}>
+                                                                <SelectValue placeholder={f.placeholder} />
+                                                            </SelectTrigger>
+                                                            <SelectContent className="rounded-none border-black/10">
+                                                                {f.options.map((opt) => (
+                                                                    <SelectItem key={opt} value={opt} className="text-sm font-light py-3">
+                                                                        {opt}
+                                                                    </SelectItem>
+                                                                ))}
+                                                            </SelectContent>
+                                                        </Select>
+                                                    );
+
+                                                if (f.type === "textarea")
+                                                    return (
+                                                        <Textarea
                                                             id={f.id}
                                                             {...field}
-                                                            type={f.type === "file" ? "file" : f.type}
-                                                            placeholder={f.placeholder}
-                                                            required={f.required}
-                                                            className="bg-white border-gray-200 focus:ring-[var(--blue-accent)]"
+                                                            placeholder={f.placeholder as string}
+                                                            rows={f.rows || 4}
+                                                            className={cn(baseInputStyles, "min-h-[120px] resize-none")}
                                                         />
                                                     );
-                                                }}
-                                            />
-                                        </div>
-                                    );
-                                })}
-                            </div>
-                        </CardContent>
-                    </Card>
+
+                                                if (f.type === "checkbox")
+                                                    return (
+                                                        <div className="flex items-center space-x-3 py-2">
+                                                            <Checkbox
+                                                                id={f.id}
+                                                                checked={field.value as any}
+                                                                onCheckedChange={field.onChange}
+                                                                className="border-black/20 data-[state=checked]:bg-[#D4AF37] data-[state=checked]:border-[#D4AF37] rounded-none"
+                                                            />
+                                                            <label htmlFor={f.id} className="text-sm font-light text-black/60 cursor-pointer">{f.description || f.label}</label>
+                                                        </div>
+                                                    );
+
+                                                return (
+                                                    <Input
+                                                        id={f.id}
+                                                        {...field}
+                                                        type={f.type === "file" ? "file" : f.type}
+                                                        placeholder={f.placeholder}
+                                                        className={cn(baseInputStyles, f.type === "file" && "file:bg-black/5 file:border-0 file:rounded-none file:text-[10px] file:uppercase file:font-bold file:tracking-widest file:px-4 file:py-2 file:mr-4 file:cursor-pointer")}
+                                                    />
+                                                );
+                                            }}
+                                        />
+                                        {errors[f.name] && (
+                                            <p className="text-[10px] uppercase font-bold text-red-500/80 tracking-widest mt-1">
+                                                {errors[f.name]?.message as string}
+                                            </p>
+                                        )}
+                                    </div>
+                                );
+                            })}
+                        </div>
+                    </div>
                 ))}
             </div>
 
-            <div className="pt-4 flex justify-end">
+            <div className="pt-12">
                 <Button
                     type="submit"
-                    size="lg"
                     disabled={isSubmitting}
-                    className="bg-gradient-to-r from-[var(--blue-accent)] to-[var(--gold-accent)] text-white font-semibold shadow-sm hover:opacity-90 transition-all"
+                    className="bg-black text-white px-16 py-8 rounded-none uppercase tracking-[0.2em] text-[10px] font-bold hover:bg-[#D4AF37] transition-all duration-500 w-full md:w-auto shadow-xl"
                 >
                     {isSubmitting ? (
                         <>
-                            <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                            Submitting...
+                            <Loader2 className="mr-4 h-4 w-4 animate-spin" />
+                            Processing Brief...
                         </>
                     ) : (
-                        schema.submitText || "Submit"
+                        schema.submitText || "Submit Brief"
                     )}
                 </Button>
             </div>

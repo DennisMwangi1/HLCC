@@ -65,15 +65,15 @@ function AboutHero() {
     <section className="relative h-[60vh] flex items-center justify-center bg-black overflow-hidden">
       <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/dark-matter.png')] opacity-[0.1] pointer-events-none" />
       <div className="container relative z-10 text-center">
-        <motion.p 
-          initial={{ opacity: 0, tracking: '0.4em' }}
-          animate={{ opacity: 1, tracking: '0.2em' }}
+        <motion.p
+          initial={{ opacity: 0, letterSpacing: '0.4em' }}
+          animate={{ opacity: 1, letterSpacing: '0.2em' }}
           transition={{ duration: 1 }}
           className="text-[#D4AF37] uppercase text-[10px] font-bold mb-8"
         >
           The Heritage
         </motion.p>
-        <motion.h1 
+        <motion.h1
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
@@ -115,7 +115,7 @@ function OurStory() {
   return (
     <SectionContainer className="bg-white">
       <div className="max-w-4xl mx-auto text-center mb-24">
-        <motion.h2 
+        <motion.h2
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -124,12 +124,12 @@ function OurStory() {
         >
           Our <span className="italic">Evolution</span>
         </motion.h2>
-        <motion.p 
-           initial={{ opacity: 0, y: 20 }}
-           whileInView={{ opacity: 1, y: 0 }}
-           viewport={{ once: true }}
-           transition={{ duration: 0.8, delay: 0.2 }}
-           className="text-xl text-black/60 font-light leading-relaxed"
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+          className="text-xl text-black/60 font-light leading-relaxed"
         >
           From our roots in 2016 to our current standing as a premier advisory firm, our journey has been defined by a singular focus: aligning the human spirit with organizational strategy.
         </motion.p>

@@ -44,7 +44,18 @@ function ProcessStep({
     description,
     index,
 }: ProcessStepProps) {
-    const isEven = index % 2 === 0;
+    const isLeft = index % 2 === 0;
+
+    const Content = ({ align }: { align: "left" | "right" }) => (
+        <div className={`w-full ${align === "right" ? "md:text-right" : "md:text-left"} text-center`}>
+            <h4 className="text-xl md:text-3xl font-heading mb-4 text-black italic leading-[1.2]">
+                {title}
+            </h4>
+            <p className="text-black/60 font-light text-sm md:text-base leading-relaxed max-w-lg mx-auto md:mx-0 inline-block">
+                {description}
+            </p>
+        </div>
+    );
 
     return (
         <motion.div
@@ -52,29 +63,41 @@ function ProcessStep({
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: index * 0.1 }}
             viewport={{ once: true }}
-            className={`relative flex flex-col md:flex-row items-center ${isEven ? "md:flex-row-reverse" : ""}`}
+            className="relative"
         >
-            {/* Step content */}
-            <div className={`w-full md:w-1/2 px-8 md:px-16 ${isEven ? "md:text-left" : "md:text-right"}`}>
-                <h4 className="text-2xl font-heading mb-4 text-black italic">
-                    {title}
-                </h4>
-                <p className="text-black/60 font-light leading-relaxed">
-                    {description}
-                </p>
+            <div className="grid grid-cols-1 md:grid-cols-2 w-full items-start">
+                {/* Left Column */}
+                <div className="px-8 md:px-20 h-full">
+                    {isLeft ? (
+                        <Content align="right" />
+                    ) : (
+                        <div className="hidden md:block" aria-hidden="true" />
+                    )}
+                </div>
+
+                {/* Right Column */}
+                <div className="px-8 md:px-20 h-full">
+                    {!isLeft ? (
+                        <Content align="left" />
+                    ) : (
+                        <div className="hidden md:block" aria-hidden="true" />
+                    )}
+                </div>
             </div>
 
-            {/* Elegant Circle Marker */}
-            <div className="absolute left-1/2 -translate-x-1/2 flex items-center justify-center">
+            {/* Central Spine Marker */}
+            <div className="absolute left-1/2 top-[0.6rem] md:top-[0.8rem] -translate-x-1/2 flex items-center justify-center pointer-events-none z-20">
                 <motion.div
                     initial={{ scale: 0 }}
                     whileInView={{ scale: 1 }}
                     transition={{ duration: 0.5, delay: index * 0.15 }}
                     viewport={{ once: true }}
-                    className="flex items-center justify-center w-4 h-4 rounded-full bg-[#D4AF37] shadow-[0_0_15px_rgba(212,175,55,0.3)] z-10"
+                    className="w-3 h-3 md:w-4 md:h-4 rounded-full bg-[#D4AF37] shadow-[0_0_20px_rgba(212,175,55,0.4)] border-2 border-white"
                 />
-                <div className="absolute top-8 text-[#D4AF37] font-heading text-sm tracking-widest opacity-50">
-                    {number}
+                <div className="absolute top-10 whitespace-nowrap">
+                    <span className="text-[#D4AF37] font-heading text-[10px] md:text-xs tracking-widest font-bold opacity-80 bg-white/80 px-2 py-1 backdrop-blur-sm">
+                        {number}
+                    </span>
                 </div>
             </div>
         </motion.div>

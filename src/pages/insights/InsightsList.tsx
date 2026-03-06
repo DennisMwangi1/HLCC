@@ -35,8 +35,8 @@ export default function InsightsList() {
           <div className="container relative z-10">
             <div className="max-w-4xl">
               <motion.p
-                initial={{ opacity: 0, tracking: '0.4em' }}
-                animate={{ opacity: 1, tracking: '0.2em' }}
+                initial={{ opacity: 0, letterSpacing: '0.4em' }}
+                animate={{ opacity: 1, letterSpacing: '0.2em' }}
                 transition={{ duration: 1 }}
                 className="text-[#D4AF37] uppercase text-[10px] font-bold mb-8 flex items-center gap-4"
               >

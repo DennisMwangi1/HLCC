@@ -153,8 +153,8 @@ export default function ServiceDetails() {
           <div className="relative container mx-auto px-4 md:px-6">
             <div className="max-w-4xl">
               <motion.div
-                initial={{ opacity: 0, tracking: '0.5em' }}
-                animate={{ opacity: 1, tracking: '0.3em' }}
+                initial={{ opacity: 0, letterSpacing: '0.5em' }}
+                animate={{ opacity: 1, letterSpacing: '0.3em' }}
                 transition={{ duration: 1 }}
                 className="text-[#D4AF37] uppercase text-[10px] font-bold mb-8 flex items-center gap-4"
               >

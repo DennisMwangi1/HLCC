@@ -1,7 +1,7 @@
 "use client";
+import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { ImageWithFallback } from "@/components/figma/ImageWithFallback";
 import { Check, ArrowRight } from "lucide-react";
 import { DynamicForm } from "../../components/DynamicForm.tsx";
@@ -27,7 +27,7 @@ export default function RegisterFacilitator() {
         <WhyJoin />
         <Eligibility />
         <ApplicationForm />
-        <BottomCTA />
+        {/* <BottomCTA /> */}
       </main>
     </>
   );
@@ -55,8 +55,8 @@ function Hero() {
       <div className="relative container mx-auto px-4 md:px-6">
         <div className="max-w-4xl">
           <motion.p
-            initial={{ opacity: 0, tracking: '0.4em' }}
-            animate={{ opacity: 1, tracking: '0.2em' }}
+            initial={{ opacity: 0, letterSpacing: '0.4em' }}
+            animate={{ opacity: 1, letterSpacing: '0.2em' }}
             transition={{ duration: 1 }}
             className="text-[#D4AF37] uppercase text-[10px] font-bold mb-8 flex items-center gap-4"
           >
@@ -231,7 +231,7 @@ function ApplicationForm() {
           </p>
         </div>
 
-        <div className="p-12 lg:p-20 bg-[#fafafa] border border-black/5">
+        <div className="max-w-5xl mx-auto">
           <DynamicForm schema={facilitatorFormSchema} />
         </div>
       </div>
