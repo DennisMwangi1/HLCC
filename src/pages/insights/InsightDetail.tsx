@@ -8,6 +8,7 @@ import { articles } from "@/content/insights";
 import { useSEO } from "@/hooks/useSEO";
 import { getAbsoluteUrl } from "@/lib/seo";
 import { OrganizationSchema, ArticleSchema, BreadcrumbSchema } from "@/components/StructuredData";
+import { Button } from "@/components/ui/button";
 
 export default function InsightDetail() {
   const { slug } = useParams();
