@@ -272,13 +272,6 @@ function OurTeam() {
       image: "/assets/img/Koech.jpeg",
     },
     {
-      name: "Jennifer Kinyoe",
-      title: "Strategic Advisor",
-      bioShort: "Jennifer Kinyoe is the Managing Director of Loxea Kenya, leading innovative mobility solutions across Africa. With over 25 years of multi-sector leadership in leasing and healthcare.",
-      bio: "Ms. Jennifer Kinyoe is the Managing Director of Loxea Kenya, where she leads a team of leasing professionals driving innovative mobility solutions. Loxea operates across 23 African countries with a fleet of over 6,000 vehicles. Since joining Loxea in April 2023, Jennifer has been a passionate champion of sustainability, spearheading the company's efforts to promote electric vehicle adoption and green mobility solutions in Kenya and the broader East African region.\n\nWith over 25 years of multi-sector leadership experience, Jennifer has held key executive roles, including CEO of Zohari Leasing Ltd, CEO of Rivieres Finance Limited, and General Manager for GE Healthcare East Africa. She began her career at Deloitte East Africa and later Ernst & Young London, building a strong financial and audit foundation supported by her CPA qualification.\n\nMs. Kinyoe holds an MBA in Strategic Management, a Bachelor's degree in Economics and Sociology from the University of Nairobi, and an Executive Diploma in Marketing. Her leadership is marked by a commitment to sustainability, innovation, and empowering businesses and individuals through flexible, cost-effective leasing models aligned with environmental and economic goals.",
-      image: "/assets/img/Jennifer.jpeg",
-    },
-    {
       name: "Kezie Karuoro",
       title: "Strategic Advisor",
       bioShort: "Visionary HR Leader and Global Executive Leadership Coach with over 20 years of distinguished experience driving strategic human resources and organizational transformation across complex, multinational environments.",
