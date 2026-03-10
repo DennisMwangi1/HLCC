@@ -15,6 +15,7 @@ export function Header() {
         "Services",
         "Why HLCC",
         "Blogs & Insights",
+        "Careers",
         "Contact",
     ];
     const { isOpen, type, closeModal } = useBookingModal();
@@ -35,6 +36,7 @@ export function Header() {
         if (label === "Home") return "/";
         if (label === "About") return "/about";
         if (label === "Contact") return "/contact";
+        if (label === "Careers") return "/careers";
         if (label === "Offerings" || label === "Services") return "/services";
         if (label === "Blogs & Insights") return "/insights";
         const slug = sectionMap[label] ?? label.toLowerCase().replace(/\s+/g, "-");

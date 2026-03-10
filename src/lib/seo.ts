@@ -97,6 +97,13 @@ export const pageSEO: Record<string, SEOData> = {
     image: '/assets/img/whoweare.webp',
     url: 'https://hlcc.africa/insights',
   },
+  careers: {
+    title: 'Careers - Shape the Future with HLCC',
+    description: 'Join our mission to transform leadership and culture across Africa. Explore open positions and opportunities to work with HLCC.',
+    keywords: ['careers', 'jobs', 'hiring', 'HR consulting jobs', 'leadership consulting jobs', 'Kenya'],
+    image: '/assets/img/hlcc-culture.png',
+    url: 'https://hlcc.africa/careers',
+  },
   contact: {
     title: 'Contact Us - Get in Touch with HLCC',
     description: 'Have questions about our services? Contact HLCC in Nairobi, Kenya. We\'re here to help transform your organizational culture and leadership.',

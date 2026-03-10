@@ -11,8 +11,11 @@ import RegisterFacilitator from "@/pages/register/Facilitator";
 import Contact from "@/pages/Contact";
 import InsightsList from "@/pages/insights/InsightsList";
 import InsightDetail from "@/pages/insights/InsightDetail";
+import CareersList from "@/pages/careers/CareersList";
+import JobDetail from "@/pages/careers/JobDetail";
 import { BookingModal } from "@/components/booking/BookingModal";
 import { useBookingModal } from "@/hooks/useBookingModal";
+import { Toaster } from "@/components/ui/sonner";
 
 interface AppContentProps {
     onBookConsultation: () => void;
@@ -33,6 +36,8 @@ function AppContent({ onBookConsultation, onBookDiscovery }: AppContentProps) {
                 <Route path="/insights/:slug" element={<InsightDetail />} />
                 <Route path="/register/coach" element={<RegisterCoach />} />
                 <Route path="/register/facilitator" element={<RegisterFacilitator />} />
+                <Route path="/careers" element={<CareersList />} />
+                <Route path="/careers/:slug" element={<JobDetail />} />
                 <Route path="/contact" element={<Contact />} />
             </Routes>
             <Footer onBookConsultation={onBookDiscovery} />
@@ -50,6 +55,7 @@ export default function App() {
                 onBookDiscovery={() => openModal('discovery')}
             />
             <BookingModal isOpen={isOpen} onOpenChange={closeModal} type={type} />
+            <Toaster />
         </>
     );
 }
