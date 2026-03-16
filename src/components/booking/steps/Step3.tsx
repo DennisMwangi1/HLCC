@@ -142,7 +142,7 @@ export function BookingStep3() {
                     caption_label: "text-xs uppercase tracking-widest font-bold text-black",
                     nav: "space-x-1 flex items-center",
                     nav_button: cn(
-                      "h-8 w-8 bg-white border border-black/5 rounded-none hover:bg-black/5 transition-colors",
+                      "h-8 w-8 bg-white border border-black/5 rounded-none hover:bg-slate-900/5 transition-colors",
                       "flex items-center justify-center"
                     ),
                     nav_button_previous: "absolute left-1",
@@ -154,8 +154,8 @@ export function BookingStep3() {
                     cell: "h-9 w-9 text-center text-xs p-0 relative [&:has([aria-selected])]:bg-transparent",
                     day: cn(
                       "h-9 w-9 p-0 font-medium rounded-none transition-all",
-                      "hover:bg-black/5 hover:text-black",
-                      "focus:bg-black/5 focus:text-black",
+                      "hover:bg-slate-900/5 hover:text-black",
+                      "focus:bg-slate-900/5 focus:text-black",
                       "aria-selected:opacity-100"
                     ),
                     day_selected: "bg-[#D4AF37] text-white hover:bg-[#D4AF37] hover:text-white focus:bg-[#D4AF37] focus:text-white font-bold shadow-lg scale-110 z-10",
@@ -182,10 +182,10 @@ export function BookingStep3() {
               <div className="space-y-4">
                 {[1, 2, 3].map((i) => (
                   <div key={i} className="space-y-2">
-                    <div className="h-2 bg-black/[0.02] rounded w-24 animate-pulse" />
+                    <div className="h-2 bg-slate-900/[0.02] rounded w-24 animate-pulse" />
                     <div className="grid grid-cols-4 gap-2">
                       {[1, 2, 3, 4].map((j) => (
-                        <div key={j} className="h-8 bg-black/[0.02] rounded animate-pulse" />
+                        <div key={j} className="h-8 bg-slate-900/[0.02] rounded animate-pulse" />
                       ))}
                     </div>
                   </div>

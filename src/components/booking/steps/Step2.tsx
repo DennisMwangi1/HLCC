@@ -96,7 +96,7 @@ export function BookingStep2({ bookingType }: BookingStep2Props) {
                           htmlFor={checkboxId}
                           className={`flex flex-col h-full items-start space-y-4 rounded-none border p-6 transition-all duration-500 cursor-pointer ${isChecked
                             ? 'border-[#D4AF37] bg-white shadow-xl'
-                            : 'border-black/5 hover:border-black/20 hover:bg-black/[0.02]'
+                            : 'border-black/5 hover:border-black/20 hover:bg-slate-900/[0.02]'
                             }`}
                         >
                           <div className="flex justify-between items-center w-full">
@@ -154,7 +154,7 @@ export function BookingStep2({ bookingType }: BookingStep2Props) {
                       key={timeframe.value}
                       className={`flex flex-col items-center justify-center p-4 h-24 rounded-none border transition-all duration-500 cursor-pointer text-center ${field.value === timeframe.value
                         ? 'border-[#D4AF37] bg-white shadow-lg'
-                        : 'border-black/5 hover:border-black/20 hover:bg-black/[0.02]'
+                        : 'border-black/5 hover:border-black/20 hover:bg-slate-900/[0.02]'
                         }`}
                       onClick={() => field.onChange(timeframe.value)}
                     >
@@ -205,7 +205,7 @@ export function BookingStep2({ bookingType }: BookingStep2Props) {
                       key={method.id}
                       className={`relative flex flex-col items-center justify-center rounded-none border p-8 cursor-pointer transition-all duration-500 ${field.value === method.id
                         ? 'border-[#D4AF37] bg-white shadow-xl translate-y-[-4px]'
-                        : 'border-black/5 hover:border-black/20 hover:bg-black/[0.1]'
+                        : 'border-black/5 hover:border-black/20 hover:bg-slate-900/[0.1]'
                         }`}
                       onClick={() => field.onChange(method.id)}
                     >

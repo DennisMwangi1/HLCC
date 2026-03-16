@@ -28,8 +28,8 @@ export default function InsightsList() {
       <BreadcrumbSchema items={breadcrumbs} />
       <main className="bg-white">
         {/* HERO */}
-        <section className="relative h-[50vh] flex items-center bg-black overflow-hidden">
-          <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/dark-matter.png')] opacity-[0.1] pointer-events-none" />
+        <section className="relative h-[50vh] flex items-center bg-slate-900 overflow-hidden">
+          <div className="absolute inset-0 bg-slate-900opacity-[0.1] pointer-events-none" />
           <div className="container relative z-10">
             <div className="max-w-4xl">
               <motion.p

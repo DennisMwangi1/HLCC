@@ -46,7 +46,7 @@ export default function InsightDetail() {
         <div className="container mx-auto px-4 md:px-6 text-center">
           <p className="text-[#D4AF37] uppercase tracking-widest text-xs mb-8">Error 404</p>
           <h1 className="text-4xl font-heading font-light mb-12 italic">Insight Not Found</h1>
-          <Button asChild className="bg-black text-white hover:bg-gray-800 rounded-none px-12 py-7 uppercase tracking-widest text-xs">
+          <Button asChild className="bg-slate-900 text-white hover:bg-gray-800 rounded-none px-12 py-7 uppercase tracking-widest text-xs">
             <Link to="/insights">Return to Insights</Link>
           </Button>
         </div>
@@ -69,8 +69,8 @@ export default function InsightDetail() {
 
       <main className="bg-white">
         {/* Article Hero */}
-        <section className="relative pt-40 pb-24 bg-black overflow-hidden">
-          <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/dark-matter.png')] opacity-[0.1] pointer-events-none" />
+        <section className="relative pt-40 pb-24 bg-slate-900 overflow-hidden">
+          <div className="absolute inset-0 bg-slate-900opacity-[0.1] pointer-events-none" />
           <div className="container relative z-10">
             <div className="max-w-4xl">
               <motion.div
@@ -184,7 +184,7 @@ export default function InsightDetail() {
                 )}
 
                 {article.originalUrl && (
-                  <div className="p-10 bg-black text-white">
+                  <div className="p-10 bg-slate-900 text-white">
                     <h3 className="text-xs uppercase tracking-[0.3em] font-bold text-white/40 mb-6">Full Publication</h3>
                     <p className="text-lg font-heading italic mb-8">Read the complete story in our digital warehouse.</p>
                     <Button asChild className="w-full bg-[#D4AF37] text-black hover:bg-[#F3E5AB] rounded-none py-7 text-[10px] uppercase font-bold tracking-widest">

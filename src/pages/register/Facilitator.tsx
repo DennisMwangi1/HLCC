@@ -42,7 +42,7 @@ function Section({ children, className = "" }: { children: React.ReactNode; clas
 
 function Hero() {
   return (
-    <section className="relative h-[60vh] flex items-center text-white overflow-hidden bg-black">
+    <section className="relative h-[60vh] flex items-center text-white overflow-hidden bg-slate-900">
       <div className="absolute inset-0">
         <ImageWithFallback
           src="/assets/img/facilitator.avif"
@@ -204,7 +204,7 @@ function Eligibility() {
           </div>
         </div>
 
-        <div className="max-w-3xl mx-auto p-12 bg-black text-white text-center">
+        <div className="max-w-3xl mx-auto p-12 bg-slate-900 text-white text-center">
           <p className="text-[#D4AF37] font-bold uppercase tracking-[0.3em] text-[10px] mb-4">The Emerging Voice</p>
           <h3 className="text-2xl font-heading font-light italic mb-6">New Perspectives</h3>
           <p className="text-white/40 font-light text-sm leading-relaxed">

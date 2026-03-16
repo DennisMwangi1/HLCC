@@ -23,8 +23,8 @@ export default function ServicesOverview() {
       <BreadcrumbSchema items={breadcrumbs} />
       <main className="bg-white">
         {/* Intro */}
-        <section className="relative h-[50vh] flex items-center justify-center bg-black overflow-hidden">
-          <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/dark-matter.png')] opacity-[0.1] pointer-events-none" />
+        <section className="relative h-[50vh] flex items-center justify-center bg-slate-900 overflow-hidden">
+          <div className="absolute inset-0 bg-slate-900opacity-[0.1] pointer-events-none" />
           <div className="container relative z-10 text-center">
             <p className="text-[#D4AF37] uppercase tracking-[0.4em] text-[10px] font-bold mb-8">
               The Capabilities
@@ -50,8 +50,8 @@ export default function ServicesOverview() {
         </section>
 
         {/* Closing CTA */}
-        <section className="py-40 bg-[#050505] text-white overflow-hidden relative border-t border-white/5">
-          <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/dark-matter.png')] opacity-[0.05] pointer-events-none" />
+        <section className="py-40  bg-slate-900 text-white overflow-hidden relative border-t border-white/5">
+          <div className="absolute inset-0 bg-[#050505] opacity-[0.05] pointer-events-none" />
           <div className="container relative mx-auto px-4 md:px-6 z-10">
             <div className="max-w-4xl mx-auto text-center">
               <p className="text-[#D4AF37] uppercase tracking-[0.3em] text-[10px] font-semibold mb-8">
@@ -85,13 +85,13 @@ function ServiceCard({ service: s, index: i }: { service: typeof services[0]; in
       className="group cursor-pointer"
       onClick={() => navigate(`/services/${s.slug}`)}
     >
-      <div className="relative aspect-video overflow-hidden bg-black mb-10">
+      <div className="relative aspect-video overflow-hidden bg-slate-900 mb-10">
         <img
           src={s.heroImage ?? '/assets/img/wanjiru.jpg'}
           alt={`${s.title} image`}
           className="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-110 transition-all duration-700"
         />
-        <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-all duration-700" />
+        <div className="absolute inset-0 bg-slate-900/20 group-hover:bg-transparent transition-all duration-700" />
       </div>
 
       <div className="border-l border-black/5 pl-8 group-hover:border-[#D4AF37] transition-colors duration-500">

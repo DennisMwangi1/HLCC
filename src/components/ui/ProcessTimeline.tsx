@@ -26,7 +26,7 @@ export function ProcessTimeline({
                 whileInView={{ height: "100%" }}
                 transition={{ duration: 1.5, ease: "easeInOut" }}
                 viewport={{ once: true }}
-                className="absolute left-1/2 top-0 w-[1px] -translate-x-1/2 bg-black/10"
+                className="absolute left-1/2 top-0 w-[1px] -translate-x-1/2 bg-slate-900/10"
             />
 
             <div className="space-y-32">

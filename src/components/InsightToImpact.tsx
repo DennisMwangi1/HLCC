@@ -23,8 +23,8 @@ export function InsightToImpact() {
     ];
 
     return (
-        <section className="py-32 bg-[#0a0a0a] text-white relative overflow-hidden">
-            <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-[0.03] pointer-events-none" />
+        <section className="py-32 bg-slate-900 text-white relative overflow-hidden">
+            <div className="absolute inset-0 bg-slate-900 opacity-[0.03] pointer-events-none" />
             <div className="absolute top-0 right-[-10%] w-[40%] h-[40%] bg-[#D4AF37]/5 rounded-full blur-[120px]" />
             <div className="absolute bottom-0 left-[-10%] w-[40%] h-[40%] bg-white/5 rounded-full blur-[120px]" />
 
@@ -55,7 +55,7 @@ export function InsightToImpact() {
                         >
                             <div className="mb-10 relative">
                                 <div className="absolute -inset-4 bg-white/5 rounded-full scale-0 group-hover:scale-100 transition-transform duration-500" />
-                                <div className="relative inline-flex items-center justify-center w-24 h-24 rounded-full border border-white/10 group-hover:border-[#D4AF37]/50 transition-colors duration-500 bg-black/40 backdrop-blur-sm">
+                                <div className="relative inline-flex items-center justify-center w-24 h-24 rounded-full border border-white/10 group-hover:border-[#D4AF37]/50 transition-colors duration-500 bg-slate-900/40 backdrop-blur-sm">
                                     <step.icon className="h-8 w-8 text-[#D4AF37]" strokeWidth={1} />
                                 </div>
                                 <div className="absolute -bottom-2 -right-2 w-8 h-8 rounded-full bg-[#0a0a0a] border border-white/5 flex items-center justify-center text-[10px] text-white/40 font-mono">

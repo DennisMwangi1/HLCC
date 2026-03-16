@@ -68,7 +68,7 @@ export function TimeSlotGroup({ groupedSlots, selectedTime, onTimeSelect, select
                       'disabled:opacity-30 disabled:cursor-not-allowed',
                       isSelected
                         ? 'bg-[#D4AF37] text-white border-[#D4AF37] shadow-xl translate-y-[-2px]'
-                        : 'border-black/5 hover:border-black/20 hover:bg-black/[0.02] bg-white text-black/60'
+                        : 'border-black/5 hover:border-black/20 hover:bg-slate-900/[0.02] bg-white text-black/60'
                     )}
                     aria-pressed={isSelected}
                   >

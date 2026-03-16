@@ -29,7 +29,7 @@ const formSchema = z.object({
     phone: z.string().min(5, { message: "Phone number is required." }),
     currentRole: z.string().min(2, { message: "Current role is required." }),
     linkedinUrl: z.string().optional(),
-    resumeLink: z.string().url({ message: "Please provide a valid URL (e.g., Google Drive, Dropbox)." }),
+    resume: z.instanceof(File).refine((file) => file.size <= 5 * 1024 * 1024, { message: "File size must be less than 5MB." }).refine((file) => ['application/pdf', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'].includes(file.type), { message: "Only PDF, DOC, or DOCX files are allowed." }),
     coverLetter: z.string().min(20, { message: "Please provide a brief cover letter." }),
 });
 
@@ -53,7 +53,7 @@ export default function JobDetail() {
             phone: "",
             currentRole: "",
             linkedinUrl: "",
-            resumeLink: "",
+            resume: undefined,
             coverLetter: "",
         },
     });
@@ -63,7 +63,7 @@ export default function JobDetail() {
             <div className="min-h-[50vh] flex flex-col items-center justify-center bg-white text-black py-20 px-4 text-center">
                 <h1 className="text-4xl font-heading font-light mb-4 italic">Position Not Found</h1>
                 <p className="text-black/50 font-light mb-8">The role you are looking for does not exist or has been closed.</p>
-                <Button onClick={() => navigate("/careers")} className="bg-black text-white rounded-none hover:bg-[#D4AF37] px-8 py-6 text-[10px] uppercase font-bold tracking-widest transition-all">
+                <Button onClick={() => navigate("/careers")} className="bg-slate-900 text-white rounded-none hover:bg-[#D4AF37] px-8 py-6 text-[10px] uppercase font-bold tracking-widest transition-all">
                     View Open Positions
                 </Button>
             </div>
@@ -79,17 +79,33 @@ export default function JobDetail() {
     async function onSubmit(values: z.infer<typeof formSchema>) {
         setIsSubmitting(true);
         try {
-            const result = await sendEmail({
-                to: "applications@hlcc.africa",
-                subject: `New Application: ${job!.title}`,
-                data: {
-                    JobTitle: job!.title,
-                    ...values,
-                },
-                formName: "Job Application",
-                userEmail: values.email,
-                userName: values.fullName,
+            const formData = new FormData();
+            formData.append('to', "hlccafrica@gmail.com");
+            formData.append('subject', `New Application: ${job!.title}`);
+            formData.append('html', `
+                <h3>Job Application Details</h3>
+                <p><strong>Job Title:</strong> ${job!.title}</p>
+                <p><strong>Full Name:</strong> ${values.fullName}</p>
+                <p><strong>Email:</strong> ${values.email}</p>
+                <p><strong>Phone:</strong> ${values.phone}</p>
+                <p><strong>Current Role:</strong> ${values.currentRole}</p>
+                <p><strong>LinkedIn URL:</strong> ${values.linkedinUrl || 'N/A'}</p>
+                <p><strong>Cover Letter:</strong></p>
+                <p>${values.coverLetter.replace(/\n/g, '<br>')}</p>
+            `);
+            formData.append('formName', "Job Application");
+            formData.append('userEmail', values.email);
+            formData.append('userName', values.fullName);
+            if (values.resume) {
+                formData.append('resume', values.resume);
+            }
+
+            const response = await fetch('/api/send-email', {
+                method: 'POST',
+                body: formData,
             });
+
+            const result = await response.json();
 
             if (result.success) {
                 toast.success("Application submitted successfully. We will be in touch!");
@@ -111,8 +127,8 @@ export default function JobDetail() {
             <BreadcrumbSchema items={breadcrumbs} />
             <main className="bg-white">
                 {/* HERO SECTION */}
-                <section className="relative pt-32 pb-24 bg-black text-white">
-                    <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/dark-matter.png')] opacity-[0.1] pointer-events-none" />
+                <section className="relative pt-32 pb-24 bg-slate-900 text-white">
+                    <div className="absolute inset-0 bg-slate-900opacity-[0.1] pointer-events-none" />
                     <div className="container relative z-10 mx-auto px-4 md:px-6">
                         <Link to="/careers" className="inline-flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.2em] text-[#D4AF37] hover:text-white transition-colors mb-12">
                             <ArrowLeft className="w-3 h-3" /> Back to Careers
@@ -190,7 +206,7 @@ export default function JobDetail() {
                                         <ul className="space-y-4">
                                             {job.niceToHave.map((req, i) => (
                                                 <li key={i} className="flex gap-4 items-start">
-                                                    <span className="mt-2.5 w-1.5 h-1.5 rounded-full bg-black/20 shrink-0" />
+                                                    <span className="mt-2.5 w-1.5 h-1.5 rounded-full bg-slate-900/20 shrink-0" />
                                                     <span className="text-black/60 font-light leading-relaxed">{req}</span>
                                                 </li>
                                             ))}
@@ -279,14 +295,20 @@ export default function JobDetail() {
 
                                             <FormField
                                                 control={form.control}
-                                                name="resumeLink"
-                                                render={({ field }) => (
+                                                name="resume"
+                                                render={({ field: { value, onChange, ...field } }) => (
                                                     <FormItem>
-                                                        <FormLabel className="text-[10px] uppercase tracking-[0.2em] font-bold text-black/40">Resume/CV Link *</FormLabel>
+                                                        <FormLabel className="text-[10px] uppercase tracking-[0.2em] font-bold text-black/40">Resume/CV *</FormLabel>
                                                         <FormControl>
-                                                            <Input type="url" className="border-0 border-b border-black/10 rounded-none bg-transparent px-0 py-4 focus-visible:ring-0 focus-visible:border-[#D4AF37] transition-all" placeholder="Google Drive, Dropbox, etc." {...field} />
+                                                            <Input
+                                                                type="file"
+                                                                accept=".pdf,.doc,.docx"
+                                                                className="border-0 border-b border-black/10 rounded-none bg-transparent px-0 py-4 focus-visible:ring-0 focus-visible:border-[#D4AF37] transition-all"
+                                                                onChange={(e) => onChange(e.target.files?.[0])}
+                                                                {...field}
+                                                            />
                                                         </FormControl>
-                                                        <p className="text-[10px] text-black/40 mt-1">Please provide a valid, accessible link to your resume.</p>
+                                                        <p className="text-[10px] text-black/40 mt-1">Upload your resume (PDF, DOC, or DOCX, max 5MB).</p>
                                                         <FormMessage className="text-[10px] uppercase font-bold text-red-500/80" />
                                                     </FormItem>
                                                 )}
@@ -309,7 +331,7 @@ export default function JobDetail() {
                                             <Button
                                                 type="submit"
                                                 disabled={isSubmitting}
-                                                className="w-full bg-black text-white hover:bg-[#D4AF37] rounded-none py-7 text-[10px] uppercase tracking-widest font-bold transition-colors duration-500"
+                                                className="w-full bg-slate-900 text-white hover:bg-[#D4AF37] rounded-none py-7 text-[10px] uppercase tracking-widest font-bold transition-colors duration-500"
                                             >
                                                 {isSubmitting ? (
                                                     <>

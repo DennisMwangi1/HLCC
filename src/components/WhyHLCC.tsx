@@ -14,9 +14,9 @@ export function WhyHLCC() {
     return (
         <section
             id="why-hlcc"
-            className="py-32 bg-[#050505] text-white relative overflow-hidden"
+            className="py-32 bg-slate-900 text-white relative overflow-hidden"
         >
-            <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/dark-matter.png')] opacity-[0.05] pointer-events-none" />
+            <div className="absolute inset-0 bg-slate-900 opacity-[0.05] pointer-events-none" />
 
             <div className="container relative mx-auto px-4 md:px-6">
                 <div className="grid lg:grid-cols-2 gap-24 items-center">

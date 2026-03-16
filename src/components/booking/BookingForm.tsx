@@ -143,7 +143,7 @@ export function BookingForm({ type, onSuccess, onCancel }: BookingFormProps) {
       <div className="px-0 pt-4 pb-12">
         <div className="relative flex items-center justify-between max-w-2xl mx-auto">
           {/* Connecting Lines */}
-          <div className="absolute top-1/2 left-0 right-0 h-px bg-black/5 -translate-y-1/2">
+          <div className="absolute top-1/2 left-0 right-0 h-px bg-slate-900/5 -translate-y-1/2">
             <motion.div
               className="h-full bg-[#D4AF37]"
               initial={{ width: 0 }}
@@ -222,7 +222,7 @@ export function BookingForm({ type, onSuccess, onCancel }: BookingFormProps) {
                   type="button"
                   onClick={nextStep}
                   disabled={isSubmitting}
-                  className="bg-black text-white hover:bg-[#D4AF37] transition-all duration-500 rounded-none px-12 py-7 text-[10px] uppercase tracking-widest font-bold h-auto"
+                  className="bg-slate-900 text-white hover:bg-[#D4AF37] transition-all duration-500 rounded-none px-12 py-7 text-[10px] uppercase tracking-widest font-bold h-auto"
                 >
                   Continue
                 </Button>
@@ -230,7 +230,7 @@ export function BookingForm({ type, onSuccess, onCancel }: BookingFormProps) {
                 <Button
                   type="submit"
                   disabled={isSubmitting}
-                  className="bg-black text-white hover:bg-[#D4AF37] transition-all duration-500 rounded-none px-16 py-7 text-[10px] uppercase tracking-widest font-bold h-auto disabled:opacity-50"
+                  className="bg-slate-900 text-white hover:bg-[#D4AF37] transition-all duration-500 rounded-none px-16 py-7 text-[10px] uppercase tracking-widest font-bold h-auto disabled:opacity-50"
                 >
                   {isSubmitting ? (
                     <>

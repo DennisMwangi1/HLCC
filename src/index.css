@@ -1243,12 +1243,12 @@
     background-color: var(--background);
   }
 
-  .bg-black\/50 {
+  .bg-slate-900\/50 {
     background-color: #00000080;
   }
 
   @supports (color: color-mix(in lab, red, red)) {
-    .bg-black\/50 {
+    .bg-slate-900\/50 {
       background-color: color-mix(in oklab, var(--color-black) 50%, transparent);
     }
   }

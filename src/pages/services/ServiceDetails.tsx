@@ -84,7 +84,7 @@ const MethodologyPill = ({ text, index }: MethodologyPillProps) => (
     whileInView={{ opacity: 1, scale: 1 }}
     transition={{ duration: 0.5, delay: index * 0.05 }}
     viewport={{ once: true }}
-    className="px-6 py-3 border border-black/10 rounded-none text-[10px] font-bold uppercase tracking-[0.2em] text-black hover:bg-black hover:text-white transition-all duration-500 cursor-default"
+    className="px-6 py-3 border border-black/10 rounded-none text-[10px] font-bold uppercase tracking-[0.2em] text-black hover:bg-slate-900 hover:text-white transition-all duration-500 cursor-default"
   >
     {text}
   </motion.div>
@@ -122,7 +122,7 @@ export default function ServiceDetails() {
         <div className="container mx-auto px-4 md:px-6 text-center">
           <p className="text-[#D4AF37] uppercase tracking-widest text-xs mb-8">Error 404</p>
           <h1 className="text-4xl font-heading font-light mb-12 italic">Capability Not Found</h1>
-          <Button asChild className="bg-black text-white hover:bg-gray-800 rounded-none px-12 py-7 uppercase tracking-widest text-xs">
+          <Button asChild className="bg-slate-900 text-white hover:bg-gray-800 rounded-none px-12 py-7 uppercase tracking-widest text-xs">
             <Link to="/services">Return to Capabilities</Link>
           </Button>
         </div>
@@ -137,7 +137,7 @@ export default function ServiceDetails() {
       {breadcrumbs.length > 0 && <BreadcrumbSchema items={breadcrumbs} />}
       <main className="bg-white">
         {/* HERO SECTION */}
-        <section className="relative h-[70vh] flex items-center text-white overflow-hidden bg-black">
+        <section className="relative h-[70vh] flex items-center text-white overflow-hidden bg-slate-900">
           {service.heroImage && (
             <div className="absolute inset-0">
               <ImageWithFallback
@@ -228,7 +228,7 @@ export default function ServiceDetails() {
                 viewport={{ once: true }}
                 className="lg:col-span-2"
               >
-                <div className="p-12 bg-[#050505] text-white">
+                <div className="p-12 bg-slate-900 text-white">
                   <Target className="w-8 h-8 text-[#D4AF37] mb-8" strokeWidth={1} />
                   <h3 className="text-xs uppercase tracking-[0.3em] text-white/40 font-bold mb-4">Core Objective</h3>
                   <p className="text-2xl font-heading font-light italic leading-tight">

@@ -44,7 +44,7 @@ export function Header() {
     };
 
     return (
-        <header className={`sticky top-0 z-50 w-full transition-all duration-500 border-b bg-black border-white/10 shadow-2xl`}>
+        <header className={`sticky top-0 z-50 w-full transition-all duration-500 border-b bg-slate-900 border-white/10 shadow-2xl`}>
             <div className={`container mx-auto flex transition-all duration-500 items-center justify-between px-4 md:px-6 ${isScrolled ? "h-16" : "h-20"}`}>
                 <div>
                     <Link to="/" className="flex flex-col items-start w-fit group">
@@ -79,7 +79,7 @@ export function Header() {
                             </Button>
                             {showDropdown && (
                                 <div
-                                    className="absolute right-0 mt-4 w-56 bg-black border border-white/10 shadow-2xl z-50 overflow-hidden"
+                                    className="absolute right-0 mt-4 w-56 bg-slate-900 border border-white/10 shadow-2xl z-50 overflow-hidden"
                                     onMouseLeave={() => setShowDropdown(false)}
                                 >
                                     <Link
@@ -111,7 +111,7 @@ export function Header() {
 
                         <SheetContent
                             side="right"
-                            className="bg-black border-l border-white/10 text-white w-80 max-w-full p-0"
+                            className="bg-slate-900 border-l border-white/10 text-white w-80 max-w-full p-0"
                         >
                             <nav className="flex flex-col h-full">
                                 <div className="p-8 pt-20 flex flex-col gap-8">
@@ -127,7 +127,7 @@ export function Header() {
                                     ))}
                                 </div>
 
-                                <div className="mt-auto p-8 bg-[#050505] border-t border-white/5">
+                                <div className="mt-auto p-8 bg-slate-900 border-t border-white/5">
                                     <p className="text-[#D4AF37] uppercase tracking-[0.4em] text-[9px] font-bold mb-6">Partnerships</p>
                                     <div className="flex flex-col gap-4">
                                         <Link

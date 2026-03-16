@@ -210,7 +210,7 @@ export function DynamicForm({
                                                         {...field}
                                                         type={f.type === "file" ? "file" : f.type}
                                                         placeholder={f.placeholder}
-                                                        className={cn(baseInputStyles, f.type === "file" && "file:bg-black/5 file:border-0 file:rounded-none file:text-[10px] file:uppercase file:font-bold file:tracking-widest file:px-4 file:py-2 file:mr-4 file:cursor-pointer")}
+                                                        className={cn(baseInputStyles, f.type === "file" && "file:bg-slate-900/5 file:border-0 file:rounded-none file:text-[10px] file:uppercase file:font-bold file:tracking-widest file:px-4 file:py-2 file:mr-4 file:cursor-pointer")}
                                                     />
                                                 );
                                             }}
@@ -232,7 +232,7 @@ export function DynamicForm({
                 <Button
                     type="submit"
                     disabled={isSubmitting}
-                    className="bg-black text-white px-16 py-8 rounded-none uppercase tracking-[0.2em] text-[10px] font-bold hover:bg-[#D4AF37] transition-all duration-500 w-full md:w-auto shadow-xl"
+                    className="bg-slate-900 text-white px-16 py-8 rounded-none uppercase tracking-[0.2em] text-[10px] font-bold hover:bg-[#D4AF37] transition-all duration-500 w-full md:w-auto shadow-xl"
                 >
                     {isSubmitting ? (
                         <>

@@ -81,8 +81,8 @@ export default function Contact() {
       <BreadcrumbSchema items={breadcrumbs} />
       <main className="bg-white">
         {/* Hero */}
-        <section className="relative h-[40vh] flex items-center justify-center bg-black overflow-hidden">
-          <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/dark-matter.png')] opacity-[0.1] pointer-events-none" />
+        <section className="relative h-[40vh] flex items-center justify-center bg-slate-900 overflow-hidden">
+          <div className="absolute inset-0 bg-slate-900opacity-[0.1] pointer-events-none" />
           <div className="container relative z-10 text-center">
             <p className="text-[#D4AF37] uppercase tracking-[0.4em] text-[10px] font-bold mb-8">
               The Connection
@@ -183,7 +183,7 @@ export default function Contact() {
 
                     <Button
                       type="submit"
-                      className="bg-black text-white px-12 py-8 rounded-none uppercase tracking-[0.2em] text-[10px] font-bold hover:bg-[#D4AF37] transition-all duration-500 w-full"
+                      className="bg-slate-900 text-white px-12 py-8 rounded-none uppercase tracking-[0.2em] text-[10px] font-bold hover:bg-[#D4AF37] transition-all duration-500 w-full"
                       disabled={isSubmitting}
                     >
                       {isSubmitting ? (
@@ -271,7 +271,7 @@ export default function Contact() {
         </section>
 
         {/* Social Presence */}
-        <section className="py-24 bg-[#050505] text-white">
+        <section className="py-24 bg-slate-900 text-white">
           <div className="container mx-auto px-4 md:px-6 text-center">
             <p className="text-[#D4AF37] uppercase tracking-[0.4em] text-[9px] font-bold mb-8">Digital Presence</p>
             <div className="flex justify-center gap-16">

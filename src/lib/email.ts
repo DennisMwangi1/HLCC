@@ -4,7 +4,11 @@
  */
 
 export interface EmailOptions {
-  to: 'info@hlcc.africa' | 'support@hlcc.africa' | 'applications@hlcc.africa';
+  to:
+    | 'info@hlcc.africa'
+    | 'support@hlcc.africa'
+    | 'applications@hlcc.africa'
+    | 'hlccafrica@gmail.com';
   subject: string;
   data: Record<string, unknown>;
   formName: string;

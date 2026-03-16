@@ -27,7 +27,7 @@ export function BookingConfirmation({ onClose }: BookingConfirmationProps) {
         Detailed confirmation protocol has been dispatched to your official email.
       </p>
 
-      <div className="border border-black/5 p-10 mb-12 text-center bg-black/[0.01]">
+      <div className="border border-black/5 p-10 mb-12 text-center bg-slate-900/[0.01]">
         <h4 className="text-[10px] uppercase tracking-[0.3em] font-bold text-black mb-6">Engagement Protocol</h4>
         <div className="space-y-4 text-[10px] uppercase tracking-widest text-black/40 font-medium leading-relaxed">
           <p>1. Verify dispatch in your primary inbox</p>
@@ -44,7 +44,7 @@ export function BookingConfirmation({ onClose }: BookingConfirmationProps) {
         >
           &larr; Return to Portal
         </Button>
-        <Button className="bg-black text-white hover:bg-[#D4AF37] transition-all duration-500 rounded-none px-12 py-7 text-[10px] uppercase tracking-widest font-bold h-auto shadow-xl">
+        <Button className="bg-slate-900 text-white hover:bg-[#D4AF37] transition-all duration-500 rounded-none px-12 py-7 text-[10px] uppercase tracking-widest font-bold h-auto shadow-xl">
           Integrate to Calendar
         </Button>
       </div>

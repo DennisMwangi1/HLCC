@@ -60,8 +60,8 @@ function SectionContainer({ children, className = "" }: { children: React.ReactN
 // 0) About Hero
 function AboutHero() {
   return (
-    <section className="relative h-[60vh] flex items-center justify-center bg-black overflow-hidden">
-      <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/dark-matter.png')] opacity-[0.1] pointer-events-none" />
+    <section className="relative h-[60vh] flex items-center justify-center bg-slate-900 overflow-hidden">
+      <div className="absolute inset-0 bg-slate-900opacity-[0.1] pointer-events-none" />
       <div className="container relative z-10 text-center">
         <motion.p
           initial={{ opacity: 0, letterSpacing: '0.4em' }}
@@ -143,8 +143,8 @@ function OurStory() {
 // 2) Our Purpose
 function OurPurpose() {
   return (
-    <section className="py-40 relative bg-black overflow-hidden">
-      <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/dark-matter.png')] opacity-[0.1] pointer-events-none" />
+    <section className="py-40 relative bg-slate-900 overflow-hidden">
+      <div className="absolute inset-0 bg-slate-900opacity-[0.1] pointer-events-none" />
       <div className="container mx-auto px-4 md:px-6 relative z-10">
         <div className="max-w-4xl mx-auto text-center">
           <motion.div
@@ -241,7 +241,7 @@ function AdvisorCard({ advisor, index }: { advisor: Advisor; index: number; }) {
         className="group cursor-pointer"
         onClick={() => setIsModalOpen(true)}
       >
-        <div className="relative aspect-[3/4] overflow-hidden bg-black mb-6">
+        <div className="relative aspect-[3/4] overflow-hidden bg-slate-900 mb-6">
           {advisor.image ? (
             <img
               src={advisor.image}
@@ -266,7 +266,7 @@ function AdvisorCard({ advisor, index }: { advisor: Advisor; index: number; }) {
       <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
         <DialogContent className="sm:max-w-3xl max-h-[90vh] overflow-y-auto bg-white rounded-none border-none p-0 scrollbar-hide">
           <div className="grid md:grid-cols-2">
-            <div className="bg-black aspect-square md:aspect-auto">
+            <div className="bg-slate-900 aspect-square md:aspect-auto">
               {advisor.image && <img src={advisor.image} className="w-full h-full object-cover" />}
             </div>
             <div className="p-12 flex flex-col justify-center">
@@ -402,8 +402,8 @@ function OurImpact() {
   ];
 
   return (
-    <section className="py-40 bg-black text-white relative overflow-hidden">
-      <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/dark-matter.png')] opacity-[0.1] pointer-events-none" />
+    <section className="py-40 bg-slate-900 text-white relative overflow-hidden">
+      <div className="absolute inset-0 bg-slate-900opacity-[0.1] pointer-events-none" />
       <div className="container relative mx-auto px-4 md:px-6 z-10">
         <div className="max-w-4xl mx-auto text-center mb-24">
           <p className="text-[#D4AF37] uppercase tracking-[0.3em] text-[10px] font-semibold mb-6">

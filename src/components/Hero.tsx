@@ -57,7 +57,7 @@ export function Hero({ onBookConsultation }: HeroProps) {
     }, [controls]);
 
     return (
-        <section className="relative min-h-[90vh] flex flex-col justify-center overflow-hidden bg-[#050505]">
+        <section className="relative min-h-[92vh] flex flex-col justify-center overflow-hidden bg-slate-900">
             {/* Background Image with subtle parallax/zoom effect if possible, but keep it simple for now */}
             <div
                 className="absolute inset-0 opacity-40"
@@ -69,7 +69,7 @@ export function Hero({ onBookConsultation }: HeroProps) {
             />
 
             {/* Premium Overlay: Darker, more sophisticated gradient */}
-            <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-[#050505]" />
+            <div className="absolute inset-0 bg-gradient-to-b from-slate-900/60 via-slate-900/40 to-slate-900" />
 
             {/* Content grid */}
             <div className="container relative mx-auto px-4 md:px-6 pt-32 pb-20">
