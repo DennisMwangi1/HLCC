@@ -28,66 +28,66 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     try {
         const form = formidable({ multiples: false });
 
-        form.parse(req, async (err, fields, files) => {
-            if (err) {
-                console.error('Form parsing error:', err);
-                return res.status(400).json({ error: 'Form parsing failed' });
-            }
+        const { fields, files } = await new Promise<{ fields: formidable.Fields; files: formidable.Files }>((resolve, reject) => {
+            form.parse(req, (err, fields, files) => {
+                if (err) reject(err);
+                else resolve({ fields, files });
+            });
+        });
 
-            const to = Array.isArray(fields.to) ? fields.to[0] : fields.to;
-            const subject = Array.isArray(fields.subject) ? fields.subject[0] : fields.subject;
-            const html = Array.isArray(fields.html) ? fields.html[0] : fields.html;
-            const from = Array.isArray(fields.from) ? fields.from[0] : fields.from;
-            const userEmail = Array.isArray(fields.userEmail) ? fields.userEmail[0] : fields.userEmail;
-            const userSubject = Array.isArray(fields.userSubject) ? fields.userSubject[0] : fields.userSubject;
-            const userHtml = Array.isArray(fields.userHtml) ? fields.userHtml[0] : fields.userHtml;
+        const to = Array.isArray(fields.to) ? fields.to[0] : fields.to;
+        const subject = Array.isArray(fields.subject) ? fields.subject[0] : fields.subject;
+        const html = Array.isArray(fields.html) ? fields.html[0] : fields.html;
+        const from = Array.isArray(fields.from) ? fields.from[0] : fields.from;
+        const userEmail = Array.isArray(fields.userEmail) ? fields.userEmail[0] : fields.userEmail;
+        const userSubject = Array.isArray(fields.userSubject) ? fields.userSubject[0] : fields.userSubject;
+        const userHtml = Array.isArray(fields.userHtml) ? fields.userHtml[0] : fields.userHtml;
 
-            const attachments = [];
-            if (files.resume) {
-                const file = Array.isArray(files.resume) ? files.resume[0] : files.resume;
-                attachments.push({
-                    filename: file.originalFilename || 'resume.pdf',
-                    content: await file.toBuffer(),
-                });
-            }
+        const attachments = [];
+        if (files.resume) {
+            const file = Array.isArray(files.resume) ? files.resume[0] : files.resume;
+            attachments.push({
+                filename: file.originalFilename || 'resume.pdf',
+                content: await file.toBuffer(),
+            });
+        }
 
-            console.log('Sending email to:', to);
+        console.log('Sending email to:', to);
 
-            // 1. Send notification to HLCC team
-            const teamResponse = await resend.emails.send({
-                from: from || 'HLCC Website <notifications@hlcc.africa>',
-                to: to || 'info@hlcc.africa',
-                subject: subject,
-                html: html,
-                attachments: attachments,
+        // 1. Send notification to HLCC team
+        const teamResponse = await resend.emails.send({
+            from: from || 'HLCC Website <notifications@hlcc.africa>',
+            to: to || 'info@hlcc.africa',
+            subject: subject,
+            html: html,
+            attachments: attachments,
+        });
+
+        if (teamResponse.error) {
+            console.error('Resend team notification error:', teamResponse.error);
+            return res.status(400).json({ error: teamResponse.error.message || 'Team notification failed' });
+        }
+
+        console.log('Team notification sent successfully:', teamResponse.data?.id);
+
+        // 2. Send automated response to user if userEmail is provided
+        if (userEmail && userHtml) {
+            console.log('Sending automated response to:', userEmail);
+            const userResponse = await resend.emails.send({
+                from: 'HLCC <info@hlcc.africa>',
+                to: userEmail,
+                subject: userSubject || 'We received your message - HLCC',
+                html: userHtml,
             });
 
-            if (teamResponse.error) {
-                console.error('Resend team notification error:', teamResponse.error);
-                return res.status(400).json({ error: teamResponse.error.message || 'Team notification failed' });
+            if (userResponse.error) {
+                console.error('Resend automated response error:', userResponse.error);
+            } else {
+                console.log('Automated response sent successfully:', userResponse.data?.id);
             }
+        }
 
-            console.log('Team notification sent successfully:', teamResponse.data?.id);
-
-            // 2. Send automated response to user if userEmail is provided
-            if (userEmail && userHtml) {
-                console.log('Sending automated response to:', userEmail);
-                const userResponse = await resend.emails.send({
-                    from: 'HLCC <info@hlcc.africa>',
-                    to: userEmail,
-                    subject: userSubject || 'We received your message - HLCC',
-                    html: userHtml,
-                });
-
-                if (userResponse.error) {
-                    console.error('Resend automated response error:', userResponse.error);
-                } else {
-                    console.log('Automated response sent successfully:', userResponse.data?.id);
-                }
-            }
-
-            return res.status(200).json({ success: true, id: teamResponse.data?.id });
-        });
+        return res.status(200).json({ success: true, id: teamResponse.data?.id });
     } catch (err: unknown) {
         console.error('Server error caught in handler:', err);
         const errorMessage = err instanceof Error ? err.message : 'Internal server error';
