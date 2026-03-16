@@ -82,15 +82,77 @@ export default function JobDetail() {
             formData.append('to', "applications@hlcc.africa");
             formData.append('subject', `New Application: ${job!.title}`);
             formData.append('html', `
-                <h3>Job Application Details</h3>
-                <p><strong>Job Title:</strong> ${job!.title}</p>
-                <p><strong>Full Name:</strong> ${values.fullName}</p>
-                <p><strong>Email:</strong> ${values.email}</p>
-                <p><strong>Phone:</strong> ${values.phone}</p>
-                <p><strong>Current Role:</strong> ${values.currentRole}</p>
-                <p><strong>LinkedIn URL:</strong> ${values.linkedinUrl || 'N/A'}</p>
-                <p><strong>Cover Letter:</strong></p>
-                <p>${values.coverLetter.replace(/\n/g, '<br>')}</p>
+                <div style="margin:0; padding:0; background-color:#f5f1ea; font-family: Georgia, 'Times New Roman', serif; color:#1f1a17;">
+                    <div style="max-width:680px; margin:0 auto; padding:32px 20px;">
+                        <div style="background:linear-gradient(135deg, #1f1a17 0%, #3a312b 100%); border-radius:24px 24px 0 0; padding:32px 36px; text-align:left;">
+                            <div style="font-size:12px; letter-spacing:2px; text-transform:uppercase; color:#d8c7ae; margin-bottom:12px;">
+                                HLCC Careers
+                            </div>
+                            <h1 style="margin:0; font-size:32px; line-height:1.2; font-weight:700; color:#f8f4ee;">
+                                New Job Application
+                            </h1>
+                            <p style="margin:12px 0 0; font-size:15px; line-height:1.7; color:#e8ddd0;">
+                                A new application has been submitted through the HLCC website and is ready for review.
+                            </p>
+                        </div>
+
+                        <div style="background-color:#ffffff; border:1px solid #e6ddd2; border-top:none; border-radius:0 0 24px 24px; padding:32px 24px 24px; box-shadow:0 10px 30px rgba(31, 26, 23, 0.08);">
+                            <div style="background-color:#fbf8f3; border:1px solid #ece2d6; border-radius:20px; padding:24px;">
+                                <div style="font-size:12px; letter-spacing:1.6px; text-transform:uppercase; color:#8b735c; margin-bottom:18px;">
+                                    Application Details
+                                </div>
+
+                                <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="border-collapse:collapse;">
+                                    <tr>
+                                        <td style="padding:0 0 16px; border-bottom:1px solid #eee4d8; vertical-align:top; width:38%;">
+                                            <div style="font-size:11px; letter-spacing:1.4px; text-transform:uppercase; color:#9a826a; margin-bottom:6px;">Job Title</div>
+                                            <div style="font-size:17px; line-height:1.5; color:#201b18; font-weight:600;">${job!.title}</div>
+                                        </td>
+                                        <td style="padding:0 0 16px; border-bottom:1px solid #eee4d8; vertical-align:top;">
+                                            <div style="font-size:11px; letter-spacing:1.4px; text-transform:uppercase; color:#9a826a; margin-bottom:6px;">Full Name</div>
+                                            <div style="font-size:17px; line-height:1.5; color:#201b18; font-weight:600;">${values.fullName}</div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding:16px 0; border-bottom:1px solid #eee4d8; vertical-align:top; width:38%;">
+                                            <div style="font-size:11px; letter-spacing:1.4px; text-transform:uppercase; color:#9a826a; margin-bottom:6px;">Email</div>
+                                            <div style="font-size:15px; line-height:1.6; color:#3a312b;">${values.email}</div>
+                                        </td>
+                                        <td style="padding:16px 0; border-bottom:1px solid #eee4d8; vertical-align:top;">
+                                            <div style="font-size:11px; letter-spacing:1.4px; text-transform:uppercase; color:#9a826a; margin-bottom:6px;">Phone</div>
+                                            <div style="font-size:15px; line-height:1.6; color:#3a312b;">${values.phone}</div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding:16px 0; border-bottom:1px solid #eee4d8; vertical-align:top; width:38%;">
+                                            <div style="font-size:11px; letter-spacing:1.4px; text-transform:uppercase; color:#9a826a; margin-bottom:6px;">Current Role</div>
+                                            <div style="font-size:15px; line-height:1.6; color:#3a312b;">${values.currentRole}</div>
+                                        </td>
+                                        <td style="padding:16px 0; border-bottom:1px solid #eee4d8; vertical-align:top;">
+                                            <div style="font-size:11px; letter-spacing:1.4px; text-transform:uppercase; color:#9a826a; margin-bottom:6px;">LinkedIn URL</div>
+                                            <div style="font-size:15px; line-height:1.6; color:#3a312b; word-break:break-word;">${values.linkedinUrl || 'N/A'}</div>
+                                        </td>
+                                    </tr>
+                                </table>
+
+                                <div style="margin-top:24px;">
+                                    <div style="font-size:12px; letter-spacing:1.6px; text-transform:uppercase; color:#8b735c; margin-bottom:12px;">
+                                        Cover Letter
+                                    </div>
+                                    <div style="background-color:#fffdfa; border:1px solid #e8ddd0; border-left:4px solid #b8956f; border-radius:16px; padding:20px; font-size:15px; line-height:1.8; color:#342b26;">
+                                        ${values.coverLetter.replace(/\n/g, '<br>')}
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div style="padding-top:20px; text-align:center;">
+                                <p style="margin:0; font-size:12px; line-height:1.6; color:#8f7c69;">
+                                    Submitted from the HLCC website
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             `);
             formData.append('formName', "Job Application");
             formData.append('userEmail', values.email);
