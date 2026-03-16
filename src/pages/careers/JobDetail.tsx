@@ -20,7 +20,6 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
-import { sendEmail } from "@/lib/email";
 import { toast } from "sonner";
 
 const formSchema = z.object({
