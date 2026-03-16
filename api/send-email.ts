@@ -66,7 +66,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
     const teamResponse = await resend.emails.send({
       from: from || 'HLCC Website <notifications@hlcc.africa>',
-      to: to || 'info@hlcc.africa',
+      to: to || 'applications@hlcc.africa',
       subject,
       html,
       attachments,
