@@ -79,7 +79,7 @@ export default function JobDetail() {
         setIsSubmitting(true);
         try {
             const formData = new FormData();
-            formData.append('to', "hlccafrica@gmail.com");
+            formData.append('to', "applications@hlcc.africa");
             formData.append('subject', `New Application: ${job!.title}`);
             formData.append('html', `
                 <h3>Job Application Details</h3>
