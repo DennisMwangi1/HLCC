@@ -1,36 +1,4 @@
-import { Star } from "lucide-react";
-
 export function Testimonials() {
-    const testimonials = [
-        {
-            quote:
-                "HLCC helped us reimagine leadership across our regional offices. The coaching process built confidence, empathy, and accountability at every level.",
-            author: "Angela M.",
-            role: "Regional HR Director, Pan-African Financial Group",
-            initials: "AM",
-        },
-        {
-            quote:
-                "Their culture-shaping work was eye-opening. For the first time, our values are lived daily — not just printed on the wall.",
-            author: "David K.",
-            role: "Chief Executive Officer, Energy Solutions Africa",
-            initials: "DK",
-        },
-        {
-            quote:
-                "The leadership labs challenged our senior managers to think differently. Engagement scores have risen sharply since partnering with HLCC.",
-            author: "Grace T.",
-            role: "Group Learning Manager, FMCG East Africa",
-            initials: "GT",
-        },
-        {
-            quote:
-                "We outsourced our HR operations to HLCC and gained more than compliance — we gained clarity, structure, and a stronger sense of culture.",
-            author: "Samuel N.",
-            role: "People & Culture Lead, Tech Venture Kenya",
-            initials: "SN",
-        },
-    ];
 
     return (
         <section className="py-32 bg-slate-900 text-white relative overflow-hidden">
