@@ -8,7 +8,7 @@ const __dirname = dirname(__filename);
 // Get base URL from environment variable or use a default
 // Set SITE_URL environment variable in your deployment platform (e.g., Vercel)
 // For Vercel, you can set it in the project settings or via CLI: vercel env add SITE_URL
-const baseUrl = process.env.SITE_URL || process.env.VITE_SITE_URL || 'https://your-domain.com';
+const baseUrl = process.env.SITE_URL || process.env.VITE_SITE_URL || 'https://hlcc.africa';
 
 // Static routes with their priorities and change frequencies
 const staticRoutes = [
@@ -19,6 +19,7 @@ const staticRoutes = [
   { path: '/contact', priority: '0.7', changefreq: 'monthly' },
   { path: '/register/coach', priority: '0.6', changefreq: 'monthly' },
   { path: '/register/facilitator', priority: '0.6', changefreq: 'monthly' },
+  { path: '/careers', priority: '0.8', changefreq: 'weekly' },
 ];
 
 // Function to extract slugs from TypeScript content files
@@ -61,8 +62,19 @@ const insightRoutes = insightSlugs.map(slug => ({
   changefreq: 'monthly',
 }));
 
+// Extract career slugs
+const careersPath = join(__dirname, '..', 'src', 'content', 'careers.ts');
+const careerSlugs = extractSlugs(careersPath, /slug:\s*["']([^"']+)["']/g);
+
+// Dynamic career routes
+const careerRoutes = careerSlugs.map(slug => ({
+  path: `/careers/${slug}`,
+  priority: '0.7',
+  changefreq: 'weekly',
+}));
+
 // Combine all routes
-const allRoutes = [...staticRoutes, ...serviceRoutes, ...insightRoutes];
+const allRoutes = [...staticRoutes, ...serviceRoutes, ...insightRoutes, ...careerRoutes];
 
 // Get current date in ISO format
 const currentDate = new Date().toISOString().split('T')[0];
