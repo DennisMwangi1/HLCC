@@ -5,10 +5,8 @@ import { dirname, join } from 'path';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
-// Get base URL from environment variable or use a default
-// Set SITE_URL environment variable in your deployment platform (e.g., Vercel)
-// For Vercel, you can set it in the project settings or via CLI: vercel env add SITE_URL
-const baseUrl = process.env.SITE_URL || process.env.VITE_SITE_URL || 'https://hlcc.africa';
+// Base URL for sitemap — always use the canonical non-www domain
+const baseUrl = (process.env.SITE_URL || process.env.VITE_SITE_URL || 'https://hlcc.africa').replace(/\/+$/, '');
 
 // Static routes with their priorities and change frequencies
 const staticRoutes = [

@@ -13,6 +13,7 @@ import InsightsList from "@/pages/insights/InsightsList";
 import InsightDetail from "@/pages/insights/InsightDetail";
 import CareersList from "@/pages/careers/CareersList";
 import JobDetail from "@/pages/careers/JobDetail";
+import NotFound from "@/pages/NotFound";
 import { BookingModal } from "@/components/booking/BookingModal";
 import { useBookingModal } from "@/hooks/useBookingModal";
 import { Toaster } from "@/components/ui/sonner";
@@ -39,6 +40,7 @@ function AppContent({ onBookConsultation, onBookDiscovery }: AppContentProps) {
                 <Route path="/careers" element={<CareersList />} />
                 <Route path="/careers/:slug" element={<JobDetail />} />
                 <Route path="/contact" element={<Contact />} />
+                <Route path="*" element={<NotFound />} />
             </Routes>
             <Footer onBookConsultation={onBookDiscovery} />
         </div>
