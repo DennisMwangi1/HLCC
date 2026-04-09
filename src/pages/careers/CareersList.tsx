@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ArrowRight, MapPin, Clock, Briefcase } from "lucide-react";
-import { activeJobPostings } from "@/content/careers";
+import { activeJobPostings, isApplicationClosed } from "@/content/careers";
 import { useSEO } from "@/hooks/useSEO";
 import { pageSEO } from "@/lib/seo";
 import { OrganizationSchema, BreadcrumbSchema } from "@/components/StructuredData";
@@ -97,7 +97,9 @@ export default function CareersList() {
                             </div>
                         ) : (
                             <div className="max-w-4xl mx-auto space-y-0">
-                                {filtered.map((job, index) => (
+                                {filtered.map((job, index) => {
+                                    const closed = isApplicationClosed(job);
+                                    return (
                                     <motion.div
                                         key={job.slug}
                                         initial={{ opacity: 0, y: 20 }}
@@ -111,9 +113,16 @@ export default function CareersList() {
                                         >
                                             <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
                                                 <div className="space-y-4">
-                                                    <h2 className="text-2xl md:text-3xl font-heading font-light text-black group-hover:text-[#D4AF37] transition-colors duration-500">
-                                                        {job.title}
-                                                    </h2>
+                                                    <div className="flex items-center gap-3">
+                                                        <h2 className="text-2xl md:text-3xl font-heading font-light text-black group-hover:text-[#D4AF37] transition-colors duration-500">
+                                                            {job.title}
+                                                        </h2>
+                                                        {closed && (
+                                                            <span className="inline-flex items-center px-3 py-1 text-[9px] font-bold uppercase tracking-widest bg-red-50 text-red-600 border border-red-100 rounded-full">
+                                                                Applications Closed
+                                                            </span>
+                                                        )}
+                                                    </div>
                                                     <div className="flex flex-wrap items-center gap-6 text-[10px] font-bold uppercase tracking-widest text-black/30">
                                                         <span className="flex items-center gap-2">
                                                             <Briefcase
@@ -141,23 +150,24 @@ export default function CareersList() {
                                                         {job.description}
                                                     </p>
                                                 </div>
-                                                <div className="flex items-center gap-4 text-[10px] font-bold uppercase tracking-[0.2em] text-black group-hover:gap-6 transition-all duration-500 shrink-0">
-                                                    View &amp; Apply{" "}
+                                                <div className={`flex items-center gap-4 text-[10px] font-bold uppercase tracking-[0.2em] group-hover:gap-6 transition-all duration-500 shrink-0 ${closed ? 'text-black/30' : 'text-black'}`}>
+                                                    {closed ? 'View Details' : 'View & Apply'}{" "}
                                                     <ArrowRight className="w-3 h-3 text-[#D4AF37]" />
                                                 </div>
                                             </div>
                                             <div className="mt-4 text-[9px] font-bold uppercase tracking-widest text-black/20">
                                                 Posted {job.postedDate}
                                                 {job.closingDate && (
-                                                    <>
+                                                    <span className={closed ? 'text-red-400' : ''}>
                                                         {" "}
-                                                        · Closes {job.closingDate}
-                                                    </>
+                                                        · {closed ? 'Closed' : 'Closes'} {job.closingDate}
+                                                    </span>
                                                 )}
                                             </div>
                                         </Link>
                                     </motion.div>
-                                ))}
+                                    );
+                                })}
                             </div>
                         )}
                     </div>

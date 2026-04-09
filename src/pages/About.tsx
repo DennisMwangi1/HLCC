@@ -331,12 +331,6 @@ function OurTeam() {
       title: "Senior Associate",
       linkedin: "#",
       image: "/assets/img/Leah.jpg",
-    },
-    {
-      name: "Stella Kamau",
-      title: "Executive Assistant",
-      linkedin: "#",
-      image: "/assets/img/Stella.jpg",
     }
   ];
 

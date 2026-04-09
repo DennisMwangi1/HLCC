@@ -1,7 +1,7 @@
 import { useParams, Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ArrowLeft, MapPin, Clock, Briefcase, Loader2 } from "lucide-react";
-import { jobBySlug } from "@/content/careers";
+import { jobBySlug, isApplicationClosed } from "@/content/careers";
 import { useSEO } from "@/hooks/useSEO";
 import { pageSEO } from "@/lib/seo";
 import { OrganizationSchema, BreadcrumbSchema } from "@/components/StructuredData";
@@ -28,6 +28,7 @@ const formSchema = z.object({
     phone: z.string().min(5, { message: "Phone number is required." }),
     currentRole: z.string().min(2, { message: "Current role is required." }),
     linkedinUrl: z.string().optional(),
+    portfolioUrl: z.string().optional(),
     resume: z.instanceof(File).refine((file) => file.size <= 5 * 1024 * 1024, { message: "File size must be less than 5MB." }).refine((file) => ['application/pdf', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'].includes(file.type), { message: "Only PDF, DOC, or DOCX files are allowed." }),
     coverLetter: z.string().min(20, { message: "Please provide a brief cover letter." }),
 });
@@ -52,6 +53,7 @@ export default function JobDetail() {
             phone: "",
             currentRole: "",
             linkedinUrl: "",
+            portfolioUrl: "",
             resume: undefined,
             coverLetter: "",
         },
@@ -69,6 +71,7 @@ export default function JobDetail() {
         );
     }
 
+    const closed = isApplicationClosed(job);
     const breadcrumbs = [
         { name: "Home", url: "/" },
         { name: "Careers", url: "/careers" },
@@ -127,9 +130,14 @@ export default function JobDetail() {
                                     <div style="font-size:16px; line-height:1.6; color:#2f2823;">${values.currentRole}</div>
                                 </div>
 
-                                <div style="padding:14px 0;">
+                                <div style="padding:14px 0; border-bottom:1px solid #f0e7dc;">
                                     <div style="font-size:11px; letter-spacing:1.4px; text-transform:uppercase; color:#9a826a; margin-bottom:6px;">LinkedIn URL</div>
-                                    <div style="font-size:16px; line-height:1.6; color:#2f2823; word-break:break-word;">${values.linkedinUrl || 'N/A'}</div>
+                                    <div style="font-size:16px; line-height:1.6; color:#2f2823; word-break:break-word;">${values.linkedinUrl ? `<a href="${values.linkedinUrl}" style="color:#D4AF37;">${values.linkedinUrl}</a>` : 'N/A'}</div>
+                                </div>
+
+                                <div style="padding:14px 0;">
+                                    <div style="font-size:11px; letter-spacing:1.4px; text-transform:uppercase; color:#9a826a; margin-bottom:6px;">Portfolio URL</div>
+                                    <div style="font-size:16px; line-height:1.6; color:#2f2823; word-break:break-word;">${values.portfolioUrl ? `<a href="${values.portfolioUrl}" style="color:#D4AF37;">${values.portfolioUrl}</a>` : 'N/A'}</div>
                                 </div>
                             </div>
 
@@ -276,6 +284,30 @@ export default function JobDetail() {
                             {/* APPLICATION FORM SIDEBAR */}
                             <div className="lg:col-span-5 relative">
                                 <div className="sticky top-32 bg-[#fafafa] p-8 md:p-12 border border-black/5">
+                                    {closed ? (
+                                        <>
+                                            <h3 className="text-2xl font-heading font-light text-black mb-6 italic border-b border-black/5 pb-6">Applications Closed</h3>
+                                            <div className="space-y-6">
+                                                <div className="flex items-center gap-3 px-4 py-3 bg-red-50 border border-red-100 rounded-lg">
+                                                    <div className="w-2 h-2 rounded-full bg-red-400 shrink-0" />
+                                                    <p className="text-sm text-red-600 font-medium">
+                                                        The deadline for this position was {job.closingDate}.
+                                                    </p>
+                                                </div>
+                                                <p className="text-black/50 font-light text-sm leading-relaxed">
+                                                    Applications for this role are no longer being accepted. Please check our other open positions or send your profile for future opportunities.
+                                                </p>
+                                                <Link
+                                                    to="/careers"
+                                                    className="inline-flex items-center gap-2 bg-slate-900 text-white hover:bg-[#D4AF37] px-8 py-4 text-[10px] uppercase tracking-widest font-bold transition-colors duration-500"
+                                                >
+                                                    <ArrowLeft className="w-3 h-3" />
+                                                    View Open Positions
+                                                </Link>
+                                            </div>
+                                        </>
+                                    ) : (
+                                        <>
                                     <h3 className="text-2xl font-heading font-light text-black mb-8 italic border-b border-black/5 pb-6">Apply Now</h3>
 
                                     <Form {...form}>
@@ -353,6 +385,21 @@ export default function JobDetail() {
 
                                             <FormField
                                                 control={form.control}
+                                                name="portfolioUrl"
+                                                render={({ field }) => (
+                                                    <FormItem>
+                                                        <FormLabel className="text-[10px] uppercase tracking-[0.2em] font-bold text-black/40">Portfolio URL</FormLabel>
+                                                        <FormControl>
+                                                            <Input className="border-0 border-b border-black/10 rounded-none bg-transparent px-0 py-4 focus-visible:ring-0 focus-visible:border-[#D4AF37] transition-all" placeholder="https://yourportfolio.com" {...field} />
+                                                        </FormControl>
+                                                        <p className="text-[10px] text-black/40 mt-1">Link to your portfolio, personal website, or work samples.</p>
+                                                        <FormMessage className="text-[10px] uppercase font-bold text-red-500/80" />
+                                                    </FormItem>
+                                                )}
+                                            />
+
+                                            <FormField
+                                                control={form.control}
                                                 name="resume"
                                                 render={({ field: { value, onChange, ...field } }) => (
                                                     <FormItem>
@@ -402,6 +449,8 @@ export default function JobDetail() {
                                             </Button>
                                         </form>
                                     </Form>
+                                        </>
+                                    )}
                                 </div>
                             </div>
                         </div>
