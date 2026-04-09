@@ -331,6 +331,12 @@ function OurTeam() {
       title: "Senior Associate",
       linkedin: "#",
       image: "/assets/img/Leah.jpg",
+    },
+    {
+      name: "Anne Secundah",
+      title: "Associate",
+      linkedin: "https://www.linkedin.com/in/annesecundah/",
+      image: "/assets/img/Anne.png"
     }
   ];
 
