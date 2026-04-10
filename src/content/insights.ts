@@ -12,9 +12,35 @@ export type Article = {
   relatedTags?: string[];
   originalUrl?: string; // link to original article
   secondaryImage?: string; // additional image for the article
+  linkedinEmbed?: string; // LinkedIn post embed URL
 };
 
 export const articles: Article[] = [
+  {
+    slug: "rooted-connected-and-rising",
+    title: "Rooted, Connected & Rising — The Beginning of a Movement",
+    category: "Women & Leadership",
+    image: "/assets/img/Rooted.png",
+    secondaryImage: "/assets/img/Rising.png",
+    tagline:
+      "A gathering where women are not just networking or learning — but reflecting, unlearning, reconnecting and intentionally rising.",
+    description:
+      "The inaugural Rooted & Rising gathering brought together accomplished women in midlife for courageous stories, deep listening, and intentional leadership — the beginning of a movement towards deeper self-awareness and compassionate living.",
+    content:
+      "For a long time, I have known that part of my life's work is to impact women in midlife. Women who are competent. Accomplished. Responsible. Women who are holding organisations together, holding families together, holding themselves together. And yet, quietly navigating the curveballs of life.\n\nLast March, I hosted a Lean In Circle gathering that was deeply meaningful. The conversations were real and the connections powerful. But I remember leaving that space with a gentle but persistent knowing: There is more that needs to be said. More that needs to be held. More that needs to be healed.\n\nI just did not yet know how to create that space, until I completed my CBM (Coach Business Masterclass) at CDI-Africa Coaching Group. That journey sharpened my vision in a profound way. It helped me see more clearly the kind of spaces I am called to convene — spaces where women are not just networking or learning, but reflecting, unlearning, reconnecting and intentionally rising.\n\nFrom that clarity, Rooted, Connected & Rising was birthed.\n\nLast Saturday, we hosted our very first Rooted & Rising gathering. Courageous stories were shared — stories of self-doubt, rejection, rebuilding, faith, motherhood, leadership and becoming. During the fireside conversation that followed, time seemed to stand still. The room was filled with deep listening, laughter, relating nods, affirmation and truth.\n\nI honestly struggle to find words to fully describe what the day meant to me — the impact, the lessons, the confirmations. Throughout the coming weeks, I will be sharing reflections and takeaways from each of the founding voices — Lucy Wairimu, Risper Alaro, Carol Koech, and Eileen Laskar — who so generously shared their journeys. Their stories carry wisdom for many more women who are doing life bravely, even when it does not look like it from the outside.\n\nThis is the beginning of a movement towards more intentional leadership, deeper self-awareness and compassionate living and becoming. To all the amazing ladies who attended — Hellen Gatumuta, Leah Heho, Sarah Omaya, Anne Makomu-Njuguna, Hannah Kirira, Beatrice Njoroge, Sylvia Kamotho, Rose Chelang'at, Carolyne Mutheu, Anne Secundah and others — thank you for showing up and being part of this story.",
+    author: "Wanjiru Mwangi",
+    date: "April 9, 2026",
+    linkedinEmbed:
+      "https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7441766105880363008",
+    relatedTags: [
+      "women-in-leadership",
+      "midlife-empowerment",
+      "intentional-living",
+      "coaching",
+      "self-awareness",
+      "community",
+    ],
+  },
   {
     slug: "wanjiru-mwangi-top-25-changemakers-2025",
     title: "Top 25 Changemakers in People and Culture Space 2025 - Wanjiru Mwangi",

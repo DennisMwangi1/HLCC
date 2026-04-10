@@ -149,6 +149,53 @@ export default function InsightDetail() {
                   ))}
                 </div>
 
+                {/* Additional Gallery Image */}
+                {article.secondaryImage && article.image && (
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.98 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 1 }}
+                    viewport={{ once: true }}
+                    className="aspect-video bg-[#fafafa] overflow-hidden border border-black/5 my-16"
+                  >
+                    <ImageWithFallback
+                      src={article.image}
+                      alt={`${article.title} — Gallery`}
+                      className="w-full h-full object-cover"
+                    />
+                  </motion.div>
+                )}
+
+                {/* LinkedIn Embed */}
+                {article.linkedinEmbed && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.8 }}
+                    className="my-16"
+                  >
+                    <div className="flex items-center gap-4 mb-8">
+                      <span className="w-12 h-px bg-[#D4AF37]/50" />
+                      <h3 className="text-xs uppercase tracking-[0.3em] font-bold text-black">
+                        From LinkedIn
+                      </h3>
+                    </div>
+                    <div className="bg-[#fafafa] border border-black/5 p-6 md:p-10">
+                      <iframe
+                        src={article.linkedinEmbed}
+                        height="1529"
+                        width="100%"
+                        frameBorder="0"
+                        allowFullScreen
+                        title="Embedded LinkedIn post"
+                        className="max-w-full mx-auto block"
+                        style={{ maxWidth: '504px' }}
+                      />
+                    </div>
+                  </motion.div>
+                )}
+
                 {article.result && (
                   <motion.div
                     initial={{ opacity: 0, y: 20 }}
