@@ -98,7 +98,7 @@ export const jobPostings: JobPosting[] = [
             "Leadership and team coordination ability.",
         ],
         postedDate: "April 9, 2026",
-        closingDate: "April 30, 2026",
+        closingDate: "April 16, 2026",
         isActive: true,
     },
     {
@@ -132,7 +132,7 @@ export const jobPostings: JobPosting[] = [
             "Team player with a collaborative mindset.",
         ],
         postedDate: "April 9, 2026",
-        closingDate: "April 30, 2026",
+        closingDate: "April 16, 2026",
         isActive: true,
     },
 ];
