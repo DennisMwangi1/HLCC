@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ArrowRight, MapPin, Clock, Briefcase } from "lucide-react";
-import { activeJobPostings, isApplicationClosed } from "@/content/careers";
+import { activeJobPostings, isApplicationClosed, sortJobsByApplicationStatus } from "@/content/careers";
 import { useSEO } from "@/hooks/useSEO";
 import { pageSEO } from "@/lib/seo";
 import { OrganizationSchema, BreadcrumbSchema } from "@/components/StructuredData";
@@ -21,10 +21,11 @@ export default function CareersList() {
     ];
     const [activeDepartment, setActiveDepartment] = useState("All");
 
-    const filtered =
+    const filtered = sortJobsByApplicationStatus(
         activeDepartment === "All"
             ? activeJobPostings
-            : activeJobPostings.filter((j) => j.department === activeDepartment);
+            : activeJobPostings.filter((j) => j.department === activeDepartment)
+    );
 
     return (
         <>
@@ -109,58 +110,58 @@ export default function CareersList() {
                                     >
                                         <Link
                                             to={`/careers/${job.slug}`}
-                                            className="group block border-b border-black/5 py-10 first:pt-0"
+                                            className={`group block border-b border-black/5 py-10 first:pt-0 transition-opacity duration-300 ${closed ? "opacity-50 hover:opacity-60" : ""}`}
                                         >
                                             <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
                                                 <div className="space-y-4">
                                                     <div className="flex items-center gap-3">
-                                                        <h2 className="text-2xl md:text-3xl font-heading font-light text-black group-hover:text-[#D4AF37] transition-colors duration-500">
+                                                        <h2 className={`text-2xl md:text-3xl font-heading font-light transition-colors duration-500 ${closed ? "text-black/50" : "text-black group-hover:text-[#D4AF37]"}`}>
                                                             {job.title}
                                                         </h2>
                                                         {closed && (
-                                                            <span className="inline-flex items-center px-3 py-1 text-[9px] font-bold uppercase tracking-widest bg-red-50 text-red-600 border border-red-100 rounded-full">
+                                                            <span className="inline-flex items-center px-3 py-1 text-[9px] font-bold uppercase tracking-widest bg-black/5 text-black/40 border border-black/10 rounded-full">
                                                                 Applications Closed
                                                             </span>
                                                         )}
                                                     </div>
-                                                    <div className="flex flex-wrap items-center gap-6 text-[10px] font-bold uppercase tracking-widest text-black/30">
+                                                    <div className={`flex flex-wrap items-center gap-6 text-[10px] font-bold uppercase tracking-widest ${closed ? "text-black/20" : "text-black/30"}`}>
                                                         <span className="flex items-center gap-2">
                                                             <Briefcase
-                                                                className="w-3 h-3 text-[#D4AF37]"
+                                                                className={`w-3 h-3 ${closed ? "text-black/20" : "text-[#D4AF37]"}`}
                                                                 strokeWidth={1.5}
                                                             />
                                                             {job.department}
                                                         </span>
                                                         <span className="flex items-center gap-2">
                                                             <MapPin
-                                                                className="w-3 h-3 text-[#D4AF37]"
+                                                                className={`w-3 h-3 ${closed ? "text-black/20" : "text-[#D4AF37]"}`}
                                                                 strokeWidth={1.5}
                                                             />
                                                             {job.location}
                                                         </span>
                                                         <span className="flex items-center gap-2">
                                                             <Clock
-                                                                className="w-3 h-3 text-[#D4AF37]"
+                                                                className={`w-3 h-3 ${closed ? "text-black/20" : "text-[#D4AF37]"}`}
                                                                 strokeWidth={1.5}
                                                             />
                                                             {job.type}
                                                         </span>
                                                     </div>
-                                                    <p className="text-black/40 font-light text-sm leading-relaxed line-clamp-2 max-w-xl">
+                                                    <p className={`font-light text-sm leading-relaxed line-clamp-2 max-w-xl ${closed ? "text-black/25" : "text-black/40"}`}>
                                                         {job.description}
                                                     </p>
                                                 </div>
-                                                <div className={`flex items-center gap-4 text-[10px] font-bold uppercase tracking-[0.2em] group-hover:gap-6 transition-all duration-500 shrink-0 ${closed ? 'text-black/30' : 'text-black'}`}>
-                                                    {closed ? 'View Details' : 'View & Apply'}{" "}
-                                                    <ArrowRight className="w-3 h-3 text-[#D4AF37]" />
+                                                <div className={`flex items-center gap-4 text-[10px] font-bold uppercase tracking-[0.2em] transition-all duration-500 shrink-0 ${closed ? "text-black/25 group-hover:gap-5" : "text-black group-hover:gap-6"}`}>
+                                                    {closed ? "View Details" : "View & Apply"}{" "}
+                                                    <ArrowRight className={`w-3 h-3 ${closed ? "text-black/25" : "text-[#D4AF37]"}`} />
                                                 </div>
                                             </div>
-                                            <div className="mt-4 text-[9px] font-bold uppercase tracking-widest text-black/20">
+                                            <div className={`mt-4 text-[9px] font-bold uppercase tracking-widest ${closed ? "text-black/15" : "text-black/20"}`}>
                                                 Posted {job.postedDate}
                                                 {job.closingDate && (
-                                                    <span className={closed ? 'text-red-400' : ''}>
+                                                    <span>
                                                         {" "}
-                                                        · {closed ? 'Closed' : 'Closes'} {job.closingDate}
+                                                        · {closed ? "Closed" : "Closes"} {job.closingDate}
                                                     </span>
                                                 )}
                                             </div>
