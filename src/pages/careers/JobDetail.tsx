@@ -21,6 +21,8 @@ import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { toast } from "sonner";
+import { getAutoResponseTemplate } from "@/lib/email";
+import { isValidResumeFile, MAX_RESUME_SIZE } from "@/lib/resume";
 
 const formSchema = z.object({
     fullName: z.string().min(2, { message: "Full name is required." }),
@@ -29,7 +31,14 @@ const formSchema = z.object({
     currentRole: z.string().min(2, { message: "Current role is required." }),
     linkedinUrl: z.string().optional(),
     portfolioUrl: z.string().optional(),
-    resume: z.instanceof(File).refine((file) => file.size <= 5 * 1024 * 1024, { message: "File size must be less than 5MB." }).refine((file) => ['application/pdf', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'].includes(file.type), { message: "Only PDF, DOC, or DOCX files are allowed." }),
+    resume: z
+        .instanceof(File)
+        .refine((file) => file.size <= MAX_RESUME_SIZE, {
+            message: "File size must be less than 5MB.",
+        })
+        .refine(isValidResumeFile, {
+            message: "Only PDF, DOC, or DOCX files are allowed.",
+        }),
     coverLetter: z.string().min(20, { message: "Please provide a brief cover letter." }),
 });
 
@@ -159,12 +168,15 @@ export default function JobDetail() {
                     </div>
                 </div>
             `);
-            formData.append('formName', "Job Application");
+            const formName = "Job Application";
+            const autoResponse = getAutoResponseTemplate(values.fullName, formName);
+
+            formData.append('formName', formName);
             formData.append('userEmail', values.email);
             formData.append('userName', values.fullName);
-            if (values.resume) {
-                formData.append('resume', values.resume);
-            }
+            formData.append('userSubject', autoResponse.subject);
+            formData.append('userHtml', autoResponse.html);
+            formData.append('resume', values.resume);
 
             const response = await fetch('/api/send-email', {
                 method: 'POST',

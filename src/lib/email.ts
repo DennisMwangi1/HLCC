@@ -25,7 +25,7 @@ const brandColors = {
   border: '#eaeaea'
 };
 
-const getAutoResponseTemplate = (userName: string, formName: string) => {
+export const getAutoResponseTemplate = (userName: string, formName: string) => {
   const firstName = userName ? userName.split(' ')[0] : 'there';
 
   let content = '';
