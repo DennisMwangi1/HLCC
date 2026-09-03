@@ -1,9 +1,8 @@
 "use client";
 
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useRef } from "react";
 import { motion, useMotionValue, useTransform, animate, useInView } from "framer-motion";
 import { Quote, Linkedin } from "lucide-react";
-import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { ProcessTimeline } from "@/components/ui/ProcessTimeline";
 import { useSEO } from "@/hooks/useSEO";
 import { pageSEO } from "@/lib/seo";
@@ -220,99 +219,8 @@ function OurPhilosophy() {
   );
 }
 
-interface Advisor {
-  name: string;
-  title: string;
-  bio: string;
-  image?: string;
-}
-
-// Advisor Card Component
-function AdvisorCard({ advisor, index }: { advisor: Advisor; index: number; }) {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
-  return (
-    <>
-      <motion.div
-        initial={{ opacity: 0, scale: 0.95 }}
-        whileInView={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.8, delay: index * 0.1 }}
-        viewport={{ once: true }}
-        className="group cursor-pointer"
-        onClick={() => setIsModalOpen(true)}
-      >
-        <div className="relative aspect-[3/4] overflow-hidden bg-slate-900 mb-6">
-          {advisor.image ? (
-            <img
-              src={advisor.image}
-              alt={advisor.name}
-              className="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700"
-            />
-          ) : (
-            <div className="w-full h-full flex items-center justify-center text-white/10 text-6xl font-heading uppercase italic">
-              {advisor.name.split(' ').map((n: string) => n[0]).join('')}
-            </div>
-          )}
-          <div className="absolute inset-x-0 bottom-0 p-8 bg-gradient-to-t from-black to-transparent text-white">
-            <p className="text-[10px] uppercase tracking-[0.2em] text-[#D4AF37] font-bold mb-2 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-              Read Bio
-            </p>
-            <h3 className="text-xl font-heading font-light">{advisor.name}</h3>
-            <p className="text-xs font-light text-white/50 tracking-wide mt-1 uppercase">{advisor.title}</p>
-          </div>
-        </div>
-      </motion.div>
-
-      <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
-        <DialogContent className="sm:max-w-3xl max-h-[90vh] overflow-y-auto bg-white rounded-none border-none p-0 scrollbar-hide">
-          <div className="grid md:grid-cols-2">
-            <div className="bg-slate-900 aspect-square md:aspect-auto">
-              {advisor.image && <img src={advisor.image} className="w-full h-full object-cover" />}
-            </div>
-            <div className="p-12 flex flex-col justify-center">
-              <p className="text-[#D4AF37] uppercase tracking-[0.2em] text-[10px] font-bold mb-4">Strategic Advisor</p>
-              <h2 className="text-3xl font-heading font-light text-black mb-2">{advisor.name}</h2>
-              <p className="text-sm font-light text-black/40 uppercase tracking-widest mb-8">{advisor.title}</p>
-              <div className="prose prose-sm font-light text-black/60 leading-relaxed max-h-64 overflow-y-auto pr-4 scrollbar-thin scrollbar-thumb-black/10">
-                {advisor.bio}
-              </div>
-            </div>
-          </div>
-        </DialogContent>
-      </Dialog>
-    </>
-  );
-}
-
 // 4) Our Team
 function OurTeam() {
-  const advisors = [
-    {
-      name: "Carol Koech",
-      title: "Strategic Advisor",
-      bio: "Carol Koech is the Vice President for Africa at the Global Energy Alliance for People and Planet (GEAPP). With over 15 years of leadership in energy, infrastructure, and consumer sectors.",
-      image: "/assets/img/Koech.jpeg",
-    },
-    {
-      name: "Kezie Karuoro",
-      title: "Strategic Advisor",
-      bio: "Kezie Karuoro Kihara is a visionary HR Leader and Global Executive Leadership Coach with over 20 years of distinguished experience driving strategic human resources and organizational transformation.",
-      image: "/assets/img/Kezie-K.jpg",
-    },
-    {
-      name: "Major Boke Kitangita",
-      title: "Strategic Advisor",
-      bio: "Major Boke is a co-founder & CEO of Jeff Hamilton; an integrated outsourcing company focusing on Staff Outsourcing, Security Services and Talent Acquisition.",
-      image: "/assets/img/Major-B.jpg",
-    },
-    {
-      name: "Joshua Siwa",
-      title: "Strategic Advisor",
-      bio: "Joshua is a strategic business leader and seasoned CFO with 18+ years of experience transforming finance into a strategic driver of growth.",
-      image: "/assets/img/Josh.jpg",
-    }
-  ];
-
   const team = [
     {
       name: "Wanjiru Mwangi",
@@ -327,12 +235,6 @@ function OurTeam() {
       image: "/assets/img/carolyne.jpg",
     },
     {
-      name: "Leah Heho",
-      title: "Senior Associate",
-      linkedin: "#",
-      image: "/assets/img/Leah.jpg",
-    },
-    {
       name: "Anne Secundah",
       title: "Associate",
       linkedin: "https://www.linkedin.com/in/annesecundah/",
@@ -342,24 +244,6 @@ function OurTeam() {
 
   return (
     <SectionContainer className="bg-white">
-      {/* Advisors */}
-      <div className="mb-40">
-        <div className="text-center mb-24">
-          <p className="text-[#D4AF37] uppercase tracking-[0.3em] text-[10px] font-semibold mb-6">
-            Strategic Guidance
-          </p>
-          <h2 className="text-4xl md:text-5xl font-heading font-light text-black mb-8">
-            Board of <span className="italic">Advisors</span>
-          </h2>
-        </div>
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto">
-          {advisors.map((advisor, i) => (
-            <AdvisorCard key={advisor.name} advisor={advisor} index={i} />
-          ))}
-        </div>
-      </div>
-
-      {/* Internal Team */}
       <div>
         <div className="text-center mb-24">
           <p className="text-[#D4AF37] uppercase tracking-[0.3em] text-[10px] font-semibold mb-6">
@@ -369,7 +253,7 @@ function OurTeam() {
             The <span className="italic">Core Team</span>
           </h2>
         </div>
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-5xl mx-auto">
           {team.map((member, i) => (
             <motion.div
               key={member.name}
