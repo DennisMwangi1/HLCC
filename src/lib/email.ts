@@ -1,7 +1,10 @@
 /**
  * Email Utility for HLCC
- * Sends emails using Resend via a serverless function
+ * Sends emails using Resend via a serverless function, or, with Andishi connected, to the
+ * studio's inbox.
  */
+import { visitorError } from '@andishi/runtime';
+import { andishiEnabled, sendToInbox } from './andishi';
 
 export interface EmailOptions {
   to:
@@ -136,6 +139,22 @@ export const getAutoResponseTemplate = (userName: string, formName: string) => {
 };
 
 export async function sendEmail(options: EmailOptions) {
+  // With Andishi connected, the form goes to the studio's inbox (Contacts › Messages) instead of
+  // the email route, with the form's name as the subject.
+  if (andishiEnabled) {
+    try {
+      await sendToInbox({
+        name: options.userName || String(options.data.name ?? ''),
+        email: options.userEmail || String(options.data.email ?? ''),
+        subject: `${options.formName}: ${options.subject}`,
+        data: options.data,
+      });
+      return { success: true };
+    } catch (error) {
+      console.error('Error sending to Andishi:', error);
+      return { success: false, error: visitorError(error) };
+    }
+  }
   try {
     const html = `
       <!DOCTYPE html>

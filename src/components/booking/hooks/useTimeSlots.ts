@@ -1,8 +1,11 @@
 import { useState, useEffect, useMemo } from "react";
 import { format, isSameDay, setHours, setMinutes } from "date-fns";
+import { useAndishiBooking } from "../andishiBooking";
 
 export interface TimeSlot {
   time: Date;
+  /** The Andishi slot's instant, when the times come from Andishi. */
+  startsAt?: string;
   formatted: string;
   period: "morning" | "afternoon" | "evening";
 }
@@ -59,11 +62,34 @@ const generateTimeSlots = (date: Date): TimeSlot[] => {
   return slots;
 };
 
+/** periodOf files a time under morning, afternoon or evening, as the generated slots are. */
+const periodOf = (time: Date): TimeSlot["period"] =>
+  time.getHours() < 12 ? "morning" : time.getHours() < 15 ? "afternoon" : "evening";
+
 export function useTimeSlots(selectedDate: Date | undefined) {
   const [isLoading, setIsLoading] = useState(false);
   const [slots, setSlots] = useState<TimeSlot[]>([]);
+  const booking = useAndishiBooking();
+  const serviceReady = !!booking?.service;
 
   useEffect(() => {
+    // With Andishi, the times are the service's real availability for the day.
+    if (booking && selectedDate) {
+      if (!serviceReady) return;
+      let stopped = false;
+      setIsLoading(true);
+      const day = format(selectedDate, "yyyy-MM-dd");
+      void booking.availability({ from: day, to: day }).then((answer) => {
+        if (stopped) return;
+        const days = answer && answer.model === "appointment" ? answer.days : [];
+        setSlots(days.flatMap((d) => d.slots).map((slot) => {
+          const time = new Date(slot.startsAt);
+          return { time, formatted: format(time, "h:mm a"), period: periodOf(time), startsAt: slot.startsAt };
+        }));
+        setIsLoading(false);
+      });
+      return () => { stopped = true; };
+    }
     if (selectedDate) {
       setIsLoading(true);
       // Simulate API call
@@ -78,7 +104,8 @@ export function useTimeSlots(selectedDate: Date | undefined) {
       setSlots([]);
       setIsLoading(false);
     }
-  }, [selectedDate]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedDate, serviceReady]);
 
   const groupedSlots = useMemo<GroupedTimeSlots>(() => {
     return {

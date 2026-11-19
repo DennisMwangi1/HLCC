@@ -71,6 +71,7 @@ export function BookingStep3() {
   };
 
   const handleTimeSelect = (time: Date) => {
+    setValue('slotStart', time.toISOString(), { shouldValidate: false });
     setValue('preferredDate', format(time, 'yyyy-MM-dd'), { shouldValidate: false });
     setValue('preferredTime', format(time, 'HH:mm'), { shouldValidate: false });
   };

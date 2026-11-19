@@ -4,13 +4,14 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { ImageWithFallback } from "@/components/figma/ImageWithFallback";
-import { articles } from "@/content/insights";
+import { useInsights } from "@/content/useInsights";
 import { useSEO } from "@/hooks/useSEO";
 import { pageSEO } from "@/lib/seo";
 import { OrganizationSchema, BreadcrumbSchema } from "@/components/StructuredData";
 
 export default function InsightsList() {
   useSEO(pageSEO.insights);
+  const { articles, loading } = useInsights();
 
   const breadcrumbs = [
     { name: 'Home', url: '/' },
@@ -64,6 +65,7 @@ export default function InsightsList() {
         {/* LISTING */}
         <section className="py-32">
           <div className="container mx-auto px-4 md:px-6">
+            {loading && articles.length === 0 && <p className="text-black/40 text-sm">Loading insights…</p>}
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-16">
               {sorted.map((a, index) => (
                 <motion.div

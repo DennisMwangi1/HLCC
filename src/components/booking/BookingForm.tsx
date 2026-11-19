@@ -12,6 +12,9 @@ import { motion, AnimatePresence } from 'framer-motion';
 import type { BookingType } from "@/components/booking/types.ts";
 import { sendEmail } from '@/lib/email';
 import { toast } from 'sonner';
+import { useBooking } from '@andishi/runtime';
+import { andishiEnabled } from '@/lib/andishi';
+import { AndishiBookingContext, SERVICE_SLUG } from './andishiBooking';
 
 const formSchema = z.object({
   // Step 1
@@ -32,6 +35,8 @@ const formSchema = z.object({
   preferredDate: z.string().min(1, 'Please select a date for your meeting'),
   preferredTime: z.string().min(1, 'Please select a time for your meeting'),
   timezone: z.string(),
+  // The chosen slot's instant, when the times come from Andishi.
+  slotStart: z.string().optional(),
 
   // Additional
   message: z.string().optional(),
@@ -53,6 +58,7 @@ export function BookingForm({ type, onSuccess, onCancel }: BookingFormProps) {
   const [currentStep, setCurrentStep] = useState(1);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+  const booking = useBooking(SERVICE_SLUG[type]);
 
   const methods = useForm<FormValues>({
     resolver: zodResolver(formSchema),
@@ -99,7 +105,24 @@ export function BookingForm({ type, onSuccess, onCancel }: BookingFormProps) {
     try {
       setIsSubmitting(true);
 
-      // Send email via Resend
+      // With Andishi, the time is booked on the service (it shows in the studio's Bookings);
+      // the answers the booking does not hold go to the inbox below with it.
+      if (andishiEnabled) {
+        if (!data.slotStart) {
+          toast.error('Please choose one of the available times.');
+          return;
+        }
+        if (!(await booking.select({ start: data.slotStart }))) {
+          toast.error('That time was just taken. Please choose another.');
+          return;
+        }
+        if (!(await booking.book({ name: data.name, email: data.email, phone: data.phone }))) {
+          toast.error('We could not confirm the booking. Please check your details and try again.');
+          return;
+        }
+      }
+
+      // Send email via Resend (or, with Andishi, to the studio's inbox)
       const result = await sendEmail({
         to: 'info@hlcc.africa',
         subject: `New Booking: ${type === 'discovery' ? 'Discovery Call' : 'Consultation'}`,
@@ -184,6 +207,7 @@ export function BookingForm({ type, onSuccess, onCancel }: BookingFormProps) {
         </div>
       </div>
 
+      <AndishiBookingContext.Provider value={andishiEnabled ? booking : null}>
       <FormProvider {...methods}>
         <form onSubmit={handleSubmit(onSubmit)} className="px-0">
           <div className="min-h-[400px] py-4">
@@ -246,6 +270,7 @@ export function BookingForm({ type, onSuccess, onCancel }: BookingFormProps) {
           </div>
         </form>
       </FormProvider>
+      </AndishiBookingContext.Provider>
     </div>
   );
 }

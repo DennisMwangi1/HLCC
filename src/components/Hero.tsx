@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { motion, useAnimation } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
+import { Text, usePageContent } from "@andishi/runtime/react";
 
 interface HeroProps {
     onBookConsultation: () => void;
@@ -26,6 +27,8 @@ const metrics = [
 ];
 
 export function Hero({ onBookConsultation }: HeroProps) {
+    // The home page's copy from Andishi (Content › Edit content); the fallbacks show until it is edited.
+    usePageContent({ path: "/" });
     // Counter logic
     const [counts, setCounts] = useState(metrics.map(() => 0));
     const controls = useAnimation();
@@ -81,9 +84,8 @@ export function Hero({ onBookConsultation }: HeroProps) {
                     >
                         <h1 className="text-4xl md:text-6xl lg:text-7xl text-white mb-8 leading-[1.1] font-heading font-light tracking-tight">
                             Culture Runs <span className="italic">the Show</span>.
-                            <span className="block mt-4 text-[#D4AF37] font-medium tracking-normal">
-                                We Make Sure It Works for You.
-                            </span>
+                            <Text as="span" section="hero" field="tagline" className="block mt-4 text-[#D4AF37] font-medium tracking-normal"
+                                fallback="We Make Sure It Works for You." />
                         </h1>
                     </motion.div>
 
@@ -93,8 +95,8 @@ export function Hero({ onBookConsultation }: HeroProps) {
                         transition={{ delay: 0.3, duration: 0.8 }}
                         className="text-lg md:text-2xl text-white/70 mb-12 max-w-2xl mx-auto leading-relaxed font-light"
                     >
-                        HLCC helps organizations align people, culture, and leadership to
-                        build workplaces where belonging drives performance.
+                        <Text section="hero" field="intro"
+                            fallback="HLCC helps organizations align people, culture, and leadership to build workplaces where belonging drives performance." />
                     </motion.p>
 
                     <motion.div

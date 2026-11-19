@@ -4,7 +4,8 @@ import { Link, useParams } from "react-router-dom";
 import { motion } from "framer-motion";
 import {  User, Award } from "lucide-react";
 import { ImageWithFallback } from "@/components/figma/ImageWithFallback";
-import { articles } from "@/content/insights";
+import { useInsights } from "@/content/useInsights";
+import type { Article } from "@/content/insights";
 import { useSEO } from "@/hooks/useSEO";
 import { getAbsoluteUrl } from "@/lib/seo";
 import { OrganizationSchema, ArticleSchema, BreadcrumbSchema } from "@/components/StructuredData";
@@ -12,6 +13,7 @@ import { Button } from "@/components/ui/button";
 
 export default function InsightDetail() {
   const { slug } = useParams();
+  const { articles, loading } = useInsights();
   const article = articles.find((a) => a.slug === slug);
 
   useSEO(
@@ -40,6 +42,10 @@ export default function InsightDetail() {
     ]
     : [];
 
+  if (!article && loading) {
+    return <main className="py-40 bg-white text-center text-black/40 text-sm">Loading…</main>;
+  }
+
   if (!article) {
     return (
       <main className="py-24 bg-white text-black">
@@ -54,7 +60,7 @@ export default function InsightDetail() {
     );
   }
 
-  const related = getRelatedArticles(article.slug, article.relatedTags);
+  const related = getRelatedArticles(articles, article.slug, article.relatedTags);
 
   const paragraphs = article.content
     .split(/\n\s*\n/)
@@ -283,7 +289,7 @@ export default function InsightDetail() {
   );
 }
 
-function getRelatedArticles(currentSlug: string, tags?: string[]) {
+function getRelatedArticles(articles: Article[], currentSlug: string, tags?: string[]) {
   const pool = articles.filter((a) => a.slug !== currentSlug);
   if (!tags || tags.length === 0) return pool.slice(0, 3);
 
