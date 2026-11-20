@@ -8,7 +8,8 @@
     "generate-sitemap": "node scripts/generate-sitemap.js",
     "build": "npm run generate-sitemap && tsc -b && vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "dev:staging": "vite --mode staging"
   },
   "dependencies": {
     "@andishi/runtime": "file:.andishi/andishi-runtime-0.1.0.tgz",
