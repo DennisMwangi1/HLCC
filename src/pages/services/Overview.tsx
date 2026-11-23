@@ -2,7 +2,8 @@
 
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
-import { services } from "../../content/services";
+import { useServices } from "../../content/useServices";
+import type { Service } from "../../content/services";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import { useSEO } from "@/hooks/useSEO";
@@ -11,6 +12,7 @@ import { OrganizationSchema, BreadcrumbSchema } from "@/components/StructuredDat
 
 export default function ServicesOverview() {
   useSEO(pageSEO.services);
+  const { services } = useServices();
 
   const breadcrumbs = [
     { name: 'Home', url: '/' },
@@ -73,7 +75,7 @@ export default function ServicesOverview() {
   );
 }
 
-function ServiceCard({ service: s, index: i }: { service: typeof services[0]; index: number; }) {
+function ServiceCard({ service: s, index: i }: { service: Service; index: number; }) {
   const navigate = useNavigate();
 
   return (

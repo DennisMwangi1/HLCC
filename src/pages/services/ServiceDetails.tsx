@@ -3,7 +3,7 @@
 import { useMemo, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { motion, } from "framer-motion";
-import { serviceBySlug } from "../../content/services";
+import { useServices } from "../../content/useServices";
 import { Button } from "@/components/ui/button";
 import { ImageWithFallback } from "@/components/figma/ImageWithFallback";
 import { CheckCircle, ChevronDown, Sparkles, Target, TrendingUp, Award } from "lucide-react";
@@ -92,7 +92,8 @@ const MethodologyPill = ({ text, index }: MethodologyPillProps) => (
 
 export default function ServiceDetails() {
   const { slug } = useParams<{ slug: string; }>();
-  const service = useMemo(() => (slug ? serviceBySlug[slug] : undefined), [slug]);
+  const { services, loading } = useServices();
+  const service = useMemo(() => services.find((s) => s.slug === slug), [services, slug]);
 
   // SEO configuration for service page
   useSEO(
@@ -115,6 +116,10 @@ export default function ServiceDetails() {
       { name: service.title, url: `/services/${service.slug}` },
     ]
     : [];
+
+  if (!service && loading) {
+    return <main className="py-40 bg-white text-center text-black/40 text-sm">Loading…</main>;
+  }
 
   if (!service) {
     return (

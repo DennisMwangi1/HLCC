@@ -1,7 +1,8 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ArrowRight, MapPin, Clock, Briefcase } from "lucide-react";
-import { activeJobPostings, isApplicationClosed, sortJobsByApplicationStatus } from "@/content/careers";
+import { isApplicationClosed, sortJobsByApplicationStatus } from "@/content/careers";
+import { useCareers } from "@/content/useCareers";
 import { useSEO } from "@/hooks/useSEO";
 import { pageSEO } from "@/lib/seo";
 import { OrganizationSchema, BreadcrumbSchema } from "@/components/StructuredData";
@@ -14,6 +15,8 @@ export default function CareersList() {
         { name: "Home", url: "/" },
         { name: "Careers", url: "/careers" },
     ];
+
+    const { jobs: activeJobPostings } = useCareers();
 
     const departments = [
         "All",
