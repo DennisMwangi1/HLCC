@@ -2,7 +2,7 @@ import { useParams, Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ArrowLeft, MapPin, Clock, Briefcase, Loader2 } from "lucide-react";
 import { isApplicationClosed } from "@/content/careers";
-import { useCareers } from "@/content/useCareers";
+import { useCareer } from "@/content/useCareers";
 import { useSEO } from "@/hooks/useSEO";
 import { pageSEO } from "@/lib/seo";
 import { OrganizationSchema, BreadcrumbSchema } from "@/components/StructuredData";
@@ -46,8 +46,7 @@ const formSchema = z.object({
 export default function JobDetail() {
     const { slug } = useParams<{ slug: string }>();
     const navigate = useNavigate();
-    const { jobs, loading } = useCareers();
-    const job = jobs.find((j) => j.slug === slug);
+    const { job, loading } = useCareer(slug);
 
     useSEO({
         ...pageSEO.careers,

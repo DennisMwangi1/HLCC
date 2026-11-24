@@ -6,16 +6,15 @@ export const textOf = (entry: CollectionEntry, key: string): string => {
   return typeof value === "string" ? value : value == null ? "" : String(value);
 };
 
-/** A "one per line" field as a list. */
-export const linesOf = (entry: CollectionEntry, key: string): string[] =>
-  textOf(entry, key).split("\n").map((line) => line.trim()).filter(Boolean);
+/** A list field (an array of texts); older "one per line" text is read too. */
+export function listOf(entry: CollectionEntry, key: string): string[] {
+  const value = entry.data[key];
+  if (Array.isArray(value)) return value.map(String).filter(Boolean);
+  return textOf(entry, key).split("\n").map((line) => line.trim()).filter(Boolean);
+}
 
-/** A JSON field (process steps, FAQ), or the fallback when it is empty or not JSON. */
-export function jsonOf<T>(entry: CollectionEntry, key: string, fallback: T): T {
-  try {
-    const text = textOf(entry, key);
-    return text ? (JSON.parse(text) as T) : fallback;
-  } catch {
-    return fallback;
-  }
+/** A repeating group field: its items, each an object of the group's fields. */
+export function groupOf<T>(entry: CollectionEntry, key: string): T[] {
+  const value = entry.data[key];
+  return Array.isArray(value) ? (value.filter((item) => typeof item === "object" && item !== null) as T[]) : [];
 }

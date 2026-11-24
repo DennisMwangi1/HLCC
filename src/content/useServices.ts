@@ -1,7 +1,7 @@
 import { useMemo } from "react";
 import { useCollection } from "@andishi/runtime";
 import { andishiEnabled } from "@/lib/andishi";
-import { jsonOf, linesOf, textOf } from "./collectionFields";
+import { groupOf, listOf, textOf } from "./collectionFields";
 import { services as localServices, type Service } from "./services";
 
 /**
@@ -9,22 +9,21 @@ import { services as localServices, type Service } from "./services";
  * when the site is connected, else content/services.ts. Ordered by their position field.
  */
 export function useServices(): { services: Service[]; loading: boolean } {
-  const collection = useCollection(andishiEnabled ? "services" : null);
+  const collection = useCollection(andishiEnabled ? "services" : null, { sort: "position" });
   const mapped = useMemo(
     () =>
-      [...collection.entries]
-        .sort((a, b) => Number(a.data.position ?? 0) - Number(b.data.position ?? 0))
-        .map<Service>((entry) => ({
+      collection.entries.map<Service>((entry) => ({
           slug: textOf(entry, "slug"),
           title: textOf(entry, "title"),
           tagline: textOf(entry, "tagline"),
           description: textOf(entry, "description"),
-          focusAreas: linesOf(entry, "focus_areas"),
+          focusAreas: listOf(entry, "focus_areas"),
           outcome: textOf(entry, "outcome"),
           heroImage: textOf(entry, "hero_image") || undefined,
-          methodology: linesOf(entry, "methodology"),
-          process: jsonOf(entry, "process", []),
-          faq: jsonOf(entry, "faq", []),
+          methodology: listOf(entry, "methodology"),
+          process: groupOf<{ number?: number; title: string; description: string; duration: string }>(entry, "process")
+            .map((step, index) => ({ ...step, number: Number(step.number ?? index + 1) })),
+          faq: groupOf<{ question: string; answer: string }>(entry, "faq"),
         })),
     [collection.entries],
   );
