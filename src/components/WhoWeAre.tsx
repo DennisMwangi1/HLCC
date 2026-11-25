@@ -1,3 +1,4 @@
+import { Text } from "@andishi/runtime/react";
 export function WhoWeAre() {
     return (
         <section className="py-32 bg-white">
@@ -5,7 +6,7 @@ export function WhoWeAre() {
                 {/* Text Content */}
                 <div className="max-w-xl">
                     <h2 className="text-4xl md:text-5xl font-heading text-black mb-10 leading-tight">
-                        Our Essence
+                        <Text section="who_we_are" field="heading" fallback={"Our Essence"} />
                     </h2>
 
                     <div className="space-y-6 text-black/70 text-lg font-light leading-relaxed">
@@ -16,12 +17,11 @@ export function WhoWeAre() {
                         </p>
 
                         <p>
-                            We believe culture runs the show. Every strategy succeeds or fails because of the human element behind it.
-                            We help leaders build workplaces where belonging isn't just a word, but a driver of performance.
+                            <Text section="who_we_are" field="text" fallback={"We believe culture runs the show. Every strategy succeeds or fails because of the human element behind it. We help leaders build workplaces where belonging isn't just a word, but a driver of performance."} />
                         </p>
 
                         <p>
-                            With a blend of global expertise and deep local insight, we craft organizational cultures that are resilient, high-performing, and unmistakably human.
+                            <Text section="who_we_are" field="text_2" fallback={"With a blend of global expertise and deep local insight, we craft organizational cultures that are resilient, high-performing, and unmistakably human."} />
                         </p>
                     </div>
 

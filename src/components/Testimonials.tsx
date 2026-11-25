@@ -1,3 +1,4 @@
+import { Text } from "@andishi/runtime/react";
 export function Testimonials() {
 
     return (
@@ -8,7 +9,7 @@ export function Testimonials() {
                 {/* Header */}
                 <div className="text-center mb-24">
                     <p className="text-[#D4AF37] uppercase tracking-[0.3em] text-[10px] font-semibold mb-6">
-                        Voices of Impact
+                        <Text section="testimonials" field="text" fallback={"Voices of Impact"} />
                     </p>
                     <h2 className="text-4xl md:text-5xl font-heading font-light mb-8">
                         The Client <span className="italic">Perspective</span>

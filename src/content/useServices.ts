@@ -12,7 +12,11 @@ export function useServices(): { services: Service[]; loading: boolean } {
   const collection = useCollection(andishiEnabled ? "services" : null, { sort: "position" });
   const mapped = useMemo(
     () =>
-      collection.entries.map<Service>((entry) => ({
+      // Ordered by position here as well as by the Site API (sort=position), so the order holds
+      // on an API that does not apply it.
+      [...collection.entries]
+        .sort((a, b) => Number(a.data.position ?? 0) - Number(b.data.position ?? 0))
+        .map<Service>((entry) => ({
           slug: textOf(entry, "slug"),
           title: textOf(entry, "title"),
           tagline: textOf(entry, "tagline"),

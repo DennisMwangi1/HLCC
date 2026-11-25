@@ -1,6 +1,7 @@
 import { Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
+import { Text } from "@andishi/runtime/react";
 export function WhyHLCC() {
     const differentiators = [
         "Culture-first approach — aligning people and strategy for measurable growth.",
@@ -23,7 +24,7 @@ export function WhyHLCC() {
                     {/* Text Side */}
                     <div>
                         <p className="text-[#D4AF37] uppercase tracking-[0.3em] text-[10px] font-semibold mb-6">
-                            The HLCC Advantage
+                            <Text section="why_hlcc" field="text" fallback={"The HLCC Advantage"} />
                         </p>
 
                         <h2 className="text-4xl md:text-5xl font-heading font-light mb-10 leading-tight">
@@ -34,7 +35,7 @@ export function WhyHLCC() {
                         </h2>
 
                         <p className="text-lg text-white/50 mb-12 font-light leading-relaxed">
-                            We combine the scale and discipline of global firms with the empathy, agility, and cultural intelligence that unique local contexts demand.
+                            <Text section="why_hlcc" field="text_2" fallback={"We combine the scale and discipline of global firms with the empathy, agility, and cultural intelligence that unique local contexts demand."} />
                         </p>
 
                         {/* What Sets Us Apart */}
@@ -73,11 +74,11 @@ export function WhyHLCC() {
                             {/* Sophisticated Overlay Info */}
                             <div className="absolute bottom-10 left-10 space-y-4">
                                 <div>
-                                    <p className="text-[10px] uppercase tracking-widest text-[#D4AF37] mb-1">Standard of Excellence</p>
+                                    <p className="text-[10px] uppercase tracking-widest text-[#D4AF37] mb-1"><Text section="why_hlcc" field="text_3" fallback={"Standard of Excellence"} /></p>
                                     <p className="text-3xl font-heading">97% <span className="text-sm font-light italic">Retention</span></p>
                                 </div>
                                 <div className="pt-4 border-t border-white/10">
-                                    <p className="text-[10px] uppercase tracking-widest text-[#D4AF37] mb-1">Impact Delivered</p>
+                                    <p className="text-[10px] uppercase tracking-widest text-[#D4AF37] mb-1"><Text section="why_hlcc" field="text_4" fallback={"Impact Delivered"} /></p>
                                     <p className="text-3xl font-heading">200+ <span className="text-sm font-light italic">Engagements</span></p>
                                 </div>
                             </div>

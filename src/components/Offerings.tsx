@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 
+import { Text } from "@andishi/runtime/react";
 const offerings = [
     {
         id: "culture",
@@ -70,7 +71,7 @@ export function Offerings() {
                         What We <span className="italic">Deliver</span>
                     </h2>
                     <p className="text-xl text-black/50 max-w-2xl mx-auto font-light leading-relaxed">
-                        Unlocking Human Potential. Building Cultures that Thrive.
+                        <Text section="offerings" field="text" fallback={"Unlocking Human Potential. Building Cultures that Thrive."} />
                     </p>
                 </div>
 
@@ -114,7 +115,7 @@ export function Offerings() {
 
                                     <div className="mt-auto">
                                         <div className="pt-6 border-t border-black/5">
-                                            <p className="text-[10px] uppercase tracking-widest text-black/30 mb-2">Measurable Outcome</p>
+                                            <p className="text-[10px] uppercase tracking-widest text-black/30 mb-2"><Text section="offerings" field="text_2" fallback={"Measurable Outcome"} /></p>
                                             <p className="text-black/80 text-sm font-medium italic">
                                                 {outcome}
                                             </p>

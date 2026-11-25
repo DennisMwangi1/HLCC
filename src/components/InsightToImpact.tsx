@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { Lightbulb, Users, TrendingUp } from "lucide-react";
 
+import { Text } from "@andishi/runtime/react";
 export function InsightToImpact() {
     const steps = [
         {
@@ -34,7 +35,7 @@ export function InsightToImpact() {
                         From <span className="italic text-[#D4AF37]">Insight</span> to Impact
                     </h2>
                     <p className="text-lg text-white/50 max-w-2xl mx-auto font-light leading-relaxed">
-                        Every HLCC engagement moves organizations through a deliberate, high-touch journey—from awareness to lasting institutional transformation.
+                        <Text section="insight_to_impact" field="text" fallback={"Every HLCC engagement moves organizations through a deliberate, high-touch journey—from awareness to lasting institutional transformation."} />
                     </p>
                 </div>
 

@@ -8,6 +8,7 @@ import {
     AccordionTrigger,
 } from "@/components/ui/accordion";
 
+import { Text } from "@andishi/runtime/react";
 export function FAQ() {
     const faqs = [
         {
@@ -48,13 +49,13 @@ export function FAQ() {
                     className="max-w-2xl mx-auto text-center mb-24"
                 >
                     <p className="text-[#D4AF37] uppercase tracking-[0.3em] text-[10px] font-semibold mb-6">
-                        Clarity & Context
+                        <Text section="faq" field="text" fallback={"Clarity & Context"} />
                     </p>
                     <h2 className="text-4xl md:text-5xl text-black mb-8 font-heading font-light">
                         Frequently Asked <span className="italic">Questions</span>
                     </h2>
                     <p className="text-xl text-black/50 font-light leading-relaxed">
-                        Common inquiries from leaders exploring organizational transformation.
+                        <Text section="faq" field="text_2" fallback={"Common inquiries from leaders exploring organizational transformation."} />
                     </p>
                 </motion.div>
 
@@ -91,7 +92,7 @@ export function FAQ() {
                     className="text-center mt-24 pt-12 border-t border-black/5"
                 >
                     <p className="text-black/40 text-xs uppercase tracking-[0.2em] font-semibold mb-6">
-                        Direct Inquiries
+                        <Text section="faq" field="text_3" fallback={"Direct Inquiries"} />
                     </p>
                     <div className="flex flex-col sm:flex-row gap-8 justify-center items-center">
                         <a

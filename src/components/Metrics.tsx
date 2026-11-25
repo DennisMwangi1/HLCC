@@ -1,3 +1,4 @@
+import { Text } from "@andishi/runtime/react";
 export function ImpactAtScale() {
     const metrics = [
         {
@@ -25,13 +26,13 @@ export function ImpactAtScale() {
             <div className="container relative mx-auto px-4 md:px-6">
                 <div className="text-center mb-24">
                     <p className="text-[#D4AF37] uppercase tracking-[0.3em] text-[10px] font-semibold mb-6">
-                        Our Track Record
+                        <Text section="impact" field="text" fallback={"Our Track Record"} />
                     </p>
                     <h2 className="text-4xl md:text-5xl text-black font-heading font-light mb-8">
                         Impact at <span className="italic">Scale</span>
                     </h2>
                     <p className="text-xl text-black/50 max-w-2xl mx-auto font-light leading-relaxed">
-                        Every HLCC engagement drives tangible, human-centered transformation across the continent.
+                        <Text section="impact" field="text_2" fallback={"Every HLCC engagement drives tangible, human-centered transformation across the continent."} />
                     </p>
                 </div>
 

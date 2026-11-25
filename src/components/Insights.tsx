@@ -6,6 +6,7 @@ import { Calendar, User, ArrowRight } from "lucide-react";
 import { ImageWithFallback } from "@/components/figma/ImageWithFallback";
 import { articles } from "@/content/insights";
 
+import { Text } from "@andishi/runtime/react";
 export function Insights() {
     // Get the latest 3 articles, sorted by date
     const sortedArticles = [...articles]
@@ -32,13 +33,13 @@ export function Insights() {
                 >
                     <div className="max-w-2xl">
                         <p className="text-[#D4AF37] uppercase tracking-[0.3em] text-[10px] font-semibold mb-6">
-                            Thought Leadership
+                            <Text section="insights" field="text" fallback={"Thought Leadership"} />
                         </p>
                         <h2 className="text-4xl md:text-5xl text-black font-heading font-light mb-6">
                             Insights & <span className="italic">Perspectives</span>
                         </h2>
                         <p className="text-xl text-black/50 font-light leading-relaxed">
-                            Research and reflections on the evolving landscape of global leadership and institutional culture.
+                            <Text section="insights" field="text_2" fallback={"Research and reflections on the evolving landscape of global leadership and institutional culture."} />
                         </p>
                     </div>
                     <Link to="/insights" className="group flex items-center gap-3 text-black font-semibold text-xs uppercase tracking-widest border-b border-black/10 pb-2 hover:border-[#D4AF37] transition-all duration-300">
@@ -100,7 +101,7 @@ export function Insights() {
                     </div>
                 ) : (
                     <div className="text-center py-24 border border-dashed border-black/10">
-                        <p className="text-black/40 font-light italic">No current entries available.</p>
+                        <p className="text-black/40 font-light italic"><Text section="insights" field="text_3" fallback={"No current entries available."} /></p>
                     </div>
                 )}
             </div>
